@@ -1,0 +1,49 @@
+.main-wrap {
+  padding-left: 12.4rem;
+  padding-top: 16.8rem;
+
+  section {
+    padding-left: 1.6rem;
+    margin-bottom: clamp(20px, 2.5vw, 44px);
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background: #5c5c5c;
+  }
+
+  .section-1 {
+    padding-right: 4.2rem;
+    h2 {
+      font-size: 2.6rem;
+      color: #fff;
+      margin-bottom: 2.4rem;
+    }
+
+    .main-container {
+      min-width: 833px;
+      aspect-ratio: 866/349;
+      background: rgb(149, 113, 113);
+    }
+  }
+
+  .section-2 {
+    padding-right: 4.2rem;
+    .link-container {
+      margin-top: clamp(20px, 2.5vw, 44px);
+      // margin-top: 4.4rem;
+      display: flex;
+      gap: clamp(16px, 2.5vw, 28px);
+
+      div {
+        // width: calc(100% - 42px / 8);
+        width: calc(100% / 8);
+        min-width: 140px;
+        min-width: 122px;
+        aspect-ratio: 12/5;
+        background: red;
+      }
+    }
+  }
+}
