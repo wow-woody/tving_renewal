@@ -1,6 +1,6 @@
 import './scss/Main.scss';
 
-const Main = () => {
+const Home = () => {
   return (
     <div className="main-wrap">
       <section className="section-1">
@@ -1028,4 +1028,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;

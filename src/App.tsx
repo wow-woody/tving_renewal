@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header/Header';
-import Main from './pages/Main';
+import Main from './pages/Home';
 import Login from './pages/auth/Login';
 import Join from './pages/auth/Join';
 import Footer from './components/Footer/Footer';
