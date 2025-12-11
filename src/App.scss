@@ -1,0 +1,40 @@
+// ---------공통사항----------
+// .inner{
+//   max-width: ;
+//   margin: 0 auto;
+// }
+
+// ---------컬러 가이드---------
+$base-red: #ff153c;
+$base-black: #282828;
+$text-w: #fff;
+$line-w: #fff;
+$line-g: #3d3d3d;
+
+// ----------mixin-----------
+// @mixin flex($jc: space-between, $ai: center, $gap) {
+//   display: flex;
+//   justify-content: $jc;
+//   align-items: $ai;
+//   gap: $gap;
+// }
+
+// @mixin font($fs: 1.6rem, $fw: 400, $color: $base) {
+//   font-size: $fs;
+//   font-weight: $fw;
+//   color: $color;
+// }
+
+@mixin boxshadow {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 16px;
+  background: rgba(51, 51, 51, 0.5);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 6px rgba(0, 0, 0, 0.25) inset;
+}
