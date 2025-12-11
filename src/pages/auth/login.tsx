@@ -1,10 +1,33 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../scss/Login.scss';
+import { useAuthStore } from '../../store/useAuthStore';
 
 const Login = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+
+  const { onLogin, onGoogleLogin, onKakaoLogin } = useAuthStore();
+  const navigate = useNavigate();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await onLogin(id, password);
+      setId('');
+      setPassword('');
+      navigate('/');
+    } catch (err) {
+      console.log('로그인 에러');
+    }
+  };
+  const handleGoogle = async () => {
+    await onGoogleLogin();
+    navigate('/');
+  };
+  const handleKakao = async () => {
+    await onKakaoLogin();
+    navigate('/');
+  };
 
   return (
     <div className="login-wrappers">
@@ -17,7 +40,7 @@ const Login = () => {
         <div className="login-box">
           <h2>티빙 계정으로 로그인</h2>
           <div className="login-section">
-            <div className="input">
+            <form className="input" onSubmit={handleLogin}>
               <div className="id">
                 <div>
                   <input
@@ -53,7 +76,7 @@ const Login = () => {
                   혼용하여 입력해 주세요.
                 </p>
               </div>
-            </div>
+            </form>
             <form className="select">
               <label>
                 <input type="checkbox" />
@@ -68,11 +91,11 @@ const Login = () => {
             </form>
             <button className="do-login">로그인 하기</button>
             <div className="social-login">
-              <button className="kakao">
+              <button className="kakao" type="button" onClick={handleKakao}>
                 <img src="/images/kakao.svg" alt="kakao" />
                 <span>카카오 로그인</span>
               </button>
-              <button className="google">
+              <button className="google" type="button" onClick={handleGoogle}>
                 <img src="/images/google.svg" alt="google" />
                 <span>구글 로그인</span>
               </button>
