@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Join.scss';
 
@@ -34,6 +34,71 @@ const Join = () => {
     const isPwMatched = password === passwordCheck;
     const showPwCheckError = pwCheckTouched && !isPwMatched;
 
+    //------------ 하단 체크박스 ------------
+    // 전체 체크
+    const [allChecked, setAllChecked] = useState(false);
+
+    // 마케팅 마스터 체크박스
+    const [marketingMasterChecked, setMarketingMasterChecked] = useState(false);
+
+    // 마케팅 세부 체크박스 3개
+    const [marketingSelect, setMarketingSelect] = useState([false, false, false]);
+
+    // 나머지 체크박스: 0:만 14세 이상, 1:[필수] 서비스 이용약관, 2:[필수] 개인정보, 3:[선택] 개인정보
+    const [otherCheckboxes, setOtherCheckboxes] = useState([false, false, false, false]);
+
+    // 전체 체크박스 변경
+    const handleAllChange = (e) => {
+        const checked = e.target.checked;
+        setAllChecked(checked);
+        setMarketingMasterChecked(checked);
+        setMarketingSelect(marketingSelect.map(() => checked));
+        setOtherCheckboxes(otherCheckboxes.map(() => checked));
+    };
+
+    // 마케팅 마스터 체크박스 변경
+    const handleMarketingMasterChange = (e) => {
+        const checked = e.target.checked;
+        setMarketingMasterChecked(checked);
+        setMarketingSelect(marketingSelect.map(() => checked));
+    };
+
+    // 마케팅 세부 체크박스 변경
+    const handleMarketingSelectChange = (index) => (e) => {
+        const newValues = [...marketingSelect];
+        newValues[index] = e.target.checked;
+        setMarketingSelect(newValues);
+
+        // 하나라도 체크되면 마케팅 마스터 체크
+        setMarketingMasterChecked(newValues.some((v) => v));
+    };
+
+    // 나머지 체크박스 변경
+    const handleOtherCheckboxChange = (index) => (e) => {
+        const newValues = [...otherCheckboxes];
+        newValues[index] = e.target.checked;
+        setOtherCheckboxes(newValues);
+    };
+
+    // all 체크박스 동기화
+    useEffect(() => {
+        const all = [...otherCheckboxes, marketingMasterChecked, ...marketingSelect].every(
+            (v) => v
+        );
+        setAllChecked(all);
+    }, [otherCheckboxes, marketingMasterChecked, marketingSelect]);
+
+    // 필수 체크박스 확인
+    const isRequiredChecked = otherCheckboxes[1] && otherCheckboxes[2]; // 필수 두 개 체크 여부
+
+    const handleNextStep = () => {
+        if (!isRequiredChecked) {
+            alert('필수 항목을 모두 체크해주세요.');
+            return;
+        }
+        alert('다음 단계로 진행!');
+    };
+
     return (
         <div className="join-wrappers">
             <div className="top">
@@ -43,7 +108,7 @@ const Join = () => {
             </div>
             <div className="join-wrap">
                 <div className="join-box">
-                    <h2>아이디와 이메일로 간편하게 티빙을 시작하세요!</h2>
+                    <h2>아이디와 이메일로 간편하게 시작하세요!</h2>
                     <div className="join-section">
                         <div className="input-area">
                             <div className="id">
@@ -180,28 +245,105 @@ const Join = () => {
                         </div>
 
                         <form className="agreement">
-                            <label>
-                                <input type="checkbox" />
+                            <label className="all">
+                                <input
+                                    type="checkbox"
+                                    checked={allChecked}
+                                    onChange={handleAllChange}
+                                />
                                 <span className="fake"></span>
                                 <span>필수 및 선택 항목을 모두 포함하여 동의합니다</span>
                             </label>
+                            <div className="select-box">
+                                <div>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={otherCheckboxes[0]}
+                                            onChange={handleOtherCheckboxChange(0)}
+                                        />
+                                        <span className="fake"></span>
+                                        <span>만 14세 이상입니다.</span>
+                                    </label>
+                                    <button>
+                                        <img src="/images/arrow-right.svg" alt="more" />
+                                    </button>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={otherCheckboxes[1]}
+                                            onChange={handleOtherCheckboxChange(1)}
+                                        />
+                                        <span className="fake"></span>
+                                        <span>[필수] 서비스 이용약관 동의</span>
+                                    </label>
+                                    <button>
+                                        <img src="/images/arrow-right.svg" alt="more" />
+                                    </button>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={otherCheckboxes[2]}
+                                            onChange={handleOtherCheckboxChange(2)}
+                                        />
+                                        <span className="fake"></span>
+                                        <span>[필수] 개인정보 수집 및 이용 동의</span>
+                                    </label>
+                                    <button>
+                                        <img src="/images/arrow-right.svg" alt="more" />
+                                    </button>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={otherCheckboxes[3]}
+                                            onChange={handleOtherCheckboxChange(3)}
+                                        />
+                                        <span className="fake"></span>
+                                        <span>[선택] 개인정보 수집 및 이용 동의</span>
+                                    </label>
+                                    <button>
+                                        <img src="/images/arrow-right.svg" alt="more" />
+                                    </button>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={marketingMasterChecked}
+                                            onChange={handleMarketingMasterChange}
+                                        />
+                                        <span className="fake"></span>
+                                        <span>[선택] 마케팅 정보 수신 동의</span>
+                                    </label>
+                                    <button>
+                                        <img src="/images/arrow-right.svg" alt="more" />
+                                    </button>
+                                </div>
+                                <div className="marketing-select">
+                                    {['푸쉬 알림', '문자 알림', '이메일 알림'].map((label, i) => (
+                                        <label key={i}>
+                                            <input
+                                                type="checkbox"
+                                                checked={marketingSelect[i]}
+                                                onChange={handleMarketingSelectChange(i)}
+                                            />
+                                            <span className="fake"></span>
+                                            <span>{label}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
                         </form>
 
-                        <button className="join-btn">가입하기</button>
-
-                        <div className="social-login">
-                            <p className="line-title">다른 서비스 계정으로 가입하기</p>
-                            <div>
-                                <button className="kakao">
-                                    <img src="/images/kakao.svg" alt="kakao" />
-                                    <span>카카오 로그인</span>
-                                </button>
-                                <button className="google">
-                                    <img src="/images/google.svg" alt="google" />
-                                    <span>구글 로그인</span>
-                                </button>
-                            </div>
-                        </div>
+                        <button className="join-btn" onClick={handleNextStep}>
+                            가입하기
+                        </button>
                     </div>
                     <button className="back">
                         <p>뒤로가기</p>
