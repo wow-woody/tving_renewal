@@ -29,7 +29,8 @@ type UserInfo =
 
 interface AuthState {
   user: UserInfo | null;
-  onMember: (email: string, password: string) => Promise<void>;
+  loading: boolean;
+  onMember: (id: string, email: string, password: string) => Promise<void>;
   onLogin: (email: string, password: string) => Promise<void>;
   onLogout: () => Promise<void>;
   onGoogleLogin: () => Promise<void>;
@@ -58,9 +59,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   // 회원가입 메서드
-  onMember: async (email, password) => {
+  onMember: async (email, password, id) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      await setDoc(doc(db, 'users', uid), {
+        id,
+        email,
+        uid,
+        createdAt: new Date(),
+      });
       set({ user: userCredential.user });
       alert('회원가입 완료');
     } catch (err: any) {

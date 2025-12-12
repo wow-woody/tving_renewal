@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../scss/Login.scss';
+import './scss/Login.scss';
 import { useAuthStore } from '../../store/useAuthStore';
 
 const Login = () => {
@@ -110,7 +110,7 @@ const Login = () => {
                 <Link to="">비밀번호 재설정</Link>
               </li>
               <li>
-                <Link to="">회원가입</Link>
+                <Link to="/join">회원가입</Link>
               </li>
             </ul>
           </div>
