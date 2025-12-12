@@ -8,7 +8,16 @@ import {
 } from 'firebase/auth';
 import { auth, googleProvider, db } from '../firebase/firebase';
 import { create } from 'zustand';
-import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  Timestamp,
+  where,
+} from 'firebase/firestore';
 
 declare global {
   interface Window {
@@ -59,7 +68,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   // 회원가입 메서드
-  onMember: async (email, password, id) => {
+  onMember: async (id, email, password) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
@@ -81,7 +90,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   // 로그인 메서드
   onLogin: async (email, password) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      let IdEmail = email;
+
+      if (!email.includes('@')) {
+        const userRef = collection(db, 'users');
+        const q = query(userRef, where('id', '==', email));
+        const querySnapshot = await getDocs(q);
+
+        IdEmail = querySnapshot.docs[0].data().email;
+      }
+
+      const userCredential = await signInWithEmailAndPassword(auth, IdEmail, password);
       set({ user: userCredential.user });
       alert('로그인 성공');
     } catch (err: any) {

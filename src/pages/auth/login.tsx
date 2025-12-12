@@ -89,7 +89,9 @@ const Login = () => {
                 <span>자동로그인</span>
               </label>
             </form>
-            <button className="do-login">로그인 하기</button>
+            <button className="do-login" onClick={handleLogin}>
+              로그인 하기
+            </button>
             <div className="social-login">
               <button className="kakao" type="button" onClick={handleKakao}>
                 <img src="/images/kakao.svg" alt="kakao" />
