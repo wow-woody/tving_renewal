@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Join.scss';
+import Popup1 from '../../components/Join-Popup/Popup1';
+import Popup2 from '../../components/Join-Popup/Popup2';
+import Popup3 from '../../components/Join-Popup/Popup3';
+import Popup4 from '../../components/Join-Popup/Popup4';
 
 const Join = () => {
     // ------id------
@@ -97,6 +101,38 @@ const Join = () => {
             return;
         }
         alert('다음 단계로 진행!');
+    };
+
+    //------------popup------------
+    const [openPopup, setOpenPopup] = useState(null);
+
+    const closePopup = () => setOpenPopup(null);
+
+    const handlePopupAgree = (popupName) => {
+        if (popupName === 'popup1') {
+            setOtherCheckboxes((prev) => {
+                const newValues = [...prev];
+                newValues[1] = true;
+                return newValues;
+            });
+        } else if (popupName === 'popup2') {
+            setOtherCheckboxes((prev) => {
+                const newValues = [...prev];
+                newValues[2] = true;
+                return newValues;
+            });
+        } else if (popupName === 'popup3') {
+            setOtherCheckboxes((prev) => {
+                const newValues = [...prev];
+                newValues[3] = true;
+                return newValues;
+            });
+        } else if (popupName === 'popup4') {
+            setMarketingMasterChecked(true);
+            setMarketingSelect([true, true, true]);
+        }
+
+        closePopup();
     };
 
     return (
@@ -265,9 +301,6 @@ const Join = () => {
                                         <span className="fake"></span>
                                         <span>만 14세 이상입니다.</span>
                                     </label>
-                                    <button>
-                                        <img src="/images/arrow-right.svg" alt="more" />
-                                    </button>
                                 </div>
                                 <div>
                                     <label>
@@ -279,7 +312,7 @@ const Join = () => {
                                         <span className="fake"></span>
                                         <span>[필수] 서비스 이용약관 동의</span>
                                     </label>
-                                    <button>
+                                    <button type="button" onClick={() => setOpenPopup('popup1')}>
                                         <img src="/images/arrow-right.svg" alt="more" />
                                     </button>
                                 </div>
@@ -293,7 +326,7 @@ const Join = () => {
                                         <span className="fake"></span>
                                         <span>[필수] 개인정보 수집 및 이용 동의</span>
                                     </label>
-                                    <button>
+                                    <button type="button" onClick={() => setOpenPopup('popup2')}>
                                         <img src="/images/arrow-right.svg" alt="more" />
                                     </button>
                                 </div>
@@ -307,7 +340,7 @@ const Join = () => {
                                         <span className="fake"></span>
                                         <span>[선택] 개인정보 수집 및 이용 동의</span>
                                     </label>
-                                    <button>
+                                    <button type="button" onClick={() => setOpenPopup('popup3')}>
                                         <img src="/images/arrow-right.svg" alt="more" />
                                     </button>
                                 </div>
@@ -321,7 +354,7 @@ const Join = () => {
                                         <span className="fake"></span>
                                         <span>[선택] 마케팅 정보 수신 동의</span>
                                     </label>
-                                    <button>
+                                    <button type="button" onClick={() => setOpenPopup('popup4')}>
                                         <img src="/images/arrow-right.svg" alt="more" />
                                     </button>
                                 </div>
@@ -351,6 +384,18 @@ const Join = () => {
                 </div>
             </div>
             <div className="footer-line"></div>
+            {openPopup === 'popup1' && (
+                <Popup1 onClose={closePopup} onAgree={() => handlePopupAgree('popup1')} />
+            )}
+            {openPopup === 'popup2' && (
+                <Popup2 onClose={closePopup} onAgree={() => handlePopupAgree('popup2')} />
+            )}
+            {openPopup === 'popup3' && (
+                <Popup3 onClose={closePopup} onAgree={() => handlePopupAgree('popup3')} />
+            )}
+            {openPopup === 'popup4' && (
+                <Popup4 onClose={closePopup} onAgree={() => handlePopupAgree('popup4')} />
+            )}
         </div>
     );
 };
