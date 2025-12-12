@@ -7,6 +7,7 @@ import Join from './pages/auth/join';
 import Footer from './components/Footer/Footer';
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
+import Mypage from './pages/auth/Mypage';
 
 function App() {
   const location = useLocation();
