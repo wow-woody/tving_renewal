@@ -1,12 +1,32 @@
+@use '../../App.scss' as g;
+
 .join-wrappers {
     width: 100%;
-    height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
 
+    input {
+        width: 100%;
+        height: 44px;
+        background: #5c5c5c;
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        padding: 0 20px;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+
+        &::placeholder {
+            color: #a4a4a4;
+        }
+    }
+
     .top {
         width: 100%;
-        padding: 44px 0;
+        padding: 30px 0 28px 0;
         border-bottom: 1px solid #5c5c5c;
         text-align: center;
 
@@ -17,18 +37,239 @@
 
     .join-wrap {
         flex: 1;
-        min-height: 678px;
+        min-height: 792px;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        h2 {
-            font-size: 2rem;
-            color: #fff;
-            text-align: center;
+        .join-box {
+            width: 540px;
+            display: flex;
+            gap: 2rem;
+            flex-direction: column;
+            align-items: center;
+
+            h2 {
+                font-size: 2.6rem;
+                color: #fff;
+                text-align: center;
+            }
+
+            .join-section {
+                width: 100%;
+                height: 100%;
+                border: 1px solid #5c5c5c;
+                border-radius: 16px;
+                position: relative;
+
+                padding: 36px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                &::before {
+                    @include g.boxshadow;
+                }
+
+                .input-area {
+                    position: relative;
+                    z-index: 1;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    button:not(.send) {
+                        position: absolute;
+                        right: 20px;
+                        top: 50%;
+                        transform: translateY(-50%);
+
+                        img {
+                            width: 20px;
+                            aspect-ratio: 1;
+                        }
+                    }
+
+                    p {
+                        color: #a4a4a4;
+                        font-size: 0.9rem;
+                        font-weight: 400;
+                        letter-spacing: -0.6px;
+                    }
+
+                    .id {
+                        > div {
+                            position: relative;
+                        }
+
+                        p {
+                            margin-top: 8px;
+                            display: flex;
+                            gap: 4px;
+
+                            &.error {
+                                color: #ff4d4d;
+                            }
+                        }
+                    }
+
+                    .password {
+                        > div div + div {
+                            margin-top: 12px;
+                        }
+
+                        > div div {
+                            position: relative;
+                        }
+                        p {
+                            margin-top: 8px;
+                            display: flex;
+                            gap: 4px;
+
+                            &.error {
+                                color: #ff4d4d;
+                            }
+                        }
+                    }
+
+                    .email {
+                        > div {
+                            position: relative;
+                        }
+                        p {
+                            margin-top: 8px;
+                            display: flex;
+                            gap: 4px;
+                        }
+                    }
+
+                    .phone {
+                        display: flex;
+                        gap: 12px;
+
+                        > div {
+                            position: relative;
+                            flex: 1;
+                        }
+
+                        .send {
+                            width: 128px;
+                            border: 1px solid #5c5c5c;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+            .agreement {
+                position: relative;
+                z-index: 1;
+
+                font-size: 1rem;
+                font-weight: 600;
+                color: #a4a4a4;
+
+                .select-box {
+                    margin-top: 16px;
+                    padding-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 8px;
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        &.marketing-select {
+                            padding-left: 32px;
+                            justify-content: flex-start;
+                            gap: 24px;
+                        }
+                    }
+                }
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+
+                    position: relative;
+
+                    input {
+                        position: absolute;
+                        opacity: 0;
+                        left: 0;
+                        top: 0;
+                        height: 13px;
+                        width: 13px;
+
+                        cursor: pointer;
+                    }
+
+                    .fake {
+                        width: 13px;
+                        height: 13px;
+                        border-radius: 50%;
+                        background-color: #3d3d3d;
+                    }
+
+                    input:checked + .fake {
+                        background: #ff153c;
+                        background-image: url('/images/check.svg');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+
+                    span {
+                        cursor: pointer;
+                    }
+                }
+
+                .all {
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                }
+            }
+
+            .join-btn {
+                position: relative;
+                z-index: 1;
+
+                width: 100%;
+                height: 44px;
+                background: #ff153c;
+                font-size: 1.6rem;
+                font-weight: 800;
+                color: #fff;
+            }
         }
 
-        .join-box {
+        .back {
+            width: 100%;
+            height: 56px;
+
+            border: 1px solid #5c5c5c;
+            border-radius: 16px;
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::before {
+                @include g.boxshadow;
+            }
+
+            p {
+                z-index: 1;
+                font-size: 1.6rem;
+                font-weight: 700;
+                color: #a4a4a4;
+            }
         }
     }
 

@@ -1,0 +1,59 @@
+.mypage-wrap {
+    margin: 0 0.2%;
+    padding-left: 12.4rem;
+    padding-top: 10.8rem;
+
+    .user-info-wrap {
+        width: calc(100% - 16px);
+        height: 216px;
+        margin-right: 1.6rem;
+        border-top: 1px solid #5c5c5c;
+        border-bottom: 1px solid #5c5c5c;
+
+        .user-info {
+            padding: 28px 0;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+
+            > div + div {
+                border-left: 1px solid #5c5c5c;
+            }
+
+            .user {
+                flex-grow: 608;
+                padding: 12px 0 0 16px;
+            }
+
+            .subscribe {
+                flex-grow: 586;
+                padding: 12px 0 0 32px;
+            }
+
+            .cs {
+                flex-grow: 586;
+                padding: 12px 0 0 32px;
+            }
+
+            .top-title {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                font-size: 0.9rem;
+                color: #a4a4a4;
+
+                > div {
+                    padding: 8px;
+                    border: 1px solid #a4a4a4;
+                    border-radius: 4px;
+                }
+
+                div:first-of-type {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
