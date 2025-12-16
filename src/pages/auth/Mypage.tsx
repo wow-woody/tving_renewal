@@ -43,6 +43,14 @@ const Mypage = () => {
                 </div>
             </div>
 
+            <div className="watching-list-wrap">
+                <div className="title-wrap">
+                    <h2 className="title">
+                        <span>전체 시청 내역</span>
+                    </h2>
+                </div>
+                <div className="watching-list"></div>
+            </div>
             <p>123456789</p>
             <p>2</p>
             <p>3</p>

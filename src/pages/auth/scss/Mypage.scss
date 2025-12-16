@@ -56,4 +56,55 @@
             }
         }
     }
+
+    .title-wrap {
+        width: 100%;
+        text-align: center; /* h2를 중앙에 두는 역할도 함 (flex를 쓰므로 사실상 h2에만 적용해도 무방) */
+        /* 필요에 따라 패딩/마진 등을 조절하세요. */
+    }
+
+    /*
+ * 🌟 핵심: 제목 요소 (h2.title)에 Flexbox 적용
+ * 양쪽 줄(::before, ::after)이 텍스트를 감싸도록 설정합니다.
+ */
+    .title {
+        /* Flexbox 설정 */
+        display: flex;
+        align-items: center; /* 수직 중앙 정렬 */
+        justify-content: flex-start; /* Flexbox 항목 자체를 중앙에 두기 (선택 사항) */
+
+        /* 너비 및 여백 설정 */
+        width: 100%;
+        margin: 20px 0;
+
+        /* 폰트 설정 (선택 사항) */
+        font-size: 24px;
+        color: #333;
+    }
+
+    /*
+ * 🚀 양쪽 줄 생성 (::before, ::after)
+ * flex-grow: 1; 이 줄을 좌우 끝까지 쫙 펼쳐지게 만드는 핵심 속성입니다.
+ */
+    // .title::before,
+    .title::after {
+        content: ''; /* 가상 요소 내용 (필수) */
+        flex-grow: 1; /* 남은 공간을 동일하게 채우도록 확장 */
+        height: 1px; /* 줄의 두께 */
+        background-color: #ccc; /* 줄의 색상 */
+    }
+
+    /* 텍스트와 줄 사이의 간격 조정 */
+    .title::before {
+        margin-right: 15px; /* 왼쪽 줄과 텍스트 사이 간격 */
+    }
+
+    .title::after {
+        margin-left: 15px; /* 오른쪽 줄과 텍스트 사이 간격 */
+    }
+
+    /* 텍스트를 감싸는 <span> 태그 */
+    .title span {
+        white-space: nowrap; /* 제목이 길어져도 줄바꿈되지 않게 방지 */
+    }
 }
