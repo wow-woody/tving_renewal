@@ -1,6 +1,9 @@
+import { useUserStore } from '../../store/useUserStore';
 import './scss/Mypage.scss';
 
 const Mypage = () => {
+    const { profiles, profileId } = useUserStore();
+    const currentProfile = profiles.find((p) => p.id === profileId);
     return (
         <div className="mypage-wrap">
             <div className="user-info-wrap">
@@ -12,6 +15,15 @@ const Mypage = () => {
                             <div>
                                 프로필 수정 <span></span>
                             </div>
+                            {currentProfile && (
+                                <>
+                                    <img
+                                        src="/assets/Profile/profile-G.png"
+                                        alt={currentProfile.name}
+                                    />
+                                    <span>{currentProfile.name}</span>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className="subscribe">

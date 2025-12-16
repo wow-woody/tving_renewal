@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './scss/Join.scss';
 import IdInput from './layout/IdInput';
@@ -10,7 +10,7 @@ import { useAuthStore } from '../../store/useAuthStore';
 const Join = () => {
   const { onMember } = useAuthStore();
 
-  //   const [id, setId] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [email, setEmail] = useState('');
@@ -27,7 +27,7 @@ const Join = () => {
     }
 
     try {
-      await onMember(email, password);
+      await onMember(id, email, password);
 
       setEmail('');
       setPassword('');
@@ -49,7 +49,7 @@ const Join = () => {
           <h2>아이디와 이메일로 간편하게 시작하세요!</h2>
           <form className="join-section" onSubmit={handleJoin}>
             <div className="input-area">
-              <IdInput />
+              <IdInput value={id} onChange={setId} />
               <PasswordInput
                 password={password}
                 onPasswordChange={setPassword}

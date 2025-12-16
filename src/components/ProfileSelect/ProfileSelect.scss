@@ -1,0 +1,122 @@
+@use '../../App.scss' as p;
+
+.profileDropdown {
+  position: relative;
+
+  .currentProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+
+    span {
+      color: p.$text-w;
+      font-size: 1.4rem;
+    }
+
+    .arrow {
+      margin-left: 4px;
+      font-size: 1rem;
+    }
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #1a1a1a;
+    border-radius: 8px;
+    min-width: 200px;
+    padding: 12px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    .profileList {
+      .profileItem {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        &.active {
+          .check {
+            opacity: 1;
+          }
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+
+        span {
+          color: p.$text-w;
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
+
+        .check {
+          position: absolute;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 0, 0, 0.6);
+          border-radius: 50%;
+          opacity: 0;
+          font-size: 1.8rem;
+          color: p.$text-w;
+        }
+      }
+    }
+
+    .dropdownActions {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 8px;
+      padding-top: 8px;
+
+      a,
+      button {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        color: p.$text-w;
+        font-size: 1.4rem;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+      }
+
+      button {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+}
