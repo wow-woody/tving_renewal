@@ -1,283 +1,299 @@
 @use '../../App.scss' as h;
 
 header {
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: h.$text-w;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: h.$text-w;
 
-    .aside-header {
-        position: fixed;
-        background: h.$base-black;
-        height: 100vh;
-        width: 108px;
-        font-size: 2rem;
+  .aside-header {
+    position: fixed;
+    background: h.$base-black;
+    height: 100vh;
+    width: 108px;
+    font-size: 2rem;
 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border-right: 1px solid #333;
+    transition: width 0.2s ease;
+
+    z-index: 500;
+
+    &.isOpen {
+      width: 216px;
+      background: rgba(40, 40, 40, 0.8);
+
+      .side-menu span {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .logo .logo-wrap a.open {
+        .logo-main {
+          opacity: 0;
+        }
+        .logo-small {
+          opacity: 1;
+        }
+      }
+    }
+
+    .logo {
+      margin-top: 45px;
+      margin-bottom: 144px;
+      width: 100%;
+      height: 28px;
+
+      .logo-wrap {
+        position: relative;
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        height: 28px;
+        margin-left: 36px;
+        transition: opacity 0.25s ease-in;
 
-        border-right: 1px solid #333;
-        transition: width 0.2s ease;
-
-        z-index: 500;
-
-        &.isOpen {
-            width: 216px;
-            background: rgba(40, 40, 40, 0.8);
-
-            .side-menu span {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            .logo .logo-wrap a.open {
-                .logo-main {
-                    opacity: 0;
-                }
-                .logo-small {
-                    opacity: 1;
-                }
-            }
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 28px;
+          transition: opacity 0.1s ease;
         }
 
-        .logo {
-            margin-top: 45px;
-            margin-bottom: 144px;
-            width: 100%;
+        .logo-main {
+          margin-top: 0.5px;
+          height: 27px;
+          opacity: 1;
+        }
+        .logo-small {
+          opacity: 0;
+        }
+
+        & a.open {
+          .logo-main {
+            opacity: 0;
+          }
+          .logo-small {
             height: 28px;
-
-            .logo-wrap {
-                position: relative;
-                display: flex;
-                align-items: center;
-                height: 28px;
-                margin-left: 36px;
-                transition: opacity 0.25s ease-in;
-
-                img {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    height: 28px;
-                    transition: opacity 0.1s ease;
-                }
-
-                .logo-main {
-                    margin-top: 0.5px;
-                    height: 27px;
-                    opacity: 1;
-                }
-                .logo-small {
-                    opacity: 0;
-                }
-
-                & a.open {
-                    .logo-main {
-                        opacity: 0;
-                    }
-                    .logo-small {
-                        height: 28px;
-                        opacity: 1;
-                    }
-                }
-            }
+            opacity: 1;
+          }
         }
-
-        .side-menu {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-
-            li {
-                &:not(.setting-icon) {
-                    margin-bottom: 40px;
-                }
-
-                &.setting-icon {
-                    margin-bottom: 45px;
-                    margin-top: auto;
-                }
-
-                a {
-                    display: flex;
-                    align-items: center;
-                    gap: 16px;
-                    padding-left: 42px;
-                }
-
-                span {
-                    opacity: 0;
-                    white-space: nowrap;
-                    transform: translateX(-10px);
-                    transition: opacity 0.25s ease, transform 0.25s ease;
-                }
-
-                img {
-                    transition: all 0.25s ease;
-                }
-
-                &:hover a {
-                    font-weight: 700;
-                    filter: brightness(1.3);
-
-                    img {
-                        transform: scale(1.05);
-                    }
-                }
-            }
-        }
+      }
     }
 
-    .top-header {
-        position: fixed;
-        top: 0;
-        left: 108px;
-        width: calc(100% - 108px);
+    .side-menu {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
 
-        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        z-index: 100;
+      li {
+        &:not(.setting-icon) {
+          margin-bottom: 40px;
+        }
 
+        &.setting-icon {
+          margin-bottom: 45px;
+          margin-top: auto;
+        }
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding-left: 42px;
+        }
+
+        span {
+          opacity: 0;
+          white-space: nowrap;
+          transform: translateX(-10px);
+          transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        img {
+          transition: all 0.25s ease;
+        }
+
+        &:hover a {
+          font-weight: 700;
+          filter: brightness(1.3);
+
+          img {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+
+  .top-header {
+    position: fixed;
+    top: 0;
+    left: 108px;
+    width: calc(100% - 108px);
+
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    z-index: 100;
+
+    display: flex;
+    padding: 40px 48px 20px 32px;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &.fixed-header {
+      position: fixed;
+      top: 0;
+      left: 108px;
+
+      height: 108px;
+    }
+
+    &.hidden {
+      transform: translateY(-90%);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .left-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .main-menu {
         display: flex;
-        padding: 40px 48px 20px 32px;
+        align-items: center;
+        gap: 28px;
 
-        justify-content: space-between;
-        align-items: flex-start;
+        li a {
+          display: inline-block;
+          font-weight: 700;
+        }
+        li:hover a {
+          font-weight: 800;
+        }
+      }
 
-        &.fixed-header {
-            position: fixed;
-            top: 0;
-            left: 108px;
+      .search-box {
+        position: relative;
 
-            height: 108px;
+        width: 628px;
+        height: 40px;
+        input {
+          width: 100%;
+          height: 100%;
+          border: none;
+          outline: none;
+          border-radius: 8px;
+          background: h.$line-g;
+          color: h.$text-w;
+          padding: 0 36px;
         }
 
-        &.hidden {
-            transform: translateY(-90%);
-            opacity: 1;
-            pointer-events: auto;
+        .search-icon-wrap {
+          position: absolute;
+          left: 0;
+          top: 2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
         }
 
-        &.visible {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
+        button {
+          position: absolute;
+          right: 0;
+          top: 2px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          background: none;
+          border: none;
+
+          z-index: 2;
+          cursor: pointer;
         }
-
-        .left-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-
-            .main-menu {
-                display: flex;
-                align-items: center;
-                gap: 28px;
-
-                li a {
-                    display: inline-block;
-                    font-weight: 700;
-                }
-                li:hover a {
-                    font-weight: 800;
-                }
-            }
-
-            .search-box {
-                position: relative;
-
-                width: 628px;
-                height: 40px;
-                input {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    outline: none;
-                    border-radius: 8px;
-                    background: h.$line-g;
-                    color: h.$text-w;
-                    padding: 0 36px;
-                }
-
-                .search-icon-wrap {
-                    position: absolute;
-                    left: 0;
-                    top: 2px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 36px;
-                    height: 36px;
-                }
-
-                button {
-                    position: absolute;
-                    right: 0;
-                    top: 2px;
-
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 36px;
-                    height: 36px;
-                    background: none;
-                    border: none;
-
-                    z-index: 2;
-                    cursor: pointer;
-                }
-            }
-        }
-        .user {
-            > div {
-                display: flex;
-                align-items: center;
-                font-size: 1.3rem;
-                font-weight: 400;
-            }
-
-            .login-before {
-                gap: 12px;
-                line-height: 1;
-                vertical-align: middle;
-                div p {
-                    padding-bottom: 1.5px;
-                }
-                div a {
-                    width: 92px;
-                    height: 36px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .login {
-                    border: 1px solid h.$line-w;
-                    border-radius: 4px;
-                    box-sizing: border-box;
-
-                    color: h.$text-w;
-
-                    &:hover a {
-                        font-weight: 700;
-                    }
-                }
-
-                .join {
-                    background: h.$base-red;
-                    border: 1px solid h.$base-red;
-                    border-radius: 4px;
-
-                    color: #fff;
-
-                    &:hover a {
-                        font-weight: 700;
-                    }
-                }
-            }
-            .login-after {
-                display: none;
-            }
-        }
+      }
     }
+    .user {
+      > div {
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+        font-weight: 400;
+      }
+
+      .login-before {
+        gap: 12px;
+        line-height: 1;
+        vertical-align: middle;
+        div p {
+          padding-bottom: 1.5px;
+        }
+        div a {
+          width: 92px;
+          height: 36px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .login {
+          border: 1px solid h.$line-w;
+          border-radius: 4px;
+          box-sizing: border-box;
+
+          color: h.$text-w;
+
+          &:hover a {
+            font-weight: 700;
+          }
+        }
+
+        .join {
+          background: h.$base-red;
+          border: 1px solid h.$base-red;
+          border-radius: 4px;
+
+          color: #fff;
+
+          &:hover a {
+            font-weight: 700;
+          }
+        }
+      }
+      .login-after {
+        gap: 12px;
+
+        button {
+          //   display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid h.$line-w;
+          border-radius: 4px;
+          background: transparent;
+          color: h.$text-w;
+          font-size: 1.3rem;
+          cursor: pointer;
+
+          &:hover {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
 }
