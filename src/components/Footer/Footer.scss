@@ -1,0 +1,42 @@
+@use '../../App.scss' as g;
+
+footer {
+    margin-left: 112px;
+    margin-right: 24px;
+    margin-bottom: 36px;
+
+    padding: 52px;
+
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #b9b9b9;
+
+    @include g.boxshadow;
+    border-radius: 14px;
+
+    display: flex;
+    justify-content: space-between;
+
+    .footer-left {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+
+        .footer-left-top p + p {
+            margin-top: 4px;
+        }
+    }
+
+    .footer-right {
+        ul {
+            display: flex;
+            gap: 12px;
+        }
+        .sns-wrap li {
+            padding: 5px;
+            border-radius: 50%;
+
+            @include g.boxshadow;
+        }
+    }
+}

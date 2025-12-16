@@ -1,9 +1,9 @@
 @use '../../App.scss' as h;
 
 header {
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: h.$text-w;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: h.$text-w;
 
     .aside-header {
         position: fixed;
@@ -19,25 +19,25 @@ header {
         width: 84px;
         font-size: 2rem;
 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
 
         // border-right: 1px solid #333;
         transition: width 0.2s ease;
 
-    z-index: 500;
+        z-index: 500;
 
         &.isOpen {
             width: 200px;
             background: rgba(40, 40, 40, 0.8);
             backdrop-filter: blur(8px);
 
-      .side-menu span {
-        display: block;
-        opacity: 1;
-        transform: translateX(0);
-      }
+            .side-menu span {
+                display: block;
+                opacity: 1;
+                transform: translateX(0);
+            }
 
             .logo .logo-wrap a.open {
                 .logo-main {
@@ -50,27 +50,27 @@ header {
             }
         }
 
-    .logo {
-      margin-top: 45px;
-      margin-bottom: 144px;
-      width: 100%;
-      height: 28px;
+        .logo {
+            margin-top: 45px;
+            margin-bottom: 144px;
+            width: 100%;
+            height: 28px;
 
-      .logo-wrap {
-        position: relative;
-        display: flex;
-        align-items: center;
-        height: 28px;
-        margin-left: 24px;
-        transition: opacity 0.25s ease-in;
+            .logo-wrap {
+                position: relative;
+                display: flex;
+                align-items: center;
+                height: 28px;
+                margin-left: 24px;
+                transition: opacity 0.25s ease-in;
 
-        img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 28px;
-          transition: opacity 0.1s ease;
-        }
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 28px;
+                    transition: opacity 0.1s ease;
+                }
 
                 .logo-main {
                     margin-top: 0.5px;
@@ -82,64 +82,64 @@ header {
                     opacity: 0;
                 }
 
-        & a.open {
-          .logo-main {
-            opacity: 0;
-          }
-          .logo-small {
-            height: 28px;
-            opacity: 1;
-          }
+                & a.open {
+                    .logo-main {
+                        opacity: 0;
+                    }
+                    .logo-small {
+                        height: 28px;
+                        opacity: 1;
+                    }
+                }
+            }
         }
-      }
+
+        .side-menu {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            li {
+                &:not(.setting-icon) {
+                    margin-bottom: 40px;
+                }
+
+                &.setting-icon {
+                    margin-bottom: 45px;
+                    margin-top: auto;
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    padding-left: 30px;
+                }
+
+                span {
+                    display: none;
+                    opacity: 0;
+                    white-space: nowrap;
+                    transform: translateX(-10px);
+                    transition: opacity 0.25s ease, transform 0.25s ease;
+                }
+
+                img {
+                    transition: all 0.25s ease;
+                }
+
+                &:hover a {
+                    font-weight: 700;
+                    filter: brightness(1.3);
+
+                    img {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
     }
-
-    .side-menu {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-
-      li {
-        &:not(.setting-icon) {
-          margin-bottom: 40px;
-        }
-
-        &.setting-icon {
-          margin-bottom: 45px;
-          margin-top: auto;
-        }
-
-        a {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding-left: 30px;
-        }
-
-        span {
-          display: none;
-          opacity: 0;
-          white-space: nowrap;
-          transform: translateX(-10px);
-          transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-
-        img {
-          transition: all 0.25s ease;
-        }
-
-        &:hover a {
-          font-weight: 700;
-          filter: brightness(1.3);
-
-          img {
-            transform: scale(1.05);
-          }
-        }
-      }
-    }
-  }
 
     .top-header {
         position: fixed;
@@ -160,8 +160,8 @@ header {
         display: flex;
         padding: 40px 24px 20px 24px;
 
-    justify-content: space-between;
-    align-items: flex-start;
+        justify-content: space-between;
+        align-items: flex-start;
 
         &.fixed-header {
             position: fixed;
@@ -199,9 +199,9 @@ header {
                 width: 426px;
                 height: 36px;
 
-        display: flex;
-        align-items: center;
-        gap: 28px;
+                display: flex;
+                align-items: center;
+                gap: 28px;
 
                 li a {
                     position: relative;
@@ -324,52 +324,51 @@ header {
 
                     color: #fff;
 
-            &:hover a {
-              font-weight: 700;
+                    &:hover a {
+                        font-weight: 700;
+                    }
+                }
             }
-          }
-        }
-        .login-after {
-          gap: 12px;
+            .login-after {
+                gap: 12px;
 
-          button {
-            //   display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid h.$line-w;
-            border-radius: 4px;
-            background: transparent;
-            color: h.$text-w;
-            font-size: 1.3rem;
-            cursor: pointer;
+                button {
+                    //   display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid h.$line-w;
+                    border-radius: 4px;
+                    background: transparent;
+                    color: h.$text-w;
+                    font-size: 1.3rem;
+                    cursor: pointer;
 
-            &:hover {
-              font-weight: 700;
+                    &:hover {
+                        font-weight: 700;
+                    }
+                }
             }
-          }
         }
-      }
     }
 
-        .top-show {
-            opacity: 1;
-            transition: opacity 0.2s ease;
+    .top-show {
+        opacity: 1;
+        transition: opacity 0.2s ease;
 
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
 
-            // background: #282828;
+        // background: #282828;
 
-            background: rgba(40, 40, 40, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        background: rgba(40, 40, 40, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 
-            padding: 8px 10px;
-            border-top: none;
-            border-radius: 0 0 8px 8px;
-        }
+        padding: 8px 10px;
+        border-top: none;
+        border-radius: 0 0 8px 8px;
     }
 }
