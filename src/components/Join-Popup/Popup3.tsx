@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './scss/Popup3.module.scss';
+import { createPortal } from 'react-dom';
 
 interface PopupProps {
     onClose: () => void;
@@ -7,7 +8,7 @@ interface PopupProps {
 }
 
 const Popup3 = ({ onClose, onAgree }: PopupProps) => {
-    return (
+    return createPortal(
         <div className={styles['popup-bg']}>
             <div className={styles['popup-wrap']}>
                 <div className={styles['popup-box']}>
@@ -61,7 +62,8 @@ const Popup3 = ({ onClose, onAgree }: PopupProps) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.getElementById('modal-root')!
     );
 };
 

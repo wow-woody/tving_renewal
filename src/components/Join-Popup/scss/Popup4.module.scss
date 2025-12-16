@@ -1,13 +1,18 @@
+@use '../../../App.scss' as g;
+
 .popup-bg {
     position: fixed;
-    inset: 0;
+    // inset: 0;
 
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
 
     background: rgba(0, 0, 0, 0.8);
 
-    z-index: 100;
+    z-index: 1000;
 
     .popup-wrap {
         width: 540px;
@@ -19,8 +24,8 @@
     }
 
     .popup-box {
-        background: #282828;
-        border: 1px solid #5c5c5c;
+        @include g.boxshadow;
+
         border-radius: 12px;
         padding: 46px 16px 32px 46px;
 

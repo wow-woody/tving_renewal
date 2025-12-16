@@ -12,38 +12,44 @@ import { useUserStore } from './store/useUserStore';
 import EditProfile from './pages/EditProfile';
 
 function App() {
-  const location = useLocation();
-  const noHeaderPages = ['/login', '/join', '/editprofile'];
-  const hideHeader = noHeaderPages.includes(location.pathname);
-  const initAuth = useAuthStore((state) => state.initAuth);
-  const { user } = useAuthStore();
-  const { initProfiles } = useUserStore();
+    const location = useLocation();
 
-  useEffect(() => {
-    initAuth();
-  }, []);
+    const noHeaderPages = ['/login', '/join', '/editprofile'];
+    const hideHeader = noHeaderPages.includes(location.pathname);
 
-  useEffect(() => {
-    if (user && 'uid' in user) {
-      initProfiles(user.uid);
-    }
-  }, [user]);
+    const noFooterPage = ['/login', '/join', './editprofile'];
+    const hideFooter = noFooterPage.includes(location.pathname);
 
-  return (
-    <>
-      {!hideHeader && <Header />}
+    const initAuth = useAuthStore((state) => state.initAuth);
+    const { user } = useAuthStore();
+    const { initProfiles } = useUserStore();
 
-      <Routes>
-        <Route path="/" element={<Home />} />
+    useEffect(() => {
+        initAuth();
+    }, []);
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/editprofile" element={<EditProfile />} />
-      </Routes>
-      <Footer />
-    </>
-  );
+    useEffect(() => {
+        if (user && 'uid' in user) {
+            initProfiles(user.uid);
+        }
+    }, [user]);
+
+    return (
+        <>
+            {!hideHeader && <Header />}
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+
+                <Route path="/login" element={<Login />} />
+                <Route path="/join" element={<Join />} />
+                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/editprofile" element={<EditProfile />} />
+            </Routes>
+
+            {!hideFooter && <Footer />}
+        </>
+    );
 }
 
 export default App;
