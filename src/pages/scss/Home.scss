@@ -72,7 +72,7 @@
 
 .main-wrap {
     // padding-left: 10.8rem;
-    padding-top: 16.8rem;
+    padding-top: 13.2rem;
 
     hr {
         border: none;
@@ -102,7 +102,8 @@
 
         .main-container {
             min-width: 833px;
-            aspect-ratio: 149/61;
+            // aspect-ratio: 149/61;
+            aspect-ratio: 1788/732;
             background: rgb(149, 113, 113);
         }
     }
@@ -258,25 +259,18 @@
 
             overflow: hidden;
 
-            // max-height: 576px;
-            // height: 100%;
+            height: clamp(400px, 32vw, 576px);
 
             .new-wrap {
+                height: 100%;
+
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 gap: 22px;
 
-                width: 34.79vw;
-                // aspect-ratio: 668/487;
-                // height: 500px;
-                height: auto;
-                max-height: 500px;
-                min-height: 380px;
-
-                flex-shrink: 0;
-
                 .img-wrap {
+                    height: 74%;
                     width: 100%;
                     aspect-ratio: 16/9;
                     border-radius: 16.67px;
@@ -285,14 +279,12 @@
                 }
 
                 .new-title {
-                    flex: 1;
+                    height: 26%;
 
                     display: flex;
                     gap: 24px;
                     align-items: flex-start;
                     padding: 0 0.4% 20px;
-
-                    height: 100%;
 
                     .title-img {
                         max-height: 84px;
@@ -302,7 +294,6 @@
                         // min-width: 170px;
 
                         img {
-                            display: flex;
                             height: 100%;
                             object-fit: cover;
                         }
