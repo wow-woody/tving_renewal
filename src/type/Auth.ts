@@ -6,5 +6,6 @@ export interface Profile {
   id: string;
   name: string;
   owner: boolean;
+  image: string;
   createdAt: Date;
 }

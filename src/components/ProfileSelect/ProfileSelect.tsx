@@ -22,7 +22,7 @@ const ProfileSelect = () => {
     <div className="profile-dropdown">
       {/* 현재 프로필 표시 */}
       <div className="current-profile" onClick={handleToggle}>
-        <img src="/assets/Profile/profile-G.png" alt={currentProfile?.name} />
+        <img src={currentProfile?.image} alt={currentProfile?.name} />
         <span>{currentProfile?.name}</span>
         <span className="arrow">{isOpen ? '▲' : '▼'}</span>
       </div>
@@ -39,7 +39,7 @@ const ProfileSelect = () => {
                   key={profile.id}
                   className="profile-item"
                   onClick={() => handleSelectProfile(profile.id)}>
-                  <img src="/assets/Profile/profile-G.png" alt={profile.name} />
+                  <img src={profile.image} alt={profile.name} />
                   <span>{profile.name}</span>
                 </div>
               ))}

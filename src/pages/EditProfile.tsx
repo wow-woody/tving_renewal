@@ -3,6 +3,7 @@ import './scss/EditProfile.scss';
 import { useUserStore } from '../store/useUserStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { useState } from 'react';
+import { ProfileImg } from '../constants/ProfileImages';
 
 const EditProfile = () => {
   const { profiles, addProfile } = useUserStore();
@@ -26,10 +27,12 @@ const EditProfile = () => {
     setAdd(false);
   };
 
+  const newImg = profiles.length < 4 ? ProfileImg[profiles.length] : ProfileImg[0];
+
   return (
     <div>
       <Link to="/" className="edit-logo">
-        <img src="/images/tving-logo-main.svg" alt="" />
+        <img src="/images/tving-logo-main.svg" alt="tving-logo" />
       </Link>
       <div className="edit-title">
         <h2>프로필 수정</h2>
@@ -39,17 +42,17 @@ const EditProfile = () => {
         {profiles.map((profile) => (
           <div key={profile.id} className="profile-id">
             <p>
-              <img src="/assets/Profile/profile-G.png" alt={profile.name} />
+              <img src={profile.image} alt={profile.name} />
             </p>
-            <p>{profile.name}</p>
-            <button>프로필 편집</button>
+            <p className="edit-name">{profile.name}</p>
+            <button className="edit-btn">프로필 편집</button>
           </div>
         ))}
 
         {add && (
           <div className="profile-id creating">
             <p>
-              <img src="/assets/Profile/profile-G.png" alt="new profile" />
+              <img src={newImg} alt="new profile" />
             </p>
 
             <input
@@ -61,7 +64,7 @@ const EditProfile = () => {
               autoFocus
             />
 
-            <button onClick={handleSaveProfile}>완료</button>
+            <button onClick={handleSaveProfile}>수정</button>
           </div>
         )}
 
@@ -69,13 +72,15 @@ const EditProfile = () => {
         {!add && profiles.length < 4 && (
           <div className="profile-add" onClick={handleAddProfile}>
             <p></p>
-            <button>프로필 추가</button>
+            <button className="add-btn">프로필 추가</button>
           </div>
         )}
       </div>
-      <button className="back">
-        <p>뒤로가기</p>
-      </button>
+      <div className="back-wrap">
+        <button className="back">
+          <p className="back-btn">나가기</p>
+        </button>
+      </div>
     </div>
   );
 };

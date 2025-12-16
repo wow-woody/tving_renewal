@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import type { Profile } from '../type/Auth';
+import { ProfileImg } from '../constants/ProfileImages';
 
 interface UserState {
   profiles: Profile[];
@@ -27,12 +28,13 @@ export const useUserStore = create<UserState>((set, get) => ({
       await addDoc(ref, {
         name: '내 프로필',
         owner: true,
+        image: ProfileImg[0],
         createdAt: new Date(),
       });
       return get().initProfiles(uid);
     }
 
-    const profiles = snap.docs.map((doc) => ({
+    const profiles: Profile[] = snap.docs.map((doc) => ({
       id: doc.id,
       ...(doc.data() as Omit<Profile, 'id'>),
     }));
@@ -48,10 +50,14 @@ export const useUserStore = create<UserState>((set, get) => ({
     const profiles = get().profiles;
     if (profiles.length >= 4) return;
 
+    const usedImg = profiles.map((i) => i.image);
+    const CheckImg = ProfileImg.find((img) => !usedImg.includes(img)) ?? ProfileImg[0];
+
     const ref = collection(db, 'users', uid, 'profiles');
     const docRef = await addDoc(ref, {
       name,
       owner: false,
+      image: CheckImg,
       createdAt: new Date(),
     });
 
@@ -62,6 +68,7 @@ export const useUserStore = create<UserState>((set, get) => ({
           id: docRef.id,
           name,
           owner: false,
+          image: CheckImg,
           createdAt: new Date(),
         },
       ],
