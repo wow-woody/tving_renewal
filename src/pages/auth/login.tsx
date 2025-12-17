@@ -116,7 +116,7 @@ const Login = () => {
               </li>
             </ul>
           </div>
-          <button className="back">
+          <button className="back" onClick={() => navigate(-1)}>
             <p>뒤로가기</p>
           </button>
         </div>
