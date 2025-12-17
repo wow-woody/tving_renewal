@@ -25,7 +25,7 @@ $line-g: #3d3d3d;
 //   color: $color;
 // }
 
-@mixin boxshadow {
+@mixin boxshadow($border-opacity: 0.2) {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 12px rgba(255, 255, 255, 0.1) inset;
 
     backdrop-filter: blur(100px);
@@ -39,5 +39,5 @@ $line-g: #3d3d3d;
         rgba(255, 255, 255, 0.05) 360deg
     );
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, $border-opacity);
 }

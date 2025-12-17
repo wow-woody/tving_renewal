@@ -22,12 +22,10 @@ const ProfileSelect = () => {
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
-            if (
-                isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)
-            ) {
+            if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
                 setIsOpen(false);
             }
-        }
+        };
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [isOpen]);
@@ -39,8 +37,6 @@ const ProfileSelect = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [isOpen]);
-
-
 
     return (
         <div className="profile-dropdown" ref={dropdownRef}>
@@ -54,30 +50,34 @@ const ProfileSelect = () => {
             {/* 드롭다운 메뉴 */}
             {isOpen && (
                 <div className="dropdown-menu">
-                    {/* 프로필 리스트 */}
-                    <div className="profile-list">
-                        {profiles
-                            .filter((profile) => profile.id !== profileId)
-                            .map((profile) => (
-                                <div
-                                    key={profile.id}
-                                    className="profile-item"
-                                    onClick={() => handleSelectProfile(profile.id)}
-                                >
-                                    <span>{profile.name}</span>
-                                    <img src={profile.image} alt={profile.name} />
-                                </div>
-                            ))}
-                    </div>
+                    <div className="dropdown-bg">
+                        <div className="dropdown-bg-inner">
+                            {/* 프로필 리스트 */}
+                            <div className="profile-list">
+                                {profiles
+                                    .filter((profile) => profile.id !== profileId)
+                                    .map((profile) => (
+                                        <div
+                                            key={profile.id}
+                                            className="profile-item"
+                                            onClick={() => handleSelectProfile(profile.id)}
+                                        >
+                                            <span>{profile.name}</span>
+                                            <img src={profile.image} alt={profile.name} />
+                                        </div>
+                                    ))}
+                            </div>
 
-                    {/* 하단 버튼 */}
-                    <div className="dropdown-actions">
-                        <Link to="/editprofile" onClick={() => setIsOpen(false)}>
-                            프로필 수정
-                        </Link>
-                        <button className="logout-btn" onClick={onLogout}>
-                            로그아웃
-                        </button>
+                            {/* 하단 버튼 */}
+                            <div className="dropdown-actions">
+                                <Link to="/editprofile" onClick={() => setIsOpen(false)}>
+                                    프로필 수정
+                                </Link>
+                                <button className="logout-btn" onClick={onLogout}>
+                                    로그아웃
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

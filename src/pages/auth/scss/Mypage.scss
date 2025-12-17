@@ -1,12 +1,85 @@
+@mixin title-wrap {
+    .title-wrap {
+        position: relative;
+
+        @include pagenation-wrap($pos: absolute, $p-b: 0, $p-l: 10.8rem);
+    }
+}
+
+@mixin pagenation-wrap($pos: none, $p-b: 64px, $p-l: 0px) {
+    .pagenation-wrap {
+        height: 32px;
+        width: 100%;
+        padding-right: 24px;
+        padding-left: $p-l;
+        padding-bottom: $p-b;
+        display: flex;
+        align-items: flex-end;
+        gap: 14px;
+
+        position: $pos;
+        top: 50%;
+        left: 0;
+
+        .pagenation-area {
+            position: relative;
+            flex: 1;
+
+            .pagenation-line {
+                height: 1px;
+                width: 100%;
+                background: #373737;
+            }
+
+            .pointer-line {
+                position: absolute;
+                top: 0;
+                left: 30%;
+
+                height: 1px;
+                width: 80px;
+                background: #ff153c;
+            }
+        }
+
+        .nav-btn {
+            display: flex;
+
+            button {
+                width: 32px;
+                height: 32px;
+                border: 1px solid #373737;
+                border-radius: 0;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                cursor: pointer;
+
+                img {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+
+            button + button {
+                border-left: none;
+            }
+        }
+    }
+}
+
 .mypage-wrap {
     margin: 0 0.2%;
-    padding-left: 12.4rem;
-    padding-top: 10.8rem;
+    padding-left: 10.8rem;
+    padding-top: 12rem;
 
     .user-info-wrap {
         width: calc(100% - 16px);
+        min-width: 1100px;
         height: 216px;
-        margin-right: 1.6rem;
+        margin-right: 2.4rem;
         border-top: 1px solid #5c5c5c;
         border-bottom: 1px solid #5c5c5c;
 
@@ -21,90 +94,153 @@
                 border-left: 1px solid #5c5c5c;
             }
 
-            .user {
-                flex-grow: 608;
-                padding: 12px 0 0 16px;
-            }
-
-            .subscribe {
-                flex-grow: 586;
-                padding: 12px 0 0 32px;
-            }
-
-            .cs {
-                flex-grow: 586;
-                padding: 12px 0 0 32px;
-            }
-
             .top-title {
                 display: flex;
                 align-items: center;
-                gap: 8px;
+                justify-content: space-between;
 
-                font-size: 0.9rem;
-                color: #a4a4a4;
+                .sub-title {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: #fff;
+                }
 
-                > div {
+                .link {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: #a4a4a4;
+
                     padding: 8px;
                     border: 1px solid #a4a4a4;
                     border-radius: 4px;
-                }
 
-                div:first-of-type {
-                    font-weight: 700;
+                    a {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+
+                        img {
+                            width: 10px;
+                            height: 10px;
+                        }
+                    }
+                }
+            }
+
+            .user {
+                width: 35%;
+                height: 100%;
+                padding: 12px 32px 0 16px;
+
+                display: flex;
+                flex-direction: column;
+
+                .current-profile {
+                    flex: 1;
+
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+
+                    img {
+                        width: 60px;
+                        aspect-ratio: 1;
+                    }
+
+                    span {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                        color: #fff;
+                    }
+                }
+            }
+
+            .subscribe {
+                width: 32.5%;
+                height: 100%;
+                padding: 12px 32px 0 32px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .current-subscribe {
+                    flex: 1;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 8px;
+
+                    .subscribe-info {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+
+                        img {
+                            width: 24px;
+                            aspect-ratio: 1;
+                            object-fit: contain;
+                        }
+
+                        p {
+                            font-size: 1.4rem;
+                            font-weight: 800;
+                            color: #919191;
+                        }
+                    }
+                }
+            }
+
+            .cs {
+                width: 32.5%;
+                height: 100%;
+                padding: 12px 32px 0 32px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .setting {
+                    flex: 1;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 8px;
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+
+                        img {
+                            width: 24px;
+                            aspect-ratio: 1;
+                            object-fit: contain;
+                        }
+
+                        p {
+                            font-size: 1.4rem;
+                            font-weight: 800;
+                            color: #919191;
+                        }
+                    }
                 }
             }
         }
     }
 
-    .title-wrap {
-        width: 100%;
-        text-align: center; /* h2를 중앙에 두는 역할도 함 (flex를 쓰므로 사실상 h2에만 적용해도 무방) */
-        /* 필요에 따라 패딩/마진 등을 조절하세요. */
-    }
+    section {
+        margin-top: 140px;
+        @include title-wrap;
 
-    /*
- * 🌟 핵심: 제목 요소 (h2.title)에 Flexbox 적용
- * 양쪽 줄(::before, ::after)이 텍스트를 감싸도록 설정합니다.
- */
-    .title {
-        /* Flexbox 설정 */
-        display: flex;
-        align-items: center; /* 수직 중앙 정렬 */
-        justify-content: flex-start; /* Flexbox 항목 자체를 중앙에 두기 (선택 사항) */
-
-        /* 너비 및 여백 설정 */
-        width: 100%;
-        margin: 20px 0;
-
-        /* 폰트 설정 (선택 사항) */
-        font-size: 24px;
-        color: #333;
-    }
-
-    /*
- * 🚀 양쪽 줄 생성 (::before, ::after)
- * flex-grow: 1; 이 줄을 좌우 끝까지 쫙 펼쳐지게 만드는 핵심 속성입니다.
- */
-    // .title::before,
-    .title::after {
-        content: ''; /* 가상 요소 내용 (필수) */
-        flex-grow: 1; /* 남은 공간을 동일하게 채우도록 확장 */
-        height: 1px; /* 줄의 두께 */
-        background-color: #ccc; /* 줄의 색상 */
-    }
-
-    /* 텍스트와 줄 사이의 간격 조정 */
-    .title::before {
-        margin-right: 15px; /* 왼쪽 줄과 텍스트 사이 간격 */
-    }
-
-    .title::after {
-        margin-left: 15px; /* 오른쪽 줄과 텍스트 사이 간격 */
-    }
-
-    /* 텍스트를 감싸는 <span> 태그 */
-    .title span {
-        white-space: nowrap; /* 제목이 길어져도 줄바꿈되지 않게 방지 */
+        .title-wrap {
+            h2 {
+                font-size: 3.6rem;
+                font-weight: 800;
+                color: #fff;
+            }
+        }
     }
 }

@@ -1,0 +1,209 @@
+@use './../../App.scss' as g;
+
+.subscription-wrappers {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    .top {
+        position: fixed;
+
+        width: 100%;
+        padding: 30px 0 28px 0;
+        border-bottom: 1px solid #5c5c5c;
+        text-align: center;
+
+        background: #282828;
+
+        a {
+            display: inline-block;
+        }
+    }
+
+    .subscription-wrap {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .fixed {
+            position: fixed;
+            top: 92px;
+
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .ad-banner {
+                width: 100%;
+                height: 280px;
+                background: #fdcad2;
+
+                text-align: center;
+
+                img {
+                    margin: 0 auto;
+                    height: 100%;
+                }
+            }
+
+            .select-section {
+                width: 100%;
+                padding: 28px 0 20px 0;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+
+                background: #282828;
+
+                button {
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: #828282;
+
+                    padding: 16px 24px;
+                    border-radius: 24px;
+                    @include g.boxshadow;
+                }
+            }
+        }
+
+        .select-wrap {
+            margin-top: 474px;
+            width: 100%;
+
+            section {
+                width: 100%;
+                margin-top: 38px;
+                padding: 0 108px;
+
+                .title-wrap {
+                    padding-bottom: 16px;
+                    border-bottom: 1px solid #373737;
+                    h2 {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+
+                        font-size: 2.4rem;
+                        font-weight: 800;
+                        color: #fff;
+
+                        img {
+                            height: 24px;
+                        }
+
+                        .disney-logo {
+                            height: 44px;
+                        }
+                        span {
+                            font-size: 1.2rem;
+                            color: #828282;
+                        }
+                    }
+                }
+
+                .subscription {
+                    margin-top: 20px;
+                    width: 100%;
+                    display: flex;
+                    gap: 24px;
+                    align-items: center;
+                    justify-content: center;
+
+                    div {
+                        cursor: pointer;
+
+                        &:hover {
+                            .select {
+                                background: #ff153c;
+
+                                .select-top .title {
+                                    color: #fff;
+                                }
+                            }
+                        }
+
+                        .select {
+                            width: 264px;
+                            height: 360px;
+
+                            border-radius: 14px;
+                            background: #373737;
+
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            .select-top {
+                                text-align: center;
+                                padding: 20px 0 16px 0;
+
+                                .title {
+                                    font-size: 1.4rem;
+                                    font-weight: 800;
+                                    color: #828282;
+                                    margin-bottom: 12px;
+                                }
+                                .price {
+                                    font-size: 2.4rem;
+                                    font-weight: 800;
+                                    color: #fff;
+                                }
+                            }
+
+                            .select-content {
+                                flex: 1;
+                                width: 98%;
+
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 8px;
+
+                                background: #282828;
+
+                                font-size: 1.6rem;
+                                color: #fff;
+
+                                p {
+                                    font-size: 1.8rem;
+                                    font-weight: 800;
+                                }
+                            }
+
+                            .select-bottom {
+                                width: 98%;
+                                text-align: center;
+                                padding: 16px 0 20px 0;
+                                font-size: 1.6rem;
+                                font-weight: 800;
+                                color: #fff;
+                                background: #373737;
+                                margin-bottom: 2px;
+                                border-radius: 0 0 12px 12px;
+                            }
+                        }
+                    }
+                }
+
+                &:last-of-type {
+                    margin-bottom: 32px;
+                }
+            }
+        }
+    }
+
+    .footer-line {
+        height: 44px;
+        border-top: 1px solid #5c5c5c;
+    }
+}

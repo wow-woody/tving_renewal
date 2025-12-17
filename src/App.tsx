@@ -10,14 +10,15 @@ import { useEffect } from 'react';
 import Mypage from './pages/auth/Mypage';
 import { useUserStore } from './store/useUserStore';
 import EditProfile from './pages/EditProfile';
+import Subscription from './pages/Subscription';
 
 function App() {
     const location = useLocation();
 
-    const noHeaderPages = ['/login', '/join', '/editprofile'];
+    const noHeaderPages = ['/login', '/join', '/editprofile', '/subscription'];
     const hideHeader = noHeaderPages.includes(location.pathname);
 
-    const noFooterPage = ['/login', '/join', '/editprofile'];
+    const noFooterPage = ['/login', '/join', '/editprofile', '/subscription'];
     const hideFooter = noFooterPage.includes(location.pathname);
 
     const initAuth = useAuthStore((state) => state.initAuth);
@@ -43,8 +44,10 @@ function App() {
 
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
+
                 <Route path="/mypage" element={<Mypage />} />
                 <Route path="/editprofile" element={<EditProfile />} />
+                <Route path="/subscription" element={<Subscription />} />
             </Routes>
 
             {!hideFooter && <Footer />}
