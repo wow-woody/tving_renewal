@@ -43,7 +43,7 @@ export const useTvSeriesStore = create((set) => ({
       `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=18&with_status=0&with_original_language=ko&sort_by=popularity.desc&language=ko-KR`
     );
     const data = await res.json();
-    // console.log('한국방영중', data.results);
+    console.log('한국방영중', data.results);
     set({ onairko: data.results });
   },
 
