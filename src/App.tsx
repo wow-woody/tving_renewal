@@ -17,7 +17,7 @@ function App() {
     const noHeaderPages = ['/login', '/join', '/editprofile'];
     const hideHeader = noHeaderPages.includes(location.pathname);
 
-    const noFooterPage = ['/login', '/join', './editprofile'];
+    const noFooterPage = ['/login', '/join', '/editprofile'];
     const hideFooter = noFooterPage.includes(location.pathname);
 
     const initAuth = useAuthStore((state) => state.initAuth);

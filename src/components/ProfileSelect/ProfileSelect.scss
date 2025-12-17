@@ -1,122 +1,164 @@
 @use '../../App.scss' as p;
 
-.profileDropdown {
-  position: relative;
+.profile-dropdown {
+    position: relative;
 
-  .currentProfile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 4px;
+    height: 100%;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-    }
-
-    span {
-      color: p.$text-w;
-      font-size: 1.4rem;
-    }
-
-    .arrow {
-      margin-left: 4px;
-      font-size: 1rem;
-    }
-  }
-
-  .dropdownMenu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: #1a1a1a;
-    border-radius: 8px;
-    min-width: 200px;
-    padding: 12px 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-
-    .profileList {
-      .profileItem {
+    .current-profile {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 12px 20px;
+        gap: 10px;
         cursor: pointer;
+        // padding: 8px 12px;
+        border-radius: 4px;
+
         position: relative;
 
-        &:hover {
-          background: rgba(255, 255, 255, 0.05);
+        &::before {
+            content: '';
+            position: absolute;
+            background: #555555;
+
+            border-radius: 12px;
+
+            top: -4px;
+            bottom: -4px;
+            left: -8px;
+            right: -8px;
+
+            z-index: -1;
+
+            opacity: 0;
         }
 
-        &.active {
-          .check {
+        &:hover::before {
             opacity: 1;
-          }
         }
 
         img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
         }
 
-        span {
-          color: p.$text-w;
-          font-size: 1.5rem;
-          font-weight: 500;
-        }
+        // span {
+        //     color: p.$text-w;
+        //     font-size: 1.4rem;
+        // }
 
-        .check {
-          position: absolute;
-          left: 20px;
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(0, 0, 0, 0.6);
-          border-radius: 50%;
-          opacity: 0;
-          font-size: 1.8rem;
-          color: p.$text-w;
-        }
-      }
+        // .arrow {
+        //     margin-left: 4px;
+        //     font-size: 1rem;
+        // }
     }
 
-    .dropdownActions {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 8px;
-      padding-top: 8px;
+    .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: -8px;
 
-      a,
-      button {
-        display: block;
-        width: 100%;
-        padding: 12px 20px;
-        text-align: center;
-        border: none;
-        background: transparent;
-        color: p.$text-w;
-        font-size: 1.4rem;
-        font-weight: 500;
-        cursor: pointer;
+        // background: rgba(40, 40, 40, 0.6);
+        background: rgb(40, 40, 40);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 
-        &:hover {
-          background: rgba(255, 255, 255, 0.05);
+        // background: rgba(40, 40, 40, 0.8);
+        border-radius: 8px;
+        width: fit-content;
+        min-width: 200px;
+        max-width: 240px;
+        padding: 12px 0;
+        // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        padding: 8px 4px;
+        display: inline-block;
+        z-index: 1000;
+
+        border: 1px solid #555555;
+
+        .profile-list {
+            .profile-item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 12px;
+                padding: 12px 4px;
+                cursor: pointer;
+                position: relative;
+                white-space: nowrap;
+                border-radius: 4px;
+
+                &:hover {
+                    background: #555555;
+                }
+
+                &.active {
+                    .check {
+                        opacity: 1;
+                    }
+                }
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+
+                span {
+                    color: p.$text-w;
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                }
+
+                .check {
+                    position: absolute;
+                    left: 20px;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 50%;
+                    opacity: 0;
+                    font-size: 1.8rem;
+                    color: p.$text-w;
+                }
+            }
         }
-      }
 
-      button {
-        color: rgba(255, 255, 255, 0.6);
-      }
+        .dropdown-actions {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 8px;
+            padding-top: 8px;
+
+            a,
+            button {
+                display: block;
+                width: 100%;
+                padding: 12px 20px;
+                text-align: center;
+                border: none;
+                background: transparent;
+                color: p.$text-w;
+                font-size: 1.4rem;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 4px;
+
+                &:hover {
+                    background: #555555;
+                }
+            }
+
+            .logout-btn {
+                margin-top: 8px;
+            }
+
+            button {
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
     }
-  }
 }

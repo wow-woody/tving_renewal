@@ -256,12 +256,9 @@
 
             @include g.boxshadow;
 
-            p {
-                z-index: 1;
-                font-size: 1.6rem;
-                font-weight: 700;
-                color: #a4a4a4;
-            }
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #a4a4a4;
         }
     }
 
