@@ -1,13 +1,47 @@
 import { Link } from 'react-router-dom';
 import './scss/Home.scss';
+import RankRow from "../components/tving-top20/RankRowtop20";
+
+import drama from "../data/Drama";
+import anim from "../data/Anim";
+import movie from "../data/Movie";
+import enter from "../data/Enter";
+
+import type { Content } from "../type/content";
+import { RankScope } from "../type/enum";
+import VOnlySection from '../components/v-only/VOnlySection';
+import VOriginalSection from '../components/v-origin/VOriginalSection';
+
+
 
 const Home = () => {
-  return (
-    <div className="main-wrap">
-      <section className="section-1">
-        <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
-        <div className="main-container"></div>
-      </section>
+    // 1) 전부 합치기
+    const all: Content[] = [...drama, ...anim, ...movie, ...enter];
+
+    // 2) TOP20 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
+    const top20 = all
+        .filter((item) => item.rank?.[RankScope.TOP20] != null)
+        .sort(
+            (a, b) =>
+                (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999)
+        )
+        .slice(0, 20);
+
+    // 2) ANIM 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
+    const anim20 = all
+        .filter((item) => item.rank?.[RankScope.POP_ANIM] != null)
+        .sort(
+            (a, b) =>
+                (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999)
+        )
+        .slice(0, 20);
+
+    return (
+        <div className="main-wrap">
+            <section className="section-1">
+                <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
+                <div className="main-container"></div>
+            </section>
 
       <hr />
 
@@ -156,71 +190,40 @@ const Home = () => {
       </section>
 
       <section className="section-6">
-        <div className="title-wrap">
+        
           <h2 className="section-title">
             <Link to="/">오늘의 티빙 TOP 20</Link>
           </h2>
-          <div className="pagenation-wrap">
-            <div className="pagenation-area">
-              <div className="pagenation-line"></div>
-              <div className="pointer-line"></div>
-            </div>
-            <div className="nav-btn">
-              <button className="prev">
-                <img src="/images/arrow-left.svg" alt="prev" />
-              </button>
-              <button className="next">
-                <img src="/images/arrow-right.svg" alt="next" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="ranking-container">
-          <div className="ranking-wrap">
-            <h3 className="ranking">1</h3>
-            <div className="ranking-img"></div>
-          </div>
-          <div className="ranking-wrap">
-            <h3 className="ranking">2</h3>
-            <div className="ranking-img"></div>
-          </div>
-        </div>
+          <div className='poster-wrap'>
+                    <RankRow
+                        data={top20}
+                        rankScope={RankScope.TOP20}
+                    />
+                </div>
       </section>
 
-      <div>
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
-        <p>6</p>
-        <p>7</p>
-        <p>8</p>
-        <p>9</p>
-        <p>10</p>
-        <p>11</p>
-        <p>12</p>
-        <p>13</p>
-        <p>14</p>
-        <p>15</p>
-        <p>16</p>
-        <p>17</p>
-        <p>18</p>
-        <p>19</p>
-        <p>20</p>
-        <p>21</p>
-        <p>22</p>
-        <p>23</p>
-        <p>24</p>
-        <p>25</p>
-        <p>26</p>
-        <p>27</p>
-        <p>28</p>
-        <p>29</p>
-        <p>30</p>
-      </div>
-    </div>
-  );
+            <section className="section-8">
+                <VOriginalSection />
+            </section>
+
+            <section className="section-14">
+                
+                    <h2 className="section-title">
+                        <Link to="/">실시간 인기 애니메이션</Link>
+                    </h2>
+                
+                <div className='poster-wrap'>
+                    <RankRow data={anim20}
+                        rankScope={RankScope.POP_ANIM} />
+                </div>
+            </section>
+            <section className="section-15">
+                <VOnlySection />
+            </section>
+
+
+        </div>
+    );
 };
 
 export default Home;

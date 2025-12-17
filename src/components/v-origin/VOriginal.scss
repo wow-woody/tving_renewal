@@ -1,0 +1,90 @@
+.v-original {
+    display: flex;
+  gap: 32px;
+  padding: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7a0d1c, #3a0a12);
+  width: 1756px;
+  margin: 0 auto;  
+  
+
+  .v-original-info {
+    width: 272px;
+    color: #fff;
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .more-btn {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  }
+
+  .v-original-slider {
+    width: 80%;
+    overflow: hidden;
+  
+
+    .v-original-card {
+      position: relative;
+      
+      border-radius: 12px;
+      
+
+      img {
+        display: block;
+        border-radius: 12px;
+        transition: transform 0.4s ease;
+      }
+
+     
+
+      .badge {
+        position: absolute;
+        left: 8px;
+        bottom: 10px;    
+        padding: 4px 6px;
+        border-radius: 4px;
+        width: 94px;
+        img{
+          width: 10px;
+          height: auto;
+        }
+        
+      }
+    }
+  }
+}
+
+.glass-frame {
+  margin-top: 30px;  //임시
+  margin-left: 10.8rem;
+  width: 1788px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px;                     // 유리 두께
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
