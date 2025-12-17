@@ -1,5 +1,14 @@
 import { create } from 'zustand';
-import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import type { Profile } from '../type/Auth';
 import { ProfileImg } from '../constants/ProfileImages';
@@ -10,6 +19,8 @@ interface UserState {
 
   initProfiles: (uid: string) => Promise<void>;
   addProfile: (uid: string, name: string) => Promise<void>;
+  removeProfile: (uid: string, profileId: string) => Promise<void>;
+  updatePro: (uid: string, profileId: string, name: string) => Promise<void>;
   onSetProfile: (id: string) => void;
 }
 
@@ -73,6 +84,35 @@ export const useUserStore = create<UserState>((set, get) => ({
         },
       ],
     });
+  },
+
+  // 프로필 삭제
+  removeProfile: async (uid, profileId) => {
+    const { profiles, profileId: currentId } = get();
+    const target = profiles.find((p) => p.id === profileId);
+    if (!target) return;
+
+    //firestore에서 삭제
+    await deleteDoc(doc(db, 'users', uid, 'profiles', profileId));
+
+    const setProfiles = profiles.filter((p) => p.id !== profileId);
+
+    set({
+      profiles: setProfiles,
+      profileId:
+        currentId === profileId
+          ? setProfiles.find((p) => p.owner)?.id ?? setProfiles[0].id
+          : currentId,
+    });
+  },
+
+  // 프로필 수정 업뎃
+  updatePro: async (uId, profileId, name) => {
+    const { profiles } = get();
+    await updateDoc(doc(db, 'users', uId, 'profiles', profileId), {
+      name,
+    });
+    set({ profiles: profiles.map((p) => (p.id === profileId ? { ...p, name } : p)) });
   },
 
   onSetProfile: (id) => set({ profileId: id }),
