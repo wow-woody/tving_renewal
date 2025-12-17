@@ -64,7 +64,7 @@ const Join = () => {
             </button>
           </form>
           <button className="back" onClick={() => navigate(-1)}>
-            뒤로가기
+            <p>뒤로가기</p>
           </button>
         </div>
       </div>

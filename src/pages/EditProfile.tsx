@@ -93,9 +93,11 @@ const EditProfile = () => {
             )}
           </div>
         </div>
-        <button className="back" onClick={() => navigate(-1)}>
-          뒤로가기
-        </button>
+        <div className="back-wrap">
+          <button className="back" onClick={() => navigate(-1)}>
+            <p className="back-btn">나가기</p>
+          </button>
+        </div>
       </div>
       <div className="footer-line"></div>
       {openEdit && <OpenEdit profile={openEdit} onClose={() => setOpenEdit(null)} />}
