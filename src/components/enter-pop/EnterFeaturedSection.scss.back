@@ -74,8 +74,18 @@
 
 .thumb-swiper {
     width: 100%;
-    
 }
+
+/* 활성(재생 중) 슬라이드: 공간을 0으로 축소해 빈칸 제거 */
+.thumb-swiper .swiper-slide.is-hidden-slide {
+    width: 0 !important;
+    flex: 0 0 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+
 
 /* =========================
    Thumbnail Card
@@ -109,12 +119,5 @@
         opacity: 1;
     }
 
-    &.is-active img {
-        opacity: 1;
-    }
-    
-    /* 현재 재생(활성) 카드 보더 강조 */
-    &.is-active {
-        border: 2px solid #ff153c;
-    }
+    &.is-active img { opacity: 1; }
 }

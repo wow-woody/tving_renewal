@@ -58,6 +58,8 @@ const EnterFeaturedSection = () => {
                     slidesOffsetAfter={0}
                     roundLengths
                     loopAdditionalSlides={6}
+                    observer
+                    observeParents
                     navigation
                     loop
                     modules={[Navigation]}
@@ -69,10 +71,13 @@ const EnterFeaturedSection = () => {
                     className="thumb-swiper"
                 >
                     {list.map((item, index) => (
-                        <SwiperSlide key={item.id}>
+                        <SwiperSlide
+                            key={item.id}
+                            className={index === activeIndex ? 'is-hidden-slide' : ''}
+                        >
                             <button
                                 type="button"
-                                className={`thumb ${index === activeIndex ? 'is-active' : ''}`}
+                                className="thumb"
                                 onClick={() => {
                                     setActiveIndex(index);
                                     swiperRef.current?.slideToLoop(index); // 루프 안전 이동
