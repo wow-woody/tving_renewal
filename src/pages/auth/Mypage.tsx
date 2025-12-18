@@ -13,7 +13,7 @@ const Mypage = () => {
                         <div className="top-title">
                             <h3 className="sub-title">계정관리</h3>
                             <div className="link">
-                                <Link to="">
+                                <Link to="/editprofile">
                                     <p>프로필 수정</p>
                                     <img src="/images/edit.svg" alt="edit" />
                                 </Link>
