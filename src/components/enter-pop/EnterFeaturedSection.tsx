@@ -44,6 +44,12 @@ const EnterFeaturedSection = () => {
 
                 <div className="featured-info">
                     <h3>{activeItem.title}</h3>
+                    <p>{activeItem.age}</p>
+                    <p>{activeItem.category}</p>
+                    <p>{activeItem.broadcast}</p>
+                    <p>{activeItem.season}</p>
+                    <p>{activeItem.subtitle}</p>
+                    <p>{activeItem.desc}</p>
                 </div>
             </div>
 

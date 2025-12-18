@@ -13,6 +13,7 @@ import VOnlySection from '../components/v-only/VOnlySection';
 import VOriginalSection from '../components/v-origin/VOriginalSection';
 import MainBanner from '../components/main-banner/MainBanner';
 import EnterFeaturedSection from '../components/enter-pop/EnterFeaturedSection';
+import TvingNew from '../components/new/TvingNew';
 
 
 
@@ -132,7 +133,11 @@ const Home = () => {
           <h2 className="section-title">
             <Link to="/">티빙 NEW! 공개 예정 콘텐츠</Link>
           </h2>
-          <div className="pagenation-wrap">
+          </div>
+          <div>
+            <TvingNew/>
+          </div>
+          {/* <div className="pagenation-wrap">
             <div className="pagenation-area">
               <div className="pagenation-line"></div>
               <div className="pointer-line"></div>
@@ -184,7 +189,7 @@ const Home = () => {
               <div className="sub-title">asdfasdf</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <section className="section-6">
