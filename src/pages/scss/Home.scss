@@ -63,7 +63,7 @@
                 }
             }
 
-            button+button {
+            button + button {
                 border-left: none;
             }
         }
@@ -81,8 +81,8 @@
     }
 
     .section-title {
-        font-size: 3.6rem;
-        font-weight: 800;
+        font-size: 2.6rem;
+        font-weight: 700;
         color: #fff;
 
         position: relative;
@@ -96,6 +96,7 @@
 
         h2 {
             font-size: 2.6rem;
+            font-weight: 700;
             color: #fff;
             margin-bottom: 2.4rem;
         }
@@ -109,31 +110,30 @@
     }
 
     .section-2 {
-        padding-left: 10.8rem;
-        padding-right: 2.4rem;
+        width: 100%;
+
+        border: 1px solid red;
+
+        // padding-right: 2.4rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
 
-        .link-container {
-            // padding-top: clamp(20px, 2.5vw, 40px);
-            // padding-bottom: clamp(20px, 2.5vw, 40px);
-            // margin-top: clamp(20px, 2.5vw, 44px);
-            // margin-top: 4.4rem;
-            display: flex;
-            justify-content: space-between;
+        overflow-x: hidden;
 
-            div {
-                // width: calc(100% / 8);
-                // min-width: 140px;
-                width: 212px;
-                height: 80px;
-                // aspect-ratio: 53/20;
-                background: #ff153c;
-            
+        .section2-inner {
+            padding-left: 10.8rem;
 
-           
+            .link-container {
+                display: flex;
+                gap: 12px;
 
-                ;
+                div {
+                    width: 212px;
+                    height: 80px;
+                    background: #ff153c;
+
+                    flex-shrink: 0;
+                }
             }
         }
     }
@@ -326,29 +326,25 @@
     }
 
     .section-6 {
-        padding-left: 10.8rem;
-        padding-right: 2.4rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
-
-        
-            }
-
-            .section-11{
-                padding-left: 10.8rem;
-        padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
-
-            }
-
-            .section-14 {
-        padding-left: 10.8rem;
-        padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
-            }
-
+        .section6-inner {
+            padding-left: 10.8rem;
+            padding-right: 2.4rem;
+        }
     }
 
-    
+    .section-11 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
+    }
+
+    .section-14 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
+    }
+}
