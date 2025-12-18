@@ -11,7 +11,8 @@ import Mypage from './pages/auth/Mypage';
 import { useUserStore } from './store/useUserStore';
 import EditProfile from './pages/EditProfile';
 import Subscription from './pages/Subscription';
-import Drama from './pages/Drama';
+import Drama from './pages/Drama/Drama';
+import DramaDetail from './pages/Drama/DramaDetail';
 function App() {
   const location = useLocation();
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/drama" element={<Drama />} />
         <Route path="/subscription" element={<Subscription />} />
+        <Route path="/tv/:id" element={<DramaDetail />} />
       </Routes>
 
       {!hideFooter && <Footer />}

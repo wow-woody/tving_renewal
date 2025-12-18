@@ -9,6 +9,7 @@ export const useTvSeriesStore = create((set) => ({
   onairko: [],
   seasons: [],
   videos: [],
+  tvDetail: null,
 
   // 드라마 장르
   onFetchTvs: async () => {
@@ -28,6 +29,77 @@ export const useTvSeriesStore = create((set) => ({
     // console.log('한국 드라마', data.results);
     set({ koTvs: data.results });
   },
+
+  // 단일 드라마 상세
+  onFetchTvDetail: async (id: string) => {
+    try {
+      const [resDetail, resImg, resAge, resCredits] = await Promise.all([
+        fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=ko-KR`),
+        fetch(`https://api.themoviedb.org/3/tv/${id}/images?api_key=${API_KEY}`),
+        fetch(`https://api.themoviedb.org/3/tv/${id}/content_ratings?api_key=${API_KEY}`),
+        fetch(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=ko-KR`),
+      ]);
+
+      const detail = await resDetail.json();
+      const img = await resImg.json();
+      const ageData = await resAge.json();
+      const credits = await resCredits.json();
+
+      /* 로고 */
+      const logo =
+        img.logos?.find((l) => l.iso_639_1 === 'ko') ||
+        img.logos?.find((l) => l.iso_639_1 === 'en') ||
+        img.logos?.[0] ||
+        null;
+
+      /* 백드롭 */
+      const backdrop =
+        img.backdrops?.find((b) => b.iso_639_1 === null) || img.backdrops?.[0] || null;
+
+      /* 연령 */
+      const krAge = ageData.results?.find((r) => r.iso_3166_1 === 'KR')?.rating;
+
+      /* 장르 */
+      const genreNames = detail.genres?.map((g) => g.name) || [];
+
+      /* 방송사 */
+      const networks = detail.networks || [];
+
+      /* 시즌 */
+      const seasonText =
+        detail.number_of_seasons === 1
+          ? '시즌 1'
+          : detail.number_of_seasons
+          ? `시즌 ${detail.number_of_seasons}`
+          : '';
+
+      /* 감독 / 출연진 */
+      const directors =
+        credits.crew
+          ?.filter((c) => c.job === 'Director' || c.job === 'Executive Producer')
+          .map((d) => d.name) || [];
+
+      const casts = credits.cast?.slice(0, 8).map((c) => c.name) || [];
+
+      set({
+        tvDetail: {
+          ...detail,
+          age: krAge || (detail.adult ? '19' : '12'),
+          logo: logo?.file_path || null,
+          backdrop: backdrop?.file_path || detail.backdrop_path,
+          directors,
+          casts,
+          genreNames,
+          networks,
+          seasonText,
+        },
+      });
+    } catch (error) {
+      console.error('TV Detail Fetch Error', error);
+      set({ tvDetail: null });
+    }
+  },
+
   // 방영중인 드라마
   onFetchOnAir: async () => {
     const res = await fetch(
@@ -50,17 +122,17 @@ export const useTvSeriesStore = create((set) => ({
   //
   onFetchTvVideos: async (id) => {
     const res = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=ko-KR`
     );
     const data = await res.json();
-    console.log(data);
+    console.log('영상', data);
     set({ videos: data.results });
   },
 
   // 시리즈 시즌
   onFetchSeasons: async (id) => {
     const res = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=ko-KR`
     );
     const data = await res.json();
     console.log('seasons', data);
@@ -71,7 +143,7 @@ export const useTvSeriesStore = create((set) => ({
   episodes: [],
   onFetchEpisodes: async (id, season) => {
     const res = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${API_KEY}&language=ko-KR`
     );
     const data = await res.json();
     console.log('에피소드', data.episodes);
