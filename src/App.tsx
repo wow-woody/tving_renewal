@@ -11,15 +11,32 @@ import Mypage from './pages/auth/Mypage';
 import { useUserStore } from './store/useUserStore';
 import EditProfile from './pages/EditProfile';
 import Subscription from './pages/Subscription';
-import Drama from './pages/Drama/Drama';
+import SubscriptionCheck from './pages/SubscriptionCheck';
+import SubscriptionPayment from './pages/SubscriptionPayment';
 import DramaDetail from './pages/Drama/DramaDetail';
+import Drama from './pages/Drama/Drama';
+
 function App() {
   const location = useLocation();
 
-  const noHeaderPages = ['/login', '/join', '/editprofile', '/subscription'];
+  const noHeaderPages = [
+    '/login',
+    '/join',
+    '/editprofile',
+    '/subscription',
+    '/subscription/payment/check',
+    '/subscription/payment',
+  ];
   const hideHeader = noHeaderPages.includes(location.pathname);
 
-  const noFooterPage = ['/login', '/join', '/editprofile', '/subscription'];
+  const noFooterPage = [
+    '/login',
+    '/join',
+    '/editprofile',
+    '/subscription',
+    '/subscription/payment/check',
+    '/subscription/payment',
+  ];
   const hideFooter = noFooterPage.includes(location.pathname);
 
   const initAuth = useAuthStore((state) => state.initAuth);
@@ -50,6 +67,9 @@ function App() {
         <Route path="/drama" element={<Drama />} />
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/tv/:id" element={<DramaDetail />} />
+
+        <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
+        <Route path="/subscription/payment" element={<SubscriptionPayment />} />
       </Routes>
 
       {!hideFooter && <Footer />}

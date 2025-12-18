@@ -1,0 +1,231 @@
+.subscription-payment-wrappers {
+    width: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .top {
+        width: 100%;
+        padding: 30px 0 28px 0;
+        border-bottom: 1px solid #5c5c5c;
+        text-align: center;
+
+        background: #282828;
+
+        a {
+            display: inline-block;
+        }
+    }
+
+    .subscription-payment-wrap {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 56px;
+
+        width: 625px;
+
+        padding: 36px 0;
+
+        .title-wrap {
+            width: 100%;
+            text-align: center;
+
+            h2 {
+                font-size: 2.6rem;
+                font-weight: 800;
+                color: #fff;
+            }
+        }
+
+        .complete {
+            width: 100%;
+
+            .complete-title {
+                margin-bottom: 16px;
+
+                h2 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 12px;
+
+                    height: 28px;
+
+                    font-size: 2.4rem;
+                    font-weight: 800;
+                    color: #fff;
+
+                    img {
+                        height: 24px;
+                    }
+
+                    .disney-logo {
+                        height: 52px;
+                        margin-bottom: 16px;
+                    }
+                    span {
+                        font-size: 1.2rem;
+                        color: #828282;
+                    }
+                }
+            }
+
+            .complete-info {
+                width: 100%;
+                height: 424px;
+
+                border-radius: 14px;
+                border: 2px solid #373737;
+                background: #373737;
+
+                display: flex;
+                flex-direction: column;
+
+                .complete-top {
+                    height: 33%;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+
+                    .title {
+                        font-size: 1.4rem;
+                        font-weight: 800;
+                        color: #828282;
+                    }
+
+                    .price-wrap {
+                        text-align: center;
+
+                        .price {
+                            font-size: 2.4rem;
+                            font-weight: 800;
+                            color: #fff;
+                        }
+                        .cost {
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            text-decoration: line-through;
+                            color: #828282;
+                            margin-top: 4px;
+                        }
+                    }
+                }
+
+                .complete-middle {
+                    width: 100%;
+                    height: 54%;
+
+                    background-color: #282828;
+
+                    .icon-wrap {
+                        width: 100%;
+                        height: 50%;
+
+                        display: flex;
+                        justify-content: center;
+                        gap: 20px;
+
+                        border-bottom: 1px solid #373737;
+
+                        img {
+                            width: 50px;
+                            aspect-ratio: 1;
+                        }
+                    }
+
+                    .info {
+                        display: flex;
+                        height: 50%;
+
+                        div {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        }
+
+                        div + div {
+                            border-left: 1px solid #373737;
+                        }
+
+                        h4 {
+                            font-size: 2rem;
+                            font-weight: 800;
+                            color: #fff;
+                        }
+
+                        .period {
+                            width: 50%;
+                            p {
+                                font-size: 1.2rem;
+                                font-weight: 800;
+                                color: #828282;
+                            }
+                        }
+
+                        .amount {
+                            width: 50%;
+                            p {
+                                font-size: 1.4rem;
+                                font-weight: 800;
+                                color: #ff153c;
+
+                                span {
+                                    font-weight: 500;
+                                    color: #828282;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .complete-bottom {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    background: #ff153c;
+                    border-radius: 0 0 8px 8px;
+
+                    height: 13%;
+
+                    font-size: 2rem;
+                    font-weight: 800;
+                    color: #fff;
+                }
+            }
+        }
+
+        .back-home {
+            width: 50%;
+            height: 55px;
+
+            background: #ff153c;
+            border-radius: 8px;
+
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .footer-line {
+        width: 100%;
+        height: 44px;
+        border-top: 1px solid #5c5c5c;
+    }
+}

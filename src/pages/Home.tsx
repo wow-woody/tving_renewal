@@ -11,6 +11,10 @@ import type { Content } from '../type/content';
 import { RankScope } from '../type/enum';
 import VOnlySection from '../components/v-only/VOnlySection';
 import VOriginalSection from '../components/v-origin/VOriginalSection';
+import MainBanner from '../components/main-banner/MainBanner';
+import EnterFeaturedSection from '../components/enter-pop/EnterFeaturedSection';
+
+
 
 const Home = () => {
   // 1) 전부 합치기
@@ -28,12 +32,14 @@ const Home = () => {
     .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
     .slice(0, 20);
 
-  return (
-    <div className="main-wrap">
-      <section className="section-1">
-        <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
-        <div className="main-container"></div>
-      </section>
+    return (
+        <div className="main-wrap">
+            <section className="section-1">
+                <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
+                <div className="main-container">
+                  <MainBanner/>
+                </div>
+            </section>
 
       <hr />
 
@@ -190,9 +196,16 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section-8">
-        <VOriginalSection />
-      </section>
+            <section className="section-8">
+                <VOriginalSection />
+            </section>
+
+            <section className='section-11'>
+               <h2 className="section-title">
+            <Link to="/">예능 인기 프로그램</Link>
+          </h2>
+              <EnterFeaturedSection/>
+            </section>
 
       <section className="section-14">
         <h2 className="section-title">
