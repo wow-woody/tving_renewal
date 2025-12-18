@@ -47,7 +47,7 @@
                 left: 50%;
                 transform: translateX(-50%);
 
-                min-width:311px;
+                min-width: 311px;
 
                 .edit-sub-title {
                     position: relative;
@@ -57,6 +57,7 @@
                     color: e.$text-w;
 
                     padding: 12px 24px;
+                    min-width: 312px;
 
                     @include e.boxshadow;
                     backdrop-filter: none;
@@ -87,8 +88,8 @@
 
                 .profile-id,
                 .profile-id.creating {
-                    width:200px;
-                    height:264px;
+                    width: 200px;
+                    height: 264px;
                     display: flex;
                     align-items: center;
                     flex-direction: column;
@@ -112,7 +113,7 @@
                 .edit-btn,
                 .add-btn,
                 .add,
-                .creating-btn{
+                .creating-btn {
                     font-size: 1.2rem;
                     color: e.$text-w;
 
@@ -152,36 +153,33 @@
                     }
                 }
 
-                .creating-bottom{
-                    input{
+                .creating-bottom {
+                    input {
                         font-size: 1.8rem;
-                        font-weight:700;
-                        height:30px;
-                        width:100%;
+                        font-weight: 700;
+                        height: 30px;
+                        width: 100%;
                         padding-left: 8px;
 
                         outline: none;
-                        border:none;
+                        border: none;
 
                         border-radius: 8px;
 
-                        background:#282828;
-                        color:#5c5c5c;
+                        background: #282828;
+                        color: #5c5c5c;
 
-                        &::placeholder{
-                            font-size:1.6rem;
+                        &::placeholder {
+                            font-size: 1.6rem;
                             font-weight: 500;
                         }
 
-                        &:focus{
+                        &:focus {
                             outline: 1px solid #fff;
-                            color:#fff;
+                            color: #fff;
                         }
                     }
                 }
-
-
-                
             }
         }
     }

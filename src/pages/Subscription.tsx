@@ -7,10 +7,18 @@ const Subscription = () => {
     const sectionRefs = useRef({});
 
     const scrollTo = (key) => {
+        if (key === 'top') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+            return;
+        }
+
         const target = sectionRefs.current[key];
         if (!target) return;
 
-        const y = target.getBoundingClientRect().top + window.pageYOffset - 500; // header height
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 193; // header height
 
         window.scrollTo({
             top: y,
@@ -25,21 +33,19 @@ const Subscription = () => {
                     <img src="/images/tving-logo-main.svg" alt="logo" />
                 </Link>
             </div>
+
+            <div className="ad-banner">
+                <img src="/images/ad-banner.svg" alt="ad-banner" />
+            </div>
+
+            <div className="select-section">
+                <button onClick={() => scrollTo('top')}>전체</button>
+                <button onClick={() => scrollTo('t')}>티빙 이용권</button>
+                <button onClick={() => scrollTo('tw')}>티빙 X 웨이브 이용권</button>
+                <button onClick={() => scrollTo('twd')}>티빙 X 웨이브 X 디즈니 이용권</button>
+            </div>
+
             <div className="subscription-wrap">
-                <div className="fixed">
-                    <div className="ad-banner">
-                        <img src="/images/ad-banner.svg" alt="ad-banner" />
-                    </div>
-
-                    <div className="select-section">
-                        <button onClick={() => scrollTo('t')}>티빙 이용권</button>
-                        <button onClick={() => scrollTo('tw')}>티빙 X 웨이브 이용권</button>
-                        <button onClick={() => scrollTo('twd')}>
-                            티빙 X 웨이브 X 디즈니 이용권
-                        </button>
-                    </div>
-                </div>
-
                 <div className="select-wrap">
                     <section ref={(el) => (sectionRefs.current.t = el)}>
                         <div className="title-wrap">
@@ -50,22 +56,30 @@ const Subscription = () => {
                         </div>
                         <div className="subscription">
                             <div>
-                                <div className="select">
-                                    <div className="select-top">
-                                        <p className="title">광고형 스탠다드</p>
-                                        <p className="price">월 5,500원</p>
+                                <Link to="/subscription/payment/check">
+                                    <div className="select">
+                                        <div className="select-top">
+                                            <p className="title">광고형 스탠다드</p>
+                                            <div className="price-wrap">
+                                                <p className="price">월 5,500원</p>
+                                                <p className="cost">ddd</p>
+                                            </div>
+                                        </div>
+                                        <div className="select-content">
+                                            <div className="img-wrap">
+                                                <img src="/images/tving-icon.svg" alt="" />
+                                            </div>
+                                            <p>동시시청 2대</p>
+                                            <span>+</span>
+                                            <p>최대 1080p FHD 고화질</p>
+                                            <span>+</span>
+                                            <p>모든 디바이스 지원</p>
+                                            <span>+</span>
+                                            <p>광고포함</p>
+                                        </div>
+                                        <div className="select-bottom">이용권 선택</div>
                                     </div>
-                                    <div className="select-content">
-                                        <p>동시시청 2대</p>
-                                        <span>+</span>
-                                        <p>최대 1080p FHD 고화질</p>
-                                        <span>+</span>
-                                        <p>모든 디바이스 지원</p>
-                                        <span>+</span>
-                                        <p>광고포함</p>
-                                    </div>
-                                    <div className="select-bottom">이용권 선택</div>
-                                </div>
+                                </Link>
                             </div>
                         </div>
                     </section>
@@ -116,6 +130,7 @@ const Subscription = () => {
                                 이용권
                             </h2>
                         </div>
+
                         <div className="subscription">
                             <div>
                                 <div className="select">
