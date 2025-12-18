@@ -11,69 +11,70 @@ import Mypage from './pages/auth/Mypage';
 import { useUserStore } from './store/useUserStore';
 import EditProfile from './pages/EditProfile';
 import Subscription from './pages/Subscription';
-import Drama from './pages/Drama';
 import SubscriptionCheck from './pages/SubscriptionCheck';
 import SubscriptionPayment from './pages/SubscriptionPayment';
+import DramaDetail from './pages/Drama/DramaDetail';
+import Drama from './pages/Drama/Drama';
 
 function App() {
-    const location = useLocation();
+  const location = useLocation();
 
-    const noHeaderPages = [
-        '/login',
-        '/join',
-        '/editprofile',
-        '/subscription',
-        '/subscription/payment/check',
-        '/subscription/payment',
-    ];
-    const hideHeader = noHeaderPages.includes(location.pathname);
+  const noHeaderPages = [
+    '/login',
+    '/join',
+    '/editprofile',
+    '/subscription',
+    '/subscription/payment/check',
+    '/subscription/payment',
+  ];
+  const hideHeader = noHeaderPages.includes(location.pathname);
 
-    const noFooterPage = [
-        '/login',
-        '/join',
-        '/editprofile',
-        '/subscription',
-        '/subscription/payment/check',
-        '/subscription/payment',
-    ];
-    const hideFooter = noFooterPage.includes(location.pathname);
+  const noFooterPage = [
+    '/login',
+    '/join',
+    '/editprofile',
+    '/subscription',
+    '/subscription/payment/check',
+    '/subscription/payment',
+  ];
+  const hideFooter = noFooterPage.includes(location.pathname);
 
-    const initAuth = useAuthStore((state) => state.initAuth);
-    const { user } = useAuthStore();
-    const { initProfiles } = useUserStore();
+  const initAuth = useAuthStore((state) => state.initAuth);
+  const { user } = useAuthStore();
+  const { initProfiles } = useUserStore();
 
-    useEffect(() => {
-        initAuth();
-    }, []);
+  useEffect(() => {
+    initAuth();
+  }, []);
 
-    useEffect(() => {
-        if (user && 'uid' in user) {
-            initProfiles(user.uid);
-        }
-    }, [user]);
+  useEffect(() => {
+    if (user && 'uid' in user) {
+      initProfiles(user.uid);
+    }
+  }, [user]);
 
-    return (
-        <>
-            {!hideHeader && <Header />}
+  return (
+    <>
+      {!hideHeader && <Header />}
 
-            <Routes>
-                <Route path="/" element={<Home />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-                <Route path="/login" element={<Login />} />
-                <Route path="/join" element={<Join />} />
-                <Route path="/mypage" element={<Mypage />} />
-                <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/drama" element={<Drama />} />
+        <Route path="/subscription" element={<Subscription />} />
+        <Route path="/tv/:id" element={<DramaDetail />} />
 
-                <Route path="/drama" element={<Drama />} />
+        <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
+        <Route path="/subscription/payment" element={<SubscriptionPayment />} />
+      </Routes>
 
-                <Route path="/subscription" element={<Subscription />} />
-                <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
-                <Route path="/subscription/payment" element={<SubscriptionPayment />} />
-            </Routes>
-
-            {!hideFooter && <Footer />}
-        </>
-    );
+      {!hideFooter && <Footer />}
+    </>
+  );
 }
 
 export default App;
