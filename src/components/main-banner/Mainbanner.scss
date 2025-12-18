@@ -1,0 +1,100 @@
+/* ================================
+   Main Banner
+================================ */
+.mainbanner {
+  position: relative;
+  border-radius: 12px;
+}
+
+/* ================================
+   Glass Pagination Container
+================================ */
+.custom-pagination {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 24px;
+  padding: 14px 28px;
+
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  z-index: 10;
+}
+
+/* ================================
+   Pager Item
+================================ */
+.pager-item {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 6px;
+  font-size: 14px;
+  color: #bbb;
+  white-space: nowrap;
+}
+
+/* 기본 회색 라인 (항상 표시) */
+.pager-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+}
+
+/* ================================
+   Pager Title
+================================ */
+.pager-title {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================
+   Red Progress Bar (Active Only)
+================================ */
+.pager-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 0%;
+  height: 2px;
+  background: #e50914;
+  border-radius: 2px;
+
+  z-index: 2;
+}
+
+/* ================================
+   Active State
+================================ */
+.swiper-pagination-bullet-active {
+  color: #fff;
+}
+
+.swiper-pagination-bullet-active .pager-progress {
+  animation: progressBar 3s linear forwards;
+}
+
+/* ================================
+   Progress Animation
+================================ */
+@keyframes progressBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

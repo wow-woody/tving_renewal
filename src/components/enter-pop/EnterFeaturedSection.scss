@@ -1,0 +1,104 @@
+/* =========================
+   Enter Featured Section
+========================= */
+
+.enter-featured-section {
+  position: relative;
+  display: flex;
+  gap: 0; /* 겹침 연출 */
+  align-items: flex-start;
+  padding: 40px 0;
+  overflow: visible; /* 🔥 겹침 필수 */
+}
+
+/* =========================
+   Left Featured (Video)
+========================= */
+
+.featured-fixed {
+  position: relative;
+  z-index: 3; /* 🔥 최상단 */
+  flex: 0 0 520px;
+}
+
+.featured-media {
+  width: 628px;
+  height: 375px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  z-index: 10;
+
+  /* 떠 있는 느낌 */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+  img,
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.featured-info {
+  margin-top: 12px;
+  color: #fff;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+/* =========================
+   Right Swiper (Behind)
+========================= */
+
+.thumb-rail {
+  position: relative;
+  z-index: 1; /* 🔽 영상 아래 */
+  flex: 1 1 auto;
+  min-width: 0;
+
+  /* 🔥 영상 뒤로 파고들게 */
+  margin-left: -420px;
+  // padding-left: 450px; /* 네비 버튼 영역 보존 */
+}
+
+.thumb-swiper {
+  width: 100%;
+}
+
+/* =========================
+   Thumbnail Card
+========================= */
+
+.thumb {
+  width: 100%;
+  height: 375px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+
+  &.is-active img {
+    opacity: 1;
+  }
+}
