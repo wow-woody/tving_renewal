@@ -27,7 +27,7 @@ const VOriginalSection = () => {
 
       {/* 우측 카드 영역 */}
       <div className="v-original-slider">
-        <Swiper slidesPerView={6} spaceBetween={24}>
+        <Swiper slidesPerView={4.5} spaceBetween={24}>
           {ORIGINAL_CONTENTS.map((item) => (
             <SwiperSlide key={item.id}>
               <VOriginalCard item={item} />

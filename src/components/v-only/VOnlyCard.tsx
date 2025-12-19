@@ -11,7 +11,7 @@ const VOnlyCard = ({ item, rank }: Props) => {
     <div className="v-only-item">
       <img
         className="rank"
-        src={`/images/rank/rank-${String(rank).padStart(2, "0")}.svg`}
+        src={`/images/rank/rank-${String(rank).padStart(2, "0")}.png`}
         alt={`rank ${rank}`}
       />
 

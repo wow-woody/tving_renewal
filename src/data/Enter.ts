@@ -255,7 +255,7 @@ const Enter: Content[] = [
         subtitle: '해설자막',
         director: '김상아, 곽지혜',
         actor: '라미란, 박민영, 주종혁, 차홍, 정상규, 박혜민',
-        desc: 'K-뷰티 마스터들의 뉴욕 정복기',
+        desc: '박민영과 함께하는 K-뷰티 마스터들의 뉴욕 정복기',
         iframe: [{
             width: "900px",
             height: "600px",

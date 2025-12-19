@@ -3,12 +3,35 @@
 ========================= */
 
 .enter-featured-section {
+    margin-top: 72px;
     position: relative;
     display: flex;
-    gap: 24px; /* 여백 확보로 겹침 해소 */
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
     padding: 40px 0;
-    /* 각 자식 섹션의 스택을 분리해 상호 간섭 방지 */
+    isolation: isolate;
+    overflow: visible;
+}
+
+.section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.enter-featured-body {
+    margin-top: 32px;
+    position: relative;
+    display: flex;
+    gap: 24px;
+    /* 여백 확보로 겹침 해소 */
+    align-items: flex-start;
     isolation: isolate;
     overflow: visible;
 }
@@ -48,11 +71,56 @@
 .featured-info {
     margin-top: 12px;
     color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+
+    padding: 0 0.8%;
 
     h3 {
-        font-size: 18px;
+        font-size: 24px;
         font-weight: 600;
+        width: 100%;
+        margin: 0 0 8px 0;
+        color: white;
+        font-weight: 800;
+        margin-top: 10px;
+
     }
+
+    p {
+        font-size: 14px;
+        margin: 0;
+        white-space: nowrap;
+        border: 2px solid #373737;
+        border-radius: 4px;
+        padding: 5px 9px;
+        color: #b9b9b9;
+    }
+
+    /* age만 배지 이미지 표시: 보더/패딩 제거 */
+    .age {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .age img {
+        height: 25px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .desc {
+        color: #919191;
+        font-size: 16px;
+        line-height: 24px;
+        height: 100px;
+    }
+
+
+
 }
 
 /* =========================
@@ -74,7 +142,6 @@
 
 .thumb-swiper {
     width: 100%;
-    
 }
 
 /* =========================
@@ -94,7 +161,8 @@
     /* 확대 시 과도한 재페인트 방지 및 기준점 중앙 */
     will-change: transform;
     transform-origin: center;
-    box-sizing: border-box; /* 보더 추가 시 레이아웃 밀림 방지 */
+    box-sizing: border-box;
+    /* 보더 추가 시 레이아웃 밀림 방지 */
 
     img {
         width: 100%;
@@ -112,9 +180,82 @@
     &.is-active img {
         opacity: 1;
     }
-    
+
     /* 현재 재생(활성) 카드 보더 강조 */
     &.is-active {
         border: 2px solid #ff153c;
+    }
+}
+
+/* =========================
+   Pagination / Navigation
+========================= */
+
+.thumb-controls {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.enter-pagination {
+    position: relative;
+    flex: 1 1 auto;
+    height: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.pagenation-line {
+    width: 100%;
+    height: 2px;
+    background: #373737;
+
+}
+
+.pointer-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 2px;
+    background: #ff153c;
+    transform: translateX(var(--enter-progress, 0px));
+    transition: transform 0.35s ease;
+}
+
+.enter-nav {
+    display: flex;
+    align-items: flex-start;
+    gap: 0px;
+    height: 34px;
+    border-top: 1px solid #373737;
+    border-bottom: 1px solid #373737;
+    padding-top: 0;
+
+    .nav-btn {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+
+
+        justify-content: center;
+        border: 1px solid #373737;
+
+        font-size: 20px;
+        color: #fff;
+        border-radius: 0px;
+
+        cursor: pointer;
+
+        &:hover {
+
+            color: #ff153c;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
     }
 }

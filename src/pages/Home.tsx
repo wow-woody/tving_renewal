@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './scss/Home.scss';
 import RankRow from '../components/tving-top20/RankRowtop20';
+import RankRowAnim from '../components/anim-top20/RankRowanim20';
 
 import drama from '../data/Drama';
 import anim from '../data/Anim';
@@ -14,6 +15,10 @@ import VOriginalSection from '../components/v-origin/VOriginalSection';
 import MainBanner from '../components/main-banner/MainBanner';
 import EnterFeaturedSection from '../components/enter-pop/EnterFeaturedSection';
 import TvingNew from '../components/new/TvingNew';
+import DramaFeaturedSection from '../components/drama-pop/DramaFeaturedSection';
+import MovieFeaturedSection from '../components/movie-pop/MovieFeaturedSection';
+
+
 
 const Home = () => {
     // 1) 전부 합치기
@@ -31,14 +36,14 @@ const Home = () => {
         .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
         .slice(0, 20);
 
-    return (
-        <div className="main-wrap">
-            <section className="section-1">
-                <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
-                <div className="main-container">
-                    <MainBanner />
-                </div>
-            </section>
+  return (
+    <div className="main-wrap">
+      <section className="section-1">
+        <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
+        <div className="main-container">
+          <MainBanner />
+        </div>
+      </section>
 
             <hr />
 
@@ -128,16 +133,16 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="section-5">
-                <div className="title-wrap">
-                    <h2 className="section-title">
-                        <Link to="/">티빙 NEW! 공개 예정 콘텐츠</Link>
-                    </h2>
-                </div>
-                <div>
-                    <TvingNew />
-                </div>
-                {/* <div className="pagenation-wrap">
+      <section className="section-5">
+        <div className="title-wrap">
+          <h2 className="section-title">
+            <Link to="/">티빙 NEW! 공개 예정 콘텐츠</Link>
+          </h2>
+        </div>
+        <div>
+          <TvingNew />
+        </div>
+        {/* <div className="pagenation-wrap">
             <div className="pagenation-area">
               <div className="pagenation-line"></div>
               <div className="pointer-line"></div>
@@ -190,44 +195,35 @@ const Home = () => {
             </div>
           </div>
         </div> */}
-            </section>
+      </section>
+      <section className="section-6">
+        <RankRow data={top20} rankScope={RankScope.TOP20} />
+      </section>
 
-            <section className="section-6">
-                <div className="section6-inner">
-                    <h2 className="section-title">
-                        <Link to="/">오늘의 티빙 TOP 20</Link>
-                    </h2>
-                </div>
-                <div className="poster-wrap">
-                    <RankRow data={top20} rankScope={RankScope.TOP20} />
-                </div>
-            </section>
+      <section className="section-8">
+        <VOriginalSection />
+      </section>
 
-            <section className="section-8">
-                <VOriginalSection />
-            </section>
+      <section className="section-9">
+        <DramaFeaturedSection />
+      </section>
 
-            <section className="section-11">
-                <h2 className="section-title">
-                    <Link to="/">예능 인기 프로그램</Link>
-                </h2>
-                <EnterFeaturedSection />
-            </section>
+      <section className='section-11'>
+        <EnterFeaturedSection />
+      </section>
 
-            <section className="section-14">
-                <h2 className="section-title">
-                    <Link to="/">실시간 인기 애니메이션</Link>
-                </h2>
+      <section className='section-13'>
+        <MovieFeaturedSection />
+      </section>
 
-                <div className="poster-wrap">
-                    <RankRow data={anim20} rankScope={RankScope.POP_ANIM} />
-                </div>
-            </section>
-            <section className="section-15">
-                <VOnlySection />
-            </section>
-        </div>
-    );
+      <section className="section-14">
+        <RankRowAnim data={anim20} title="실시간 인기 애니메이션" rankScope={RankScope.POP_ANIM} />
+      </section>
+      <section className="section-15">
+        <VOnlySection />
+      </section>
+    </div>
+  );
 };
 
 export default Home;

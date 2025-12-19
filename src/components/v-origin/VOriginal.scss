@@ -3,7 +3,7 @@
   gap: 32px;
   padding: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #7a0d1c, #3a0a12);
+  background: linear-gradient(295deg, rgba(255, 21, 60, 0.50) -42.62%, rgba(255, 21, 60, 0.40) -25.5%, rgba(255, 21, 60, 0.30) -8.39%, rgba(255, 21, 60, 0.10) 8.73%, rgba(255, 21, 60, 0.20) 25.84%, rgba(255, 21, 60, 0.30) 42.95%, rgba(255, 21, 60, 0.40) 60.07%, rgba(255, 21, 60, 0.50) 77.18%, rgba(255, 21, 60, 0.40) 100%);
   width: 1756px;
   margin: 0 auto;  
   
@@ -11,6 +11,7 @@
   .v-original-info {
     width: 272px;
     color: #fff;
+    margin-right: 94px;
 
     .logo {
       font-weight: 700;
@@ -55,11 +56,12 @@
 
       .badge {
         position: absolute;
-        left: 8px;
-        bottom: 10px;    
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 30px;   
         padding: 4px 6px;
         border-radius: 4px;
-        width: 94px;
+        width: 150px;
         img{
           width: 10px;
           height: auto;
@@ -71,20 +73,92 @@
 }
 
 .glass-frame {
-  margin-top: 30px;  //임시
+  margin-top: 30px;
   margin-left: 10.8rem;
-  width: 1788px;
+  width: 1770px;
   display: flex;
   justify-content: flex-start;
-  padding: 5px;                     // 유리 두께
+  padding: 5px 3px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  position: relative;
+  overflow: hidden;
+  
+  /* Glass morphism 효과 강화 + 모서리 빛 반사 */
+  background: 
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
+    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
+    radial-gradient(circle at center left, rgba(255, 255, 255, 0.10) 0%, transparent 15%),
+    radial-gradient(circle at center right, rgba(255, 255, 255, 0.10) 0%, transparent 15%),
+    rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  /* 빛 반사 테두리 - 모서리 더 투명 */
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  
+  /* 입체감과 빛 반사 */
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 20px 0 rgba(255, 255, 255, 0.08) inset,
+    0 -2px 10px 0 rgba(255, 255, 255, 0.1) inset;
+  
+  /* 반짝임 효과 (상단 하이라이트) */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.6) 20%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0.6) 80%,
+      transparent 100%
+    );
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  /* 빛 반사 효과 (대각선) */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    animation: shine 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-    0 12px 30px rgba(0, 0, 0, 0.45);
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  100% {
+    transform: translate(50%, 50%) rotate(45deg);
+  }
 }
 
