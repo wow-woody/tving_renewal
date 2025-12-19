@@ -15,6 +15,7 @@ import SubscriptionCheck from './pages/SubscriptionCheck';
 import SubscriptionPayment from './pages/SubscriptionPayment';
 import DramaDetail from './pages/Drama/DramaDetail';
 import Drama from './pages/Drama/Drama';
+import DramaCate from './pages/Drama/DramaCate';
 
 function App() {
   const location = useLocation();
@@ -67,6 +68,7 @@ function App() {
         <Route path="/drama" element={<Drama />} />
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/tv/:id" element={<DramaDetail />} />
+        <Route path="/drama/genre/:key" element={<DramaCate />} />
 
         <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
         <Route path="/subscription/payment" element={<SubscriptionPayment />} />

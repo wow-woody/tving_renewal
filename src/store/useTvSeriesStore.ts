@@ -1,8 +1,9 @@
 import { create } from 'zustand';
+import type { TvSeriesStore } from '../type/contents';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-export const useTvSeriesStore = create((set) => ({
+export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
   tvs: [],
   koTvs: [],
   onair: [],
@@ -17,8 +18,11 @@ export const useTvSeriesStore = create((set) => ({
       `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=18&sort_by=popularity.desc&language=ko-KR`
     );
     const data = await res.json();
-    // console.log('드라마', data.results);
-    set({ tvs: data.results });
+
+    const dramaOnly = data.results.filter(
+      (item) => item.genre_ids?.includes(18) && !item.genre_ids?.includes(16)
+    );
+    set({ tvs: dramaOnly });
   },
   // 한국 드라마 장르
   onFetchKoTvs: async () => {

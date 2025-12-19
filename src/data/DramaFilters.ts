@@ -98,7 +98,7 @@ export const DRAMA_FILTERS = [
     },
   },
   {
-    key: 'History',
+    key: 'history',
     label: '사극/역사',
     tmdb: {
       with_genres: '18,36',

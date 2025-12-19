@@ -2,17 +2,31 @@ import { useEffect } from 'react';
 import { useTvSeriesStore } from '../../store/useTvSeriesStore';
 import '../scss/Drama.scss';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import OnAirDramaList from '../../components/Drama/OnAirDrama';
+import DramaSwiper from '../../components/Drama/DramaSwiper';
+import { useDramaCate } from '../../store/Drama/useDramaCate';
+import { useDramaList } from '../../store/Drama/useDramaList';
 const Drama = () => {
-  const { onFetchTvs, onairko, onFetchOnAirKo } = useTvSeriesStore();
+  const onFetchTvs = useTvSeriesStore((s) => s.onFetchTvs);
+  const onFetchKoTvs = useTvSeriesStore((s) => s.onFetchKoTvs);
+  const onFetchOnAirKo = useTvSeriesStore((s) => s.onFetchOnAirKo);
+  const onairko = useTvSeriesStore((s) => s.onairko);
 
   const navigate = useNavigate();
+  const { key } = useParams();
+  const setCategory = useDramaCate((s) => s.setCategory);
+  const dramaList = useDramaList();
+
+  useEffect(() => {
+    setCategory(key || 'all');
+  }, [key, setCategory]);
 
   useEffect(() => {
     onFetchTvs();
+    onFetchKoTvs();
     onFetchOnAirKo();
-  }, [onFetchTvs, onFetchOnAirKo]);
+  }, [onFetchTvs, onFetchKoTvs, onFetchOnAirKo]);
 
   return (
     <div className="contents-wrap">
@@ -33,21 +47,6 @@ const Drama = () => {
         </ul>
       </section>
       <section className="section-3">
-        {/* <div className="pagenation-wrap">
-          <div className="pagenation-area" ref={areaRef}>
-            <div className="pagenation-line" />
-            <div className="pointer-line" ref={barRef} />
-          </div>
-
-          <div className="nav-btn">
-            <button ref={prevRef}>
-              <img src="/images/arrow-left.svg" />
-            </button>
-            <button ref={nextRef}>
-              <img src="/images/arrow-right.svg" />
-            </button>
-          </div>
-        </div> */}
         <div className="onair-list">
           <div>
             <h3>지금 방영중인 드라마</h3>
@@ -57,7 +56,12 @@ const Drama = () => {
           </div>
         </div>
       </section>
-      <section className="section-4"></section>
+      <section className="section-4">
+        <div></div>
+        <div>
+          <DramaSwiper tvs={dramaList} />
+        </div>
+      </section>
     </div>
   );
 };

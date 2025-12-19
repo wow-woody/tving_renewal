@@ -1,6 +1,6 @@
-import DramaDeBanner from './DramaDeBanner';
+import DramaDeBanner from '../../components/Drama/DramaDeBanner';
+import DramaList from '../../components/Drama/DramaList';
 import '../scss/DramaDetail.scss';
-import DramaList from './DramaList';
 
 const DramaDetail = () => {
   return (
