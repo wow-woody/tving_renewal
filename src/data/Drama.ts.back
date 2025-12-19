@@ -40,7 +40,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 284744,
+    id: 2,
     title: '프로보노',
     img1: '/images/drama/drama2-1.jpg',
     img2: '/images/drama/drama2-2.jpg',
@@ -111,7 +111,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 280946,
+    id: 4,
     title: '태풍상사',
     img1: '/images/drama/drama4-1.jpg',
     img2: '/images/drama/drama4-2.jpg',
@@ -216,7 +216,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 240686,
+    id: 7,
     title: '금월여가',
     img1: '/images/drama/drama7-1.jpg',
     img2: '/images/drama/drama7-2.jpg',
@@ -283,7 +283,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 96462,
+    id: 9,
     title: '사이코지만괜찮아',
     img1: '/images/drama/drama9-1.jpg',
     img2: '/images/drama/drama9-2.jpg',
@@ -314,7 +314,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 112888,
+    id: 10,
     title: '여신강림',
     img1: '/images/drama/drama10-1.jpg',
     img2: '/images/drama/drama10-2.jpg',
@@ -345,7 +345,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 94796,
+    id: 11,
     title: '사랑의불시착',
     img1: '/images/drama/drama11-1.jpg',
     img2: '/images/drama/drama11-2.jpg',
@@ -376,7 +376,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 99494,
+    id: 12,
     title: '악의꽃',
     img1: '/images/drama/drama12-1.jpg',
     img2: '/images/drama/drama12-2.jpg',
@@ -407,7 +407,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 85220,
+    id: 13,
     title: '로맨스는별책부록',
     img1: '/images/drama/drama13-1.jpg',
     img2: '/images/drama/drama13-2.jpg',
@@ -438,7 +438,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 42389,
+    id: 14,
     title: '뱀파이어검사',
     img1: '/images/drama/drama14-1.jpg',
     img2: '/images/drama/drama14-2.jpg',
@@ -469,7 +469,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 64010,
+    id: 15,
     title: '응답하라1988',
     img1: '/images/drama/drama15-1.jpg',
     img2: '/images/drama/drama15-2.jpg',
@@ -503,7 +503,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 96102,
+    id: 16,
     title: '슬기로운의사생활',
     img1: '/images/drama/drama16-1.png',
     img2: '/images/drama/drama16-2.png',
@@ -537,7 +537,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 230923,
+    id: 17,
     title: '선재업고튀어',
     img1: '/images/drama/drama17-1.jpg',
     img2: '/images/drama/drama17-2.jpg',
@@ -572,7 +572,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 65143,
+    id: 18,
     title: '태양의후예',
     img1: '/images/drama/drama18-1.jpg',
     img2: '/images/drama/drama18-2.jpg',
@@ -673,7 +673,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 133670,
+    id: 21,
     title: '술꾼도시여자들',
     img1: '/images/drama/drama21-1.jpg',
     img2: '/images/drama/drama21-2.jpg',
@@ -706,7 +706,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 158811,
+    id: 22,
     title: '몸값',
     img1: '/images/drama/drama22-1.jpg',
     img2: '/images/drama/drama22-2.jpg',
@@ -739,7 +739,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 158258,
+    id: 23,
     title: '방과후,전쟁활동',
     img1: '/images/drama/drama23-1.jpg',
     img2: '/images/drama/drama23-2.jpg',
@@ -775,7 +775,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 157847,
+    id: 24,
     title: '잔혹한 인턴',
     img1: '/images/drama/drama24-1.jpg',
     img2: '/images/drama/drama24-2.jpg',
@@ -811,7 +811,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 218230,
+    id: 25,
     title: '이재,곧 죽습니다',
     img1: '/images/drama/drama25-1.png',
     img2: '/images/drama/drama25-2.png',
@@ -848,7 +848,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 227192,
+    id: 26,
     title: '피라미드게임',
     img1: '/images/drama/drama26-1.jpg',
     img2: '/images/drama/drama26-2.jpg',
@@ -919,7 +919,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 226103,
+    id: 28,
     title: '원경',
     img1: '/images/drama/drama28-1.jpg',
     img2: '/images/drama/drama28-2.jpg',
@@ -954,7 +954,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 224732,
+    id: 29,
     title: '우씨왕후',
     img1: '/images/drama/drama29-1.jpg',
     img2: '/images/drama/drama29-2.jpg',
@@ -986,7 +986,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 222767,
+    id: 30,
     title: 'LTNS',
     img1: '/images/drama/drama30-1.jpg',
     img2: '/images/drama/drama30-2.jpg',
@@ -1058,7 +1058,7 @@ const Drama: Content[] = [
     ],
   },
   {
-    id: 230775,
+    id: 32,
     title: '러닝메이트',
     img1: '/images/drama/drama32-1.jpg',
     img2: '/images/drama/drama32-2.jpg',
@@ -1091,7 +1091,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 201019,
+    id: 33,
     title: '구미호뎐1938',
     img1: '/images/drama/drama33-1.jpg',
     img2: '/images/drama/drama33-2.jpg',
@@ -1124,7 +1124,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 216310,
+    id: 34,
     title: '무인도의디바',
     img1: '/images/drama/drama34-1.jpg',
     img2: '/images/drama/drama34-2.jpg',
@@ -1157,7 +1157,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 214528,
+    id: 35,
     title: '정년이',
     img1: '/images/drama/drama35-1.jpg',
     img2: '/images/drama/drama35-2.jpg',
@@ -1223,7 +1223,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 238673,
+    id: 37,
     title: '아이쇼핑',
     img1: '/images/drama/drama37-1.jpg',
     img2: '/images/drama/drama37-2.jpg',
@@ -1256,7 +1256,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 93740,
+    id: 38,
     title: '파운데이션',
     img1: '/images/drama/drama38-1.jpg',
     img2: '/images/drama/drama38-2.jpg',
@@ -1293,7 +1293,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 225171,
+    id: 39,
     title: '플루리부스',
     img1: '/images/drama/drama39-1.jpg',
     img2: '/images/drama/drama39-2.jpg',
@@ -1330,7 +1330,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 110382,
+    id: 40,
     title: '파친코2',
     img1: '/images/drama/drama40-1.jpg',
     img2: '/images/drama/drama40-2.jpg',
@@ -1368,7 +1368,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 221079,
+    id: 41,
     title: '라스트 프런티어',
     img1: '/images/drama/drama41-1.jpg',
     img2: '/images/drama/drama41-2.jpg',
@@ -1480,7 +1480,7 @@ const Drama: Content[] = [
   },
 
   {
-    id: 127235,
+    id: 44,
     title: '인베이션',
     img1: '/images/drama/drama44-1.jpg',
     img2: '/images/drama/drama44-2.jpg',
