@@ -140,51 +140,9 @@
 
     .section-3 {
         padding-left: 10.8rem;
-        padding-top: 112px;
+        padding-top: 112px;}
 
-        .watching-container {
-            height: 100%;
-
-            // background: rgb(255, 207, 207);
-
-            @include pagenation-wrap();
-
-            .watching-wrap {
-                height: 525px;
-                display: flex;
-                gap: 24px;
-
-                .side-wrap {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    width: 265px;
-                    height: 100%;
-
-                    .more-btn-area {
-                        padding-bottom: 70px;
-
-                        .more-btn {
-                            padding: 8px 12px;
-                            border: 1.4px solid #fff;
-                            border-radius: 8px;
-
-                            font-size: 1.6rem;
-                            font-weight: 700;
-                            color: #fff;
-                        }
-                    }
-                }
-
-                .watching-main-wrap {
-                    width: 100%;
-                    height: 100%;
-                    background: #ff153c;
-                }
-            }
-        }
-    }
+      
 
     .section-4 {
         padding-top: 128px;
