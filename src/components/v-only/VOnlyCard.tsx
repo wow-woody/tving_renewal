@@ -8,17 +8,22 @@ interface Props {
 
 const VOnlyCard = ({ item, rank }: Props) => {
   return (
-    <div className="v-only-item">
-      <img
-        className="rank"
-        src={`/images/rank/rank-${String(rank).padStart(2, "0")}.png`}
-        alt={`rank ${rank}`}
-      />
+    <Link to={`/detail/${item.id}`} className="v-only-card-wrapper">
+      {/* 랭킹 숫자 */}
+      {rank && (
+        <div className="rank-box">
+          <img
+            src={`/images/rank/rank-${String(rank).padStart(2, "0")}.png`}
+            alt={String(rank)}
+          />
+        </div>
+      )}
 
-      <Link to={`/detail/${item.id}`} className="v-only-card">
+      {/* 카드 */}
+      <div className="v-only-card">
         <img src={item.img1} alt={item.title} />
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

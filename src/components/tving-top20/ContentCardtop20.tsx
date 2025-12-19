@@ -11,17 +11,17 @@ interface Props {
 const ContentCardtop20 = ({ item, rankScope }: Props) => {
     const rank = item.rank?.[rankScope];
 
-    return (
-        <Link to={`/detail/${item.id}`} className="rank-card">
-            {/* 숫자 영역 */}
-            <div className="rank-box">
-                {rank && (
-                    <img
-                        src={`/images/rank/rank-${String(rank).padStart(2, '0')}.svg`}
-                        alt={String(rank)}
-                    />
-                )}
-            </div>
+  return (
+   <Link to={`/detail/${item.id}`} className="rank-card">
+  {/* 숫자 영역 */}
+  <div className="rank-box">
+    {rank && (
+      <img
+        src={`/images/rank/rank-${String(rank).padStart(2, "0")}.png`}
+        alt={String(rank)}
+      />
+    )}
+  </div>
 
             {/* 포스터 영역 */}
             <div className="poster-box">

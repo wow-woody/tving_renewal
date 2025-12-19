@@ -47,24 +47,6 @@ const Home = () => {
 
             <hr />
 
-            <section className="section-2">
-                <div className="section2-inner">
-                    <h2 className="hidden">바로가기</h2>
-                    <div className="link-container">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-            </section>
-
-            <hr />
-
             <section className="section-3">
                 <h2 className="hidden">시청중인 프로그램</h2>
                 <div className="watching-container">

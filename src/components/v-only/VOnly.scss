@@ -1,64 +1,141 @@
 .v-only {
-  display: flex;
+    display: flex;
   gap: 32px;
-  padding: 32px 40px;
-  background: linear-gradient(135deg, #7a0d1c, #3a0a12);
-  max-width: 1200px;  
-  margin: 0 auto;
-}
-
-.v-only-info {
-  width: 240px;
-  flex-shrink: 0;
-  color: #fff;
-
-  .logo {
-    width: 120px;
-    margin-bottom: 16px;
-  }
-
-  p {
-    line-height: 1.4;
-    margin-bottom: 16px;
-  }
-
-  .more-btn {
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-}
-
-.v-only-slider {
-  flex: 1;
-  overflow: hidden;
-}
-
-.v-only-item {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-}
-
-.v-only-item .rank {
-  position: absolute;
-  left: -28px;
-  bottom: 0;
-  width: 48px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.v-only-card {
-  width: 160px;
+  padding: 40px;
   border-radius: 12px;
-  overflow: hidden;
+  background: linear-gradient(295deg, rgba(255, 21, 60, 0.50) -42.62%, rgba(255, 21, 60, 0.40) -25.5%, rgba(255, 21, 60, 0.30) -8.39%, rgba(255, 21, 60, 0.10) 8.73%, rgba(255, 21, 60, 0.20) 25.84%, rgba(255, 21, 60, 0.30) 42.95%, rgba(255, 21, 60, 0.40) 60.07%, rgba(255, 21, 60, 0.50) 77.18%, rgba(255, 21, 60, 0.40) 100%);
+  width: 1756px;
+  margin: 0 auto;  
+  
+  
 
-  img {
-    width: 100%;
-    display: block;
+  .v-only-info {
+    width: 272px;
+    color: #fff;
+    margin-right: 70px;
+
+    .logo {
+     width: 150px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .more-btn {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  }
+
+  .v-only-slider {
+    width: 80%;
+    overflow: hidden;
+    position: relative;
+
+    .v-only-card-wrapper {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      text-decoration: none;
+      
+
+      .rank-box {
+        width: 83px;
+        flex-shrink: 0;
+        height: auto;
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+
+      .v-only-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.3s ease;
+        
+
+        img {
+          display: block;
+          border-radius: 12px;
+          transition: transform 0.4s ease;
+          width: 220px;
+          height: auto;
+        }
+
+       
+      }
+
+      &:hover .v-only-card {
+        border-color: #ff153c;
+      }
+
+      &:hover .v-only-card img {
+        transform: scale(1.1); // badge는 고정, 이미지만 확대
+      }
+    }
+
+    /* 네비게이션 스타일 */
+    .v-only-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .nav-btn {
+      width: 120px;
+      height: 120px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      pointer-events: auto;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.3s ease;
+    
+    }
+
+    .nav-btn.prev {
+      
+      margin-left: 0px;
+    
+    img{
+    
+        width: 36px
+    };
+    }
+
+    
+
+    .nav-btn.next {
+      margin-right: -40px;
+      img{
+        width: 36px
+    };
+    }
+
+    .nav-btn:hover {
+    //   background: rgba(255, 21, 60, 0.8);
+      border-color: #fff;
+      transform: scale(1.1);
+      opacity: 1;
+    }
   }
 }

@@ -63,7 +63,7 @@
                 }
             }
 
-            button + button {
+            button+button {
                 border-left: none;
             }
         }
@@ -326,12 +326,19 @@
     }
 
     .section-6 {
+        margin-left: 6.5rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
-        .section6-inner {
-            padding-left: 10.8rem;
-            padding-right: 2.4rem;
-        }
+
+
+    }
+
+    .section-9 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
+
     }
 
     .section-11 {
@@ -339,12 +346,22 @@
         padding-right: 2.4rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
+
     }
 
-    .section-14 {
+    .section-13 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
     }
+
+    .section-14 {
+         margin-left: 6.5rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
+    }
+
+
+
 }

@@ -38,7 +38,7 @@
   .v-original-slider {
     width: 80%;
     overflow: hidden;
-  
+    position: relative;
 
     .v-original-card {
       position: relative;
@@ -69,6 +69,63 @@
         
       }
     }
+
+    /* 네비게이션 스타일 */
+    .v-original-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .nav-btn {
+      width: 120px;
+      height: 120px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: auto;
+      color: #fff;
+      font-size: 100px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.3s ease;
+    
+    }
+
+    .nav-btn.prev {
+      
+      img{
+        width: 36px
+
+      };
+      margin-left: -40px;
+    }
+
+    .nav-btn.next {
+      margin-right: -40px;
+       img{
+        width: 36px
+
+      };
+    }
+
+    .nav-btn:hover {
+     
+      border-color: #fff;
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    // .nav-btn:disabled {
+    //   opacity: 0.3;
+      cursor: default;
+    // }
   }
 }
 

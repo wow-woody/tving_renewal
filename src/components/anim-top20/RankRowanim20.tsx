@@ -90,8 +90,8 @@ const RankRowanim20 = ({ data, title = '오늘의 티빙', rankScope }: RankRowP
 
       <div className="rank-row">
         <Swiper
-          slidesPerView={7}
-          spaceBetween={0}
+          slidesPerView={6}
+          spaceBetween={50}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {
             // @ts-ignore
