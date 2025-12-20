@@ -52,7 +52,8 @@ export const DRAMA_FILTERS = [
     key: 'romance',
     label: '로맨스',
     tmdb: {
-      with_genres: '18,10749', // Drama + Romance
+      with_genres: '18,10749',
+      without_genres: '16',
     },
   },
   {

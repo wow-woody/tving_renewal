@@ -15,7 +15,8 @@ import SubscriptionCheck from './pages/SubscriptionCheck';
 import SubscriptionPayment from './pages/SubscriptionPayment';
 import DramaDetail from './pages/Drama/DramaDetail';
 import Drama from './pages/Drama/Drama';
-import DramaCate from './pages/Drama/DramaCate';
+import DramaGenre from './pages/Drama/DramaGenre';
+import LivePage from './pages/Live/LivePage';
 
 function App() {
   const location = useLocation();
@@ -66,12 +67,13 @@ function App() {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/drama" element={<Drama />} />
+        <Route path="/drama/genre/:key" element={<DramaGenre />} />
         <Route path="/subscription" element={<Subscription />} />
-        <Route path="/tv/:id" element={<DramaDetail />} />
-        <Route path="/drama/genre/:key" element={<DramaCate />} />
+        <Route path="/detail/:id" element={<DramaDetail />} />
 
         <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
         <Route path="/subscription/payment" element={<SubscriptionPayment />} />
+        <Route path="/live" element={<LivePage />} />
       </Routes>
 
       {!hideFooter && <Footer />}

@@ -10,6 +10,7 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
   onairko: [],
   seasons: [],
   videos: [],
+  filteredTvs: [],
   tvDetail: null,
 
   // 드라마 장르
@@ -131,6 +132,27 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
     const data = await res.json();
     console.log('영상', data);
     set({ videos: data.results });
+  },
+
+  // 장르
+  onFetchByFilter: async (params) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams({
+        api_key: API_KEY,
+        language: 'ko-KR',
+        sort_by: 'popularity.desc',
+        ...params,
+      })}`
+    );
+
+    const data = await res.json();
+
+    // 드라마만 걸러내기 (애니 제외)
+    const dramaOnly = data.results.filter(
+      (item) => item.genre_ids?.includes(18) && !item.genre_ids?.includes(16)
+    );
+
+    set({ filteredTvs: dramaOnly });
   },
 
   // 시리즈 시즌

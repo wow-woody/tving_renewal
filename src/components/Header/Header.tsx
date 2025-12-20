@@ -117,7 +117,7 @@ const Header = () => {
                 <Link to="/">뉴스</Link>
               </li>
               <li>
-                <Link to="/">라이브</Link>
+                <Link to="/live">라이브</Link>
               </li>
             </ul>
           </nav>
