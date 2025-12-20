@@ -18,7 +18,7 @@ interface TmdbTv {
   poster_path: string;
 }
 
-const Popular20 = ({ title = 'TMDB 인기 드라마 TOP 20' }) => {
+const Popular20 = ({ title = '인기 드라마 TOP 20' }) => {
   const [data, setData] = useState<TmdbTv[]>([]);
   const [barOffset, setBarOffset] = useState(0);
 

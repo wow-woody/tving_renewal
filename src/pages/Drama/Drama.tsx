@@ -6,8 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import OnAirDramaList from '../../components/Drama/OnAirDrama';
 import Popular20 from '../../components/Drama/Popular20/Popular20';
 import VOriginalSection from '../../components/v-origin/VOriginalSection';
-import Fantasy from '../../components/Drama/GenreSwiper/Fantasy';
-import Romance from '../../components/Drama/GenreSwiper/Romance';
+import DramaSwiper from '../../components/Drama/DramaSwiper';
+import { FANTASY_CONFIG, ACTION_CONFIG, Comedy_CONFIG } from '../../data/DramaFilters';
+import AppleTvSection from '../../components/appletv/AppleTvSection';
 
 const Drama = () => {
   const onFetchTvs = useTvSeriesStore((s) => s.onFetchTvs);
@@ -66,10 +67,16 @@ const Drama = () => {
         <VOriginalSection />
       </section>
       <section className="section-6">
-        <Fantasy />
+        <DramaSwiper config={FANTASY_CONFIG} />
       </section>
       <section className="section-7">
-        <Romance />
+        <DramaSwiper config={ACTION_CONFIG} />
+      </section>
+      <section className="section-8">
+        <DramaSwiper config={Comedy_CONFIG} />
+      </section>
+      <section className="section-9">
+        <AppleTvSection />
       </section>
     </div>
   );
