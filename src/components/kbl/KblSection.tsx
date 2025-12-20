@@ -7,16 +7,15 @@ import "swiper/css/navigation";
 import "./Kbl.scss";
 import KblCard from "./KblCard";
 
-import { ALL_CONTENTS } from "../../data";
-import type { Content } from "../../type/content";
+import { sports } from "../../data/sport";
 
 const KblSection = () => {
   const swiperRef = useRef<any | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  // KBL 섹션 데이터 (랭크 데이터가 없어 index 기반 순번 사용)
-  const kblContents: Content[] = ALL_CONTENTS.slice(0, 12);
+  // KBL 섹션 데이터 (sport.ts에서 KBL 카테고리만 필터링)
+  const kblContents = sports.filter((item) => item.category === "KBL");
 
   useEffect(() => {
     const swiper = swiperRef.current;

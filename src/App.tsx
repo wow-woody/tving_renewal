@@ -17,6 +17,7 @@ import DramaDetail from './pages/Drama/DramaDetail';
 import Drama from './pages/Drama/Drama';
 import DramaGenre from './pages/Drama/DramaGenre';
 import LivePage from './pages/Live/LivePage';
+import SportBanner from './pages/Sport/Sport';
 
 function App() {
   const location = useLocation();
@@ -74,6 +75,7 @@ function App() {
         <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
         <Route path="/subscription/payment" element={<SubscriptionPayment />} />
         <Route path="/live" element={<LivePage />} />
+        <Route path='/sport' element={<SportBanner />} />
       </Routes>
 
       {!hideFooter && <Footer />}

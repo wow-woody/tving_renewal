@@ -1,17 +1,17 @@
 .v-original {
     display: flex;
   gap: 32px;
-  padding: 40px;
+  padding: 40px 0 40px 10.8rem;
   border-radius: 12px;
   background: linear-gradient(295deg, rgba(255, 21, 60, 0.50) -42.62%, rgba(255, 21, 60, 0.40) -25.5%, rgba(255, 21, 60, 0.30) -8.39%, rgba(255, 21, 60, 0.10) 8.73%, rgba(255, 21, 60, 0.20) 25.84%, rgba(255, 21, 60, 0.30) 42.95%, rgba(255, 21, 60, 0.40) 60.07%, rgba(255, 21, 60, 0.50) 77.18%, rgba(255, 21, 60, 0.40) 100%);
-  width: 1756px;
-  margin: 0 auto;  
+  width: 100%;  
   
 
   .v-original-info {
-    width: 272px;
+    width: 200px;
     color: #fff;
-    margin-right: 90px;
+    margin-right: 40px;
+    flex-shrink: 0;
 
     .logo {
       font-weight: 700;
@@ -36,7 +36,7 @@
   }
 
   .v-original-slider {
-    width: 80%;
+    flex: 1;
     overflow: hidden;
     position: relative;
 

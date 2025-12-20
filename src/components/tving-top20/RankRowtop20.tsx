@@ -57,7 +57,7 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
 
   return (
     <section
-      className="section-6"
+      
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}
     >
       {/* 섹션 제목 */}
