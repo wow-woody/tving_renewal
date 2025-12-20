@@ -4,9 +4,11 @@ import '../scss/Drama.scss';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
 import { useNavigate, useParams } from 'react-router-dom';
 import OnAirDramaList from '../../components/Drama/OnAirDrama';
-import DramaSwiper from '../../components/Drama/DramaSwiper';
-import { useDramaCate } from '../../store/Drama/useDramaCate';
-import { useDramaList } from '../../store/Drama/useDramaList';
+import Popular20 from '../../components/Drama/Popular20/Popular20';
+import VOriginalSection from '../../components/v-origin/VOriginalSection';
+import Fantasy from '../../components/Drama/GenreSwiper/Fantasy';
+import Romance from '../../components/Drama/GenreSwiper/Romance';
+
 const Drama = () => {
   const onFetchTvs = useTvSeriesStore((s) => s.onFetchTvs);
   const onFetchKoTvs = useTvSeriesStore((s) => s.onFetchKoTvs);
@@ -15,12 +17,6 @@ const Drama = () => {
 
   const navigate = useNavigate();
   const { key } = useParams();
-  const setCategory = useDramaCate((s) => s.setCategory);
-  const dramaList = useDramaList();
-
-  useEffect(() => {
-    setCategory(key || 'all');
-  }, [key, setCategory]);
 
   useEffect(() => {
     onFetchTvs();
@@ -57,10 +53,23 @@ const Drama = () => {
         </div>
       </section>
       <section className="section-4">
-        <div></div>
-        <div>
-          <DramaSwiper tvs={dramaList} />
+        <div className="Popular20">
+          <div>
+            <h3>실시간 인기 드라마</h3>
+          </div>
         </div>
+        <div>
+          <Popular20 />
+        </div>
+      </section>
+      <section className="section-5">
+        <VOriginalSection />
+      </section>
+      <section className="section-6">
+        <Fantasy />
+      </section>
+      <section className="section-7">
+        <Romance />
       </section>
     </div>
   );
