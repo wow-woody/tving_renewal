@@ -16,6 +16,7 @@ import SubscriptionPayment from './pages/SubscriptionPayment';
 import DramaDetail from './pages/Drama/DramaDetail';
 import Drama from './pages/Drama/Drama';
 import DramaCate from './pages/Drama/DramaCate';
+import LivePage from './pages/Live/LivePage';
 
 function App() {
   const location = useLocation();
@@ -72,6 +73,7 @@ function App() {
 
         <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
         <Route path="/subscription/payment" element={<SubscriptionPayment />} />
+        <Route path="/live" element={<LivePage />} />
       </Routes>
 
       {!hideFooter && <Footer />}
