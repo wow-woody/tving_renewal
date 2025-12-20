@@ -23,6 +23,8 @@ import LiveNews from '../components/news-live/LiveNews';
 import { liveChannels } from '../data/LiveChannels';
 import MyLive from '../components/my-live/MyLive';
 import SportsLive from '../components/sports-live/SportsLive';
+import ButtonBanner from '../components/button-banner/ButtonBanner';
+import TvingNew from '../components/new/TvingNew';
 
 
 
@@ -53,7 +55,10 @@ const Home = () => {
         </div>
       </section>
 
-      <hr />
+      <section className="section-2">
+        <h2 className="hidden">바로가기</h2>
+        <ButtonBanner />
+      </section>
 
       <section className="section-3">
 
@@ -64,11 +69,7 @@ const Home = () => {
       </section>
 
       <section className="section-5">
-        <div className="title-wrap">
-          <h2 className="section-title">
-            <Link to="/">티빙 NEW! 공개 예정 콘텐츠</Link>
-          </h2>
-        </div>
+          <TvingNew />
       </section>
 
 

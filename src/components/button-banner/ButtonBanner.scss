@@ -1,0 +1,84 @@
+.button-banner-wrappers {
+    width: 100%;
+    display: flex;
+    gap: 9.8px;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    cursor: grab;
+
+    &.dragging {
+        cursor: grabbing;
+    }
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .button-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 212px;
+        height: 80px;
+
+        box-shadow: 0px 4.422050952911377px 4.42px rgba(0, 0, 0, 0.25),
+            0px 0px 13.27px rgba(255, 255, 255, 0.1) inset;
+        backdrop-filter: blur(110.55px);
+        background: conic-gradient(
+            from 135deg at 50% 50%,
+            rgba(255, 255, 255, 0.05) 0deg,
+            rgba(0, 0, 0, 0.03) 90deg,
+            rgba(255, 255, 255, 0.05) 180deg,
+            rgba(0, 0, 0, 0.03) 270deg,
+            rgba(255, 255, 255, 0.05) 360deg
+        );
+        border: 1.1px solid rgba(255, 255, 255, 0.2);
+        box-sizing: border-box;
+
+        border-radius: 14px;
+
+        .img-wrap {
+            position: relative;
+            display: inline-block;
+
+            &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+
+                box-shadow: 0px 4.422050952911377px 4.42px rgba(0, 0, 0, 0.25),
+                    0px 0px 13.27px rgba(255, 255, 255, 0.1) inset;
+                backdrop-filter: blur(4px);
+                background: conic-gradient(
+                    from 135deg at 50% 50%,
+                    rgba(255, 255, 255, 0.05) 0deg,
+                    rgba(0, 0, 0, 0.03) 90deg,
+                    rgba(255, 255, 255, 0.05) 180deg,
+                    rgba(0, 0, 0, 0.03) 270deg,
+                    rgba(255, 255, 255, 0.05) 360deg
+                );
+                border: 1.1px solid rgba(255, 255, 255, 0.2);
+                box-sizing: border-box;
+
+                border-radius: 14px;
+
+                transition: backdrop-filter 0.4s;
+            }
+        }
+
+        .img-title {
+            position: absolute;
+        }
+
+        &:hover {
+            .img-wrap::after {
+                backdrop-filter: none;
+            }
+        }
+    }
+}
