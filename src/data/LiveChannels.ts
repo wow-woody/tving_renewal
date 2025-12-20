@@ -1,18 +1,17 @@
 export interface LiveChannel {
     id: string;
     title: string;
-    time: string;
     thumb: string;
     isFree: boolean;
     category: "뉴스" | "스포츠" | "예능" | "드라마";
     iframe: string;
+    state?: 'mylive';
 }
 
 export const liveChannels: LiveChannel[] = [
     {
         id: 'z1',
         title: "모닝와이드 ",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/EfHTThUGZIc/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -33,7 +32,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z2',
         title: "연합뉴스",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/6QZ_qc75ihU/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -45,10 +43,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z3',
         title: "KBS 뉴스",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/M1WrMEUOBsU/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
+        state: 'mylive',
         iframe: `
       <iframe width="560" height="315" src="https://www.youtube.com/embed/M1WrMEUOBsU?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -57,7 +55,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z4',
         title: "MBC 뉴스",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/q9bM12ucTIY/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -69,7 +66,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z5',
         title: "YTN 뉴스",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/FJfwehhzIhw/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -81,7 +77,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z6',
         title: "매일경제뉴스",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/s9xL1DpBsfQ/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -93,10 +88,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z7',
         title: "MTN 머니투데이",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/lb1oB2feqkQ/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
+        state: 'mylive',
         iframe: `
      <iframe width="560" height="315" src="https://www.youtube.com/embed/lb1oB2feqkQ?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -105,7 +100,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z8',
         title: "SBS 뉴스",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/hw3iqcXh_qQ/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -117,7 +111,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z9',
         title: "한국경제",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/NJUjU9ALj4A/hqdefault.jpg",
         isFree: true,
         category: "뉴스",
@@ -129,7 +122,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z10',
         title: "역사저널 그날",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/4Q-yFBS769A/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -141,7 +133,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z11',
         title: "벌거벗은 세계사",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/b5UeAVqz4cI/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -153,10 +144,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z12',
         title: "1박2일",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/P8QordVAUyU/hqdefault.jpg",
         isFree: true,
         category: "예능",
+        state: 'mylive',
         iframe: `
       <iframe width="560" height="315" src="https://www.youtube.com/embed/P8QordVAUyU?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -165,7 +156,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z13',
         title: "비긴어게인",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/8dYNg7bmS5c/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -177,7 +167,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z14',
         title: "런닝맨",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/lDcWeklf6DI/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -189,10 +178,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z15',
         title: "푸른거탑",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/H3uur6g_9CA/hqdefault.jpg",
         isFree: true,
         category: "예능",
+        state: 'mylive',
         iframe: `
      <iframe width="560" height="315" src="https://www.youtube.com/embed/H3uur6g_9CA?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -201,7 +190,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z16',
         title: "크라임씬",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/RL2pFHjPaUI/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -213,7 +201,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z17',
         title: "연애의 참견",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/4yV2w1b8wxw/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -225,10 +212,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z18',
         title: "시간탐험대",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/vuJoalX0ke4/hqdefault.jpg",
         isFree: true,
         category: "예능",
+        state: 'mylive',
         iframe: `
       <iframe width="560" height="315" src="https://www.youtube.com/embed/vuJoalX0ke4?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -237,7 +224,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z19',
         title: "무한도전",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/je7aGbAOjiA/hqdefault.jpg",
         isFree: true,
         category: "예능",
@@ -249,7 +235,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z20',
         title: "태조왕건",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/1bROU5AqM8w/hqdefault.jpg",
         isFree: true,
         category: "드라마",
@@ -261,10 +246,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z21',
         title: "비밀의 숲",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/5XPwjwz3ZLw/hqdefault.jpg",
         isFree: true,
         category: "드라마",
+        state: 'mylive',
         iframe: `
       <iframe width="560" height="315" src="https://www.youtube.com/embed/5XPwjwz3ZLw?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -273,7 +258,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z22',
         title: "감자별",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/-6-OIUhfELQ/hqdefault.jpg",
         isFree: true,
         category: "드라마",
@@ -285,7 +269,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z23',
         title: "호텔 델루나",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/Wsz_If9wZ7g/hqdefault.jpg",
         isFree: true,
         category: "드라마",
@@ -297,10 +280,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z24',
         title: "라이브",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/nzON0i35cso/hqdefault.jpg",
         isFree: true,
         category: "드라마",
+        state: 'mylive',
         iframe: `
      <iframe width="560" height="315" src="https://www.youtube.com/embed/nzON0i35cso?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -309,7 +292,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z25',
         title: "여신강림",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/Ci5OGw5HqIw/hqdefault.jpg",
         isFree: true,
         category: "드라마",
@@ -321,10 +303,10 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z26',
         title: "스물다섯 스물하나",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/QJdCLgv_Zqg/hqdefault.jpg",
         isFree: true,
         category: "드라마",
+        state: 'mylive',
         iframe: `
      <iframe width="560" height="315" src="https://www.youtube.com/embed/QJdCLgv_Zqg?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -333,7 +315,6 @@ export const liveChannels: LiveChannel[] = [
     {
         id: 'z27',
         title: "이번생은 처음이라",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/9qt9bK9y5aw/hqdefault.jpg",
         isFree: true,
         category: "드라마",
@@ -345,7 +326,6 @@ export const liveChannels: LiveChannel[] = [
      {
         id: 'z28',
         title: "KBL",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/YPFcgf_8Juo/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -357,7 +337,6 @@ export const liveChannels: LiveChannel[] = [
        {
         id: 'z29',
         title: "World Skateboard",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/bZHZNsqNLzk/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -371,10 +350,10 @@ export const liveChannels: LiveChannel[] = [
        {
         id: 'z31',
         title: "NBA",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/uAOagNRdqe4/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
+        state: 'mylive',
         iframe: `
    <iframe width="560" height="315" src="https://www.youtube.com/embed/uAOagNRdqe4?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -383,7 +362,6 @@ export const liveChannels: LiveChannel[] = [
           {
         id: 'z32',
         title: "KBO",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/JzpF_G_Q6rI/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -395,10 +373,10 @@ export const liveChannels: LiveChannel[] = [
               {
         id: 'z33',
         title: "KLPGA",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/W-jHZyUC6NM/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
+        state: 'mylive',
         iframe: `
    <iframe width="560" height="315" src="https://www.youtube.com/embed/W-jHZyUC6NM?autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
@@ -407,7 +385,6 @@ export const liveChannels: LiveChannel[] = [
              {
         id: 'z34',
         title: "Wimbledon",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/vsbePDEpals/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -419,7 +396,6 @@ export const liveChannels: LiveChannel[] = [
              {
         id: 'z35',
         title: "FIFA",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/w6DcGN5COf4/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -431,7 +407,6 @@ export const liveChannels: LiveChannel[] = [
              {
         id: 'z36',
         title: "J-League",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/EdVGowo6tl4/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -443,7 +418,6 @@ export const liveChannels: LiveChannel[] = [
          {
         id: 'z40',
         title: "프로야구",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/yCoWH629hUU/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -455,7 +429,6 @@ export const liveChannels: LiveChannel[] = [
      {
         id: 'z41',
         title: "여자야구 올스타전",
-        time: "실시간",
         thumb: "https://img.youtube.com/vi/GYswHsosPh4/hqdefault.jpg",
         isFree: true,
         category: "스포츠",
@@ -471,3 +444,4 @@ export const liveChannels: LiveChannel[] = [
 
 
 ];
+

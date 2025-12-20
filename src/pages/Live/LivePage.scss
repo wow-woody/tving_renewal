@@ -161,18 +161,23 @@
             align-items: flex-end;
 
             .live {
-                font-size: 10px;
+                font-size: 12px;
+                font-weight: 700;
                 background: #ff153c;
-                padding: 4px 10px;
-                border-radius: 10px;
+                padding: 6px 10px;
+                border-radius: 100px;
+                width: 50px;
 
             }
 
             .free {
-                font-size: 10px;
+                color: #222;
+                font-size: 12px;
+                font-weight: 700;
                 background: #2ecc71;
-                padding: 4px 10px;
-                border-radius: 10px;
+                padding: 6px 10px;
+                border-radius: 100px;
+                width: 50px;
             }
         }
 

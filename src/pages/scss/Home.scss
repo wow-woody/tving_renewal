@@ -145,66 +145,10 @@
       
 
     .section-4 {
-        padding-top: 128px;
-        @include title-wrap();
-
-        .title-wrap {
-            padding-left: 10.8rem;
-        }
-
-        .live-container {
-            padding-top: 76px;
-
-            .live-wrap {
-                width: 408px;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-
-                .img-wrap {
-                    width: 100%;
-                    aspect-ratio: 408 / 226.22;
-                    background: #ff153c;
-                    margin-bottom: 20px;
-
-                    border: 1px solid #b9b9b9;
-                    border-radius: 19.13px;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                        object-position: center;
-                    }
-                }
-
-                .s-banner {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-
-                    font-size: 1.4rem;
-                    font-weight: 700;
-                    color: #b9b9b9;
-                    margin-bottom: 12px;
-                    padding-left: 0.4%;
-
-                    p {
-                        padding: 4px 12px;
-                        border: 1px solid #b9b9b9;
-                        border-radius: 4px;
-                    }
-                }
-
-                .s-title {
-                    font-size: 26px;
-                    font-weight: 800;
-                    color: #b9b9b9;
-                    padding-left: 0.4%;
-                }
-            }
-        }
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
     }
 
     .section-5 {
@@ -287,8 +231,13 @@
         margin-left: 6.5rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
+    }
 
-
+     .section-7 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
     }
 
     .section-9 {
@@ -316,6 +265,13 @@
 
     .section-14 {
          margin-left: 6.5rem;
+        padding-top: clamp(20px, 2.5vw, 40px);
+        padding-bottom: clamp(20px, 2.5vw, 40px);
+    }
+
+     .section-16 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
         padding-top: clamp(20px, 2.5vw, 40px);
         padding-bottom: clamp(20px, 2.5vw, 40px);
     }

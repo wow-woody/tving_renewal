@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { LiveChannel } from "../../data/LiveChannels";
 
 interface Props {
@@ -15,6 +15,13 @@ const LiveChannelList = ({
   onSelect,
 }: Props) => {
   const [activeTab, setActiveTab] = useState<Category>('전체');
+  const activeItemRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (activeItemRef.current) {
+      activeItemRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [activeId]);
 
   const filteredList =
     activeTab === '전체'
@@ -41,6 +48,7 @@ const LiveChannelList = ({
         {filteredList.map((ch) => (
           <button
             key={ch.id}   // ✅ string OK
+            ref={activeId === ch.id ? activeItemRef : null}
             className={`channel-item ${
               activeId === ch.id ? "active" : ""
             }`}

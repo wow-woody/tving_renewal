@@ -19,26 +19,30 @@ import DramaFeaturedSection from '../components/drama-pop/DramaFeaturedSection';
 import MovieFeaturedSection from '../components/movie-pop/MovieFeaturedSection';
 import AppleTvSection from '../components/appletv/AppleTvSection';
 import KblSection from '../components/kbl/KblSection';
+import LiveNews from '../components/news-live/LiveNews';
+import { liveChannels } from '../data/LiveChannels';
+import MyLive from '../components/my-live/MyLive';
+import SportsLive from '../components/sports-live/SportsLive';
 
 
 
 
 const Home = () => {
-    // 1) 전부 합치기
-    const all: Content[] = [...drama, ...anim, ...movie, ...enter];
+  // 1) 전부 합치기
+  const all: Content[] = [...drama, ...anim, ...movie, ...enter];
 
-    // 2) TOP20 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
-    const top20 = all
-        .filter((item) => item.rank?.[RankScope.TOP20] != null)
-        .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
-        .slice(0, 20);
+  // 2) TOP20 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
+  const top20 = all
+    .filter((item) => item.rank?.[RankScope.TOP20] != null)
+    .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
+    .slice(0, 20);
 
 
-    // 2) ANIM 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
-    const anim20 = all
-        .filter((item) => item.rank?.[RankScope.POP_ANIM] != null)
-        .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
-        .slice(0, 20);
+  // 2) ANIM 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
+  const anim20 = all
+    .filter((item) => item.rank?.[RankScope.POP_ANIM] != null)
+    .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
+    .slice(0, 20);
 
   return (
     <div className="main-wrap">
@@ -49,54 +53,31 @@ const Home = () => {
         </div>
       </section>
 
-            <hr />
+      <hr />
 
-            <section className="section-3">
-       
-            </section>
+      <section className="section-3">
 
-            <section className="section-4">
-                <div className="title-wrap">
-                    <h2 className="section-title">
-                        <Link to="/">뉴스 라이브</Link>
-                    </h2>
-                    <div className="pagenation-wrap">
-                        <div className="pagenation-area">
-                            <div className="pagenation-line"></div>
-                            <div className="pointer-line"></div>
-                        </div>
-                        <div className="nav-btn">
-                            <button className="prev">
-                                <img src="/images/arrow-left.svg" alt="prev" />
-                            </button>
-                            <button className="next">
-                                <img src="/images/arrow-right.svg" alt="next" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="live-container">
-                    <div className="live-wrap">
-                        <div className="img-wrap"></div>
-                        <div className="s-banner">
-                            <p>mbc 라디오 시사</p>
-                        </div>
-                        <div className="s-title">MBC 라디오 시사 하이라이트</div>
-                    </div>
-                </div>
-            </section>
+      </section>
+
+      <section className="section-4">
+        <LiveNews list={liveChannels} />
+      </section>
 
       <section className="section-5">
         <div className="title-wrap">
           <h2 className="section-title">
             <Link to="/">티빙 NEW! 공개 예정 콘텐츠</Link>
           </h2>
-       </div>
+        </div>
       </section>
 
 
       <section className="section-6">
         <RankRow data={top20} rankScope={RankScope.TOP20} />
+      </section>
+
+      <section className="section-7">
+        <MyLive list={liveChannels} />
       </section>
 
       <section className="section-8">
@@ -107,7 +88,7 @@ const Home = () => {
         <DramaFeaturedSection />
       </section>
 
-       <section className="section-10">
+      <section className="section-10">
         <AppleTvSection />
       </section>
 
@@ -115,14 +96,14 @@ const Home = () => {
         <EnterFeaturedSection />
       </section>
 
-           <section className='section-12'>
+      <section className='section-12'>
         <KblSection />
       </section>
 
 
-        <section className='section-13'>
+      <section className='section-13'>
         <MovieFeaturedSection />
-      </section> 
+      </section>
 
       <section className="section-14">
         <RankRowAnim data={anim20} title="실시간 인기 애니메이션" rankScope={RankScope.POP_ANIM} />
@@ -130,6 +111,9 @@ const Home = () => {
 
       <section className="section-15">
         <VOnlySection />
+      </section>
+      <section className="section-16">
+        <SportsLive list={liveChannels} />
       </section>
     </div>
   );

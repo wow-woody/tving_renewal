@@ -1,11 +1,25 @@
-import { useState } from "react";
-import { liveChannels } from "../../data/liveChannels";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { liveChannels } from "../../data/LiveChannels";
 import LivePlayer from "../../components/Live/LivePlayer";
 import LiveChannelList from "../../components/Live/LiveChannelList";
 import "./LivePage.scss";
 
 const LivePage = () => {
-  const [activeId, setActiveId] = useState(liveChannels[0].id);
+  const location = useLocation();
+  const channelId = location.state?.channelId;
+  
+  const [activeId, setActiveId] = useState(channelId || liveChannels[0].id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (channelId) {
+      setActiveId(channelId);
+    }
+  }, [channelId]);
 
   const activeChannel =
     liveChannels.find((ch) => ch.id === activeId) ??
