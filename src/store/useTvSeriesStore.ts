@@ -126,12 +126,23 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
 
   //
   onFetchTvVideos: async (id) => {
-    const res = await fetch(
+    const koRes = await fetch(
       `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=ko-KR`
     );
-    const data = await res.json();
-    console.log('영상', data);
-    set({ videos: data.results });
+    const koData = await koRes.json();
+
+    if (koData.results?.length > 0) {
+      set({ videos: koData.results });
+      return;
+    }
+
+    // 없으면 영어 fallback
+    const enRes = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=en-US`
+    );
+    const enData = await enRes.json();
+
+    set({ videos: enData.results || [] });
   },
 
   // 장르
