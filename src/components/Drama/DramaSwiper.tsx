@@ -6,9 +6,10 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import '../../drama-pop/DramaFeaturedSection.scss';
-import { AGE } from '../../../contents/media';
+import '../drama-pop/DramaFeaturedSection.scss';
+import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';
+import type { DramaGenres } from '../../data/DramaFilters';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
@@ -30,7 +31,11 @@ interface FeaturedItem {
   age?: string;
 }
 
-const Romance = () => {
+interface Props {
+  config: DramaGenres;
+}
+
+const DramaSwiper = ({ config }: Props) => {
   const [list, setList] = useState<FeaturedItem[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [barOffset, setBarOffset] = useState(0);
@@ -42,23 +47,26 @@ const Romance = () => {
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const fetchFantasy = async () => {
-      const randomPage = Math.floor(Math.random() * 5) + 1;
-      const res = await fetch(
-        `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams({
-          api_key: API_KEY,
-          language: 'ko-KR',
-          sort_by: 'popularity.desc',
-          with_genres: '10749',
-          without_genres: '16',
-          page: String(randomPage),
-        })}`
-      );
+    const fetchDrama = async () => {
+      const results: FeaturedItem[] = [];
+      let page = Math.floor(Math.random() * 5) + 1;
 
-      const data = await res.json();
+      while (results.length < 15 && page <= 10) {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams({
+            api_key: API_KEY,
+            language: 'ko-KR',
+            sort_by: 'popularity.desc',
+            with_genres: config.genreParam,
+            without_genres: '16',
+            with_video: 'true',
+            page: String(page),
+          })}`
+        );
 
-      const results: FeaturedItem[] = await Promise.all(
-        data.results.slice(0, 8).map(async (tv: any) => {
+        const data = await res.json();
+
+        for (const tv of data.results) {
           const videoRes = await fetch(
             `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
               api_key: API_KEY,
@@ -67,36 +75,40 @@ const Romance = () => {
           );
 
           const videoData = await videoRes.json();
+
           const trailer = videoData.results?.find(
-            (v: any) => v.site === 'YouTube' && v.type === 'Trailer'
+            (v: any) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
           );
 
-          return {
+          if (!trailer) continue;
+
+          results.push({
             id: tv.id,
             title: tv.name,
             img1: tv.poster_path ? `${IMAGE_BASE}${tv.poster_path}` : '',
-            iframe: trailer
-              ? [
-                  {
-                    src: `https://www.youtube.com/embed/${trailer.key}`,
-                    title: trailer.name,
-                  },
-                ]
-              : undefined,
+            iframe: [
+              {
+                src: `https://www.youtube.com/embed/${trailer.key}`,
+                title: trailer.name,
+              },
+            ],
             desc: tv.overview,
-            category: '로맨스',
             broadcast: tv.origin_country?.join(', ') || '',
             season: tv.first_air_date ? tv.first_air_date.slice(0, 4) : '',
             age: tv.adult ? '19' : '12',
-          };
-        })
-      );
+          });
+
+          if (results.length === 15) break;
+        }
+
+        page++;
+      }
 
       setList(results);
     };
 
-    fetchFantasy();
-  }, []);
+    fetchDrama();
+  }, [config]);
 
   const activeItem = list[activeIndex];
   if (!activeItem) return null;
@@ -116,7 +128,7 @@ const Romance = () => {
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
       <div className="section-header">
         <h2 className="section-title">
-          <Link to="/drama/genre/romance">로맨스 드라마</Link>
+          <Link to={`/drama/genre/${config.genreKey}`}>{config.title}</Link>
         </h2>
 
         <div className="thumb-controls">
@@ -218,4 +230,4 @@ const Romance = () => {
   );
 };
 
-export default Romance;
+export default DramaSwiper;

@@ -113,3 +113,74 @@ export const DRAMA_FILTERS = [
     },
   },
 ];
+
+// 장르별 스와이퍼 데이터 값
+export interface DramaGenres {
+  genreKey: string;
+  title: string;
+  label: string;
+  genreParam: string;
+}
+
+export const FANTASY_CONFIG: DramaGenres = {
+  genreKey: 'fantasy',
+  title: '판타지 드라마',
+  label: '판타지',
+  genreParam: '10765',
+};
+
+export const ROMANCE_CONFIG: DramaGenres = {
+  genreKey: 'romance',
+  title: '로맨스 드라마',
+  label: '로맨스',
+  genreParam: '18,10749',
+};
+
+export const ACTION_CONFIG: DramaGenres = {
+  genreKey: 'action',
+  title: '액션/어드벤처/무협 드라마',
+  label: '액션/어드벤처/무협',
+  genreParam: '18,10759',
+};
+
+export const Comedy_CONFIG: DramaGenres = {
+  genreKey: 'comedy',
+  title: '코미디 드라마',
+  label: '코미디',
+  genreParam: '18,35',
+};
+
+export const Human_CONFIG: DramaGenres = {
+  genreKey: 'human',
+  title: '휴먼 드라마',
+  label: '휴먼',
+  genreParam: '18,10751',
+};
+
+export const Crime_CONFIG: DramaGenres = {
+  genreKey: 'crime',
+  title: '범죄/수사극 드라마',
+  label: '범죄/수사극',
+  genreParam: '18,80',
+};
+
+export const Mystery_CONFIG: DramaGenres = {
+  genreKey: 'mystery',
+  title: '미스터리 드라마',
+  label: '미스터리',
+  genreParam: '18,9648',
+};
+
+export const History_CONFIG: DramaGenres = {
+  genreKey: 'history',
+  title: '사극/역사 드라마',
+  label: '사극/역사',
+  genreParam: '18,36',
+};
+
+export const War_CONFIG: DramaGenres = {
+  genreKey: 'war',
+  title: '정치/전쟁 드라마',
+  label: '정치/전쟁',
+  genreParam: '18,10768',
+};

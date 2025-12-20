@@ -17,7 +17,7 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
       <ul className="onair-list">
         {tvs.map((tv) => (
           <li key={tv.id}>
-            <Link to={`/tv/${tv.id}`}>
+            <Link to={`/detail/${tv.id}`}>
               <div className="poster">
                 <img
                   src={
