@@ -1,4 +1,9 @@
 .contents-wrap {
+    box-sizing: border-box;
+    padding-top: 12rem;
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    max-width: 1920px;
     h2 {
         font-size: 2.6rem;
         font-weight: 700;
@@ -9,7 +14,7 @@
         margin-top: 32px;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 16px;
+        gap: 32px;
 
         .drama-card {
             position: relative;
@@ -30,18 +35,43 @@
                 border: 2px solid transparent;
                 box-sizing: border-box;
                 transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+                border: 2px solid rgba(255, 255, 255, 0.06);
+
+                // &::before {
+                //     content: '';
+                //     position: absolute;
+                //     inset: -2px;
+                //     border-radius: 16px;
+                //     background: linear-gradient(
+                //         135deg,
+                //         rgba(255, 255, 255, 0.18),
+                //         rgba(255, 255, 255, 0.04)
+                //     );
+                //     border: 1px solid rgba(255, 255, 255, 0.12);
+                //     backdrop-filter: blur(8px);
+                //     -webkit-backdrop-filter: blur(8px);
+
+                //     opacity: 0.5;
+                //     pointer-events: none;
+                //     mix-blend-mode: screen;
+                //     transition: opacity 0.4s ease;
+                // }
 
                 &::after {
                     content: '';
                     position: absolute;
-                    left: -2px;
-                    right: -2px;
-                    bottom: -2px;
-                    height: 30%;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: 45%;
+                    z-index: 0;
+                    border-bottom-left-radius: 12px;
+                    border-bottom-right-radius: 12px;
                     background: linear-gradient(
                         to top,
-                        rgba(255, 21, 60, 0.8) 0%,
-                        rgba(255, 21, 60, 0.4) 50%,
+                        rgba(255, 21, 60, 1) 0%,
+                        rgba(255, 21, 60, 0.7) 35%,
                         rgba(255, 21, 60, 0) 100%
                     );
                     opacity: 0;
@@ -58,6 +88,36 @@
                     transform-origin: center center;
                     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                     will-change: transform;
+                }
+
+                .overlay-info {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 1;
+                    padding: 10px 12px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    color: #fff;
+                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+                    opacity: 0;
+                    transform: translateY(8px);
+                    transition: opacity 0.25s ease, transform 0.25s ease;
+                    pointer-events: none;
+
+                    .overlay-title {
+                        font-size: 2.2rem;
+                        font-weight: 800;
+                        line-height: 1.3;
+                        text-shadow: 0 0 6px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.8);
+                    }
+                    .overlay-meta {
+                        font-size: 1.2rem;
+                        opacity: 0.9;
+                        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+                    }
                 }
             }
 
@@ -83,7 +143,7 @@
             &:hover {
                 z-index: 2;
                 .img-wrap {
-                    transform: scaleY(1.06);
+                    transform: scale(1.06);
                     border-color: #ff153c;
                     box-shadow: 0 8px 16px rgba(255, 21, 60, 0.2), 0 16px 32px rgba(0, 0, 0, 0.15),
                         0 24px 48px rgba(0, 0, 0, 0.1);
@@ -93,8 +153,16 @@
                         transform: scale(1.1);
                     }
 
+                    &::before {
+                        opacity: 0.75;
+                    }
+
                     img {
                         transform: scale(1.1);
+                    }
+                    .overlay-info {
+                        opacity: 1;
+                        transform: translateY(0);
                     }
                 }
                 .title {

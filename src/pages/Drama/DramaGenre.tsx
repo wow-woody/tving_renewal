@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
+import { TMDB_GENRE_MAP } from '../../data/tmdbGenreMap';
 import { useTvSeriesStore } from '../../store/useTvSeriesStore';
 import '../scss/DramaGenre.scss';
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w342';
@@ -33,12 +34,27 @@ const DramaGenre = () => {
                     <div key={tv.id} className="drama-card">
                         {tv.poster_path && (
                             <div className="drama-card-inner">
-                                <div className="img-wrap">
-                                    <img src={`${IMAGE_BASE}${tv.poster_path}`} alt={tv.name} />
-                                </div>
-                                <div className="title-wrap">
+                                <Link
+                                    to={`/drama/detail/${tv.id}`}
+                                    aria-label={`${tv.name} 상세보기`}
+                                >
+                                    <div className="img-wrap">
+                                        <img src={`${IMAGE_BASE}${tv.poster_path}`} alt={tv.name} />
+                                        <div className="overlay-info">
+                                            <p className="overlay-title">{tv.name}</p>
+                                            <p className="overlay-meta">
+                                                {(tv.genre_ids || [])
+                                                    .map((id: number) => TMDB_GENRE_MAP[id])
+                                                    .filter(Boolean)
+                                                    .slice(0, 2)
+                                                    .join(' • ')}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Link>
+                                {/* <div className="title-wrap">
                                     <p className="title">{tv.name}</p>
-                                </div>
+                                </div> */}
                             </div>
                         )}
                     </div>
