@@ -13,6 +13,8 @@ import { RankScope } from '../type/enum';
 import VOnlySection from '../components/v-only/VOnlySection';
 import VOriginalSection from '../components/v-origin/VOriginalSection';
 import MainBanner from '../components/main-banner/MainBanner';
+import ButtonBanner from '../components/button-banner/ButtonBanner';
+import TvingNew from '../components/new/TvingNew';
 import EnterFeaturedSection from '../components/enter-pop/EnterFeaturedSection';
 
 import DramaFeaturedSection from '../components/drama-pop/DramaFeaturedSection';
@@ -53,10 +55,8 @@ const Home = () => {
         </div>
       </section>
 
-      <hr />
-
       <section className="section-3">
-
+        <ButtonBanner />
       </section>
 
       <section className="section-4">
@@ -64,11 +64,7 @@ const Home = () => {
       </section>
 
       <section className="section-5">
-        <div className="title-wrap">
-          <h2 className="section-title">
-            <Link to="/">티빙 NEW! 공개 예정 콘텐츠</Link>
-          </h2>
-        </div>
+        <TvingNew />
       </section>
 
 

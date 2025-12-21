@@ -16,7 +16,7 @@ const ContentCardtop20 = ({ item, rankScope }: Props) => {
       {/* 숫자 영역 */}
       <div className="rank-box">
         {rank && (
-          <img src={`/images/rank/rank-${String(rank).padStart(2, '0')}.png`} alt={String(rank)} />
+          <img src={`/images/rank/rank-${String(rank).padStart(2, '0')}.svg`} alt={String(rank)} />
         )}
       </div>
 

@@ -76,20 +76,20 @@
     max-width: 1920px;
     margin: 0 auto;
 
-    hr {
-        border: none;
-        height: 1px;
-        background: #5c5c5c;
-    }
+    // hr {
+    //     border: none;
+    //     height: 1px;
+    //     background: #5c5c5c;
+    // }
 
-    .section-title {
-        font-size: 3.6rem;
-        font-weight: 800;
-        color: #fff;
+    // .section-title {
+    //     font-size: 3.6rem;
+    //     font-weight: 800;
+    //     color: #fff;
 
-        position: relative;
-        z-index: 5;
-    }
+    //     position: relative;
+    //     z-index: 5;
+    // }
 
     .section-1 {
         padding-left: 10.8rem;
@@ -111,35 +111,6 @@
         }
     }
 
-    .section-2 {
-        width: 100%;
-
-        border: 1px solid red;
-
-        // padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
-
-        overflow-x: hidden;
-
-        .section2-inner {
-            padding-left: 10.8rem;
-
-            .link-container {
-                display: flex;
-                gap: 12px;
-
-                div {
-                    width: 212px;
-                    height: 80px;
-                    background: #ff153c;
-
-                    flex-shrink: 0;
-                }
-            }
-        }
-    }
-
     .section-3 {
         padding-left: 10.8rem;
         padding-top: 112px;}
@@ -154,79 +125,10 @@
     }
 
     .section-5 {
-        width: 100%;
-        padding-top: 128px;
-        @include title-wrap();
-
-        .title-wrap {
-            padding-left: 10.8rem;
-        }
-
-        .new-container {
-            padding-top: 76px;
-
-            display: flex;
-            gap: 35px;
-
-            overflow: hidden;
-
-            height: clamp(400px, 32vw, 576px);
-
-            .new-wrap {
-                height: 100%;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                gap: 22px;
-
-                .img-wrap {
-                    height: 74%;
-                    width: 100%;
-                    aspect-ratio: 16/9;
-                    border-radius: 16.67px;
-
-                    background: #ff153c;
-                }
-
-                .new-title {
-                    height: 26%;
-
-                    display: flex;
-                    gap: 24px;
-                    align-items: flex-start;
-                    padding: 0 0.4% 20px;
-
-                    .title-img {
-                        max-height: 84px;
-                        height: 4.375vw; // 1920px 기준 84px로 설정
-                        min-height: 64px; // 최소 높이도 명확히 지정
-
-                        // min-width: 170px;
-
-                        img {
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    }
-
-                    .sub-title {
-                        font-size: 2.2rem;
-                        font-weight: 700;
-                        color: #fff;
-                    }
-                }
-
-                &:nth-child(even) {
-                    flex-direction: column-reverse;
-
-                    .new-title {
-                        align-items: flex-end;
-                        padding: 20px 0.4% 0;
-                    }
-                }
-            }
-        }
+    //    padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 70px;
+        padding-bottom: 70px;
     }
 
     .section-6 {

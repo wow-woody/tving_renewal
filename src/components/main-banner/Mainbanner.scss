@@ -95,12 +95,12 @@
 /* ================================
    Active State
 ================================ */
-.swiper-pagination-bullet-active {
+.mainbanner .swiper-pagination-bullet-active {
     color: #fff;
     font-weight: 800;
 }
 
-.swiper-pagination-bullet-active .pager-progress {
+.mainbanner .swiper-pagination-bullet-active .pager-progress {
     animation: progressBar 3s linear forwards;
 }
 
