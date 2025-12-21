@@ -25,8 +25,7 @@ import LiveNews from '../components/news-live/LiveNews';
 import { liveChannels } from '../data/LiveChannels';
 import MyLive from '../components/my-live/MyLive';
 import SportsLive from '../components/sports-live/SportsLive';
-import ButtonBanner from '../components/button-banner/ButtonBanner';
-import TvingNew from '../components/new/TvingNew';
+
 
 
 
