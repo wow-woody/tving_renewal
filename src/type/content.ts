@@ -1,7 +1,7 @@
 import type { AgeRating, Category, TvingBadge, RankScope, Genre } from './enum';
 
-export interface Content {
-  id: number;
+export interface Content<NId = number> {
+    id: NId;
   title: string;
 
   img1: string;
