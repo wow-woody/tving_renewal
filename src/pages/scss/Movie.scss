@@ -1,0 +1,87 @@
+@use '../../App.scss' as g;
+
+.contents-wrap {
+  padding-top: 12rem;
+
+  .section-1 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: clamp(20px, 2.5vw, 46px);
+
+    h2 {
+      font-size: 2.6rem;
+      color: #fff;
+      margin-bottom: 2.4rem;
+    }
+
+    .sub-container {
+      position: relative;
+      min-width: 833px;
+      aspect-ratio: 1788/732;
+      border-radius: 1.4rem;
+      background: rgb(26, 34, 61);
+    }
+  }
+
+  .section-2 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 3rem;
+
+    .enter-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      .filter-item {
+        padding: 10px 24px;
+        border: 1px solid #5c5c5c;
+        @include g.boxshadow;
+        border-radius: 50px;
+        color: #fff;
+        font-size: 1.6rem;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+
+        &:hover {
+          border-color: #ff153c;
+          background: rgba(255, 21, 60, 0.1);
+        }
+
+        &.active {
+          border-color: #ff153c;
+          background: #ff153c;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .section-popular {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-upcoming {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-movieSwiper {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 4rem;
+  }
+
+  .movie-voriginal {
+    margin-bottom: 4rem;
+  }
+
+  .section-appletv {
+    margin-bottom: 4rem;
+  }
+}

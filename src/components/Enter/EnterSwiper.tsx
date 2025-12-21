@@ -6,7 +6,7 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import '../drama-pop/DramaFeaturedSection.scss';
+import './scss/EnterSwiper.scss';
 import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';
 import type { EnterGenres } from '../../data/EnterFilters';
@@ -200,7 +200,7 @@ const EnterSwiper = ({ config }: Props) => {
 
   return (
     <section
-      className="drama-featured-section"
+      className="enter-featured-section"
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
       <div className="section-header">
         <h2 className="section-title">

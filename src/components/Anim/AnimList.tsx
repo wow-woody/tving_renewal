@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { useTvSeriesStore } from '../../store/useTvSeriesStore';
+import { useAnimStore } from '../../store/useAnimStore';
 import { useEffect, useRef, useState } from 'react';
-import VideoPopup from '../../components/Drama/VideoPopup';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -9,20 +8,21 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import './scss/DramaList.scss';
+import './scss/AnimList.scss';
+import VideoPlay from '../Drama/VideoPlay';
 
-const DramaList = () => {
+const AnimList = () => {
   const { id } = useParams<{ id: string }>();
 
   const {
-    tvDetail,
+    animDetail,
     episodes,
     videos,
-    onFetchTvDetail,
+    onFetchAnimDetail,
     onFetchSeasons,
     onFetchEpisodes,
-    onFetchTvVideos,
-  } = useTvSeriesStore();
+    onFetchAnimVideos,
+  } = useAnimStore();
 
   const [showPopup, setShowPopup] = useState(false);
   const [youtubeKey, setYoutubeKey] = useState('');
@@ -33,10 +33,10 @@ const DramaList = () => {
 
   useEffect(() => {
     if (!id) return;
-    onFetchTvDetail(id);
+    onFetchAnimDetail(id);
     onFetchSeasons(id);
     onFetchEpisodes(id, 1);
-    onFetchTvVideos(id);
+    onFetchAnimVideos(id);
   }, [id]);
 
   const handleVideoOpen = () => {
@@ -47,11 +47,11 @@ const DramaList = () => {
     setShowPopup(true);
   };
 
-  if (!tvDetail) return <p>tv 정보 불러오는 중</p>;
+  if (!animDetail) return <p>애니메이션 정보 불러오는 중</p>;
 
   return (
-    <section className="dramaList-wrap">
-      <h2>{tvDetail.name}</h2>
+    <section className="animList-wrap">
+      <h2>{animDetail.name}</h2>
 
       {/* ▶ 에피소드 Swiper */}
       <div className="episode-swiper">
@@ -96,9 +96,9 @@ const DramaList = () => {
         </Swiper>
       </div>
 
-      {showPopup && <VideoPopup youtubeKey={youtubeKey} onClose={() => setShowPopup(false)} />}
+      {showPopup && <VideoPlay youtubeKey={youtubeKey} onClose={() => setShowPopup(false)} />}
     </section>
   );
 };
 
-export default DramaList;
+export default AnimList;

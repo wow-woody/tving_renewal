@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { SearchResult } from '../../store/useSearchStore';
 import './SearchDropdown.scss';
 
@@ -10,6 +10,7 @@ interface SearchDropdownProps {
     selectedIndex?: number;
     onNavigate?: (result: SearchResult) => void;
     onIndexChange?: (index: number) => void;
+    searchQuery?: string;
 }
 
 const SearchDropdown: React.FC<SearchDropdownProps> = ({
@@ -19,8 +20,10 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
     selectedIndex = -1,
     onNavigate,
     onIndexChange,
+    searchQuery = '',
 }) => {
     const selectedItemRef = useRef<HTMLAnchorElement>(null);
+    const navigate = useNavigate();
 
     // 선택된 항목이 변경될 때 스크롤
     useEffect(() => {
@@ -112,6 +115,19 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
                     </Link>
                 ))}
             </div>
+            {results.length > 0 && searchQuery && (
+                <div className="search-footer">
+                    <button
+                        className="view-all-btn"
+                        onClick={() => {
+                            navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+                            onClose();
+                        }}
+                    >
+                        모든 결과 보기 ({results.length})
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

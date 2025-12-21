@@ -32,13 +32,18 @@ interface TvSeriesStore {
   filteredTvs: TV[];
   tvDetail: TvDetail | null;
   episodes: any[];
-  
+  episodesBySeason: Record<number, any[]>;
+
   // 엔터 관련 상태
   enters: TV[];
   koEnters: TV[];
   filteredEnters: TV[];
   enterDetail: TvDetail | null;
-  
+
+  // 애니 관련 상태
+  anims: TV[];
+  filteredAnims: TV[];
+
   onFetchTvs: () => Promise<void>;
   onFetchKoTvs: () => Promise<void>;
   onFetchTvDetail: (id: string) => Promise<void>;
@@ -48,12 +53,16 @@ interface TvSeriesStore {
   onFetchByFilter: (params: Record<string, string>) => Promise<void>;
   onFetchSeasons: (id: string) => Promise<void>;
   onFetchEpisodes: (id: string, season: number) => Promise<void>;
-  
+
   // 엔터 관련 함수
   onFetchEnters: () => Promise<void>;
   onFetchKoEnters: () => Promise<void>;
   onFetchEnterDetail: (id: string) => Promise<void>;
   onFetchEnterByFilter: (params: Record<string, string>) => Promise<void>;
+
+  // 애니 관련 함수
+  onFetchAnims: () => Promise<void>;
+  onFetchAnimByFilter: (params: Record<string, string>) => Promise<void>;
 }
 
 export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
@@ -65,12 +74,17 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
   videos: [],
   filteredTvs: [],
   tvDetail: null,
-  
+
   // 엔터 관련 초기 상태
   enters: [],
   koEnters: [],
   filteredEnters: [],
   enterDetail: null,
+  episodesBySeason: {},
+
+  // 애니 관련 초기 상태
+  anims: [],
+  filteredAnims: [],
 
   // 드라마 장르
   onFetchTvs: async () => {
@@ -179,7 +193,7 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
       `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=18&with_status=0&with_original_language=ko&sort_by=popularity.desc&language=ko-KR`
     );
     const data = await res.json();
-    console.log('한국방영중', data.results);
+    // console.log('한국방영중', data.results);
     set({ onairko: data.results });
   },
 
@@ -243,7 +257,12 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
     );
     const data = await res.json();
     console.log('에피소드', data.episodes);
-    set({ episodes: data.episodes });
+    set((state) => ({
+      episodesBySeason: {
+        ...state.episodesBySeason,
+        [season]: data.episodes || [],
+      },
+    }));
   },
 
   // 엔터 관련 함수들
@@ -336,5 +355,30 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
 
     const data = await res.json();
     set({ filteredEnters: data.results });
+  },
+
+  // 애니메이션 가져오기
+  onFetchAnims: async () => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=16&sort_by=popularity.desc&language=ko-KR`
+    );
+    const data = await res.json();
+    set({ anims: data.results });
+  },
+
+  // 애니메이션 필터링
+  onFetchAnimByFilter: async (params) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams({
+        api_key: API_KEY,
+        language: 'ko-KR',
+        sort_by: 'popularity.desc',
+        with_genres: '16',
+        ...params,
+      })}`
+    );
+
+    const data = await res.json();
+    set({ filteredAnims: data.results });
   },
 }));

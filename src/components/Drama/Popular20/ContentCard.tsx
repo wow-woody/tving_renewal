@@ -14,7 +14,7 @@ const ContentCard = ({ id, title, img1, order }: Props) => {
       {order && (
         <div className="rank-box">
           <img
-            src={`/images/rank/rank-${String(order).padStart(2, '0')}.png`}
+            src={`/images/rank/rank-${String(order).padStart(2, '0')}.svg`}
             alt={`rank-${order}`}
           />
         </div>

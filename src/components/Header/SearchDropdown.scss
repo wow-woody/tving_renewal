@@ -141,3 +141,34 @@
         background: rgba(255, 255, 255, 0.25);
     }
 }
+
+.search-footer {
+    padding: 1.6rem;
+    border-top: 1px solid #373737;
+    background: #1a1a1a;
+    position: sticky;
+    bottom: 0;
+    
+    .view-all-btn {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #ff153c 0%, #d01030 100%);
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background: linear-gradient(135deg, #ff2a50 0%, #e02040 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 21, 60, 0.4);
+        }
+        
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}

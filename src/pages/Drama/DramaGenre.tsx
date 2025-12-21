@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
 import { useTvSeriesStore } from '../../store/useTvSeriesStore';
-
+import '../scss/DramaGenre.scss'
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w342';
 
 const DramaGenre = () => {
@@ -32,7 +32,9 @@ const DramaGenre = () => {
         {filteredTvs.map((tv) => (
           <div key={tv.id} className="drama-card">
             {tv.poster_path && <img src={`${IMAGE_BASE}${tv.poster_path}`} alt={tv.name} />}
-            <p className="title">{tv.name}</p>
+            <div className="title-wrap">
+              <p className="title">{tv.name}</p>
+            </div>
           </div>
         ))}
       </div>
