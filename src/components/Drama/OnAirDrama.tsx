@@ -6,7 +6,7 @@ import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import './OnAirDrama.scss';
+import './scss/OnAirDrama.scss';
 
 import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';

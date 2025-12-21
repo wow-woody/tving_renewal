@@ -221,7 +221,7 @@ const DramaSwiper = ({ config }: Props) => {
               </p>
               <p className="broadcast">{tvDetail.networks?.map((n) => n.name).join(', ')}</p>
               <p className="season">{tvDetail.seasonText}</p>
-              <p className="genre">{tvDetail.genreNames.join(' · ')}</p>
+              <p className="genre">드라마</p>
               <span className="desc">{tvDetail.overview}</span>
             </Link>
           )}

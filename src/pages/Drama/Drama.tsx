@@ -60,7 +60,7 @@ const Drama = () => {
       <section className="section-dramaSwiper">
         <Popular20 />
       </section>
-      <section className="section-5">
+      <section className="drama-voriginal">
         <VOriginalSection />
       </section>
       <section className="section-dramaSwiper">
