@@ -60,20 +60,21 @@ const DramaSimilar = () => {
           <div className="similar-title">
             <h3>비슷한 콘텐츠</h3>
           </div>
-        </div>
 
-        <div className="thumb-controls">
-          <div className="enter-pagination" ref={trackRef}>
-            <div className="pagenation-line" />
-            <div className="pointer-line" ref={barRef} />
-          </div>
-          <div className="enter-nav">
-            <button ref={prevRef} className="nav-btn prev">
-              ‹
-            </button>
-            <button ref={nextRef} className="nav-btn next">
-              ›
-            </button>
+
+          <div className="thumb-controls">
+            <div className="enter-pagination" ref={trackRef}>
+              <div className="pagenation-line" />
+              <div className="pointer-line" ref={barRef} />
+            </div>
+            <div className="enter-nav">
+              <button ref={prevRef} className="nav-btn prev">
+                ‹
+              </button>
+              <button ref={nextRef} className="nav-btn next">
+                ›
+              </button>
+            </div>
           </div>
         </div>
 

@@ -1,20 +1,22 @@
 .dramaList-wrap {
-  padding-left: 100px;
+  padding: 60px 0;
 }
 
 .episode-swiper {
   position: relative;
-}
 
-.season-section {
-  margin-bottom: 60px;
+  .swiper-slide {
+    width: auto;
+  }
 }
 
 .season-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 62px;
 }
 
 .season-title {
@@ -22,18 +24,18 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  height: 38px;
 
   h3 {
     color: #fff;
-    font-size: 24px;
-    margin: 0;
+    font-size: 36px;
   }
 
   .season-dropdown-btn {
     background: transparent;
     border: none;
     color: #fff;
-    font-size: 16px;
+    font-size: 24px;
     cursor: pointer;
     padding: 4px 8px;
     transition: transform 0.2s;
@@ -56,7 +58,7 @@
       border-radius: 4px;
       color: #fff;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 24px;
       white-space: nowrap;
       transition: all 0.2s;
       opacity: 0;
@@ -80,6 +82,33 @@
       }
     }
   }
+
+  .thumb-controls {
+    .enter-pagination {
+      position: relative;
+      width: 200px;
+      height: 2px;
+    }
+
+    .pagenation-line {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .pointer-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: #fff;
+
+      transform: translateX(var(--enter-progress));
+      transition: transform 0.2s ease-out;
+    }
+  }
+
 }
 
 @keyframes slideInItem {
@@ -87,6 +116,7 @@
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -94,8 +124,8 @@
 }
 
 /* 유튜브 가로 카드 */
-.episode-card.wide {
-  display: flex;
+.episode-card {
+  width: 680px;
 }
 
 .episode-card .thumb {
@@ -149,5 +179,24 @@
 }
 
 .episode-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  margin-top: 1.6rem;
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  .ep-overview {
+    font-size: 1.6rem;
+  }
+
+  .ep-data {
+    font-size: 1.4rem;
+    color: #919191;
+  }
+
   color: #fff;
 }

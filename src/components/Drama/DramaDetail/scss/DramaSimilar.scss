@@ -1,5 +1,5 @@
 .dramaSimilar-wrap {
-  padding-left: 80px;
+  padding: 60px 0;
 
   .similar-section {
     margin-bottom: 60px;
@@ -7,16 +7,15 @@
 
   .similar-header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 62px;
   }
 
   .similar-title {
     h3 {
-      color: #fff;
-      font-size: 24px;
-      margin: 0;
+    color: #fff;
+    font-size: 36px;
     }
   }
 
@@ -25,7 +24,6 @@
     display: flex;
     align-items: flex-end;
     gap: 12px;
-    margin-bottom: 20px;
   }
 
   .enter-pagination {

@@ -16,9 +16,10 @@ const DramaTrail = () => {
   const { id } = useParams<{ id: string }>();
   const { videos, onFetchTvVideos } = useTvSeriesStore();
 
-  const [barOffset, setBarOffset] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedVideoKey, setSelectedVideoKey] = useState('');
+
+  const [barOffset, setBarOffset] = useState(0);
 
   const swiperRef = useRef<SwiperType | null>(null);
   const barRef = useRef<HTMLDivElement | null>(null);
@@ -33,9 +34,11 @@ const DramaTrail = () => {
 
   const updateBar = (prog: number) => {
     if (!trackRef.current || !barRef.current) return;
+
     const track = trackRef.current.clientWidth;
     const bar = barRef.current.clientWidth;
     const maxLeft = Math.max(track - bar, 0);
+
     setBarOffset(Math.min(Math.max(prog, 0), 1) * maxLeft);
   };
 
@@ -55,46 +58,49 @@ const DramaTrail = () => {
           <div className="season-title">
             <h3>관련 영상 (총 {videos.length}개)</h3>
           </div>
-        </div>
 
-        <div className="thumb-controls">
-          <div className="enter-pagination" ref={trackRef}>
-            <div className="pagenation-line" />
-            <div className="pointer-line" ref={barRef} />
-          </div>
-          <div className="enter-nav">
-            <button ref={prevRef} className="nav-btn prev">
-              ‹
-            </button>
-            <button ref={nextRef} className="nav-btn next">
-              ›
-            </button>
+          <div className="thumb-controls">
+            <div className="enter-pagination" ref={trackRef}>
+              <div className="pagenation-line" />
+              <div className="pointer-line" ref={barRef} />
+            </div>
+            <div className="enter-nav">
+              <button ref={prevRef} className="nav-btn prev">
+                ‹
+              </button>
+              <button ref={nextRef} className="nav-btn next">
+                ›
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="episode-swiper">
           <Swiper
             modules={[Navigation]}
-            slidesPerView={3.8}
+            slidesPerView={3.8}   // ← 여기만 상황별로 변경
             spaceBetween={16}
             navigation
             onBeforeInit={(swiper) => {
+              // TS 에러 방지용
               // @ts-expect-error HTMLElement OK
               swiper.params.navigation.prevEl = prevRef.current;
               // @ts-expect-error HTMLElement OK
               swiper.params.navigation.nextEl = nextRef.current;
             }}
-            onSwiper={(s) => {
-              swiperRef.current = s;
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
               updateBar(0);
             }}
             onSlideChange={(swiper) => {
-              const total = videos.length;
+              const total = swiper.slides.length;
               const visible = Number(swiper.params.slidesPerView) || 1;
               const maxIndex = Math.max(total - visible, 1);
+
               updateBar(swiper.realIndex / maxIndex);
             }}
-            onProgress={(_, prog) => updateBar(prog)}>
+          >
+
             {videos.map((video) => (
               <SwiperSlide key={video.id}>
                 <div className="episode-card">

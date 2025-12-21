@@ -1,5 +1,5 @@
 .dramaTrail-wrap {
-  padding-left: 80px;
+  padding: 60px 0;
 
   .season-section {
     margin-bottom: 60px;
@@ -8,15 +8,15 @@
   .season-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 62px;
+    gap:8px;
   }
 
   .season-title {
+    
     h3 {
-      color: #fff;
-      font-size: 24px;
-      margin: 0;
+    color: #fff;
+    font-size: 36px;
     }
   }
 
@@ -130,7 +130,7 @@
 
     .episode-title {
       color: #fff;
-      margin-top: 12px;
+      margin-top: 16px;
 
       h3 {
         font-size: 16px;

@@ -22,8 +22,8 @@ const DramaDeBanner = () => {
   const backdropUrl = tvDetail.backdrop
     ? `https://image.tmdb.org/t/p/original${tvDetail.backdrop}`
     : tvDetail.poster_path
-    ? `https://image.tmdb.org/t/p/original${tvDetail.poster_path}`
-    : '';
+      ? `https://image.tmdb.org/t/p/original${tvDetail.poster_path}`
+      : '';
 
   return (
     <>
@@ -61,17 +61,23 @@ const DramaDeBanner = () => {
           <div className="detail-overview">
             <p>{tvDetail.overview}</p>
           </div>
-          <div>
-            {tvDetail.directors?.length > 0 && (
-              <p>
-                <strong>연출</strong> {tvDetail.directors.join(', ')}
-              </p>
-            )}
-            {tvDetail.casts?.length > 0 && (
-              <p>
-                <strong>출연</strong> {tvDetail.casts.join(', ')}
-              </p>
-            )}
+          <div className='detail-people'>
+            <div className="directors">
+              {tvDetail.directors?.length > 0 && (
+                <>
+                  <p>연출</p>
+                  <p>{tvDetail.directors.join(', ')}</p>
+                </>
+              )}
+            </div>
+            <div className="casts">
+              {tvDetail.casts?.length > 0 && (
+                <>
+                  <p>출연</p>
+                  <p>{tvDetail.casts.join(', ')}</p>
+                </>
+              )}
+            </div>
           </div>
           <div className="detail-btn">
             <div onClick={() => setPlayVideo(true)}>play</div>

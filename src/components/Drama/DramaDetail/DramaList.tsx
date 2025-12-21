@@ -145,9 +145,8 @@ const DramaList = () => {
                     .map((s) => (
                       <button
                         key={s.id}
-                        className={`season-menu-item ${
-                          s.season_number === selectedSeasonNumber ? 'active' : ''
-                        }`}
+                        className={`season-menu-item ${s.season_number === selectedSeasonNumber ? 'active' : ''
+                          }`}
                         onClick={() => selectSeason(s.season_number)}>
                         {s.name}
                       </button>
@@ -155,58 +154,53 @@ const DramaList = () => {
                 </div>
               )}
             </div>
-          </div>
-          <div className="thumb-controls">
-            <div
-              className="enter-pagination"
-              ref={(el) => setSeasonRef(selectedSeasonNumber, 'track', el)}>
-              <div className="pagenation-line" />
+            <div className="thumb-controls">
               <div
-                className="pointer-line"
-                ref={(el) => setSeasonRef(selectedSeasonNumber, 'bar', el)}
-              />
-            </div>
-            <div className="enter-nav">
-              <button
-                ref={(el) => setSeasonRef(selectedSeasonNumber, 'prev', el)}
-                className="nav-btn prev">
-                ‹
-              </button>
-              <button
-                ref={(el) => setSeasonRef(selectedSeasonNumber, 'next', el)}
-                className="nav-btn next">
-                ›
-              </button>
+                className="enter-pagination"
+                ref={(el) => setSeasonRef(selectedSeasonNumber, 'track', el)}>
+                <div className="pagenation-line" />
+                <div
+                  className="pointer-line"
+                  ref={(el) => setSeasonRef(selectedSeasonNumber, 'bar', el)}
+                />
+              </div>
+              <div className="enter-nav">
+                <button
+                  ref={(el) => setSeasonRef(selectedSeasonNumber, 'prev', el)}
+                  className="nav-btn prev">
+                  ‹
+                </button>
+                <button
+                  ref={(el) => setSeasonRef(selectedSeasonNumber, 'next', el)}
+                  className="nav-btn next">
+                  ›
+                </button>
+              </div>
             </div>
           </div>
 
           <div className="episode-swiper">
             <Swiper
-              key={selectedSeasonNumber}
-              modules={[Navigation]}
-              slidesPerView={3.8}
+              slidesPerView="auto"
               spaceBetween={16}
-              navigation
-              onBeforeInit={(swiper) => {
-                const refs = navigationRefs.current[selectedSeasonNumber];
-                if (refs) {
-                  // @ts-expect-error HTMLElement OK
-                  swiper.params.navigation.prevEl = refs.prev;
-                  // @ts-expect-error HTMLElement OK
-                  swiper.params.navigation.nextEl = refs.next;
-                }
+              modules={[Navigation]}
+              navigation={{
+                prevEl: navigationRefs.current[selectedSeasonNumber]?.prev ?? undefined,
+                nextEl: navigationRefs.current[selectedSeasonNumber]?.next ?? undefined,
               }}
-              onSwiper={(s) => {
-                setSeasonRef(selectedSeasonNumber, 'swiper', s);
+              onSwiper={(swiper) => {
+                setSeasonRef(selectedSeasonNumber, 'swiper', swiper);
+
+                // 네비게이션 다시 초기화 (중요)
+                requestAnimationFrame(() => {
+                  swiper.navigation.init();
+                  swiper.navigation.update();
+                });
+
                 updateBar(selectedSeasonNumber, 0);
               }}
-              onSlideChange={(swiper) => {
-                const total = episodes.length;
-                const visible = Number(swiper.params.slidesPerView) || 1;
-                const maxIndex = Math.max(total - visible, 1);
-                updateBar(selectedSeasonNumber, swiper.realIndex / maxIndex);
-              }}
-              onProgress={(_, prog) => updateBar(selectedSeasonNumber, prog)}>
+            >
+              
               {episodes.map((ep) => {
                 const isUpcoming = ep.air_date && new Date(ep.air_date) > new Date();
                 const episodeImage = isUpcoming
@@ -233,8 +227,8 @@ const DramaList = () => {
                         <h3>
                           {ep.episode_number}. {ep.name}
                         </h3>
-                        <p>{ep.overview}</p>
-                        <p>
+                        <p className='ep-overview'>{ep.overview}</p>
+                        <p className='ep-data'>
                           {ep.air_date} · {isUpcoming ? '방영예정' : `${ep.runtime}분`}
                         </p>
                       </div>
