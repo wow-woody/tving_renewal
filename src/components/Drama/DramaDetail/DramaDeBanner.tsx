@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useTvSeriesStore } from '../../store/useTvSeriesStore';
+import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
 import { useParams } from 'react-router-dom';
-import './scss/DramaDeBanner.scss';
+import '../scss/DramaDeBanner.scss';
 
 const DramaDeBanner = () => {
   const { id } = useParams<{ id: string }>();

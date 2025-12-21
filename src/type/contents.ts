@@ -53,6 +53,9 @@ export interface MovieState {
   tvs: TV[];
   seasons: Season[];
   episodes: Episodes[];
+
+  // episodesBySeason: Record<number, any[]>;
+
   onFetchPopular: () => Promise<void>;
   onFetchVideo: (id: string) => Promise<Video[]>;
   onFetchTvs: () => Promise<void>;

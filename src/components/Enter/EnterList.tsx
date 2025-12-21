@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useTvSeriesStore } from '../../store/useTvSeriesStore';
 import { useEffect, useRef, useState } from 'react';
-import VideoPopup from '../../components/Drama/VideoPopup';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -10,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import './scss/EnterList.scss';
+import VideoPlay from '../Drama/VideoPlay';
 
 const EnterList = () => {
   const { id } = useParams<{ id: string }>();
@@ -96,7 +96,7 @@ const EnterList = () => {
         </Swiper>
       </div>
 
-      {showPopup && <VideoPopup youtubeKey={youtubeKey} onClose={() => setShowPopup(false)} />}
+      {showPopup && <VideoPlay youtubeKey={youtubeKey} onClose={() => setShowPopup(false)} />}
     </section>
   );
 };

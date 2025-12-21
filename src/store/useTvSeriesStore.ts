@@ -32,13 +32,13 @@ interface TvSeriesStore {
   filteredTvs: TV[];
   tvDetail: TvDetail | null;
   episodes: any[];
-  
+
   // 엔터 관련 상태
   enters: TV[];
   koEnters: TV[];
   filteredEnters: TV[];
   enterDetail: TvDetail | null;
-  
+
   onFetchTvs: () => Promise<void>;
   onFetchKoTvs: () => Promise<void>;
   onFetchTvDetail: (id: string) => Promise<void>;
@@ -48,7 +48,7 @@ interface TvSeriesStore {
   onFetchByFilter: (params: Record<string, string>) => Promise<void>;
   onFetchSeasons: (id: string) => Promise<void>;
   onFetchEpisodes: (id: string, season: number) => Promise<void>;
-  
+
   // 엔터 관련 함수
   onFetchEnters: () => Promise<void>;
   onFetchKoEnters: () => Promise<void>;
@@ -65,12 +65,13 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
   videos: [],
   filteredTvs: [],
   tvDetail: null,
-  
+
   // 엔터 관련 초기 상태
   enters: [],
   koEnters: [],
   filteredEnters: [],
   enterDetail: null,
+  episodesBySeason: {},
 
   // 드라마 장르
   onFetchTvs: async () => {
@@ -179,7 +180,7 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
       `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=18&with_status=0&with_original_language=ko&sort_by=popularity.desc&language=ko-KR`
     );
     const data = await res.json();
-    console.log('한국방영중', data.results);
+    // console.log('한국방영중', data.results);
     set({ onairko: data.results });
   },
 
@@ -243,7 +244,12 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
     );
     const data = await res.json();
     console.log('에피소드', data.episodes);
-    set({ episodes: data.episodes });
+    set((state) => ({
+      episodesBySeason: {
+        ...state.episodesBySeason,
+        [season]: data.episodes || [],
+      },
+    }));
   },
 
   // 엔터 관련 함수들
