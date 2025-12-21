@@ -14,6 +14,8 @@ export interface MediaBase {
 export interface Movie extends MediaBase {
   title: string;
   release_date: string;
+  genre_ids?: number[];
+  original_language?: string;
 }
 
 //video 타입

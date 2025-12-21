@@ -4,13 +4,12 @@ interface Props {
   id: number;
   title: string;
   img1: string;
-  order?: number; // ✅ 1,2,3…
+  order?: number;
 }
 
-const ContentCard = ({ id, title, img1, order }: Props) => {
+const MovieCard = ({ id, title, img1, order }: Props) => {
   return (
-    <Link to={`/detail/${id}`} className="rank-card">
-      {/* 랭킹 이미지 */}
+    <Link to={`/movie/${id}`} className="rank-card">
       {order && (
         <div className="rank-box">
           <img
@@ -20,7 +19,6 @@ const ContentCard = ({ id, title, img1, order }: Props) => {
         </div>
       )}
 
-      {/* 포스터 */}
       <div className="poster-box">
         <img className="img1" src={img1} alt={title} />
       </div>
@@ -28,4 +26,4 @@ const ContentCard = ({ id, title, img1, order }: Props) => {
   );
 };
 
-export default ContentCard;
+export default MovieCard;

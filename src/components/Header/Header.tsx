@@ -152,7 +152,7 @@ const Header = () => {
                 <Link to="/enter">예능</Link>
               </li>
               <li>
-                <Link to="/">영화</Link>
+                <Link to="/movie">영화</Link>
               </li>
               <li>
                 <Link to="/sport">스포츠</Link>

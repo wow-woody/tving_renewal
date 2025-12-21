@@ -26,6 +26,9 @@ import AnimGenre from './pages/Anim/AnimGenre';
 import AnimDetail from './pages/Anim/AnimDetail';
 import SearchResults from './pages/Search/SearchResults';
 import PersonDetail from './pages/Person/PersonDetail';
+import Movie from './pages/Moives/Moive';
+import MovieDetail from './pages/Moives/MovieDetail';
+import MovieGenre from './pages/Moives/MovieGenre';
 
 function App() {
   const location = useLocation();
@@ -91,7 +94,10 @@ function App() {
         <Route path="/subscription/payment/check" element={<SubscriptionCheck />} />
         <Route path="/subscription/payment" element={<SubscriptionPayment />} />
         <Route path="/live" element={<LivePage />} />
-        <Route path='/sport' element={<SportBanner />} />
+        <Route path="/sport" element={<SportBanner />} />
+        <Route path="/movie" element={<Movie />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/movie/genre/:key" element={<MovieGenre />} />
       </Routes>
 
       {!hideFooter && <Footer />}
