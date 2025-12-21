@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
+import { useWatchHistoryStore } from '../../../store/useWatchHistoryStore';
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import VideoPlay from '../VideoPlay';
@@ -24,6 +25,8 @@ const DramaList = () => {
     onFetchEpisodes,
     onFetchTvVideos,
   } = useTvSeriesStore();
+
+  const { onAddWatchHistory } = useWatchHistoryStore();
 
   const [showPopup, setShowPopup] = useState(false);
   const [youtubeKey, setYoutubeKey] = useState('');
@@ -98,6 +101,26 @@ const DramaList = () => {
   };
 
   const handleVideoOpen = (episodeId: number) => {
+    // 시청 내역에 추가 (재생 버튼 클릭 시 무조건 추가)
+    if (tvDetail) {
+      const episode = episodes.find((ep) => ep.id === episodeId);
+      onAddWatchHistory({
+        id: tvDetail.id,
+        name: tvDetail.name,
+        poster_path: tvDetail.poster_path,
+        backdrop_path: tvDetail.backdrop_path || '',
+        overview: tvDetail.overview || '',
+        vote_average: tvDetail.vote_average || 0,
+        adult: tvDetail.adult || false,
+        cAge: tvDetail.cAge || '',
+        logo: tvDetail.logo || '',
+        media_type: 'tv',
+        episodeNumber: episode?.episode_number,
+        seasonNumber: selectedSeasonNumber,
+      });
+    }
+
+    // 트레일러가 있으면 비디오 팝업 표시
     const trailer = videos.find((v) => v.type === 'Trailer' && v.site === 'YouTube');
     if (!trailer) return;
 

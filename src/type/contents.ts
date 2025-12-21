@@ -71,6 +71,7 @@ export interface HeartItem extends MediaBase {
   title?: string;
   name?: string;
   poster_path: string;
+  media_type?: 'tv' | 'movie';
 }
 
 //zustand 관리에 대한 상태 타입 정의
@@ -79,4 +80,24 @@ export interface HeartState {
   onToggleHeart: (movie: HeartItem) => Promise<void>;
   onFetchHeart: () => Promise<void>;
   onResetHeart: () => void;
+}
+
+// 시청 내역 타입
+export interface WatchHistoryItem extends MediaBase {
+  title?: string;
+  name?: string;
+  poster_path: string;
+  media_type?: 'tv' | 'movie';
+  watchedAt: string;
+  episodeNumber?: number;
+  seasonNumber?: number;
+}
+
+// 시청 내역 상태 타입
+export interface WatchHistoryState {
+  watchHistory: WatchHistoryItem[];
+  onAddWatchHistory: (item: Omit<WatchHistoryItem, 'watchedAt'>) => Promise<void>;
+  onRemoveWatchHistory: (id: number) => Promise<void>;
+  onFetchWatchHistory: () => Promise<void>;
+  onResetWatchHistory: () => void;
 }

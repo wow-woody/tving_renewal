@@ -1,4 +1,4 @@
-.movie-banner {
+.drama-banner {
   position: relative;
   width: 100%;
   height: 75rem;
@@ -38,11 +38,19 @@
   .banner-content {
     position: absolute;
     bottom: 6rem;
-    left: 10.8rem;
+    left: 10.5rem;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 3.6rem;
+    gap: 3.2rem;
+  }
+
+  .v-original-badge {
+    width: auto;
+    height: 3rem;
+    object-fit: contain;
+    align-self: flex-start;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
   }
 
   .banner-logo {
@@ -76,7 +84,7 @@
     font-weight: bold;
     text-decoration: none;
     border: 2px solid #fff;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: all 0.3s;
     align-self: flex-start;
 
