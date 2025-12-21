@@ -19,27 +19,26 @@ const getAutoplaySrc = (src: string) => {
   return src.includes('?') ? `${src}&${params}` : `${src}?${params}`;
 };
 
-const pickBestTrailer = (videos: any[]) =>
-  videos.find((v) => v.site === 'YouTube' && v.type === 'Trailer') ||
-  videos.find((v) => v.site === 'YouTube' && v.type === 'Teaser') ||
-  videos.find((v) => v.site === 'YouTube');
-
 interface FeaturedItem {
   id: number;
   title: string;
   img1: string;
+  iframe?: { src: string; title?: string }[];
   desc?: string;
+  category?: string;
+  broadcast?: string;
+  season?: string;
+  age?: string;
 }
+
 interface Props {
   config: DramaGenres;
 }
 
-const DramaSwiper = ({ config }: Props) => {
+const DramaCountry = ({ config }: Props) => {
   const [list, setList] = useState<FeaturedItem[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [barOffset, setBarOffset] = useState(0);
-  const [currentVideoKey, setCurrentVideoKey] = useState<string | null>(null);
-  const [tvDetail, setTvDetail] = useState<any>(null);
 
   const swiperRef = useRef<SwiperType | null>(null);
   const barRef = useRef<HTMLDivElement | null>(null);
@@ -48,117 +47,116 @@ const DramaSwiper = ({ config }: Props) => {
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const fetchDrama = async () => {
+    const fetchOverseas = async () => {
       const results: FeaturedItem[] = [];
-      let page = Math.floor(Math.random() * 5) + 1;
 
-      while (results.length < 15 && page <= 10) {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams({
+      // 미국, 영국, 중국, 일본 설정
+      const countries = [
+        { type: 'with_original_language', value: 'en', name: '미국' }, // 미국
+        { type: 'with_origin_country', value: 'GB', name: '영국' }, // 영국
+        { type: 'with_original_language', value: 'zh', name: '중국' }, // 중국
+        { type: 'with_original_language', value: 'ja', name: '일본' }, // 일본
+      ];
+
+      // 각 국가별로 데이터 가져오기
+      for (const country of countries) {
+        if (results.length >= 15) break;
+
+        let page = Math.floor(Math.random() * 3) + 1;
+        const targetPerCountry = Math.min(4, 15 - results.length);
+        let countryResults = 0;
+
+        while (countryResults < targetPerCountry && page <= 5) {
+          const params: Record<string, string> = {
             api_key: API_KEY,
             language: 'ko-KR',
             sort_by: 'popularity.desc',
-            with_genres: config.genreParam,
+            with_genres: '18',
             without_genres: '16',
+            with_video: 'true',
             page: String(page),
-          })}`
-        );
+          };
 
-        const data = await res.json();
+          params[country.type] = country.value;
 
-        for (const tv of data.results) {
-          results.push({
-            id: tv.id,
-            title: tv.name,
-            img1: tv.poster_path ? `${IMAGE_BASE}${tv.poster_path}` : '',
-            desc: tv.overview,
-            season: tv.first_air_date ? tv.first_air_date.slice(0, 4) : '',
-            age: tv.adult ? '19' : '12',
-          });
+          const res = await fetch(
+            `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams(params)}`
+          );
 
-          if (results.length === 15) break;
+          const data = await res.json();
+
+          for (const tv of data.results) {
+            if (countryResults >= targetPerCountry) break;
+
+            // 한국어 비디오 시도
+            const koVideoRes = await fetch(
+              `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
+                api_key: API_KEY,
+                language: 'ko-KR',
+              })}`
+            );
+            const koVideoData = await koVideoRes.json();
+
+            let trailer = koVideoData.results?.find(
+              (v: any) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
+            );
+
+            // 한국어 없으면 영어로 fallback
+            if (!trailer) {
+              const enVideoRes = await fetch(
+                `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
+                  api_key: API_KEY,
+                  language: 'en-US',
+                })}`
+              );
+              const enVideoData = await enVideoRes.json();
+
+              trailer = enVideoData.results?.find(
+                (v: any) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
+              );
+            }
+
+            if (!trailer) continue;
+
+            results.push({
+              id: tv.id,
+              title: tv.name,
+              img1: tv.poster_path ? `${IMAGE_BASE}${tv.poster_path}` : '',
+              iframe: [
+                {
+                  src: `https://www.youtube.com/embed/${trailer.key}`,
+                  title: trailer.name,
+                },
+              ],
+              desc: tv.overview,
+              broadcast: country.name,
+              season: tv.first_air_date ? tv.first_air_date.slice(0, 4) : '',
+              age: tv.adult ? '19' : '12',
+            });
+
+            countryResults++;
+          }
+
+          page++;
         }
-        page++;
       }
 
       setList(results);
     };
 
-    fetchDrama();
+    fetchOverseas();
   }, [config]);
 
-  const activeItem = list.length > 0 ? list[activeIndex] ?? list[0] : null;
-
-  useEffect(() => {
-    if (!activeItem) return;
-
-    const fetchDetail = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/tv/${activeItem.id}?api_key=${API_KEY}&language=ko-KR`
-      );
-      const detail = await res.json();
-
-      setTvDetail({
-        ...detail,
-        genreNames: detail.genres?.map((g: any) => g.name) || [],
-        networks: detail.networks || [],
-        seasonText:
-          detail.number_of_seasons === 1
-            ? '시즌 1'
-            : detail.number_of_seasons
-            ? `시즌 ${detail.number_of_seasons}`
-            : '',
-        age: detail.adult ? '19' : '12',
-      });
-    };
-
-    fetchDetail();
-  }, [activeItem]);
-
-  // 각 스와이퍼마다 독립적으로 비디오 가져오기
-  useEffect(() => {
-    if (!activeItem) return;
-
-    const fetchVideo = async () => {
-      setCurrentVideoKey(null);
-
-      // 한국어 비디오 시도
-      const koRes = await fetch(
-        `https://api.themoviedb.org/3/tv/${activeItem.id}/videos?${new URLSearchParams({
-          api_key: API_KEY,
-          language: 'ko-KR',
-        })}`
-      );
-      const koData = await koRes.json();
-
-      let trailer = pickBestTrailer(koData.results || []);
-
-      // 한국어 없으면 영어로 fallback
-      if (!trailer) {
-        const enRes = await fetch(
-          `https://api.themoviedb.org/3/tv/${activeItem.id}/videos?${new URLSearchParams({
-            api_key: API_KEY,
-            language: 'en-US',
-          })}`
-        );
-        const enData = await enRes.json();
-        trailer = pickBestTrailer(enData.results || []);
-      }
-
-      if (trailer) {
-        setCurrentVideoKey(trailer.key);
-      }
-    };
-
-    fetchVideo();
-  }, [activeItem]);
+  const activeItem = list[activeIndex];
+  if (!activeItem) return null;
 
   const updateBar = (prog: number) => {
     if (!trackRef.current || !barRef.current) return;
     const track = trackRef.current.clientWidth;
     const bar = barRef.current.clientWidth;
     const maxLeft = Math.max(track - bar, 0);
-    setBarOffset(Math.min(Math.max(prog, 0), 1) * maxLeft);
+    const safeProg = Math.min(Math.max(prog, 0), 1);
+    setBarOffset(safeProg * maxLeft);
   };
 
   return (
@@ -190,12 +188,10 @@ const DramaSwiper = ({ config }: Props) => {
       <div className="enter-featured-body">
         <div className="featured-fixed">
           <div className="featured-media">
-            {!activeItem ? (
-              <div className="featured-loading" />
-            ) : currentVideoKey ? (
+            {activeItem.iframe ? (
               <iframe
-                key={currentVideoKey}
-                src={getAutoplaySrc(`https://www.youtube.com/embed/${currentVideoKey}`)}
+                key={activeItem.id}
+                src={getAutoplaySrc(activeItem.iframe[0].src)}
                 title={activeItem.title}
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
@@ -205,26 +201,25 @@ const DramaSwiper = ({ config }: Props) => {
             )}
           </div>
 
-          {tvDetail && (
-            <Link to={`/detail/${tvDetail.id}`} className="featured-info">
-              <h3>{tvDetail.name}</h3>
+          <Link to={`/detail/${activeItem.id}`} className="featured-info">
+            <h3>{activeItem.title}</h3>
 
-              <p className="age">
-                {AGE[tvDetail.age as keyof typeof AGE]?.image ? (
-                  <img
-                    src={AGE[tvDetail.age as keyof typeof AGE].image}
-                    alt={AGE[tvDetail.age as keyof typeof AGE].label}
-                  />
-                ) : (
-                  <span>{tvDetail.age}</span>
-                )}
-              </p>
-              <p className="broadcast">{tvDetail.networks?.map((n) => n.name).join(', ')}</p>
-              <p className="season">{tvDetail.seasonText}</p>
-              <p className="genre">드라마</p>
-              <span className="desc">{tvDetail.overview}</span>
-            </Link>
-          )}
+            <p className="age">
+              {AGE[activeItem.age as keyof typeof AGE]?.image ? (
+                <img
+                  src={AGE[activeItem.age as keyof typeof AGE].image}
+                  alt={AGE[activeItem.age as keyof typeof AGE].label}
+                />
+              ) : (
+                <span>{activeItem.age}</span>
+              )}
+            </p>
+
+            <p className="category">{activeItem.category}</p>
+            <p className="broadcast">{activeItem.broadcast}</p>
+            <p className="season">{activeItem.season}</p>
+            <span className="desc">{activeItem.desc}</span>
+          </Link>
         </div>
 
         {/* 썸네일 스와이퍼 */}
@@ -272,4 +267,4 @@ const DramaSwiper = ({ config }: Props) => {
   );
 };
 
-export default DramaSwiper;
+export default DramaCountry;

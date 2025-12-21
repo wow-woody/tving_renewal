@@ -16,10 +16,23 @@ const LiveChannelList = ({
 }: Props) => {
   const [activeTab, setActiveTab] = useState<Category>('전체');
   const activeItemRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (activeItemRef.current) {
-      activeItemRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (activeItemRef.current && containerRef.current) {
+      const container = containerRef.current;
+      const item = activeItemRef.current;
+      
+      const containerTop = container.scrollTop;
+      const containerBottom = containerTop + container.clientHeight;
+      const itemTop = item.offsetTop;
+      const itemBottom = itemTop + item.clientHeight;
+
+      if (itemTop < containerTop) {
+        container.scrollTop = itemTop;
+      } else if (itemBottom > containerBottom) {
+        container.scrollTop = itemBottom - container.clientHeight;
+      }
     }
   }, [activeId]);
 
@@ -44,7 +57,7 @@ const LiveChannelList = ({
         ))}
       </div>
 
-      <div className="channel-list-container">
+      <div className="channel-list-container" ref={containerRef}>
         {filteredList.map((ch) => (
           <button
             key={ch.id}   // ✅ string OK

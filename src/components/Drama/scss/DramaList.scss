@@ -1,0 +1,16 @@
+.episode-swiper {
+  position: relative;
+}
+
+/* 유튜브 가로 카드 */
+.episode-card.wide {
+  display: flex;
+}
+
+.episode-card .thumb {
+  width: 100%;
+}
+
+.episode-title {
+  color: #fff;
+}

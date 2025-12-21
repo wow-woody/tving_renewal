@@ -92,7 +92,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`top-header ${isMain ? headerShow : 'fixed-header'}`}
+        className={`top-header ${headerShow}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}>
         <div className="header-left">
@@ -108,7 +108,7 @@ const Header = () => {
                 <Link to="/">영화</Link>
               </li>
               <li>
-                <Link to="/">스포츠</Link>
+                <Link to="/sport">스포츠</Link>
               </li>
               <li>
                 <Link to="/">애니</Link>

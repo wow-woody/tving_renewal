@@ -184,3 +184,10 @@ export const War_CONFIG: DramaGenres = {
   label: '정치/전쟁',
   genreParam: '18,10768',
 };
+
+export const OVERSEAS_CONFIG: DramaGenres = {
+  genreKey: 'overseas',
+  title: '해외 시리즈',
+  label: '해외시리즈',
+  genreParam: '18',
+};
