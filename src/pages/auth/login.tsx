@@ -2,31 +2,43 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './scss/Login.scss';
 import { useAuthStore } from '../../store/useAuthStore';
+import AlertModal from '../../components/common/AlertModal';
 
 const Login = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const { onLogin, onGoogleLogin, onKakaoLogin } = useAuthStore();
+  const { onLogin, onGoogleLogin, onKakaoLogin, alertModal, hideAlert } = useAuthStore();
   const navigate = useNavigate();
+
+  const handleAlertClose = () => {
+    hideAlert();
+    // 로그인 성공시에만 홈으로 이동
+    if (alertModal?.type === 'success') {
+      navigate('/');
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await onLogin(id, password);
       setId('');
       setPassword('');
-      navigate('/');
+      // navigate 제거 - 모달 확인 후 이동
     } catch (err) {
       console.log('로그인 에러');
     }
   };
+
   const handleGoogle = async () => {
     await onGoogleLogin();
-    navigate('/');
+    // navigate 제거 - 모달 확인 후 이동
   };
+
   const handleKakao = async () => {
     await onKakaoLogin();
-    navigate('/');
+    // navigate 제거 - 모달 확인 후 이동
   };
 
   return (
@@ -122,6 +134,15 @@ const Login = () => {
         </div>
       </div>
       <div className="footer-line"></div>
+      
+      {alertModal?.show && (
+        <AlertModal
+          message={alertModal.message}
+          type={alertModal.type}
+          title={alertModal.title}
+          onClose={handleAlertClose}
+        />
+      )}
     </div>
   );
 };

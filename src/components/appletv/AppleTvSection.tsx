@@ -57,7 +57,6 @@ const AppleTvSection = () => {
             인기 콘텐츠를 만나보세요.
           </p>
           </div>
-          <button className="more-btn">더보기 +</button>
         </div>
 
         <div className="apple-tv-slider">

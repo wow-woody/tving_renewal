@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -10,6 +11,7 @@ import KblCard from "./KblCard";
 import { sports } from "../../data/sport";
 
 const KblSection = () => {
+  const navigate = useNavigate();
   const swiperRef = useRef<any | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -52,7 +54,7 @@ const KblSection = () => {
               오직 티빙에서!
             </p>
           </div>
-          <button className="more-btn">더보기 +</button>
+          <button className="more-btn" onClick={() => navigate('/sport')}>더보기 +</button>
         </div>
 
         <div className="kbl-slider">

@@ -11,6 +11,8 @@ import { useAuthStore } from '../../store/useAuthStore';
 import ProfileSelect from '../ProfileSelect/ProfileSelect';
 import SearchDropdown from './SearchDropdown';
 import { useSearchStore } from '../../store/useSearchStore';
+import CstomerService from '../../pages/auth/CstomerService';
+import LogoutModal from './LogoutModal';
 
 interface menuitem {
   id: number;
@@ -22,15 +24,15 @@ interface menuitem {
 const asideMenu: menuitem[] = [
   { id: 1, title: '홈', path: '/', img: homeIcon },
   { id: 2, title: '마이페이지', path: '/mypage', img: userIcon },
-  { id: 3, title: '신작알림', path: '/', img: alertIcon },
-  { id: 4, title: '찜한 컨텐츠', path: '/', img: favoritIcon },
+  { id: 3, title: '라이브 알림', path: '/mypage', img: alertIcon },
+  { id: 4, title: '찜한 컨텐츠', path: '/mypage', img: favoritIcon },
   { id: 5, title: '문의하기', path: '/', img: contactIcon },
-  { id: 6, title: '설정', path: '/', img: settingIcon },
+  { id: 6, title: '로그아웃', path: '/', img: settingIcon },
 ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading } = useAuthStore();
+  const { user, loading, onLogout } = useAuthStore();
   const { searchResults, isSearching, onSearch, clearSearch } = useSearchStore();
   const navigate = useNavigate();
 
@@ -46,6 +48,8 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sValue, setSValue] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [showCustomerService, setShowCustomerService] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const handleSearchClose = () => {
     setIsSearchOpen(false);
@@ -69,6 +73,22 @@ const Header = () => {
       navigate(`/search?q=${encodeURIComponent(sValue.trim())}`);
       handleSearchClose();
     }
+  };
+
+  const handleMenuClick = (item: menuitem, e: React.MouseEvent) => {
+    if (item.title === '문의하기') {
+      e.preventDefault();
+      setShowCustomerService(true);
+    } else if (item.title === '로그아웃') {
+      e.preventDefault();
+      setShowLogoutModal(true);
+    }
+  };
+
+  const handleLogoutConfirm = () => {
+    setShowLogoutModal(false);
+    onLogout();
+    navigate('/');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -128,8 +148,8 @@ const Header = () => {
 
         <ul className="side-menu">
           {asideMenu.map((m) => (
-            <li key={m.id} className={m.title === '설정' ? 'setting-icon' : ''}>
-              <Link to={m.path}>
+            <li key={m.id} className={m.title === '로그아웃' ? 'setting-icon' : ''}>
+              <Link to={m.path} onClick={(e) => handleMenuClick(m, e)}>
                 <img src={m.img} alt={m.title} />
                 <span>{m.title}</span>
               </Link>
@@ -159,9 +179,6 @@ const Header = () => {
               </li>
               <li>
                 <Link to="/anim">애니</Link>
-              </li>
-              <li>
-                <Link to="/">뉴스</Link>
               </li>
               <li>
                 <Link to="/live">라이브</Link>
@@ -233,6 +250,17 @@ const Header = () => {
           <img src="/images/top-show.svg" alt="" />
         </div>
       </div>
+
+      {showCustomerService && (
+        <CstomerService onClose={() => setShowCustomerService(false)} />
+      )}
+
+      {showLogoutModal && (
+        <LogoutModal
+          onConfirm={handleLogoutConfirm}
+          onCancel={() => setShowLogoutModal(false)}
+        />
+      )}
     </header>
   );
 };
