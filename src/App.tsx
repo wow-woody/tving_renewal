@@ -21,6 +21,11 @@ import SportBanner from './pages/Sport/Sport';
 import Enter from './pages/Enter/Enter';
 import EnterGenre from './pages/Enter/EnterGenre';
 import EnterDetail from './pages/Enter/EnterDetail';
+import Anim from './pages/Anim/Anim';
+import AnimGenre from './pages/Anim/AnimGenre';
+import AnimDetail from './pages/Anim/AnimDetail';
+import SearchResults from './pages/Search/SearchResults';
+import PersonDetail from './pages/Person/PersonDetail';
 
 function App() {
   const location = useLocation();
@@ -75,6 +80,11 @@ function App() {
         <Route path="/enter" element={<Enter />} />
         <Route path="/enter/genre/:key" element={<EnterGenre />} />
         <Route path="/enter/detail/:id" element={<EnterDetail />} />
+        <Route path="/anim" element={<Anim />} />
+        <Route path="/anim/genre/:key" element={<AnimGenre />} />
+        <Route path="/anim/detail/:id" element={<AnimDetail />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/person/:id" element={<PersonDetail />} />
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/detail/:id" element={<DramaDetail />} />
 

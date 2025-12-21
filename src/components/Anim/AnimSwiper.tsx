@@ -6,10 +6,9 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import './scss/EnterSwiper.scss';
+import './scss/AnimSwiper.scss';
 import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';
-import type { EnterGenres } from '../../data/EnterFilters';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
@@ -33,11 +32,19 @@ interface FeaturedItem {
   age?: string;
 }
 
-interface Props {
-  config: EnterGenres;
+interface AnimConfig {
+  sectionTitle: string;
+  filters: {
+    with_genres?: string;
+    with_original_language?: string;
+  };
 }
 
-const EnterSwiper = ({ config }: Props) => {
+interface Props {
+  config: AnimConfig;
+}
+
+const AnimSwiper = ({ config }: Props) => {
   const [list, setList] = useState<FeaturedItem[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [barOffset, setBarOffset] = useState(0);
@@ -51,7 +58,7 @@ const EnterSwiper = ({ config }: Props) => {
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const fetchEnter = async () => {
+    const fetchAnim = async () => {
       const results: FeaturedItem[] = [];
       let page = Math.floor(Math.random() * 5) + 1;
 
@@ -61,15 +68,8 @@ const EnterSwiper = ({ config }: Props) => {
           language: 'ko-KR',
           sort_by: 'popularity.desc',
           page: String(page),
-          without_genres: '16,18', // 애니메이션과 드라마 제외
+          ...config.filters,
         };
-
-        if (config.genreParam) {
-          params.with_genres = config.genreParam;
-        }
-        if (config.keywordParam) {
-          params.with_keywords = config.keywordParam;
-        }
 
         const res = await fetch(
           `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams(params)}`
@@ -89,7 +89,18 @@ const EnterSwiper = ({ config }: Props) => {
           
           let hasVideo = koVideoData.results?.length > 0;
           
-          // 한국어 비디오가 없으면 영어 비디오 확인
+          // 한국어 비디오가 없으면 일본어/영어 비디오 확인
+          if (!hasVideo) {
+            const jaVideoRes = await fetch(
+              `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
+                api_key: API_KEY,
+                language: 'ja-JP',
+              })}`
+            );
+            const jaVideoData = await jaVideoRes.json();
+            hasVideo = jaVideoData.results?.length > 0;
+          }
+
           if (!hasVideo) {
             const enVideoRes = await fetch(
               `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
@@ -121,7 +132,7 @@ const EnterSwiper = ({ config }: Props) => {
       setList(results);
     };
 
-    fetchEnter();
+    fetchAnim();
   }, [config]);
 
   const activeItem = list.length > 0 ? list[activeIndex] ?? list[0] : null;
@@ -170,7 +181,19 @@ const EnterSwiper = ({ config }: Props) => {
 
       let trailer = pickBestTrailer(koData.results || []);
 
-      // 한국어 없으면 영어로 fallback
+      // 한국어 없으면 일본어로 fallback
+      if (!trailer) {
+        const jaRes = await fetch(
+          `https://api.themoviedb.org/3/tv/${activeItem.id}/videos?${new URLSearchParams({
+            api_key: API_KEY,
+            language: 'ja-JP',
+          })}`
+        );
+        const jaData = await jaRes.json();
+        trailer = pickBestTrailer(jaData.results || []);
+      }
+
+      // 일본어도 없으면 영어로 fallback
       if (!trailer) {
         const enRes = await fetch(
           `https://api.themoviedb.org/3/tv/${activeItem.id}/videos?${new URLSearchParams({
@@ -200,19 +223,19 @@ const EnterSwiper = ({ config }: Props) => {
 
   return (
     <section
-      className="enter-featured-section"
-      style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
+      className="anim-featured-section"
+      style={{ '--anim-progress': `${barOffset}px` } as CSSProperties}>
       <div className="section-header">
         <h2 className="section-title">
-          <Link to={`/enter/genre/${config.genreKey}`}>{config.title}</Link>
+          <Link to="/anim">{config.sectionTitle}</Link>
         </h2>
 
         <div className="thumb-controls">
-          <div className="enter-pagination" ref={trackRef}>
+          <div className="anim-pagination" ref={trackRef}>
             <div className="pagenation-line" />
             <div className="pointer-line" ref={barRef} />
           </div>
-          <div className="enter-nav">
+          <div className="anim-nav">
             <button ref={prevRef} className="nav-btn prev">
               ‹
             </button>
@@ -224,7 +247,7 @@ const EnterSwiper = ({ config }: Props) => {
       </div>
 
       {/* 본문 */}
-      <div className="enter-featured-body">
+      <div className="anim-featured-body">
         <div className="featured-fixed">
           <div className="featured-media">
             {!activeItem ? (
@@ -243,7 +266,7 @@ const EnterSwiper = ({ config }: Props) => {
           </div>
 
           {tvDetail && (
-            <Link to={`/enter/detail/${tvDetail.id}`} className="featured-info">
+            <Link to={`/anim/detail/${tvDetail.id}`} className="featured-info">
               <h3>{tvDetail.name}</h3>
 
               <p className="age">
@@ -258,7 +281,7 @@ const EnterSwiper = ({ config }: Props) => {
               </p>
               <p className="broadcast">{tvDetail.networks?.map((n: any) => n.name).join(', ')}</p>
               <p className="season">{tvDetail.seasonText}</p>
-              <p className="genre">예능</p>
+              <p className="genre">애니메이션</p>
               <span className="desc">{tvDetail.overview}</span>
             </Link>
           )}
@@ -309,4 +332,4 @@ const EnterSwiper = ({ config }: Props) => {
   );
 };
 
-export default EnterSwiper;
+export default AnimSwiper;

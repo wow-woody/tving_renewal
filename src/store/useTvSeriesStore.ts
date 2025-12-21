@@ -32,12 +32,17 @@ interface TvSeriesStore {
   filteredTvs: TV[];
   tvDetail: TvDetail | null;
   episodes: any[];
+  episodesBySeason: Record<number, any[]>;
 
   // 엔터 관련 상태
   enters: TV[];
   koEnters: TV[];
   filteredEnters: TV[];
   enterDetail: TvDetail | null;
+
+  // 애니 관련 상태
+  anims: TV[];
+  filteredAnims: TV[];
 
   onFetchTvs: () => Promise<void>;
   onFetchKoTvs: () => Promise<void>;
@@ -54,6 +59,10 @@ interface TvSeriesStore {
   onFetchKoEnters: () => Promise<void>;
   onFetchEnterDetail: (id: string) => Promise<void>;
   onFetchEnterByFilter: (params: Record<string, string>) => Promise<void>;
+
+  // 애니 관련 함수
+  onFetchAnims: () => Promise<void>;
+  onFetchAnimByFilter: (params: Record<string, string>) => Promise<void>;
 }
 
 export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
@@ -72,6 +81,10 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
   filteredEnters: [],
   enterDetail: null,
   episodesBySeason: {},
+
+  // 애니 관련 초기 상태
+  anims: [],
+  filteredAnims: [],
 
   // 드라마 장르
   onFetchTvs: async () => {
@@ -342,5 +355,30 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
 
     const data = await res.json();
     set({ filteredEnters: data.results });
+  },
+
+  // 애니메이션 가져오기
+  onFetchAnims: async () => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=16&sort_by=popularity.desc&language=ko-KR`
+    );
+    const data = await res.json();
+    set({ anims: data.results });
+  },
+
+  // 애니메이션 필터링
+  onFetchAnimByFilter: async (params) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?${new URLSearchParams({
+        api_key: API_KEY,
+        language: 'ko-KR',
+        sort_by: 'popularity.desc',
+        with_genres: '16',
+        ...params,
+      })}`
+    );
+
+    const data = await res.json();
+    set({ filteredAnims: data.results });
   },
 }));

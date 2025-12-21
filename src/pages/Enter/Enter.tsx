@@ -23,7 +23,10 @@ const Enter = () => {
     <div className="contents-wrap">
       <section className="section-1">
         {/* <h2>인기 예능 프로그램</h2> */}
-        <div className="sub-container"></div>
+        <div className="sub-container">
+          <img src="/images/예능배너.webp" alt="예능 배너" className="main-banner-image" />
+          <img src="/images/예능배너타이틀.webp" alt="예능 타이틀" className="banner-title-image" />
+        </div>
       </section>
       
       <section className="section-2">

@@ -6,7 +6,7 @@ import alertIcon from '../../assets/icon/aside-header-icon3.png';
 import favoritIcon from '../../assets/icon/aside-header-icon4.png';
 import contactIcon from '../../assets/icon/aside-header-icon5.png';
 import settingIcon from '../../assets/icon/aside-header-icon6.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
 import ProfileSelect from '../ProfileSelect/ProfileSelect';
 import SearchDropdown from './SearchDropdown';
@@ -32,6 +32,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, loading } = useAuthStore();
   const { searchResults, isSearching, onSearch, clearSearch } = useSearchStore();
+  const navigate = useNavigate();
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -63,7 +64,29 @@ const Header = () => {
     }
   };
 
+  const handleSearchSubmit = () => {
+    if (sValue.trim()) {
+      navigate(`/search?q=${encodeURIComponent(sValue.trim())}`);
+      handleSearchClose();
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && searchResults.length > 0) {
+        // 선택된 항목으로 이동
+        const selectedResult = searchResults[selectedIndex];
+        if (selectedResult) {
+          handleSearchClose();
+        }
+      } else if (sValue.trim()) {
+        // 검색 결과 페이지로 이동
+        handleSearchSubmit();
+      }
+      return;
+    }
+
     if (!isSearchOpen || searchResults.length === 0) return;
 
     if (e.key === 'ArrowDown') {
@@ -72,13 +95,6 @@ const Header = () => {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
-    } else if (e.key === 'Enter' && selectedIndex >= 0) {
-      e.preventDefault();
-      // Enter 키로 선택된 항목으로 이동
-      const selectedResult = searchResults[selectedIndex];
-      if (selectedResult) {
-        handleSearchClose();
-      }
     }
   };
 
@@ -142,7 +158,7 @@ const Header = () => {
                 <Link to="/sport">스포츠</Link>
               </li>
               <li>
-                <Link to="/">애니</Link>
+                <Link to="/anim">애니</Link>
               </li>
               <li>
                 <Link to="/">뉴스</Link>
@@ -183,6 +199,7 @@ const Header = () => {
                     onClose={handleSearchClose}
                     selectedIndex={selectedIndex}
                     onIndexChange={setSelectedIndex}
+                    searchQuery={sValue}
                   />
                 )}
               </div>
