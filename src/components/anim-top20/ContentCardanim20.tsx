@@ -17,7 +17,7 @@ const ContentCardanim20 = ({ item,  rankScope}: Props) => {
   <div className="rank-box">
     {rank && (
       <img
-        src={`/images/rank/rank-${String(rank).padStart(2, "0")}.png`}
+        src={`/images/rank/rank-${String(rank).padStart(2, "0")}.svg`}
         alt={String(rank)}
       />
     )}

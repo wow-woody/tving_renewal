@@ -14,11 +14,11 @@
 }
 
 /* 공통 구조는 기존 섹션들과 동일 클래스 재사용 */
-.section-header { display: flex; flex-direction: column; gap: 12px; }
-.section-title { color: #fff; font-size: 20px; font-weight: 700; }
+.section-header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 62px; }
+.section-title { color: #fff; font-size: 36px; font-weight: 800; }
 
 .enter-featured-body {
-  margin-top: 32px;
+  margin-top: 0;
   position: relative;
   display: flex;
   gap: 24px;

@@ -9,13 +9,22 @@ import "./VOnly.scss";
 
 import { ONLY_CONTENTS } from "../../data";
 import { TVING_BADGE } from "../../contents/media";
-import { TvingBadge } from "../../type/enum";
+import { TvingBadge, Category } from "../../type/enum";
 
-const VOnlySection = () => {
+interface Props {
+  category?: Category;
+}
+
+const VOnlySection = ({ category }: Props) => {
   const badge = TVING_BADGE[TvingBadge.ONLY];
   const swiperRef = useRef<any | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
+
+  // category prop이 있으면 필터링, 없으면 전체
+  const filteredContents = category 
+    ? ONLY_CONTENTS.filter(item => item.category === category)
+    : ONLY_CONTENTS;
 
   useEffect(() => {
     const swiper = swiperRef.current;
@@ -68,7 +77,7 @@ const VOnlySection = () => {
           }}
           navigation
         >
-          {ONLY_CONTENTS.map((item, index) => (
+          {filteredContents.map((item, index) => (
             <SwiperSlide key={item.id}>
               <VOnlyCard item={item} rank={index + 1} />
             </SwiperSlide>

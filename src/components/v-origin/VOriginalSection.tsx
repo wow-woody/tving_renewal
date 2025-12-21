@@ -9,13 +9,22 @@ import "./VOriginal.scss";
 
 import { ORIGINAL_CONTENTS } from "../../data";
 import { TVING_BADGE } from "../../contents/media";
-import { TvingBadge } from "../../type/enum";
+import { TvingBadge, Category } from "../../type/enum";
 
-const VOriginalSection = () => {
+interface Props {
+  category?: Category;
+}
+
+const VOriginalSection = ({ category }: Props) => {
   const badge = TVING_BADGE[TvingBadge.ORIGINAL];
   const swiperRef = useRef<any | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
+
+  // category prop이 있으면 필터링, 없으면 전체
+  const filteredContents = category 
+    ? ORIGINAL_CONTENTS.filter(item => item.category === category)
+    : ORIGINAL_CONTENTS;
 
   useEffect(() => {
     const swiper = swiperRef.current;
@@ -68,7 +77,7 @@ const VOriginalSection = () => {
           }}
           navigation
         >
-          {ORIGINAL_CONTENTS.map((item) => (
+          {filteredContents.map((item) => (
             <SwiperSlide key={item.id}>
               <VOriginalCard item={item} />
             </SwiperSlide>

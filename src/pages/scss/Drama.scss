@@ -22,6 +22,10 @@
   }
 
   .section-2 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 3rem;
+    
     .drama-filter {
       display: flex;
       cursor: pointer;
@@ -31,7 +35,27 @@
     }
   }
 
-  .onair-list {
-    display: flex;
+  .section-onair {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 4rem;
+    
+    .onair-list {
+      display: flex;
+    }
+  }
+
+  .section-dramaSwiper {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 4rem;
+  }
+
+  .drama-voriginal {
+    margin-bottom: 4rem;
+  }
+
+  .section-9 {
+    margin-bottom: 4rem;
   }
 }
