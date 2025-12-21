@@ -18,6 +18,9 @@ import Drama from './pages/Drama/Drama';
 import DramaGenre from './pages/Drama/DramaGenre';
 import LivePage from './pages/Live/LivePage';
 import SportBanner from './pages/Sport/Sport';
+import Enter from './pages/Enter/Enter';
+import EnterGenre from './pages/Enter/EnterGenre';
+import EnterDetail from './pages/Enter/EnterDetail';
 
 function App() {
   const location = useLocation();
@@ -69,6 +72,9 @@ function App() {
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/drama" element={<Drama />} />
         <Route path="/drama/genre/:key" element={<DramaGenre />} />
+        <Route path="/enter" element={<Enter />} />
+        <Route path="/enter/genre/:key" element={<EnterGenre />} />
+        <Route path="/enter/detail/:id" element={<EnterDetail />} />
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/detail/:id" element={<DramaDetail />} />
 

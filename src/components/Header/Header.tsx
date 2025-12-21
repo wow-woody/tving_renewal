@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Header.scss';
 import homeIcon from '../../assets/icon/aside-header-icon1.png';
 import userIcon from '../../assets/icon/aside-header-icon2.png';
@@ -6,9 +6,11 @@ import alertIcon from '../../assets/icon/aside-header-icon3.png';
 import favoritIcon from '../../assets/icon/aside-header-icon4.png';
 import contactIcon from '../../assets/icon/aside-header-icon5.png';
 import settingIcon from '../../assets/icon/aside-header-icon6.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
 import ProfileSelect from '../ProfileSelect/ProfileSelect';
+import SearchDropdown from './SearchDropdown';
+import { useSearchStore } from '../../store/useSearchStore';
 
 interface menuitem {
   id: number;
@@ -29,6 +31,7 @@ const asideMenu: menuitem[] = [
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, loading } = useAuthStore();
+  const { searchResults, isSearching, onSearch, clearSearch } = useSearchStore();
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -41,15 +44,43 @@ const Header = () => {
   //------------ search-box 보이기 ------------
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sValue, setSValue] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleSearchClose = () => {
     setIsSearchOpen(false);
     setSValue('');
+    clearSearch();
+    setSelectedIndex(-1);
   };
 
-  //------------ search-box 숨기기 ------------
-  const location = useLocation();
-  const isMain = location.pathname === '/';
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSValue(value);
+    if (value.trim()) {
+      onSearch(value);
+    } else {
+      clearSearch();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isSearchOpen || searchResults.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev < searchResults.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      // Enter 키로 선택된 항목으로 이동
+      const selectedResult = searchResults[selectedIndex];
+      if (selectedResult) {
+        handleSearchClose();
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,7 +133,7 @@ const Header = () => {
                 <Link to="/drama">드라마</Link>
               </li>
               <li>
-                <Link to="/">예능</Link>
+                <Link to="/enter">예능</Link>
               </li>
               <li>
                 <Link to="/">영화</Link>
@@ -135,13 +166,25 @@ const Header = () => {
                 <input
                   type="text"
                   value={sValue}
-                  onChange={(e) => setSValue(e.target.value)}
+                  onChange={handleSearchChange}
+                  onKeyDown={handleKeyDown}
                   placeholder="찾으시는 제목과 인물명을 입력해 보세요!"
+                  autoFocus
                 />
 
                 <button className="search-close" onClick={handleSearchClose} aria-label="검색 닫기">
                   <img src="/images/login-close.svg" alt="cancel" />
                 </button>
+
+                {(searchResults.length > 0 || isSearching) && (
+                  <SearchDropdown
+                    results={searchResults}
+                    isSearching={isSearching}
+                    onClose={handleSearchClose}
+                    selectedIndex={selectedIndex}
+                    onIndexChange={setSelectedIndex}
+                  />
+                )}
               </div>
             )}
           </div>

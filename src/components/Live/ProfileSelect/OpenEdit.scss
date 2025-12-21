@@ -1,0 +1,98 @@
+@use '../../App.scss' as g;
+
+.edit-popup-bg {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    z-index: 1000;
+
+    .edit-popup-wrap {
+        width: 540px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .edit-popup {
+            position:relative;
+            
+            @include g.boxshadow;
+            border-radius: 12px;
+            padding: 46px 46px 32px 46px;
+
+            display: flex;
+            gap: 5.2rem;
+
+            .edit-popup-right {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+                justify-content: center;
+
+                width: 100%;
+
+                input {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    height: 40px;
+                    width: 100%;
+                    padding-left: 8px;
+
+                    outline: none;
+                    border: none;
+
+                    border-radius: 8px;
+
+                    background: #282828;
+                    color: #5c5c5c;
+
+                    &::placeholder {
+                        font-size: 1.6rem;
+                        font-weight: 500;
+                    }
+
+                    &:focus {
+                        outline: 1px solid #fff;
+                        color: #fff;
+                    }
+                }
+
+                .btn-wrap {
+                    display: flex;
+                    gap: 1.2rem;
+
+                    button {
+                        flex: 1;
+                        font-size: 1.2rem;
+                        color: #fff;
+
+                        border: 1px solid #5c5c5c;
+                        border-radius: 8px;
+                        padding: 8px 20px;
+
+                        &.edit {
+                            background: #5c5c5c;
+
+                        }
+                    }
+                }
+
+
+            }
+
+            .close {
+                position: absolute;
+                top:24px;
+                right:24px;
+            }
+        }
+    }
+}

@@ -1,16 +1,20 @@
 .rank-card {
   display: flex;
   align-items: flex-end;   // 숫자 아래 정렬
-  gap: 8px;
+  gap: 0px;
   width: auto;             // ⭐ swiper auto 계산용
   flex-shrink: 0;
   text-decoration: none;
+  z-index: -1;
 }
 
 /* 숫자 영역 */
 .rank-box {
-  width: 84px;             // 숫자 전용 폭
+  width: 120px;
+               // 숫자 전용 폭 (84px → 100px)
   flex-shrink: 0;
+  margin-right: -20px;  // 포스터와 살짝 겹치게
+  z-index: -1;           // 숫자가 위에 표시되도록
 
   img {
     width: 100%;
