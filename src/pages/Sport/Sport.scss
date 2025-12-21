@@ -266,13 +266,18 @@
         .content-swiper {
             padding: 0 50px 0 0;
 
-            .content-card {
+            .content-card,
+            a.content-card {
                 background: rgba(255, 255, 255, 0.05);
                 border-radius: 12px;
                 @include g.boxshadow;
                 overflow: hidden;
                 transition: transform 0.3s ease;
                 cursor: pointer;
+                display: block;
+                text-decoration: none;
+                color: inherit;
+                outline: none;
 
                 &:hover {
                     transform: translateY(-8px);

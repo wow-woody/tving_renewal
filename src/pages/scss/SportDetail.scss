@@ -1,0 +1,21 @@
+.sport-detail-wrap {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #181818;
+  color: #fff;
+  padding: 4rem 0;
+}
+.sport-detail-container {
+  background: #232323;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  min-width: 400px;
+}
+.sport-detail-container h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}

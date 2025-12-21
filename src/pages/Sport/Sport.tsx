@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import YoutubeModal from '../../components/YoutubeModal';
+// import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -72,6 +74,9 @@ const Sport = () => {
         return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     };
 
+    // Youtube Modal 상태
+    const [youtubeId, setYoutubeId] = useState<string | null>(null);
+
     return (
         <div className='sport-wrappers'>
             <div className="sport-wrap">
@@ -144,16 +149,26 @@ const Sport = () => {
                             nextEl: '.superrace-next',
                             prevEl: '.superrace-prev',
                         }}
+                        preventClicks={false}
+                        preventClicksPropagation={false}
                         className="content-swiper"
                     >
-                        {superraceData.map((item) => (
-                            <SwiperSlide key={item.id}>
-                                <div className="content-card">
-                                    <img src={item.thumb} alt={item.title} />
-                                    <h3>{item.title}</h3>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                        {superraceData.map((item) => {
+                            const match = item.iframe.match(/embed\/([\w-]+)/);
+                            const videoId = match ? match[1] : '';
+                            return (
+                                <SwiperSlide key={item.id}>
+                                    <div
+                                        className="content-card"
+                                        onClick={() => setYoutubeId(videoId)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <img src={item.thumb} alt={item.title} />
+                                        <h3>{item.title}</h3>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                     <div className="swiper-button-prev superrace-prev"></div>
                     <div className="swiper-button-next superrace-next"></div>
@@ -171,14 +186,22 @@ const Sport = () => {
                         }}
                         className="content-swiper"
                     >
-                        {ufcData.map((item) => (
-                            <SwiperSlide key={item.id}>
-                                <div className="content-card">
-                                    <img src={item.thumb} alt={item.title} />
-                                    <h3>{item.title}</h3>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                        {ufcData.map((item) => {
+                            const match = item.iframe.match(/embed\/([\w-]+)/);
+                            const videoId = match ? match[1] : '';
+                            return (
+                                <SwiperSlide key={item.id}>
+                                    <div
+                                        className="content-card"
+                                        onClick={() => setYoutubeId(videoId)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <img src={item.thumb} alt={item.title} />
+                                        <h3>{item.title}</h3>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                     <div className="swiper-button-prev ufc-prev"></div>
                     <div className="swiper-button-next ufc-next"></div>
@@ -196,14 +219,22 @@ const Sport = () => {
                         }}
                         className="content-swiper"
                     >
-                        {kblData.map((item) => (
-                            <SwiperSlide key={item.id}>
-                                <div className="content-card">
-                                    <img src={item.thumb} alt={item.title} />
-                                    <h3>{item.title}</h3>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                        {kblData.map((item) => {
+                            const match = item.iframe.match(/embed\/([\w-]+)/);
+                            const videoId = match ? match[1] : '';
+                            return (
+                                <SwiperSlide key={item.id}>
+                                    <div
+                                        className="content-card"
+                                        onClick={() => setYoutubeId(videoId)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <img src={item.thumb} alt={item.title} />
+                                        <h3>{item.title}</h3>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                     <div className="swiper-button-prev kbl-prev"></div>
                     <div className="swiper-button-next kbl-next"></div>
@@ -221,14 +252,22 @@ const Sport = () => {
                         }}
                         className="content-swiper"
                     >
-                        {wimbledonData.map((item) => (
-                            <SwiperSlide key={item.id}>
-                                <div className="content-card">
-                                    <img src={item.thumb} alt={item.title} />
-                                    <h3>{item.title}</h3>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                        {wimbledonData.map((item) => {
+                            const match = item.iframe.match(/embed\/([\w-]+)/);
+                            const videoId = match ? match[1] : '';
+                            return (
+                                <SwiperSlide key={item.id}>
+                                    <div
+                                        className="content-card"
+                                        onClick={() => setYoutubeId(videoId)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <img src={item.thumb} alt={item.title} />
+                                        <h3>{item.title}</h3>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                     <div className="swiper-button-prev wimbledon-prev"></div>
                     <div className="swiper-button-next wimbledon-next"></div>
@@ -246,19 +285,30 @@ const Sport = () => {
                         }}
                         className="content-swiper"
                     >
-                        {kboData.map((item) => (
-                            <SwiperSlide key={item.id}>
-                                <div className="content-card">
-                                    <img src={item.thumb} alt={item.title} />
-                                    <h3>{item.title}</h3>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                        {kboData.map((item) => {
+                            const match = item.iframe.match(/embed\/([\w-]+)/);
+                            const videoId = match ? match[1] : '';
+                            return (
+                                <SwiperSlide key={item.id}>
+                                    <div
+                                        className="content-card"
+                                        onClick={() => setYoutubeId(videoId)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <img src={item.thumb} alt={item.title} />
+                                        <h3>{item.title}</h3>
+                                    </div>
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                     <div className="swiper-button-prev kbo-prev"></div>
                     <div className="swiper-button-next kbo-next"></div>
                 </section>
             </div>
+            {youtubeId && (
+                <YoutubeModal videoId={youtubeId} onClose={() => setYoutubeId(null)} />
+            )}
         </div>
     );
 };

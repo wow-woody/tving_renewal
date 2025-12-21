@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
+import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -95,7 +96,7 @@ const DramaFeaturedSection = () => {
             )}
           </div>
 
-          <div className="featured-info">
+          <Link to={`/detail/${activeItem.id}`} className="featured-info">
             <h3>{activeItem.title}</h3>
             <p className='age'>
               {AGE[String((activeItem as any).age) as keyof typeof AGE]?.image ? (
@@ -112,7 +113,7 @@ const DramaFeaturedSection = () => {
             <p className='season'>{activeItem.season}</p>
             <p className='subtitle'>{activeItem.subtitle}</p>
             <span className='desc'>{activeItem.desc}</span>
-          </div>
+          </Link>
         </div>
 
         <div className="thumb-rail">

@@ -53,12 +53,23 @@ const LivePlayer = ({ channel }: Props) => {
     }
   };
 
+  // iframe src 추출
+  let iframeSrc = '';
+  const match = channel.iframe.match(/src=["']([^"']+)["']/);
+  if (match) iframeSrc = match[1];
+
   return (
     <div className="live-player">
-      <div
-        className="video-area"
-        dangerouslySetInnerHTML={{ __html: channel.iframe }}
-      />
+      <div className="video-area">
+        {iframeSrc && (
+          <iframe
+            src={iframeSrc}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen
+            title={channel.title}
+          />
+        )}
+      </div>
 
       <div className="info-box">
         <h2 className="live-title">{channel.title}</h2>

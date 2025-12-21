@@ -103,6 +103,7 @@ function App() {
         <Route path="/movie" element={<Movie />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/movie/genre/:key" element={<MovieGenre />} />
+
       </Routes>
 
       {!hideFooter && <Footer />}
