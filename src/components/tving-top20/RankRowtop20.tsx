@@ -24,13 +24,25 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  const updateBar = (prog: number) => {
+  // const updateBar = (prog: number) => {
+  //   if (!trackRef.current || !barRef.current) return;
+  //   const track = trackRef.current.clientWidth;
+  //   const bar = barRef.current.clientWidth;
+  //   const maxLeft = Math.max(track - bar, 0);
+  //   const safeProg = Math.min(Math.max(prog, 0), 1);
+  //   setBarOffset(safeProg * maxLeft);
+  // };
+
+  /** 🔥 progress 값(0~1)으로 페이지네이션 위치 계산 */
+  const updateBar = (progress: number) => {
     if (!trackRef.current || !barRef.current) return;
-    const track = trackRef.current.clientWidth;
-    const bar = barRef.current.clientWidth;
-    const maxLeft = Math.max(track - bar, 0);
-    const safeProg = Math.min(Math.max(prog, 0), 1);
-    setBarOffset(safeProg * maxLeft);
+
+    const trackWidth = trackRef.current.clientWidth;
+    const barWidth = barRef.current.clientWidth;
+    const maxLeft = Math.max(trackWidth - barWidth, 0);
+
+    const safeProgress = Math.min(Math.max(progress, 0), 1);
+    setBarOffset(safeProgress * maxLeft);
   };
 
   // 네비게이션 DOM을 스와이퍼에 연결 (드라마 섹션과 동일 패턴)
@@ -56,8 +68,8 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
 
 
   return (
-    <section
-      
+    <section className="rank-row-top20"
+
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}
     >
       {/* 섹션 제목 */}
@@ -92,8 +104,9 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
 
       <div className="rank-row">
         <Swiper
-          slidesPerView={6}
-          spaceBetween={50}
+          slidesPerView='auto'
+          // slidesPerView={6}
+          spaceBetween={32}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {
             // ❗ swiper 내부에 ref 직접 주입
@@ -102,19 +115,22 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
             // @ts-ignore
             swiper.params.navigation.nextEl = nextRef.current;
           }}
-          navigation
+          // navigation
           onSwiper={(s) => {
             swiperRef.current = s;
             updateBar(0);
           }}
-          onSlideChange={(swiper) => {
-            const total = data.length;
-            const visible = Number(swiper.params.slidesPerView) || 1;
-            const maxIndex = Math.max(total - visible, 1);
-            const prog = Math.min(Math.max(swiper.realIndex / maxIndex, 0), 1);
-            updateBar(prog);
+          // onSlideChange={(swiper) => {
+          //   const total = data.length;
+          //   const visible = Number(swiper.params.slidesPerView) || 1;
+          //   const maxIndex = Math.max(total - visible, 1);
+          //   const prog = Math.min(Math.max(swiper.realIndex / maxIndex, 0), 1);
+          //   updateBar(prog);
+          // }}
+          // onProgress={(_, prog) => updateBar(prog)}
+          onProgress={(_, progress) => {
+            updateBar(progress);
           }}
-          onProgress={(_, prog) => updateBar(prog)}
         >
           {data.map((item) => (
             <SwiperSlide key={item.id}>

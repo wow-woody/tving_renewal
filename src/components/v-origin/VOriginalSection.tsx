@@ -51,12 +51,14 @@ const VOriginalSection = ({ category }: Props) => {
     <div className="v-original">
       {/* 좌측 설명 영역 */}
       <div className="v-original-info">
+        <div className="info-top">
         <img className="logo" src={badge.image} alt={badge.label} />
         <p>
           티빙만의<br />
           특별한 오리지널 콘텐츠를<br />
           만나보세요.
         </p>
+        </div>
         <button className="more-btn">더보기 +</button>
       </div>
 

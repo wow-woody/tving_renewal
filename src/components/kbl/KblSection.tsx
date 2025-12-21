@@ -43,13 +43,15 @@ const KblSection = () => {
     <section className="glass-frame">
       <div className="kbl">
         <div className="kbl-info">
-          <div className="logo">
-            <img src="/images/KBL로고.png" alt="" />
+          <div className="info-top">
+            <div className="logo">
+              <img src="/images/KBL로고.png" alt="" />
+            </div>
+            <p>
+              박진감 넘치는 프로농구는<br />
+              오직 티빙에서!
+            </p>
           </div>
-          <p>
-            KBL 인기 콘텐츠를<br />
-            한눈에 만나보세요.
-          </p>
           <button className="more-btn">더보기 +</button>
         </div>
 

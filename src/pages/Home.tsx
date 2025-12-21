@@ -13,8 +13,6 @@ import { RankScope } from '../type/enum';
 import VOnlySection from '../components/v-only/VOnlySection';
 import VOriginalSection from '../components/v-origin/VOriginalSection';
 import MainBanner from '../components/main-banner/MainBanner';
-import ButtonBanner from '../components/button-banner/ButtonBanner';
-import TvingNew from '../components/new/TvingNew';
 import EnterFeaturedSection from '../components/enter-pop/EnterFeaturedSection';
 
 import DramaFeaturedSection from '../components/drama-pop/DramaFeaturedSection';
@@ -57,9 +55,14 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section-3">
+      <section className="section-2">
         <ButtonBanner />
       </section>
+
+      <section className="section-3">
+        <h2 className='hidden'>현재 시청중인 프로그램</h2>
+      </section>
+
 
       <section className="section-4">
         <LiveNews list={liveChannels} />
@@ -68,7 +71,6 @@ const Home = () => {
       <section className="section-5">
         <TvingNew />
       </section>
-
 
       <section className="section-6">
         <RankRow data={top20} rankScope={RankScope.TOP20} />
@@ -98,7 +100,6 @@ const Home = () => {
         <KblSection />
       </section>
 
-
       <section className='section-13'>
         <MovieFeaturedSection />
       </section>
@@ -110,6 +111,7 @@ const Home = () => {
       <section className="section-15">
         <VOnlySection />
       </section>
+      
       <section className="section-16">
         <SportsLive list={liveChannels} />
       </section>

@@ -1,22 +1,38 @@
 .apple-tv {
   display: flex;
-  padding: 40px;
+  gap:96px;
+  // padding: 40px;
+  padding: 52px 0 52px 8rem;
+
+
   border-radius: 12px;
   background: url("/images/애플티비.png");
-  background-size: cover;
+  background-size: 120%;
   background-position: center;
   background-repeat: no-repeat;
-  width: 1756px;
+  // width: 1756px;
+  width: 100%;
   margin: 0 auto;
 
   .apple-tv-info {
-    width: 272px;
+    width: 280px;
     color: #fff;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 
     .logo {
       font-weight: 700;
       font-size: 18px;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
+
+      height:45px;
+
+      img{
+        height:100%;
+      }
     }
 
     p {
@@ -112,22 +128,27 @@
     }
 
     .nav-btn.prev {
-      
-      margin-left: 0px;
-    
-    img{
-    
+
+      margin-left: -40px;
+
+      img {
+
         width: 36px
-    };
+      }
+
+      ;
     }
 
-    
+
 
     .nav-btn.next {
       margin-right: -40px;
-      img{
+
+      img {
         width: 36px
-    };
+      }
+
+      ;
     }
 
 

@@ -50,11 +50,13 @@ const AppleTvSection = () => {
     <section className="glass-frame">
       <div className="apple-tv">
         <div className="apple-tv-info">
+          <div className="info-top">
           <div className="logo"><img src="/images/appletv.png" alt="" /></div>
           <p>
             애플TV+에서 제공하는<br />
             인기 콘텐츠를 만나보세요.
           </p>
+          </div>
           <button className="more-btn">더보기 +</button>
         </div>
 

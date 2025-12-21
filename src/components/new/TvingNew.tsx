@@ -54,8 +54,8 @@ const TvingNew = () => {
                 className="new-swiper"
                 slidesPerView="auto"
                 modules={[Navigation]}
-                spaceBetween={40}
-                slidesOffsetBefore={88}
+                spaceBetween={36}
+                slidesOffsetBefore={92}
                 grabCursor
                 navigation
                 onBeforeInit={(swiper) => {

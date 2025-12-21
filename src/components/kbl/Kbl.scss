@@ -1,24 +1,33 @@
 .kbl {
     display: flex;
-    gap: 32px;
-    padding: 115px 40px;
+    // gap: 32px;
+    gap: 96px;
+    // padding: 115px 40px;
+    padding: 12rem 0 12rem 8rem;
+
     border-radius: 12px;
     overflow: hidden;
     background: url("/images/KBL.png");
-    background-size: cover;
+    background-size: 120%;
     background-position: center;
     background-repeat: no-repeat;
-    width: 1756px;
-    margin: 0 auto;
+    // width: 1756px;
+    width:100%;
+    // margin: 0 auto;
 
     .kbl-info {
-        width: 272px;
+        width: 280px;
         color: #fff;
+
+        display:flex;
+        flex-direction:column;
+        justify-content: space-between;
+        align-items: flex-start;
 
         .logo {
             font-weight: 700;
             font-size: 18px;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         p {
@@ -106,8 +115,11 @@
 
                 img {
                     width: 36px
-                };
+                }
+
+                ;
             }
+
             .nav-btn.next {
                 margin-right: -40px;
 

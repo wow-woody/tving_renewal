@@ -1,86 +1,8 @@
-@mixin title-wrap {
-    .title-wrap {
-        position: relative;
-
-        @include pagenation-wrap($pos: absolute, $p-b: 0, $p-l: 10.8rem);
-    }
-}
-
-@mixin pagenation-wrap($pos: none, $p-b: 64px, $p-l: 0px) {
-    .pagenation-wrap {
-        height: 32px;
-        width: 100%;
-        padding-right: 24px;
-        padding-left: $p-l;
-        padding-bottom: $p-b;
-        display: flex;
-        align-items: flex-end;
-        gap: 14px;
-
-        position: $pos;
-        top: 50%;
-        left: 0;
-
-        .pagenation-area {
-            position: relative;
-            flex: 1;
-
-            .pagenation-line {
-                height: 1px;
-                width: 100%;
-                background: #373737;
-            }
-
-            .pointer-line {
-                position: absolute;
-                top: 0;
-                left: 30%;
-
-                height: 1px;
-                width: 80px;
-                background: #ff153c;
-            }
-        }
-
-        .nav-btn {
-            display: flex;
-
-            button {
-                width: 32px;
-                height: 32px;
-                border: 1px solid #373737;
-                border-radius: 0;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                cursor: pointer;
-
-                img {
-                    width: 12px;
-                    height: 12px;
-                }
-            }
-
-            button+button {
-                border-left: none;
-            }
-        }
-    }
-}
-
 .main-wrap {
     // padding-left: 10.8rem;
     padding-top: 12rem;
     max-width: 1920px;
-    margin: 0 auto;
-
-    // hr {
-    //     border: none;
-    //     height: 1px;
-    //     background: #5c5c5c;
-    // }
+    // margin: 0 auto;
 
     // .section-title {
     //     font-size: 3.6rem;
@@ -94,7 +16,6 @@
     .section-1 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        margin-bottom: clamp(20px, 2.5vw, 46px);
 
         h2 {
             font-size: 2.6rem;
@@ -111,74 +32,102 @@
         }
     }
 
-    .section-3 {
+    .section-2 {
         padding-left: 10.8rem;
-        padding-top: 112px;}
+        padding-top: 8.8rem;
 
-      
+        max-width: 1920px;
+    }
 
     .section-4 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 9.2rem;
+        padding-bottom: 6rem;
     }
 
     .section-5 {
-    //    padding-left: 10.8rem;
+        //    padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
     .section-6 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
-     .section-7 {
+    .section-7 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .section-8 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
     }
 
     .section-9 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 
+    .section-10 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
     }
 
     .section-11 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 
+    .section-12 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
     }
 
     .section-13 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
     .section-14 {
-         margin-left: 6.5rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
-    }
-
-     .section-16 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: 70px;
-        padding-bottom: 70px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .section-15 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
+    }
+
+    .section-16 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
 
