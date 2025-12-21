@@ -4,7 +4,7 @@ import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
-import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import './Tvingnew.scss';
 
 import New from '../../data/New';

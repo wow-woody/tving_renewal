@@ -13,7 +13,7 @@ const AppleTvCard = ({ item, rank }: Props) => {
       {rank && (
         <div className="rank-box">
           <img
-            src={`/images/rank/rank-${String(rank).padStart(2, "0")}.png`}
+            src={`/images/rank/rank-${String(rank).padStart(2, "0")}.svg`}
             alt={String(rank)}
           />
         </div>
