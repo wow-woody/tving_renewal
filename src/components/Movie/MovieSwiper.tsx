@@ -221,7 +221,7 @@ const MovieSwiper = ({ config }: Props) => {
           </div>
 
           {movieDetail && (
-            <Link to={`/movie/${movieDetail.id}`} className="featured-info">
+            <Link to={`/movie/detail/${movieDetail.id}`} className="featured-info">
               <h3>{movieDetail.title}</h3>
 
               <p className="age">

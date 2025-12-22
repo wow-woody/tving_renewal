@@ -3,9 +3,25 @@ import type { Movie, Video } from '../type/contents';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
+interface CrewMember {
+  name: string;
+  job: string;
+}
+
+interface CastMember {
+  name: string;
+}
+
+interface MovieImage {
+  file_path: string;
+  width: number;
+  height: number;
+}
+
 interface MovieState {
   movies: Movie[];
   videos: Video[];
+  images: MovieImage[];
   filteredMovies: Movie[];
   movieDetail: Movie | null;
   upcomingMovies: Movie[];
@@ -13,6 +29,7 @@ interface MovieState {
 
   onFetchPopular: () => Promise<void>;
   onFetchVideo: (id: string) => Promise<Video[]>;
+  onFetchImages: (id: string) => Promise<void>;
   onFetchByFilter: (params: Record<string, string>) => Promise<void>;
   onFetchMovieDetail: (id: string) => Promise<void>;
   onFetchUpcoming: () => Promise<void>;
@@ -22,6 +39,7 @@ interface MovieState {
 export const useMovieStore = create<MovieState>((set) => ({
   movies: [],
   videos: [],
+  images: [],
   filteredMovies: [],
   movieDetail: null,
   upcomingMovies: [],
@@ -83,6 +101,13 @@ export const useMovieStore = create<MovieState>((set) => ({
     return data.results;
   },
 
+  // 영화 이미지 가져오기
+  onFetchImages: async (id) => {
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${API_KEY}`);
+    const data = await res.json();
+    set({ images: data.backdrops || [] });
+  },
+
   // 필터링된 영화 가져오기
   onFetchByFilter: async (params) => {
     const queryString = new URLSearchParams({
@@ -126,10 +151,15 @@ export const useMovieStore = create<MovieState>((set) => ({
 
   // 영화 상세 정보 가져오기
   onFetchMovieDetail: async (id) => {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=ko-KR&append_to_response=images,release_dates`
-    );
-    const data = await res.json();
+    const [resDetail, resCredits] = await Promise.all([
+      fetch(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=ko-KR&append_to_response=images,release_dates`
+      ),
+      fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=ko-KR`),
+    ]);
+
+    const data = await resDetail.json();
+    const credits = await resCredits.json();
 
     // 연령 등급
     const krInfo = data.release_dates?.results.find((item: any) => item.iso_3166_1 === 'KR');
@@ -138,7 +168,28 @@ export const useMovieStore = create<MovieState>((set) => ({
     // 로고
     const logo = data.images?.logos?.[0]?.file_path || null;
 
-    set({ movieDetail: { ...data, cAge, logo } });
+    // 감독
+    const directors =
+      credits.crew
+        ?.filter((c: CrewMember) => c.job === 'Director')
+        .map((d: CrewMember) => d.name) || [];
+
+    // 출연진 (상위 8명)
+    const casts = credits.cast?.slice(0, 8).map((c: CastMember) => c.name) || [];
+
+    // 장르명
+    const genreNames = data.genres?.map((g: any) => g.name) || [];
+
+    set({
+      movieDetail: {
+        ...data,
+        cAge,
+        logo,
+        directors,
+        casts,
+        genreNames,
+      },
+    });
   },
 
   // 개봉 예정 영화 가져오기
