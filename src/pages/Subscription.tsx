@@ -1,171 +1,492 @@
-import { useRef } from 'react';
+// import React, { useRef } from 'react';
+// import './scss/Subscription.scss';
+// import { Link } from 'react-router-dom';
+// import { subscriptionData } from '../data/SubscriptionData.ts';
+
+// import { useSubscriptionStore } from '../store/useSubscriptionStore';
+
+// const Subscription = () => {
+//     // ------------클릭 섹션 이동------------
+//     const sectionRefs = useRef<{
+//         t?: HTMLElement | null;
+//         tw?: HTMLElement | null;
+//         twd?: HTMLElement | null;
+//     }>({});
+
+//     //--------------- section별 데이터 찾기 ----------------
+//     const tvingOnlySection = subscriptionData.sections.find((sec) => sec.id === 'tving_only');
+
+//     const tvingWavveSection = subscriptionData.sections.find((sec) => sec.id === 'tving_wavve');
+
+//     const tvingWavveDisneySection = subscriptionData.sections.find(
+//         (sec) => sec.id === 'tving_wavve_disney'
+//     );
+
+//     //-------------- 스크롤 이동 ------------------
+//     const scrollTo = (key: 't' | 'tw' | 'twd' | 'top') => {
+//         if (key === 'top') {
+//             window.scrollTo({
+//                 top: 0,
+//                 behavior: 'smooth',
+//             });
+//             return;
+//         }
+
+//         const target = sectionRefs.current[key];
+//         if (!target) return;
+
+//         const y = target.getBoundingClientRect().top + window.pageYOffset - 193; // header height
+
+//         window.scrollTo({
+//             top: y,
+//             behavior: 'smooth',
+//         });
+//     };
+
+//     const { selectItem } = useSubscriptionStore();
+
+//     return (
+//         <div className="subscription-wrappers">
+//             <div className="top">
+//                 <Link to="/">
+//                     <img src="/images/tving-logo-main.svg" alt="logo" />
+//                 </Link>
+//             </div>
+
+//             <div className="ad-banner">
+//                 <img src="/images/ad-banner.svg" alt="ad-banner" />
+//             </div>
+
+//             <div className="select-section">
+//                 <button onClick={() => scrollTo('top')}>전체</button>
+//                 <button onClick={() => scrollTo('t')}>티빙 이용권</button>
+//                 <button onClick={() => scrollTo('tw')}>티빙 X 웨이브 이용권</button>
+//                 <button onClick={() => scrollTo('twd')}>티빙 X 웨이브 X 디즈니 이용권</button>
+//             </div>
+
+//             <div className="subscription-wrap">
+//                 <div className="select-wrap">
+//                     <section
+//                         ref={(el) => {
+//                             sectionRefs.current.t = el;
+//                         }}
+//                     >
+//                         <div className="title-wrap">
+//                             <h2>
+//                                 <img src="/images/tving-logo-main.svg" alt="tving" />
+//                                 이용권
+//                             </h2>
+//                         </div>
+//                         <div className="subscription">
+//                             {tvingOnlySection?.items.map((item) => (
+//                                 <div key={item.id}>
+//                                     <Link
+//                                         key={item.id}
+//                                         to="/subscription/payment/check"
+//                                         onClick={() => selectItem(item.id)}
+//                                         state={{
+//                                             item,
+//                                             section: {
+//                                                 logos: ['/images/tving-logo-main.svg'],
+//                                                 name: '티빙 이용권',
+//                                             },
+//                                         }}
+//                                     >
+//                                         <div className="select">
+//                                             <div className="select-top">
+//                                                 <p className="title">{item.name}</p>
+//                                                 <div className="price-wrap">
+//                                                     <p className="price">
+//                                                         월 {item.price.discount.toLocaleString()}원
+//                                                     </p>
+//                                                     {item.price.original && (
+//                                                         <p className="cost">
+//                                                             {item.price.original.toLocaleString()}원
+//                                                         </p>
+//                                                     )}
+//                                                 </div>
+//                                             </div>
+//                                             <div className="select-content">
+//                                                 <div className="img-wrap">
+//                                                     {Array.isArray(item.companyIcon) ? (
+//                                                         item.companyIcon.map((icon, idx) => (
+//                                                             <img key={idx} src={icon} alt="" />
+//                                                         ))
+//                                                     ) : (
+//                                                         <img src={item.companyIcon} alt="" />
+//                                                     )}
+//                                                 </div>
+
+//                                                 {item.description.map((desc, idx) => (
+//                                                     <React.Fragment key={idx}>
+//                                                         <p>{desc}</p>
+//                                                         {idx < item.description.length - 1 && (
+//                                                             <span className="plus">+</span>
+//                                                         )}
+//                                                     </React.Fragment>
+//                                                 ))}
+//                                             </div>
+//                                             <div className="select-bottom">이용권 선택</div>
+//                                         </div>
+//                                     </Link>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </section>
+
+//                     <section
+//                         ref={(el) => {
+//                             sectionRefs.current.tw = el;
+//                         }}
+//                     >
+//                         <div className="title-wrap">
+//                             <h2>
+//                                 <img src="/images/tving-logo-main.svg" alt="tving" />
+//                                 <span>X</span>
+//                                 <img src="/images/wave-logo.svg" alt="wave" />
+//                                 이용권
+//                             </h2>
+//                         </div>
+//                         <div className="subscription">
+//                             {tvingWavveSection?.items.map((item) => (
+//                                 <div key={item.id}>
+//                                     <Link
+//                                         key={item.id}
+//                                         to="/subscription/payment/check"
+//                                         onClick={() => selectItem(item.id)}
+//                                         state={{
+//                                             item,
+//                                             section: {
+//                                                 logos: [
+//                                                     '/images/tving-logo-main.svg',
+//                                                     '/images/wave-logo.svg',
+//                                                 ],
+//                                                 name: '티빙 X 웨이브 이용권',
+//                                             },
+//                                         }}
+//                                     >
+//                                         <div className="select">
+//                                             <div className="select-top">
+//                                                 <p className="title">{item.name}</p>
+//                                                 <div className="price-wrap">
+//                                                     <p className="price">
+//                                                         월 {item.price.discount.toLocaleString()}원
+//                                                     </p>
+//                                                     {item.price.original && (
+//                                                         <p className="cost">
+//                                                             {item.price.original.toLocaleString()}원
+//                                                         </p>
+//                                                     )}
+//                                                 </div>
+//                                             </div>
+//                                             <div className="select-content">
+//                                                 <div className="img-wrap">
+//                                                     {Array.isArray(item.companyIcon) ? (
+//                                                         item.companyIcon.map((icon, idx) => (
+//                                                             <img key={idx} src={icon} alt="" />
+//                                                         ))
+//                                                     ) : (
+//                                                         <img src={item.companyIcon} alt="" />
+//                                                     )}
+//                                                 </div>
+
+//                                                 {item.description.map((desc, idx) => (
+//                                                     <React.Fragment key={idx}>
+//                                                         <p>{desc}</p>
+//                                                         {idx < item.description.length - 1 && (
+//                                                             <span className="plus">+</span>
+//                                                         )}
+//                                                     </React.Fragment>
+//                                                 ))}
+//                                             </div>
+//                                             <div className="select-bottom">이용권 선택</div>
+//                                         </div>
+//                                     </Link>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </section>
+
+//                     <section
+//                         ref={(el) => {
+//                             sectionRefs.current.twd = el;
+//                         }}
+//                     >
+//                         <div className="title-wrap">
+//                             <h2>
+//                                 <img src="/images/tving-logo-main.svg" alt="tving" />
+//                                 <span>X</span>
+//                                 <img
+//                                     className="disney-logo"
+//                                     src="/images/diseny-logo.svg"
+//                                     alt="disney"
+//                                 />
+//                                 <span>X</span>
+//                                 <img src="/images/wave-logo.svg" alt="wave" />
+//                                 이용권
+//                             </h2>
+//                         </div>
+
+//                         <div className="subscription">
+//                             {tvingWavveDisneySection?.items.map((item) => (
+//                                 <div key={item.id}>
+//                                     <Link
+//                                         key={item.id}
+//                                         to="/subscription/payment/check"
+//                                         onClick={() => selectItem(item.id)}
+//                                         state={{
+//                                             item,
+//                                             section: {
+//                                                 logos: [
+//                                                     '/images/tving-logo-main.svg',
+//                                                     '/images/diseny-logo.svg',
+//                                                     '/images/wave-logo.svg',
+//                                                 ],
+//                                                 name: '티빙 X 웨이브 X 디즈니 이용권',
+//                                             },
+//                                         }}
+//                                     >
+//                                         <div className="select">
+//                                             <div className="select-top">
+//                                                 <p className="title">{item.name}</p>
+//                                                 <div className="price-wrap">
+//                                                     <p className="price">
+//                                                         월 {item.price.discount.toLocaleString()}원
+//                                                     </p>
+//                                                     {item.price.original && (
+//                                                         <p className="cost">
+//                                                             {item.price.original.toLocaleString()}원
+//                                                         </p>
+//                                                     )}
+//                                                 </div>
+//                                             </div>
+//                                             <div className="select-content">
+//                                                 <div className="img-wrap">
+//                                                     {Array.isArray(item.companyIcon) ? (
+//                                                         item.companyIcon.map((icon, idx) => (
+//                                                             <img key={idx} src={icon} alt="" />
+//                                                         ))
+//                                                     ) : (
+//                                                         <img src={item.companyIcon} alt="" />
+//                                                     )}
+//                                                 </div>
+
+//                                                 {item.description.map((desc, idx) => (
+//                                                     <React.Fragment key={idx}>
+//                                                         <p>{desc}</p>
+//                                                         {idx < item.description.length - 1 && (
+//                                                             <span className="plus">+</span>
+//                                                         )}
+//                                                     </React.Fragment>
+//                                                 ))}
+//                                             </div>
+//                                             <div className="select-bottom">이용권 선택</div>
+//                                         </div>
+//                                     </Link>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </section>
+//                 </div>
+//             </div>
+//             <div className="footer-line"></div>
+//         </div>
+//     );
+// };
+
+// export default Subscription;
+
+import React, { useRef } from 'react';
 import './scss/Subscription.scss';
 import { Link } from 'react-router-dom';
+import { subscriptionData } from '../data/SubscriptionData';
+import { useSubscriptionStore } from '../store/useSubscriptionStore';
 
 const Subscription = () => {
-  // ------------클릭 섹션 이동------------
-  const sectionRefs = useRef<{
-    t?: HTMLElement | null;
-    tw?: HTMLElement | null;
-    twd?: HTMLElement | null;
-  }>({});
+    // ------------ 섹션 스크롤 refs ------------
+    const sectionRefs = useRef<{
+        t?: HTMLElement | null;
+        tw?: HTMLElement | null;
+        twd?: HTMLElement | null;
+    }>({});
 
-  const scrollTo = (key: 't' | 'tw' | 'twd' | 'top') => {
-    if (key === 'top') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-      return;
-    }
+    // ------------ 데이터 찾기 ------------
+    const tvingOnlySection = subscriptionData.sections.find((sec) => sec.id === 'tving_only');
+    const tvingWavveSection = subscriptionData.sections.find((sec) => sec.id === 'tving_wavve');
+    const tvingWavveDisneySection = subscriptionData.sections.find(
+        (sec) => sec.id === 'tving_wavve_disney'
+    );
 
-    const target = sectionRefs.current[key];
-    if (!target) return;
+    // ------------ 스크롤 이동 ------------
+    const scrollTo = (key: 't' | 'tw' | 'twd' | 'top') => {
+        if (key === 'top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
 
-    const y = target.getBoundingClientRect().top + window.pageYOffset - 193; // header height
+        const target = sectionRefs.current[key];
+        if (!target) return;
 
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth',
-    });
-  };
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 193;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    };
 
-  return (
-    <div className="subscription-wrappers">
-      <div className="top">
-        <Link to="/">
-          <img src="/images/tving-logo-main.svg" alt="logo" />
-        </Link>
-      </div>
+    // ------------ zustand ------------
+    const { selectItem } = useSubscriptionStore();
 
-      <div className="ad-banner">
-        <img src="/images/ad-banner.svg" alt="ad-banner" />
-      </div>
-
-      <div className="select-section">
-        <button onClick={() => scrollTo('top')}>전체</button>
-        <button onClick={() => scrollTo('t')}>티빙 이용권</button>
-        <button onClick={() => scrollTo('tw')}>티빙 X 웨이브 이용권</button>
-        <button onClick={() => scrollTo('twd')}>티빙 X 웨이브 X 디즈니 이용권</button>
-      </div>
-
-      <div className="subscription-wrap">
-        <div className="select-wrap">
-          <section
-            ref={(el) => {
-              sectionRefs.current.t = el;
-            }}>
-            <div className="title-wrap">
-              <h2>
-                <img src="/images/tving-logo-main.svg" alt="tving" />
-                이용권
-              </h2>
-            </div>
-            <div className="subscription">
-              <div>
-                <Link to="/subscription/payment/check">
-                  <div className="select">
-                    <div className="select-top">
-                      <p className="title">광고형 스탠다드</p>
-                      <div className="price-wrap">
-                        <p className="price">월 5,500원</p>
-                        <p className="cost">ddd</p>
-                      </div>
-                    </div>
-                    <div className="select-content">
-                      <div className="img-wrap">
-                        <img src="/images/tving-icon.svg" alt="" />
-                      </div>
-                      <p>동시시청 2대</p>
-                      <span>+</span>
-                      <p>최대 1080p FHD 고화질</p>
-                      <span>+</span>
-                      <p>모든 디바이스 지원</p>
-                      <span>+</span>
-                      <p>광고포함</p>
-                    </div>
-                    <div className="select-bottom">이용권 선택</div>
-                  </div>
+    // ------------ 렌더 ------------
+    return (
+        <div className="subscription-wrappers">
+            {/* 헤더 */}
+            <div className="top">
+                <Link to="/">
+                    <img src="/images/tving-logo-main.svg" alt="logo" />
                 </Link>
-              </div>
             </div>
-          </section>
 
-          <section
-            ref={(el) => {
-              sectionRefs.current.tw = el;
-            }}>
-            <div className="title-wrap">
-              <h2>
-                <img src="/images/tving-logo-main.svg" alt="tving" />
-                <span>X</span>
-                <img src="/images/wave-logo.svg" alt="wave" />
-                이용권
-              </h2>
+            {/* 광고 */}
+            <div className="ad-banner">
+                <img src="/images/ad-banner.svg" alt="ad-banner" />
             </div>
-            <div className="subscription">
-              <div>
-                <div className="select">
-                  <div className="select-top">
-                    <p className="title">광고형 스탠다드</p>
-                    <p className="price">월 5,500원</p>
-                  </div>
-                  <div className="select-content">
-                    <p>동시시청 2대</p>
-                    <span>+</span>
-                    <p>최대 1080p FHD 고화질</p>
-                    <span>+</span>
-                    <p>모든 디바이스 지원</p>
-                    <span>+</span>
-                    <p>광고포함</p>
-                  </div>
-                  <div className="select-bottom">이용권 선택</div>
+
+            {/* 섹션 선택 */}
+            <div className="select-section">
+                <button onClick={() => scrollTo('top')}>전체</button>
+                <button onClick={() => scrollTo('t')}>티빙 이용권</button>
+                <button onClick={() => scrollTo('tw')}>티빙 X 웨이브 이용권</button>
+                <button onClick={() => scrollTo('twd')}>티빙 X 웨이브 X 디즈니 이용권</button>
+            </div>
+
+            <div className="subscription-wrap">
+                <div className="select-wrap">
+                    {/* ================= 티빙 단독 ================= */}
+                    <section ref={(el) => (sectionRefs.current.t = el)}>
+                        <div className="title-wrap">
+                            <h2>
+                                <img src="/images/tving-logo-main.svg" alt="tving" />
+                                이용권
+                            </h2>
+                        </div>
+
+                        <div className="subscription">
+                            {tvingOnlySection?.items.map((item) => (
+                                <Link
+                                    key={item.id}
+                                    to="/subscription/payment/check"
+                                    onClick={() => selectItem(item.id)}
+                                >
+                                    <div className="select">
+                                        <SubscriptionItem item={item} />
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* ================= 티빙 + 웨이브 ================= */}
+                    <section ref={(el) => (sectionRefs.current.tw = el)}>
+                        <div className="title-wrap">
+                            <h2>
+                                <img src="/images/tving-logo-main.svg" alt="tving" />
+                                <span>X</span>
+                                <img src="/images/wave-logo.svg" alt="wave" />
+                                이용권
+                            </h2>
+                        </div>
+
+                        <div className="subscription">
+                            {tvingWavveSection?.items.map((item) => (
+                                <Link
+                                    key={item.id}
+                                    to="/subscription/payment/check"
+                                    onClick={() => selectItem(item.id)}
+                                >
+                                    <div className="select">
+                                        <SubscriptionItem item={item} />
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* ================= 티빙 + 웨이브 + 디즈니 ================= */}
+                    <section ref={(el) => (sectionRefs.current.twd = el)}>
+                        <div className="title-wrap">
+                            <h2>
+                                <img src="/images/tving-logo-main.svg" alt="tving" />
+                                <span>X</span>
+                                <img
+                                    className="disney-logo"
+                                    src="/images/diseny-logo.svg"
+                                    alt="disney"
+                                />
+                                <span>X</span>
+                                <img src="/images/wave-logo.svg" alt="wave" />
+                                이용권
+                            </h2>
+                        </div>
+
+                        <div className="subscription">
+                            {tvingWavveDisneySection?.items.map((item) => (
+                                <Link
+                                    key={item.id}
+                                    to="/subscription/payment/check"
+                                    onClick={() => selectItem(item.id)}
+                                >
+                                    <div className="select">
+                                        <SubscriptionItem item={item} />
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <section
-            ref={(el) => {
-              sectionRefs.current.twd = el;
-            }}>
-            <div className="title-wrap">
-              <h2>
-                <img src="/images/tving-logo-main.svg" alt="tving" />
-                <span>X</span>
-                <img className="disney-logo" src="/images/diseny-logo.svg" alt="disney" />
-                <span>X</span>
-                <img src="/images/wave-logo.svg" alt="wave" />
-                이용권
-              </h2>
             </div>
 
-            <div className="subscription">
-              <div>
-                <div className="select">
-                  <div className="select-top">
-                    <p className="title">광고형 스탠다드</p>
-                    <p className="price">월 5,500원</p>
-                  </div>
-                  <div className="select-content">
-                    <p>동시시청 2대</p>
-                    <span>+</span>
-                    <p>최대 1080p FHD 고화질</p>
-                    <span>+</span>
-                    <p>모든 디바이스 지원</p>
-                    <span>+</span>
-                    <p>광고포함</p>
-                  </div>
-                  <div className="select-bottom">이용권 선택</div>
-                </div>
-              </div>
-            </div>
-          </section>
+            <div className="footer-line" />
         </div>
-      </div>
-      <div className="footer-line"></div>
-    </div>
-  );
+    );
 };
 
 export default Subscription;
+
+/* ================= 공통 아이템 컴포넌트 ================= */
+
+interface ItemProps {
+    item: (typeof subscriptionData.sections)[0]['items'][0];
+}
+
+const SubscriptionItem = ({ item }: ItemProps) => {
+    return (
+        <>
+            <div className="select-top">
+                <p className="title">{item.name}</p>
+                <div className="price-wrap">
+                    <p className="price">월 {item.price.discount.toLocaleString()}원</p>
+                    {item.price.original && (
+                        <p className="cost">{item.price.original.toLocaleString()}원</p>
+                    )}
+                </div>
+            </div>
+
+            <div className="select-content">
+                <div className="img-wrap">
+                    {Array.isArray(item.companyIcon) ? (
+                        item.companyIcon.map((icon) => <img key={icon} src={icon} alt="" />)
+                    ) : (
+                        <img src={item.companyIcon} alt="" />
+                    )}
+                </div>
+
+                {item.description.map((desc, idx) => (
+                    <React.Fragment key={idx}>
+                        <p>{desc}</p>
+                        {idx < item.description.length - 1 && <span className="plus">+</span>}
+                    </React.Fragment>
+                ))}
+            </div>
+
+            <div className="select-bottom">이용권 선택</div>
+        </>
+    );
+};

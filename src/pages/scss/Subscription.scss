@@ -197,7 +197,7 @@
 
                                 background: #282828;
 
-                                font-size: 1.6rem;
+                                // font-size: 1.6rem;
                                 color: #fff;
 
                                 .img-wrap {
@@ -207,13 +207,18 @@
                                     img {
                                         width: 50px;
                                         aspect-ratio: 1;
-                                        margin-bottom: 12px;
+                                        margin-bottom: 20px;
                                     }
                                 }
 
                                 p {
-                                    font-size: 1.8rem;
-                                    font-weight: 800;
+                                    // font-size: 1.8rem;
+                                    font-size: 1.6rem;
+                                    font-weight: 700;
+                                }
+
+                                .plus {
+                                    font-size: 1.2rem;
                                 }
                             }
 
