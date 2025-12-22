@@ -65,7 +65,7 @@ const Login = () => {
                     <img src="/images/login-close.svg" alt="close" onClick={() => setId('')} />
                   </button>
                 </div>
-                <p>이메일 형식으로 입력해주세요</p>
+                <p>아이디를 입력해주세요</p>
               </div>
               <div className="password">
                 <div>
@@ -134,7 +134,7 @@ const Login = () => {
         </div>
       </div>
       <div className="footer-line"></div>
-      
+
       {alertModal?.show && (
         <AlertModal
           message={alertModal.message}

@@ -3,6 +3,7 @@ import { useUserStore } from '../../store/useUserStore';
 import { useAuthStore } from '../../store/useAuthStore';
 import { useHeartStore } from '../../store/useHeartStore';
 import { useWatchHistoryStore } from '../../store/useWatchHistoryStore';
+import type { HeartItem } from '../../type/contents';
 import { useEffect, useState, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -36,6 +37,12 @@ const Mypage = () => {
   const trackRefInterest = useRef<HTMLDivElement | null>(null);
   const prevRefInterest = useRef<HTMLButtonElement | null>(null);
   const nextRefInterest = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const fetchAlarms = async () => {
@@ -78,7 +85,7 @@ const Mypage = () => {
     setBarOffsetInterest(Math.min(Math.max(prog, 0), 1) * maxLeft);
   };
 
-  const handleRemoveHeart = async (item: any) => {
+  const handleRemoveHeart = async (item: HeartItem) => {
     await onToggleHeart(item);
   };
 
