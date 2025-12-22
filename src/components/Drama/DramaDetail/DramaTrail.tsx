@@ -78,7 +78,7 @@ const DramaTrail = () => {
         <div className="episode-swiper">
           <Swiper
             modules={[Navigation]}
-            slidesPerView={3.8}   // ← 여기만 상황별로 변경
+            slidesPerView={3.8} // ← 여기만 상황별로 변경
             spaceBetween={16}
             navigation
             onBeforeInit={(swiper) => {
@@ -98,13 +98,13 @@ const DramaTrail = () => {
               const maxIndex = Math.max(total - visible, 1);
 
               updateBar(swiper.realIndex / maxIndex);
-            }}
-          >
-
+            }}>
             {videos.map((video) => (
               <SwiperSlide key={video.id}>
-                <div className="episode-card">
-                  <button onClick={() => handleVideoClick(video.key)} className="thumb">
+                <div className="trailer-card">
+                  <button
+                    onClick={() => handleVideoClick(video.key)}
+                    className="trailer-card-thumb">
                     <img
                       src={`https://img.youtube.com/vi/${video.key}/maxresdefault.jpg`}
                       alt={video.name}

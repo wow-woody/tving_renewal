@@ -6,10 +6,8 @@ import type { CSSProperties } from 'react';
 import VideoPlay from '../VideoPlay';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
-import 'swiper/css/navigation';
 
 import '../scss/DramaList.scss';
 
@@ -38,8 +36,6 @@ const DramaList = () => {
   const navigationRefs = useRef<{
     [key: number]: {
       swiper: SwiperType | null;
-      prev: HTMLButtonElement | null;
-      next: HTMLButtonElement | null;
       bar: HTMLDivElement | null;
       track: HTMLDivElement | null;
     };
@@ -67,8 +63,6 @@ const DramaList = () => {
     if (!navigationRefs.current[seasonNumber]) {
       navigationRefs.current[seasonNumber] = {
         swiper: null,
-        prev: null,
-        next: null,
         bar: null,
         track: null,
       };
@@ -154,7 +148,7 @@ const DramaList = () => {
               <button
                 className="season-dropdown-btn"
                 onClick={() => setShowSeasonMenu(!showSeasonMenu)}>
-                ▼
+                ▶
               </button>
               {showSeasonMenu && (
                 <div className="season-dropdown-menu">
@@ -163,8 +157,9 @@ const DramaList = () => {
                     .map((s) => (
                       <button
                         key={s.id}
-                        className={`season-menu-item ${s.season_number === selectedSeasonNumber ? 'active' : ''
-                          }`}
+                        className={`season-menu-item ${
+                          s.season_number === selectedSeasonNumber ? 'active' : ''
+                        }`}
                         onClick={() => selectSeason(s.season_number)}>
                         {s.name}
                       </button>
@@ -184,13 +179,34 @@ const DramaList = () => {
               </div>
               <div className="enter-nav">
                 <button
-                  ref={(el) => setSeasonRef(selectedSeasonNumber, 'prev', el)}
-                  className="nav-btn prev">
+                  className="nav-btn prev"
+                  onClick={() => {
+                    const swiper = navigationRefs.current[selectedSeasonNumber]?.swiper;
+                    if (swiper) {
+                      const slidesPerView = Math.floor(
+                        swiper.width / (swiper.slides[0]?.offsetWidth + 16 || 1)
+                      );
+                      const targetIndex = Math.max(0, swiper.activeIndex - slidesPerView);
+                      swiper.slideTo(targetIndex);
+                    }
+                  }}>
                   ‹
                 </button>
                 <button
-                  ref={(el) => setSeasonRef(selectedSeasonNumber, 'next', el)}
-                  className="nav-btn next">
+                  className="nav-btn next"
+                  onClick={() => {
+                    const swiper = navigationRefs.current[selectedSeasonNumber]?.swiper;
+                    if (swiper) {
+                      const slidesPerView = Math.floor(
+                        swiper.width / (swiper.slides[0]?.offsetWidth + 16 || 1)
+                      );
+                      const targetIndex = Math.min(
+                        swiper.slides.length - 1,
+                        swiper.activeIndex + slidesPerView
+                      );
+                      swiper.slideTo(targetIndex);
+                    }
+                  }}>
                   ›
                 </button>
               </div>
@@ -199,26 +215,19 @@ const DramaList = () => {
 
           <div className="episode-swiper">
             <Swiper
+              key={selectedSeasonNumber}
               slidesPerView="auto"
               spaceBetween={16}
-              modules={[Navigation]}
-              navigation={{
-                prevEl: navigationRefs.current[selectedSeasonNumber]?.prev ?? undefined,
-                nextEl: navigationRefs.current[selectedSeasonNumber]?.next ?? undefined,
-              }}
               onSwiper={(swiper) => {
                 setSeasonRef(selectedSeasonNumber, 'swiper', swiper);
-
-                // 네비게이션 다시 초기화 (중요)
-                requestAnimationFrame(() => {
-                  swiper.navigation.init();
-                  swiper.navigation.update();
-                });
-
                 updateBar(selectedSeasonNumber, 0);
               }}
-            >
-              
+              onSlideChange={(swiper) => {
+                const maxTranslate = Math.abs(swiper.maxTranslate());
+                const currentTranslate = Math.abs(swiper.translate);
+                const progress = maxTranslate > 0 ? currentTranslate / maxTranslate : 0;
+                updateBar(selectedSeasonNumber, progress);
+              }}>
               {episodes.map((ep) => {
                 const isUpcoming = ep.air_date && new Date(ep.air_date) > new Date();
                 const episodeImage = isUpcoming
@@ -245,8 +254,8 @@ const DramaList = () => {
                         <h3>
                           {ep.episode_number}. {ep.name}
                         </h3>
-                        <p className='ep-overview'>{ep.overview}</p>
-                        <p className='ep-data'>
+                        <p className="ep-overview">{ep.overview}</p>
+                        <p className="ep-data">
                           {ep.air_date} · {isUpcoming ? '방영예정' : `${ep.runtime}분`}
                         </p>
                       </div>

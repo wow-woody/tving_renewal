@@ -1,4 +1,4 @@
-import './scss/DramaVPopup.scss';
+import '../../YoutubeModal.scss';
 
 interface VideoPopupProps {
   youtubeKey: string;
@@ -7,12 +7,12 @@ interface VideoPopupProps {
 
 const DramaVPopup = ({ youtubeKey, onClose }: VideoPopupProps) => {
   return (
-    <div className="video-popup-overlay" onClick={onClose}>
-      <div className="video-popup-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>
+    <div className="youtube-modal__backdrop" onClick={onClose}>
+      <div className="youtube-modal__content" onClick={(e) => e.stopPropagation()}>
+        <button className="youtube-modal__close" onClick={onClose}>
           ✕
         </button>
-        <div className="video-container">
+        <div className="youtube-modal__video-box">
           <iframe
             src={`https://www.youtube.com/embed/${youtubeKey}?autoplay=1`}
             title="YouTube video player"

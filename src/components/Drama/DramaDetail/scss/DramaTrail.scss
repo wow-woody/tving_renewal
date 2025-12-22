@@ -9,14 +9,13 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 62px;
-    gap:8px;
+    gap: 8px;
   }
 
   .season-title {
-    
     h3 {
-    color: #fff;
-    font-size: 36px;
+      color: #fff;
+      font-size: 36px;
     }
   }
 
@@ -88,8 +87,8 @@
     position: relative;
   }
 
-  .episode-card {
-    .thumb {
+  .trailer-card {
+    .trailer-card-thumb {
       width: 100%;
       position: relative;
       display: block;
@@ -99,16 +98,16 @@
       border: none;
       padding: 0;
       cursor: pointer;
-      transition: transform 0.3s;
-
-      &:hover {
-        transform: scale(1.05);
-      }
 
       img {
         width: 100%;
         height: auto;
         display: block;
+        transition: transform 0.3s;
+      }
+
+      &:hover img {
+        transform: scale(1.05);
       }
 
       .play-icon {
@@ -119,11 +118,12 @@
         font-size: 48px;
         color: rgba(255, 255, 255, 0.9);
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        opacity: 0;
         transition: all 0.3s;
       }
 
       &:hover .play-icon {
-        color: #ff0558;
+        opacity: 1;
         transform: translate(-50%, -50%) scale(1.2);
       }
     }
