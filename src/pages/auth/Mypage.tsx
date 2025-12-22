@@ -287,7 +287,7 @@ const Mypage = () => {
               }}
               onProgress={(_, prog) => updateBarInterest(prog)}
               className="interest-swiper">
-              {hearts.map((item) => {
+              {hearts.map((item: import('../../type/contents').HeartItem) => {
                 const detailPath =
                   item.media_type === 'movie' ? `/movie/detail/${item.id}` : `/detail/${item.id}`;
 

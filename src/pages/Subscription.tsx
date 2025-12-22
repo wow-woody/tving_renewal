@@ -1,12 +1,16 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import './scss/Subscription.scss';
 import { Link } from 'react-router-dom';
 
 const Subscription = () => {
   // ------------클릭 섹션 이동------------
-  const sectionRefs = useRef({});
+  const sectionRefs = useRef<{
+    t?: HTMLElement | null;
+    tw?: HTMLElement | null;
+    twd?: HTMLElement | null;
+  }>({});
 
-  const scrollTo = (key) => {
+  const scrollTo = (key: string) => {
     if (key === 'top') {
       window.scrollTo({
         top: 0,
@@ -47,7 +51,10 @@ const Subscription = () => {
 
       <div className="subscription-wrap">
         <div className="select-wrap">
-          <section ref={(el) => (sectionRefs.current.t = el)}>
+          <section
+            ref={(el) => {
+              sectionRefs.current.t = el;
+            }}>
             <div className="title-wrap">
               <h2>
                 <img src="/images/tving-logo-main.svg" alt="tving" />
@@ -84,7 +91,10 @@ const Subscription = () => {
             </div>
           </section>
 
-          <section ref={(el) => (sectionRefs.current.tw = el)}>
+          <section
+            ref={(el) => {
+              sectionRefs.current.tw = el;
+            }}>
             <div className="title-wrap">
               <h2>
                 <img src="/images/tving-logo-main.svg" alt="tving" />
@@ -115,7 +125,10 @@ const Subscription = () => {
             </div>
           </section>
 
-          <section ref={(el) => (sectionRefs.current.twd = el)}>
+          <section
+            ref={(el) => {
+              sectionRefs.current.twd = el;
+            }}>
             <div className="title-wrap">
               <h2>
                 <img src="/images/tving-logo-main.svg" alt="tving" />

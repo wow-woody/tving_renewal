@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './scss/Home.scss';
 import RankRow from '../components/tving-top20/RankRowtop20';
 import RankRowAnim from '../components/anim-top20/RankRowanim20';
@@ -26,10 +25,6 @@ import { liveChannels } from '../data/LiveChannels';
 import MyLive from '../components/my-live/MyLive';
 import SportsLive from '../components/sports-live/SportsLive';
 
-
-
-
-
 const Home = () => {
   // 1) 전부 합치기
   const all: Content[] = [...drama, ...anim, ...movie, ...enter];
@@ -39,7 +34,6 @@ const Home = () => {
     .filter((item) => item.rank?.[RankScope.TOP20] != null)
     .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
     .slice(0, 20);
-
 
   // 2) ANIM 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
   const anim20 = all
@@ -61,9 +55,8 @@ const Home = () => {
       </section>
 
       <section className="section-3">
-        <h2 className='hidden'>현재 시청중인 프로그램</h2>
+        <h2 className="hidden">현재 시청중인 프로그램</h2>
       </section>
-
 
       <section className="section-4">
         <LiveNews list={liveChannels} />
@@ -93,15 +86,15 @@ const Home = () => {
         <AppleTvSection />
       </section>
 
-      <section className='section-11'>
+      <section className="section-11">
         <EnterFeaturedSection />
       </section>
 
-      <section className='section-12'>
+      <section className="section-12">
         <KblSection />
       </section>
 
-      <section className='section-13'>
+      <section className="section-13">
         <MovieFeaturedSection />
       </section>
 
@@ -112,7 +105,7 @@ const Home = () => {
       <section className="section-15">
         <VOnlySection />
       </section>
-      
+
       <section className="section-16">
         <SportsLive list={liveChannels} />
       </section>

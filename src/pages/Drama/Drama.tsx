@@ -29,7 +29,6 @@ const Drama = () => {
   const onairko = useTvSeriesStore((s) => s.onairko);
 
   const navigate = useNavigate();
-  const { key } = useParams();
 
   useEffect(() => {
     onFetchTvs();

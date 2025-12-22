@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
