@@ -41,12 +41,6 @@ const CstomerService = ({ onClose }: CustomerServiceProps) => {
     setError(null);
   };
 
-  const _handleCategorySelect = (category: string) => {
-    setForm((prev) => ({ ...prev, category }));
-    setCategoryModal(false);
-    setError(null);
-  };
-
   const handleCategoryKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!categoryModal) return;
 

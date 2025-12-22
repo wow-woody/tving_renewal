@@ -107,10 +107,12 @@ export const useUserStore = create<UserState>((set, get) => ({
     const setProfiles = profiles.filter((p) => p.id !== profileId);
     const newProfileId =
       currentId === profileId
-        ? setProfiles.find((p) => p.owner)?.id ?? setProfiles[0].id
+        ? setProfiles.find((p) => p.owner)?.id ?? setProfiles[0]?.id ?? ''
         : currentId;
 
-    localStorage.setItem('selectedProfileId', newProfileId);
+    if (newProfileId) {
+      localStorage.setItem('selectedProfileId', newProfileId);
+    }
 
     set({
       profiles: setProfiles,

@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import '../scss/Drama.scss';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import OnAirDramaList from '../../components/Drama/OnAirDrama';
 import Popular20 from '../../components/Drama/Popular20/Popular20';
 import VOriginalSection from '../../components/v-origin/VOriginalSection';

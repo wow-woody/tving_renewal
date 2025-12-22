@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { usePersonStore } from '../../store/usePersonStore';
 import './PersonDetail.scss';
+import { useParams } from 'react-router-dom';
 
 const PersonDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { personDetail, personCredits, loading, onFetchPersonDetail } = usePersonStore();
 
   useEffect(() => {

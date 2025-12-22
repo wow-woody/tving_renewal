@@ -10,7 +10,7 @@ const Subscription = () => {
     twd?: HTMLElement | null;
   }>({});
 
-  const scrollTo = (key: string) => {
+  const scrollTo = (key: 't' | 'tw' | 'twd' | 'top') => {
     if (key === 'top') {
       window.scrollTo({
         top: 0,

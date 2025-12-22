@@ -4,7 +4,7 @@
 // 로그아웃 초기화
 
 import { create } from 'zustand';
-import type { HeartItem, HeartState } from '../types/movie';
+import type { HeartItem, HeartState } from '../type/contents';
 import { useAuthStore } from './useAuthStore';
 import { useUserStore } from './useUserStore';
 // firebase firestore를 가져오기
@@ -16,7 +16,7 @@ export const useHeartStore = create<HeartState>((set, get) => ({
   // 찜 목록을 저장할 배열
   hearts: [],
   // 영화를 찜하거나 취소할때 사용될 메서드
-  onToggleHeart: async (movie) => {
+  onToggleHeart: async (movie: HeartItem) => {
     // 로그인 정보 확인
     // useAuthStore에 있는 상태 변수 user 가져오기
     const user = useAuthStore.getState().user;
@@ -29,7 +29,7 @@ export const useHeartStore = create<HeartState>((set, get) => ({
     const ref = doc(db, 'users', user.uid, 'profiles', profileId, 'hearts', String(movie.id));
 
     // 현재 hearts 상태가 이미 있는지 확인
-    const exists = get().hearts.find((h) => h.id === movie.id);
+    const exists = get().hearts.find((h: HeartItem) => h.id === movie.id);
 
     if (exists) {
       // 만약에 있으면 제거
