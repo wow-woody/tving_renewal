@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
 import { useHeartStore } from '../../../store/useHeartStore';
+import type { HeartItem } from '../../../type/contents';
 import { useParams } from 'react-router-dom';
 import '../scss/DramaDeBanner.scss';
 
@@ -27,7 +28,7 @@ const DramaDeBanner = () => {
     ? `https://image.tmdb.org/t/p/original${tvDetail.poster_path}`
     : '';
 
-  const isHearted = hearts.some((h) => h.id === tvDetail.id);
+  const isHearted = hearts.some((h: HeartItem) => h.id === tvDetail.id);
 
   const handleHeartClick = async () => {
     try {

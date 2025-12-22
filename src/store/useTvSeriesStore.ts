@@ -83,6 +83,7 @@ interface TvDetail {
   adult?: boolean;
   genres?: Genre[];
   number_of_seasons?: number;
+  vote_average?: number;
 }
 
 interface TvSeriesStore {
