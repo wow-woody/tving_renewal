@@ -33,7 +33,7 @@ const Anim = () => {
   }, [onFetchAnims]);
 
   return (
-    <div className="contents-wrap">
+    <div className="anim-contents-wrap">
       <section className="section-1">
         <div className="sub-container">
           <img src="/images/애니배너.png" alt="애니메이션 배너" className="main-banner-image" />
@@ -53,35 +53,35 @@ const Anim = () => {
         </ul>
       </section>
 
-      <section className="section-rank-anim">
+      <section className="section-3">
         <RankRowAnim data={anim20} title="실시간 인기 애니메이션" rankScope={RankScope.POP_ANIM} />
       </section>
 
-      <section className="section-animSwiper">
+      <section className="section-4">
         <AnimSwiper config={JP_ANIM_CONFIG} />
       </section>
 
-      <section className="section-animSwiper">
+      <section className="section-5">
         <AnimSwiper config={COMEDY_ANIM_CONFIG} />
       </section>
 
-      <section className="section-snoopy">
+      <section className="section-6">
         <SnoopySection />
       </section>
 
-      <section className="section-animSwiper">
+      <section className="section-7">
         <AnimSwiper config={FAMILY_ANIM_CONFIG} />
       </section>
 
-      <section className="section-animSwiper">
+      <section className="section-8">
         <AnimSwiper config={DRAMA_ANIM_CONFIG} />
       </section>
 
-      <section className="section-zootopia">
+      <section className="section-9">
         <ZootopiaSection />
       </section>
 
-      <section className="section-animSwiper">
+      <section className="section-10">
         <AnimSwiper config={KIDS_ANIM_CONFIG} />
       </section>
     </div>
