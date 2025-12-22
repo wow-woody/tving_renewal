@@ -1,32 +1,18 @@
 @use '../../App.scss' as g;
 
-.contents-wrap {
+.drama-contents-wrap {
   padding-top: 12rem;
 
   .section-1 {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: clamp(20px, 2.5vw, 46px);
-
-    h2 {
-      font-size: 2.6rem;
-      color: #fff;
-      margin-bottom: 2.4rem;
-    }
-
-    .sub-container {
-      position: relative;
-      min-width: 833px;
-      aspect-ratio: 1788/732;
-      border-radius: 1.4rem;
-      background: rgb(26, 34, 61);
-    }
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
   }
 
   .section-2 {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 3rem;
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin: 46px 0;
+    
 
     .drama-filter-swiper {
       width: 100%;
@@ -46,38 +32,26 @@
         cursor: pointer;
         transition: all 0.3s ease;
         white-space: nowrap;
-        display: inline-block;
 
         &:hover {
           border-color: #ff153c;
           background: rgba(255, 21, 60, 0.1);
-          box-shadow: 0 4px 16px rgba(255, 21, 60, 0.3);
+        }
+
+        &.active {
+          border-color: #ff153c;
+          background: #ff153c;
+          color: #fff;
         }
       }
     }
   }
 
-  .section-onair {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 4rem;
+  .section-3,.section-4,.section-5,.section-6,.section-7,.section-8,.section-9, .section-10 ,.section-11, .section-12, .section-13 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 12rem;
 
-    .onair-list {
-      display: flex;
-    }
   }
 
-  .section-dramaSwiper {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 4rem;
-  }
-
-  .drama-voriginal {
-    margin-bottom: 4rem;
-  }
-
-  .section-9 {
-    margin-bottom: 4rem;
-  }
 }

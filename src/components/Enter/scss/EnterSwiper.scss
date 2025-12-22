@@ -11,7 +11,7 @@
   // padding: 40px 0;
   isolation: isolate;
   overflow: visible;
-}
+
 
 /* 재사용: 공통 구조 */
 .section-header {
@@ -228,4 +228,5 @@
 .enter-nav .nav-btn:disabled {
   opacity: 0.4;
   cursor: default;
+}
 }

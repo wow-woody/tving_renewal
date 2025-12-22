@@ -1,12 +1,13 @@
   .tiving-new-wrappers{
+    padding-left: 10.8rem;
 
   .section-header {
     // margin-bottom: 24px;
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
 
-    padding-left: 10.8rem;
-    padding-right: 2.4rem;
+    // padding-left: 10.8rem;
+    // padding-right: 2.4rem;
 
     color:#fff;
     
@@ -22,6 +23,7 @@
       display: flex;
       align-items: flex-end;
       gap: 12px;
+      margin-bottom: 64px;
     }
 
     .news-pagination {
@@ -101,6 +103,7 @@
 
         display: flex;
         justify-content: center;
+    
     }
 }
 

@@ -1,40 +1,28 @@
 @use '../../App.scss' as g;
 
-.contents-wrap {
+.movie-contents-wrap {
   padding-top: 12rem;
 
   .section-1 {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: clamp(20px, 2.5vw, 46px);
-
-    h2 {
-      font-size: 2.6rem;
-      color: #fff;
-      // margin-bottom: 2.4rem;
-    }
-
-    .sub-container {
-      position: relative;
-      min-width: 833px;
-      aspect-ratio: 1788/732;
-      border-radius: 1.4rem;
-      background: rgb(26, 34, 61);
-    }
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+   
   }
 
   .section-2 {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 3rem;
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin: 46px 0;
 
-    .enter-filter {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    .movie-filter-swiper {
+      width: 100%;
 
+      .filter-slide {
+        width: auto;
+      }
+    
       .filter-item {
-        padding: 0px 24px;
+        padding: 10px 24px;
         border: 1px solid #5c5c5c;
         @include g.boxshadow;
         border-radius: 50px;
@@ -59,29 +47,11 @@
     }
   }
 
-  .section-popular {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 4rem;
+  .section-3,.section-4,.section-5,.section-6,.section-7,.section-8,.section-9, .section-10 ,.section-11 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+    margin-bottom: 12rem;
   }
 
-  .section-upcoming {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 4rem;
-  }
-
-  .section-movieSwiper {
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
-    // margin-bottom: 4rem;
-  }
-
-  .movie-voriginal {
-    // margin-bottom: 4rem;
-  }
-
-  .section-appletv {
-    // margin-bottom: 4rem;
-  }
+ 
 }

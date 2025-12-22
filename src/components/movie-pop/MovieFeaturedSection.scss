@@ -7,11 +7,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  // gap: 16px;
   // padding: 40px 0;
   isolation: isolate;
   overflow: visible;
-}
+
 
 /* 공통 구조는 기존 섹션들과 동일 클래스 재사용 */
 .section-header {
@@ -219,4 +219,6 @@
 .enter-nav .nav-btn:disabled {
   opacity: 0.4;
   cursor: default;
+}
+
 }

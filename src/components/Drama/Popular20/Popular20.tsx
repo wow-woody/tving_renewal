@@ -30,18 +30,21 @@ const Popular20 = ({ title = '인기 드라마 TOP 20' }) => {
   // 🔥 TMDB 인기 드라마 fetch
   useEffect(() => {
     const fetchPopularTvs = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=ko-KR&page=1`
-      );
-      const json = await res.json();
-
-      const dramaOnly = json.results.filter(
-        (tv: any) => tv.genre_ids?.includes(18) && !tv.genre_ids?.includes(16)
-      );
-
-      setData(dramaOnly.slice(0, 20));
+      let dramas: TmdbTv[] = [];
+      let page = 1;
+      while (dramas.length < 20 && page <= 5) {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=ko-KR&page=${page}`
+        );
+        const json = await res.json();
+        const dramaOnly = json.results.filter(
+          (tv: any) => tv.genre_ids?.includes(18) && !tv.genre_ids?.includes(16)
+        );
+        dramas = dramas.concat(dramaOnly);
+        page++;
+      }
+      setData(dramas.slice(0, 20));
     };
-
     fetchPopularTvs();
   }, []);
 
@@ -55,7 +58,7 @@ const Popular20 = ({ title = '인기 드라마 TOP 20' }) => {
 
   return (
     <section
-      className="section-6"
+      className="rank-row-top20"
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
       <h2 className="section-title">{title}</h2>
 
@@ -77,8 +80,8 @@ const Popular20 = ({ title = '인기 드라마 TOP 20' }) => {
 
       <div className="rank-row">
         <Swiper
-          slidesPerView={6}
-          spaceBetween={50}
+          slidesPerView={4.3}
+          spaceBetween={30}
           modules={[Navigation]}
           navigation
           onBeforeInit={(swiper) => {
