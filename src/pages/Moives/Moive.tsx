@@ -33,7 +33,7 @@ const Movie = () => {
       </section>
 
       <section className="section-2">
-          <Swiper
+        <Swiper
           className="movie-filter-swiper"
           slidesPerView="auto"
           spaceBetween={12}
@@ -41,7 +41,7 @@ const Movie = () => {
           grabCursor={true}>
           {MOVIE_FILTERS.map((f) => (
             <SwiperSlide key={f.key} className="filter-slide">
-              <div className="filter-item" onClick={() => navigate(`/drama/genre/${f.key}`)}>
+              <div className="filter-item" onClick={() => navigate(`/movie/genre/${f.key}`)}>
                 {f.label}
               </div>
             </SwiperSlide>

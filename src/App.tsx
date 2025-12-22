@@ -101,9 +101,8 @@ function App() {
         <Route path="/live" element={<LivePage />} />
         <Route path="/sport" element={<SportBanner />} />
         <Route path="/movie" element={<Movie />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/movie/detail/:id" element={<MovieDetail />} />
         <Route path="/movie/genre/:key" element={<MovieGenre />} />
-
       </Routes>
 
       {!hideFooter && <Footer />}
