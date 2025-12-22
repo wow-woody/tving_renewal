@@ -41,14 +41,40 @@ const DramaGenre = () => {
                                     <div className="img-wrap">
                                         <img src={`${IMAGE_BASE}${tv.poster_path}`} alt={tv.name} />
                                         <div className="overlay-info">
-                                            <p className="overlay-title">{tv.name}</p>
-                                            <p className="overlay-meta">
-                                                {(tv.genre_ids || [])
-                                                    .map((id: number) => TMDB_GENRE_MAP[id])
-                                                    .filter(Boolean)
-                                                    .slice(0, 2)
-                                                    .join(' • ')}
-                                            </p>
+                                            <div className="overlay-header">
+                                                <p className="overlay-title">{tv.name}</p>
+                                            </div>
+                                            <div className="overlay-details">
+                                                <div className="rating-date">
+                                                    {tv.vote_average && (
+                                                        <span className="rating">
+                                                            <span className='rating_star'>⭐</span> {tv.vote_average.toFixed(1)}
+                                                        </span>
+                                                    )}
+                                                    <span>·</span>
+                                                    {tv.first_air_date && (
+                                                        <span className="date">
+                                                            {new Date(
+                                                                tv.first_air_date
+                                                            ).getFullYear()}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <p className="genres">
+                                                    {(tv.genre_ids || [])
+                                                        .map((id: number) => TMDB_GENRE_MAP[id])
+                                                        .filter(Boolean)
+                                                        .slice(0, 3)
+                                                        .join(' • ')}
+                                                </p>
+                                                {tv.overview && (
+                                                    <p className="overview">
+                                                        {tv.overview.length > 120
+                                                            ? tv.overview.slice(0, 120) + '...'
+                                                            : tv.overview}
+                                                    </p>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
