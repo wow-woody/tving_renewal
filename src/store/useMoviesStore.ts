@@ -46,7 +46,7 @@ export const useMovieStore = create<MovieState>((set) => ({
         const dataAge = await resAge.json();
         // console.log('연령?', dataAge.results);
 
-        const krInfo = dataAge.results.find((item) => item.iso_3166_1 === 'KR');
+        const krInfo = dataAge.results.find((item: any) => item.iso_3166_1 === 'KR');
         const cAge = krInfo?.release_dates?.[0].certification || 'none';
 
         // 2) 로고 이미지

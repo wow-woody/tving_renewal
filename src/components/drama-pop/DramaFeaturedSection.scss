@@ -70,6 +70,17 @@
   gap: 12px;
   align-items: center;
   padding: 0 0.8%;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:hover h3 {
+    color: #ff153c;
+  }
 }
 
 .featured-info h3 {

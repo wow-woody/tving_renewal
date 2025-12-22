@@ -67,11 +67,11 @@ const Agree = ({ onChangeCheck }: Props) => {
   }, [isRequiredChecked, onChangeCheck]);
 
   //------------popup------------
-  const [openPopup, setOpenPopup] = useState(null);
+  const [openPopup, setOpenPopup] = useState<string | null>(null);
 
   const closePopup = () => setOpenPopup(null);
 
-  const handlePopupAgree = (popupName) => {
+  const handlePopupAgree = (popupName: string) => {
     if (popupName === 'popup1') {
       setOtherCheckboxes((prev) => {
         const newValues = [...prev];

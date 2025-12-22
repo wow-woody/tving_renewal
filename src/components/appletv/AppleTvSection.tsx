@@ -61,8 +61,8 @@ const AppleTvSection = () => {
 
         <div className="apple-tv-slider">
           <Swiper
-            slidesPerView={4.3}
-            spaceBetween={24}
+            slidesPerView={3.5}
+            spaceBetween={5}
             modules={[Navigation]}
             onBeforeInit={(swiper) => {
               // @ts-ignore

@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import type { Sport } from "../../data/sport";
+import { Link } from 'react-router-dom';
+import type { Sport } from '../../data/sport';
 
 interface Props {
   item: Sport;
   rank: number;
 }
 
-const KblCard = ({ item, rank }: Props) => {
+const KblCard = ({ item }: Props) => {
   return (
     <Link to={`/detail/${item.id}`} className="kbl-card-wrapper">
       <div className="kbl-card">

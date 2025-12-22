@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
+import { useWatchHistoryStore } from '../../../store/useWatchHistoryStore';
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import VideoPlay from '../VideoPlay';
@@ -25,12 +26,13 @@ const DramaList = () => {
     onFetchTvVideos,
   } = useTvSeriesStore();
 
+  const { onAddWatchHistory } = useWatchHistoryStore();
+
   const [showPopup, setShowPopup] = useState(false);
   const [youtubeKey, setYoutubeKey] = useState('');
   const [barOffsets, setBarOffsets] = useState<{ [key: number]: number }>({});
   const [showSeasonMenu, setShowSeasonMenu] = useState(false);
   const [selectedSeasonNumber, setSelectedSeasonNumber] = useState<number>(1);
-  const [selectedEpisodeId, setSelectedEpisodeId] = useState<number | null>(null);
 
   // 각 시즌마다 독립적인 ref 관리
   const navigationRefs = useRef<{
@@ -43,16 +45,13 @@ const DramaList = () => {
     };
   }>({});
 
-  // 시즌 섹션 ref
-  const seasonSectionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
-
   useEffect(() => {
     if (!id) return;
     onFetchTvDetail(id);
     onFetchSeasons(id);
     // onFetchEpisodes(id, 1);
     onFetchTvVideos(id);
-  }, [id]);
+  }, [id, onFetchTvDetail, onFetchSeasons, onFetchTvVideos]);
 
   useEffect(() => {
     if (!tvDetail?.seasons || !id) return;
@@ -62,7 +61,7 @@ const DramaList = () => {
         onFetchEpisodes(id, season.season_number);
       }
     });
-  }, [tvDetail]);
+  }, [tvDetail, id, onFetchEpisodes]);
 
   const initSeasonRefs = (seasonNumber: number) => {
     if (!navigationRefs.current[seasonNumber]) {
@@ -79,10 +78,10 @@ const DramaList = () => {
   const setSeasonRef = (
     seasonNumber: number,
     key: keyof (typeof navigationRefs.current)[number],
-    el: any
+    el: HTMLButtonElement | HTMLDivElement | SwiperType | null
   ) => {
     initSeasonRefs(seasonNumber);
-    navigationRefs.current[seasonNumber][key] = el;
+    navigationRefs.current[seasonNumber][key] = el as never;
   };
 
   const updateBar = (seasonNumber: number, prog: number) => {
@@ -98,10 +97,29 @@ const DramaList = () => {
   };
 
   const handleVideoOpen = (episodeId: number) => {
+    // 시청 내역에 추가 (재생 버튼 클릭 시 무조건 추가)
+    if (tvDetail) {
+      const episode = episodes.find((ep) => ep.id === episodeId);
+      onAddWatchHistory({
+        id: tvDetail.id,
+        name: tvDetail.name,
+        poster_path: tvDetail.poster_path,
+        backdrop_path: tvDetail.backdrop_path || '',
+        overview: tvDetail.overview || '',
+        vote_average: tvDetail.vote_average || 0,
+        adult: tvDetail.adult || false,
+        cAge: tvDetail.cAge || '',
+        logo: tvDetail.logo || '',
+        media_type: 'tv',
+        episodeNumber: episode?.episode_number,
+        seasonNumber: selectedSeasonNumber,
+      });
+    }
+
+    // 트레일러가 있으면 비디오 팝업 표시
     const trailer = videos.find((v) => v.type === 'Trailer' && v.site === 'YouTube');
     if (!trailer) return;
 
-    setSelectedEpisodeId(episodeId);
     setYoutubeKey(trailer.key);
     setShowPopup(true);
   };

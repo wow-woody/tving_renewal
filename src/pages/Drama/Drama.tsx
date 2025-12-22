@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import { useTvSeriesStore } from '../../store/useTvSeriesStore';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import '../scss/Drama.scss';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import OnAirDramaList from '../../components/Drama/OnAirDrama';
 import Popular20 from '../../components/Drama/Popular20/Popular20';
 import VOriginalSection from '../../components/v-origin/VOriginalSection';
 import DramaSwiper from '../../components/Drama/DramaSwiper';
+import DramaBanner from '../../components/Drama/DramaBanner/DramaBanner';
 import {
   FANTASY_CONFIG,
   ACTION_CONFIG,
@@ -26,7 +29,6 @@ const Drama = () => {
   const onairko = useTvSeriesStore((s) => s.onairko);
 
   const navigate = useNavigate();
-  const { key } = useParams();
 
   useEffect(() => {
     onFetchTvs();
@@ -37,20 +39,23 @@ const Drama = () => {
   return (
     <div className="contents-wrap">
       <section className="section-1">
-        <h2>반드시 챙겨봐야 하는 회원님을 위한 콘텐츠</h2>
-        <div className="sub-container"></div>
+        <DramaBanner />
       </section>
       <section className="section-2">
-        <ul className="drama-filter">
+        <Swiper
+          className="drama-filter-swiper"
+          slidesPerView="auto"
+          spaceBetween={12}
+          freeMode={true}
+          grabCursor={true}>
           {DRAMA_FILTERS.map((f) => (
-            <li
-              key={f.key}
-              className="filter-item"
-              onClick={() => navigate(`/drama/genre/${f.key}`)}>
-              {f.label}
-            </li>
+            <SwiperSlide key={f.key} className="filter-slide">
+              <div className="filter-item" onClick={() => navigate(`/drama/genre/${f.key}`)}>
+                {f.label}
+              </div>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
       </section>
       <section className="section-onair">
         <div className="onair-list">

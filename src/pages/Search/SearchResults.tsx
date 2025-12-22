@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useSearchStore } from '../../store/useSearchStore';
 import type { SearchResult } from '../../store/useSearchStore';
@@ -8,15 +8,13 @@ const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const { searchResults, isSearching, onSearch } = useSearchStore();
-  const [filteredResults, setFilteredResults] = useState<{
-    movies: SearchResult[];
-    tvShows: SearchResult[];
-    people: SearchResult[];
-  }>({
-    movies: [],
-    tvShows: [],
-    people: [],
-  });
+
+  const filteredResults = useMemo(() => {
+    const movies = searchResults.filter((r) => r.media_type === 'movie');
+    const tvShows = searchResults.filter((r) => r.media_type === 'tv');
+    const people = searchResults.filter((r) => r.media_type === 'person');
+    return { movies, tvShows, people };
+  }, [searchResults]);
 
   useEffect(() => {
     if (query) {
@@ -24,17 +22,9 @@ const SearchResults = () => {
     }
   }, [query, onSearch]);
 
-  useEffect(() => {
-    const movies = searchResults.filter((r) => r.media_type === 'movie');
-    const tvShows = searchResults.filter((r) => r.media_type === 'tv');
-    const people = searchResults.filter((r) => r.media_type === 'person');
-
-    setFilteredResults({ movies, tvShows, people });
-  }, [searchResults]);
-
   const getMediaLink = (result: SearchResult) => {
     if (result.media_type === 'tv') {
-      return `/drama/detail/${result.id}`;
+      return `/detail/${result.id}`;
     } else if (result.media_type === 'movie') {
       return `/movie/detail/${result.id}`;
     } else {
@@ -46,8 +36,7 @@ const SearchResults = () => {
     <Link
       key={`${result.media_type}-${result.id}`}
       to={getMediaLink(result)}
-      className="result-card"
-    >
+      className="result-card">
       <div className="card-poster">
         {result.poster_path ? (
           <img
@@ -63,9 +52,7 @@ const SearchResults = () => {
       </div>
       <div className="card-info">
         <h3 className="card-title">{result.title}</h3>
-        {(result as any).release_date && (
-          <p className="card-year">{(result as any).release_date.split('-')[0]}</p>
-        )}
+        {result.release_date && <p className="card-year">{result.release_date.split('-')[0]}</p>}
         {result.vote_average > 0 && (
           <div className="card-rating">
             <span className="star">★</span>
@@ -126,9 +113,7 @@ const SearchResults = () => {
                 <h2 className="section-title">
                   TV 프로그램 <span className="count">({filteredResults.tvShows.length})</span>
                 </h2>
-                <div className="results-grid">
-                  {filteredResults.tvShows.map(renderResultCard)}
-                </div>
+                <div className="results-grid">{filteredResults.tvShows.map(renderResultCard)}</div>
               </section>
             )}
 
@@ -137,9 +122,7 @@ const SearchResults = () => {
                 <h2 className="section-title">
                   영화 <span className="count">({filteredResults.movies.length})</span>
                 </h2>
-                <div className="results-grid">
-                  {filteredResults.movies.map(renderResultCard)}
-                </div>
+                <div className="results-grid">{filteredResults.movies.map(renderResultCard)}</div>
               </section>
             )}
 
@@ -153,8 +136,7 @@ const SearchResults = () => {
                     <Link
                       key={`person-${person.id}`}
                       to={getMediaLink(person)}
-                      className="result-card person-card"
-                    >
+                      className="result-card person-card">
                       <div className="card-poster person-poster">
                         {person.poster_path ? (
                           <img

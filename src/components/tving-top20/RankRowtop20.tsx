@@ -133,8 +133,9 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
           }}
         >
           {data.map((item) => (
+            
             <SwiperSlide key={item.id}>
-              <ContentCard item={item} rankScope={rankScope} />
+            <ContentCard item={item} rankScope={rankScope} />
             </SwiperSlide>
           ))}
         </Swiper>

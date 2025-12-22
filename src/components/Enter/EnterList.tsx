@@ -87,7 +87,7 @@ const EnterList = () => {
                   </h3>
                   <p>{ep.overview}</p>
                   <p>
-                    {ep.air_date} · {ep.runtime}분
+                    {ep.air_date} · {ep.runtime ? `${ep.runtime}분` : ''}
                   </p>
                 </div>
               </div>
