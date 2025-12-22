@@ -11,6 +11,11 @@ interface DramaShow {
   logo: string;
 }
 
+interface Logo {
+  iso_639_1: string;
+  file_path: string;
+}
+
 const DramaBanner = () => {
   const [dramaShow, setDramaShow] = useState<DramaShow | null>(null);
 
@@ -33,8 +38,8 @@ const DramaBanner = () => {
           `https://api.themoviedb.org/3/tv/${drama.id}/images?api_key=${API_KEY}`
         );
         const dataLogo = await resLogo.json();
-        const koLogo = dataLogo.logos?.find((l: any) => l.iso_639_1 === 'ko');
-        const enLogo = dataLogo.logos?.find((l: any) => l.iso_639_1 === 'en');
+        const koLogo = dataLogo.logos?.find((l: Logo) => l.iso_639_1 === 'ko');
+        const enLogo = dataLogo.logos?.find((l: Logo) => l.iso_639_1 === 'en');
         const logo = koLogo?.file_path || enLogo?.file_path || null;
 
         setDramaShow({

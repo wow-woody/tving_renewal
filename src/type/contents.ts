@@ -32,6 +32,7 @@ export interface TV extends MediaBase {
   name: string;
   poster_path: string;
   first_air_date: string;
+  genre_ids?: number[];
 }
 
 //season 타입
@@ -43,7 +44,6 @@ export interface Season extends MediaBase {
 
 //episodes 타입
 export interface Episodes extends MediaBase {
-  id: string;
   name: string;
   episode_number: number;
   still_path: string;

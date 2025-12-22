@@ -3,6 +3,69 @@ import type { TV } from '../type/contents';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
+interface Network {
+  id: number;
+  name: string;
+  logo_path: string | null;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface Season {
+  id: number;
+  name: string;
+  season_number: number;
+  episode_count: number;
+  poster_path: string | null;
+}
+
+interface Video {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+}
+
+interface Episode {
+  id: number;
+  name: string;
+  episode_number: number;
+  still_path: string | null;
+  overview: string;
+}
+
+interface Logo {
+  iso_639_1: string;
+  file_path: string;
+}
+
+interface Backdrop {
+  iso_639_1: string | null;
+  file_path: string;
+}
+
+interface ContentRating {
+  iso_3166_1: string;
+  rating: string;
+}
+
+interface CrewMember {
+  job: string;
+  name: string;
+}
+
+interface CastMember {
+  name: string;
+}
+
+interface TvItem {
+  genre_ids: number[];
+}
+
 interface TvDetail {
   id: number;
   name: string;
@@ -15,10 +78,10 @@ interface TvDetail {
   directors: string[];
   casts: string[];
   genreNames: string[];
-  networks: any[];
+  networks: Network[];
   seasonText: string;
   adult?: boolean;
-  genres?: any[];
+  genres?: Genre[];
   number_of_seasons?: number;
 }
 
@@ -27,12 +90,12 @@ interface TvSeriesStore {
   koTvs: TV[];
   onair: TV[];
   onairko: TV[];
-  seasons: any[];
-  videos: any[];
+  seasons: Season[];
+  videos: Video[];
   filteredTvs: TV[];
   tvDetail: TvDetail | null;
-  episodes: any[];
-  episodesBySeason: Record<number, any[]>;
+  episodes: Episode[];
+  episodesBySeason: Record<number, Episode[]>;
 
   // 엔터 관련 상태
   enters: TV[];
@@ -50,7 +113,7 @@ interface TvSeriesStore {
   onFetchOnAir: () => Promise<void>;
   onFetchOnAirKo: () => Promise<void>;
   onFetchTvVideos: (id: string) => Promise<void>;
-  onFetchByFilter: (params: Record<string, string>) => Promise<void>;
+  onFetchByFilter: (params: Partial<Record<string, string>>) => Promise<void>;
   onFetchSeasons: (id: string) => Promise<void>;
   onFetchEpisodes: (id: string, season: number) => Promise<void>;
 
@@ -94,7 +157,7 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
     const data = await res.json();
 
     const dramaOnly = data.results.filter(
-      (item: any) => item.genre_ids?.includes(18) && !item.genre_ids?.includes(16)
+      (item: TvItem) => item.genre_ids?.includes(18) && !item.genre_ids?.includes(16)
     );
     set({ tvs: dramaOnly });
   },
@@ -125,20 +188,20 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
 
       /* 로고 */
       const logo =
-        img.logos?.find((l: any) => l.iso_639_1 === 'ko') ||
-        img.logos?.find((l: any) => l.iso_639_1 === 'en') ||
+        img.logos?.find((l: Logo) => l.iso_639_1 === 'ko') ||
+        img.logos?.find((l: Logo) => l.iso_639_1 === 'en') ||
         img.logos?.[0] ||
         null;
 
       /* 백드롭 */
       const backdrop =
-        img.backdrops?.find((b: any) => b.iso_639_1 === null) || img.backdrops?.[0] || null;
+        img.backdrops?.find((b: Backdrop) => b.iso_639_1 === null) || img.backdrops?.[0] || null;
 
       /* 연령 */
-      const krAge = ageData.results?.find((r: any) => r.iso_3166_1 === 'KR')?.rating;
+      const krAge = ageData.results?.find((r: ContentRating) => r.iso_3166_1 === 'KR')?.rating;
 
       /* 장르 */
-      const genreNames = detail.genres?.map((g: any) => g.name) || [];
+      const genreNames = detail.genres?.map((g: Genre) => g.name) || [];
 
       /* 방송사 */
       const networks = detail.networks || [];
@@ -154,10 +217,10 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
       /* 감독 / 출연진 */
       const directors =
         credits.crew
-          ?.filter((c: any) => c.job === 'Director' || c.job === 'Executive Producer')
-          .map((d: any) => d.name) || [];
+          ?.filter((c: CrewMember) => c.job === 'Director' || c.job === 'Executive Producer')
+          .map((d: CrewMember) => d.name) || [];
 
-      const casts = credits.cast?.slice(0, 8).map((c: any) => c.name) || [];
+      const casts = credits.cast?.slice(0, 8).map((c: CastMember) => c.name) || [];
 
       set({
         tvDetail: {
@@ -233,7 +296,7 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
 
     // 드라마만 걸러내기 (애니 제외)
     const dramaOnly = data.results.filter(
-      (item: any) => item.genre_ids?.includes(18) && !item.genre_ids?.includes(16)
+      (item: TvItem) => item.genre_ids?.includes(18) && !item.genre_ids?.includes(16)
     );
 
     set({ filteredTvs: dramaOnly });
@@ -297,17 +360,17 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
       const credits = await resCredits.json();
 
       const logo =
-        img.logos?.find((l: any) => l.iso_639_1 === 'ko') ||
-        img.logos?.find((l: any) => l.iso_639_1 === 'en') ||
+        img.logos?.find((l: Logo) => l.iso_639_1 === 'ko') ||
+        img.logos?.find((l: Logo) => l.iso_639_1 === 'en') ||
         img.logos?.[0] ||
         null;
 
       const backdrop =
-        img.backdrops?.find((b: any) => b.iso_639_1 === null) || img.backdrops?.[0] || null;
+        img.backdrops?.find((b: Backdrop) => b.iso_639_1 === null) || img.backdrops?.[0] || null;
 
-      const krAge = ageData.results?.find((r: any) => r.iso_3166_1 === 'KR')?.rating;
+      const krAge = ageData.results?.find((r: ContentRating) => r.iso_3166_1 === 'KR')?.rating;
 
-      const genreNames = detail.genres?.map((g: any) => g.name) || [];
+      const genreNames = detail.genres?.map((g: Genre) => g.name) || [];
       const networks = detail.networks || [];
       const seasonText =
         detail.number_of_seasons === 1
@@ -318,10 +381,10 @@ export const useTvSeriesStore = create<TvSeriesStore>((set) => ({
 
       const directors =
         credits.crew
-          ?.filter((c: any) => c.job === 'Director' || c.job === 'Executive Producer')
-          .map((d: any) => d.name) || [];
+          ?.filter((c: CrewMember) => c.job === 'Director' || c.job === 'Executive Producer')
+          .map((d: CrewMember) => d.name) || [];
 
-      const casts = credits.cast?.slice(0, 8).map((c: any) => c.name) || [];
+      const casts = credits.cast?.slice(0, 8).map((c: CastMember) => c.name) || [];
 
       set({
         enterDetail: {
