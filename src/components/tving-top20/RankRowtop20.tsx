@@ -104,8 +104,8 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
 
       <div className="rank-row">
         <Swiper
-          slidesPerView='auto'
-          // slidesPerView={6}
+          slidesPerView={4.3}
+         
           spaceBetween={32}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {

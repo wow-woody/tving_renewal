@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import ContentCard from './ContentCard';
-import '../../tving-top20/RankRow-top20.scss';
+import './DramaRankRow-top20.scss';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w342';
@@ -58,7 +58,7 @@ const Popular20 = ({ title = '인기 드라마 TOP 20' }) => {
 
   return (
     <section
-      className="rank-row-top20"
+      className="drama-rank-row-top20"
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
       <h2 className="section-title">{title}</h2>
 

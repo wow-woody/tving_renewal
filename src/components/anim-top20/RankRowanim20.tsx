@@ -101,8 +101,8 @@ const RankRowanim20 = ({ data, title = '오늘의 티빙', rankScope }: RankRowP
 
       <div className="rank-row">
         <Swiper
-          slidesPerView='auto'
-          // slidesPerView={6}
+          slidesPerView={4.3}
+          
           spaceBetween={32}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {

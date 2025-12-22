@@ -1,3 +1,13 @@
+// 영화 설명 3줄까지만 보이기
+.movie-overview-3lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.6;
+  max-height: calc(1.6em * 3);
+}
 /* =========================
    Movie Featured Section
 ========================= */
