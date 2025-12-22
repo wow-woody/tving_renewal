@@ -27,8 +27,9 @@ const asideMenu: menuitem[] = [
   { id: 3, title: '라이브 알림', path: '/mypage', img: alertIcon },
   { id: 4, title: '찜한 컨텐츠', path: '/mypage', img: favoritIcon },
   { id: 5, title: '문의하기', path: '/', img: contactIcon },
-  { id: 6, title: '로그아웃', path: '/', img: settingIcon },
 ];
+
+const logoutMenu: menuitem = { id: 6, title: '로그아웃', path: '/', img: settingIcon };
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -148,13 +149,21 @@ const Header = () => {
 
         <ul className="side-menu">
           {asideMenu.map((m) => (
-            <li key={m.id} className={m.title === '로그아웃' ? 'setting-icon' : ''}>
+            <li key={m.id}>
               <Link to={m.path} onClick={(e) => handleMenuClick(m, e)}>
                 <img src={m.img} alt={m.title} />
                 <span>{m.title}</span>
               </Link>
             </li>
           ))}
+          {!loading && user && (
+            <li className="setting-icon">
+              <Link to={logoutMenu.path} onClick={(e) => handleMenuClick(logoutMenu, e)}>
+                <img src={logoutMenu.img} alt={logoutMenu.title} />
+                <span>{logoutMenu.title}</span>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
 
