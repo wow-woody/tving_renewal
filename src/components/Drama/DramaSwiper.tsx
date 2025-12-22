@@ -14,12 +14,42 @@ import type { DramaGenres } from '../../data/DramaFilters';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
+interface Video {
+  site: string;
+  type: string;
+  key: string;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface Network {
+  id: number;
+  name: string;
+  logo_path: string | null;
+}
+
+interface TvDetailData {
+  id: number;
+  name: string;
+  overview: string;
+  adult: boolean;
+  genres?: Genre[];
+  networks?: Network[];
+  number_of_seasons?: number;
+  genreNames: string[];
+  seasonText: string;
+  age: string;
+}
+
 const getAutoplaySrc = (src: string) => {
   const params = 'autoplay=1&mute=1&controls=0&playsinline=1&rel=0';
   return src.includes('?') ? `${src}&${params}` : `${src}?${params}`;
 };
 
-const pickBestTrailer = (videos: any[]) =>
+const pickBestTrailer = (videos: Video[]) =>
   videos.find((v) => v.site === 'YouTube' && v.type === 'Trailer') ||
   videos.find((v) => v.site === 'YouTube' && v.type === 'Teaser') ||
   videos.find((v) => v.site === 'YouTube');
@@ -29,6 +59,8 @@ interface FeaturedItem {
   title: string;
   img1: string;
   desc?: string;
+  season?: string;
+  age?: string;
 }
 interface Props {
   config: DramaGenres;
@@ -39,7 +71,7 @@ const DramaSwiper = ({ config }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [barOffset, setBarOffset] = useState(0);
   const [currentVideoKey, setCurrentVideoKey] = useState<string | null>(null);
-  const [tvDetail, setTvDetail] = useState<any>(null);
+  const [tvDetail, setTvDetail] = useState<TvDetailData | null>(null);
 
   const swiperRef = useRef<SwiperType | null>(null);
   const barRef = useRef<HTMLDivElement | null>(null);
@@ -100,7 +132,7 @@ const DramaSwiper = ({ config }: Props) => {
 
       setTvDetail({
         ...detail,
-        genreNames: detail.genres?.map((g: any) => g.name) || [],
+        genreNames: detail.genres?.map((g: Genre) => g.name) || [],
         networks: detail.networks || [],
         seasonText:
           detail.number_of_seasons === 1
@@ -219,7 +251,9 @@ const DramaSwiper = ({ config }: Props) => {
                   <span>{tvDetail.age}</span>
                 )}
               </p>
-              <p className="broadcast">{tvDetail.networks?.map((n) => n.name).join(', ')}</p>
+              <p className="broadcast">
+                {tvDetail.networks?.map((n: Network) => n.name).join(', ')}
+              </p>
               <p className="season">{tvDetail.seasonText}</p>
               <p className="genre">드라마</p>
               <span className="desc">{tvDetail.overview}</span>

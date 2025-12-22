@@ -36,6 +36,8 @@ interface Episode {
   episode_number: number;
   still_path: string | null;
   overview: string;
+  air_date?: string;
+  runtime?: number;
 }
 
 interface Logo {
@@ -73,6 +75,7 @@ interface TvDetail {
   backdrop_path: string;
   poster_path: string;
   age?: string;
+  cAge?: string;
   logo: string | null;
   backdrop: string | null;
   directors: string[];
@@ -84,6 +87,7 @@ interface TvDetail {
   genres?: Genre[];
   number_of_seasons?: number;
   vote_average?: number;
+  seasons?: Season[];
 }
 
 interface TvSeriesStore {

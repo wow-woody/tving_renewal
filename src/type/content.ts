@@ -1,7 +1,7 @@
 import type { AgeRating, Category, TvingBadge, RankScope, Genre } from './enum';
 
 export interface Content<NId = number> {
-    id: NId;
+  id: NId;
   title: string;
 
   img1: string;
@@ -17,6 +17,8 @@ export interface Content<NId = number> {
 
   year?: string;
   genre?: Genre;
+  filterKey?: string;
+  genreKey?: string[];
   time?: string;
   broadcast?: string;
   season?: string;

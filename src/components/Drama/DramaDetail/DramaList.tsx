@@ -33,7 +33,6 @@ const DramaList = () => {
   const [barOffsets, setBarOffsets] = useState<{ [key: number]: number }>({});
   const [showSeasonMenu, setShowSeasonMenu] = useState(false);
   const [selectedSeasonNumber, setSelectedSeasonNumber] = useState<number>(1);
-  const [selectedEpisodeId, setSelectedEpisodeId] = useState<number | null>(null);
 
   // 각 시즌마다 독립적인 ref 관리
   const navigationRefs = useRef<{
@@ -46,16 +45,13 @@ const DramaList = () => {
     };
   }>({});
 
-  // 시즌 섹션 ref
-  const seasonSectionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
-
   useEffect(() => {
     if (!id) return;
     onFetchTvDetail(id);
     onFetchSeasons(id);
     // onFetchEpisodes(id, 1);
     onFetchTvVideos(id);
-  }, [id]);
+  }, [id, onFetchTvDetail, onFetchSeasons, onFetchTvVideos]);
 
   useEffect(() => {
     if (!tvDetail?.seasons || !id) return;
@@ -65,7 +61,7 @@ const DramaList = () => {
         onFetchEpisodes(id, season.season_number);
       }
     });
-  }, [tvDetail]);
+  }, [tvDetail, id, onFetchEpisodes]);
 
   const initSeasonRefs = (seasonNumber: number) => {
     if (!navigationRefs.current[seasonNumber]) {
@@ -82,10 +78,10 @@ const DramaList = () => {
   const setSeasonRef = (
     seasonNumber: number,
     key: keyof (typeof navigationRefs.current)[number],
-    el: any
+    el: HTMLButtonElement | HTMLDivElement | SwiperType | null
   ) => {
     initSeasonRefs(seasonNumber);
-    navigationRefs.current[seasonNumber][key] = el;
+    navigationRefs.current[seasonNumber][key] = el as never;
   };
 
   const updateBar = (seasonNumber: number, prog: number) => {
@@ -124,7 +120,6 @@ const DramaList = () => {
     const trailer = videos.find((v) => v.type === 'Trailer' && v.site === 'YouTube');
     if (!trailer) return;
 
-    setSelectedEpisodeId(episodeId);
     setYoutubeKey(trailer.key);
     setShowPopup(true);
   };
