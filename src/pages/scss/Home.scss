@@ -1,98 +1,24 @@
-@mixin title-wrap {
-    .title-wrap {
-        position: relative;
-
-        @include pagenation-wrap($pos: absolute, $p-b: 0, $p-l: 10.8rem);
-    }
-}
-
-@mixin pagenation-wrap($pos: none, $p-b: 64px, $p-l: 0px) {
-    .pagenation-wrap {
-        height: 32px;
-        width: 100%;
-        padding-right: 24px;
-        padding-left: $p-l;
-        padding-bottom: $p-b;
-        display: flex;
-        align-items: flex-end;
-        gap: 14px;
-
-        position: $pos;
-        top: 50%;
-        left: 0;
-
-        .pagenation-area {
-            position: relative;
-            flex: 1;
-
-            .pagenation-line {
-                height: 1px;
-                width: 100%;
-                background: #373737;
-            }
-
-            .pointer-line {
-                position: absolute;
-                top: 0;
-                left: 30%;
-
-                height: 1px;
-                width: 80px;
-                background: #ff153c;
-            }
-        }
-
-        .nav-btn {
-            display: flex;
-
-            button {
-                width: 32px;
-                height: 32px;
-                border: 1px solid #373737;
-                border-radius: 0;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                cursor: pointer;
-
-                img {
-                    width: 12px;
-                    height: 12px;
-                }
-            }
-
-            button+button {
-                border-left: none;
-            }
-        }
-    }
-}
-
 .main-wrap {
     // padding-left: 10.8rem;
     padding-top: 12rem;
+    max-width: 1920px;
+    // margin: 0 auto;
 
-    hr {
-        border: none;
-        height: 1px;
-        background: #5c5c5c;
-    }
+    // .section-title {
+    //     font-size: 3.6rem;
+    //     font-weight: 800;
+    //     color: #fff;
 
-    .section-title {
-        font-size: 2.6rem;
-        font-weight: 700;
-        color: #fff;
-
-        position: relative;
-        z-index: 5;
-    }
+    //     position: relative;
+    //     z-index: 5;
+    // }
+    //     position: relative;
+    //     z-index: 5;
+    // }
 
     .section-1 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        margin-bottom: clamp(20px, 2.5vw, 46px);
 
         h2 {
             font-size: 2.6rem;
@@ -110,256 +36,101 @@
     }
 
     .section-2 {
-        width: 100%;
-
-        border: 1px solid red;
-
-        // padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
-
-        overflow-x: hidden;
-
-        .section2-inner {
-            padding-left: 10.8rem;
-
-            .link-container {
-                display: flex;
-                gap: 12px;
-
-                div {
-                    width: 212px;
-                    height: 80px;
-                    background: #ff153c;
-
-                    flex-shrink: 0;
-                }
-            }
-        }
-    }
-
-    .section-3 {
         padding-left: 10.8rem;
-        padding-top: 112px;
+        padding-top: 8.8rem;
 
-        .watching-container {
-            height: 100%;
-
-            // background: rgb(255, 207, 207);
-
-            @include pagenation-wrap();
-
-            .watching-wrap {
-                height: 525px;
-                display: flex;
-                gap: 24px;
-
-                .side-wrap {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    width: 265px;
-                    height: 100%;
-
-                    .more-btn-area {
-                        padding-bottom: 70px;
-
-                        .more-btn {
-                            padding: 8px 12px;
-                            border: 1.4px solid #fff;
-                            border-radius: 8px;
-
-                            font-size: 1.6rem;
-                            font-weight: 700;
-                            color: #fff;
-                        }
-                    }
-                }
-
-                .watching-main-wrap {
-                    width: 100%;
-                    height: 100%;
-                    background: #ff153c;
-                }
-            }
-        }
+        max-width: 1920px;
     }
 
     .section-4 {
-        padding-top: 128px;
-        @include title-wrap();
-
-        .title-wrap {
-            padding-left: 10.8rem;
-        }
-
-        .live-container {
-            padding-top: 76px;
-
-            .live-wrap {
-                width: 408px;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-
-                .img-wrap {
-                    width: 100%;
-                    aspect-ratio: 408 / 226.22;
-                    background: #ff153c;
-                    margin-bottom: 20px;
-
-                    border: 1px solid #b9b9b9;
-                    border-radius: 19.13px;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                        object-position: center;
-                    }
-                }
-
-                .s-banner {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-
-                    font-size: 1.4rem;
-                    font-weight: 700;
-                    color: #b9b9b9;
-                    margin-bottom: 12px;
-                    padding-left: 0.4%;
-
-                    p {
-                        padding: 4px 12px;
-                        border: 1px solid #b9b9b9;
-                        border-radius: 4px;
-                    }
-                }
-
-                .s-title {
-                    font-size: 26px;
-                    font-weight: 800;
-                    color: #b9b9b9;
-                    padding-left: 0.4%;
-                }
-            }
-        }
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 9.2rem;
+        padding-bottom: 6rem;
     }
 
     .section-5 {
-        width: 100%;
-        padding-top: 128px;
-        @include title-wrap();
-
-        .title-wrap {
-            padding-left: 10.8rem;
-        }
-
-        .new-container {
-            padding-top: 76px;
-
-            display: flex;
-            gap: 35px;
-
-            overflow: hidden;
-
-            height: clamp(400px, 32vw, 576px);
-
-            .new-wrap {
-                height: 100%;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                gap: 22px;
-
-                .img-wrap {
-                    height: 74%;
-                    width: 100%;
-                    aspect-ratio: 16/9;
-                    border-radius: 16.67px;
-
-                    background: #ff153c;
-                }
-
-                .new-title {
-                    height: 26%;
-
-                    display: flex;
-                    gap: 24px;
-                    align-items: flex-start;
-                    padding: 0 0.4% 20px;
-
-                    .title-img {
-                        max-height: 84px;
-                        height: 4.375vw; // 1920px 기준 84px로 설정
-                        min-height: 64px; // 최소 높이도 명확히 지정
-
-                        // min-width: 170px;
-
-                        img {
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    }
-
-                    .sub-title {
-                        font-size: 2.2rem;
-                        font-weight: 700;
-                        color: #fff;
-                    }
-                }
-
-                &:nth-child(even) {
-                    flex-direction: column-reverse;
-
-                    .new-title {
-                        align-items: flex-end;
-                        padding: 20px 0.4% 0;
-                    }
-                }
-            }
-        }
+        //    padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
     .section-6 {
-        margin-left: 6.5rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 
+    .section-7 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 
+    .section-8 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
     }
 
     .section-9 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 
+    .section-10 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
     }
 
     .section-11 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
 
+    .section-12 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
     }
 
     .section-13 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
     .section-14 {
-         margin-left: 6.5rem;
-        padding-top: clamp(20px, 2.5vw, 40px);
-        padding-bottom: clamp(20px, 2.5vw, 40px);
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .section-15 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 7.2rem;
+        padding-bottom: 7.2rem;
+    }
+
+    .section-16 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
 

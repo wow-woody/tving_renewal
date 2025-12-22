@@ -9,13 +9,22 @@ import "./VOriginal.scss";
 
 import { ORIGINAL_CONTENTS } from "../../data";
 import { TVING_BADGE } from "../../contents/media";
-import { TvingBadge } from "../../type/enum";
+import { TvingBadge, Category } from "../../type/enum";
 
-const VOriginalSection = () => {
+interface Props {
+  category?: Category;
+}
+
+const VOriginalSection = ({ category }: Props) => {
   const badge = TVING_BADGE[TvingBadge.ORIGINAL];
   const swiperRef = useRef<any | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
+
+  // category prop이 있으면 필터링, 없으면 전체
+  const filteredContents = category 
+    ? ORIGINAL_CONTENTS.filter(item => item.category === category)
+    : ORIGINAL_CONTENTS;
 
   useEffect(() => {
     const swiper = swiperRef.current;
@@ -42,13 +51,14 @@ const VOriginalSection = () => {
     <div className="v-original">
       {/* 좌측 설명 영역 */}
       <div className="v-original-info">
+        <div className="info-top">
         <img className="logo" src={badge.image} alt={badge.label} />
         <p>
           티빙만의<br />
           특별한 오리지널 콘텐츠를<br />
           만나보세요.
         </p>
-        <button className="more-btn">더보기 +</button>
+        </div>
       </div>
 
       {/* 우측 카드 영역 */}
@@ -68,7 +78,7 @@ const VOriginalSection = () => {
           }}
           navigation
         >
-          {ORIGINAL_CONTENTS.map((item) => (
+          {filteredContents.map((item) => (
             <SwiperSlide key={item.id}>
               <VOriginalCard item={item} />
             </SwiperSlide>

@@ -24,15 +24,26 @@ const RankRowanim20 = ({ data, title = '오늘의 티빙', rankScope }: RankRowP
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  const updateBar = (prog: number) => {
-    if (!trackRef.current || !barRef.current) return;
-    const track = trackRef.current.clientWidth;
-    const bar = barRef.current.clientWidth;
-    const maxLeft = Math.max(track - bar, 0);
-    const safeProg = Math.min(Math.max(prog, 0), 1);
-    setBarOffset(safeProg * maxLeft);
-  };
+  // const updateBar = (prog: number) => {
+  //   if (!trackRef.current || !barRef.current) return;
+  //   const track = trackRef.current.clientWidth;
+  //   const bar = barRef.current.clientWidth;
+  //   const maxLeft = Math.max(track - bar, 0);
+  //   const safeProg = Math.min(Math.max(prog, 0), 1);
+  //   setBarOffset(safeProg * maxLeft);
+  // };
 
+    const updateBar = (progress: number) => {
+    if (!trackRef.current || !barRef.current) return;
+
+    const trackWidth = trackRef.current.clientWidth;
+    const barWidth = barRef.current.clientWidth;
+    const maxLeft = Math.max(trackWidth - barWidth, 0);
+
+    const safeProgress = Math.min(Math.max(progress, 0), 1);
+    setBarOffset(safeProgress * maxLeft);
+  };
+  
   useEffect(() => {
     const swiper = swiperRef.current;
     if (!swiper || !prevRef.current || !nextRef.current) return;
@@ -56,7 +67,7 @@ const RankRowanim20 = ({ data, title = '오늘의 티빙', rankScope }: RankRowP
 
   return (
     <section
-      className="section-14"
+      className="rank-row-anim20"
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}
     >
       {title && (
@@ -90,8 +101,9 @@ const RankRowanim20 = ({ data, title = '오늘의 티빙', rankScope }: RankRowP
 
       <div className="rank-row">
         <Swiper
-          slidesPerView={6}
-          spaceBetween={50}
+          slidesPerView='auto'
+          // slidesPerView={6}
+          spaceBetween={32}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {
             // @ts-ignore
@@ -104,14 +116,17 @@ const RankRowanim20 = ({ data, title = '오늘의 티빙', rankScope }: RankRowP
             swiperRef.current = s;
             updateBar(0);
           }}
-          onSlideChange={(swiper) => {
-            const total = data.length;
-            const visible = Number(swiper.params.slidesPerView) || 1;
-            const maxIndex = Math.max(total - visible, 1);
-            const prog = Math.min(Math.max(swiper.realIndex / maxIndex, 0), 1);
-            updateBar(prog);
+          // onSlideChange={(swiper) => {
+          //   const total = data.length;
+          //   const visible = Number(swiper.params.slidesPerView) || 1;
+          //   const maxIndex = Math.max(total - visible, 1);
+          //   const prog = Math.min(Math.max(swiper.realIndex / maxIndex, 0), 1);
+          //   updateBar(prog);
+          // }}
+          // onProgress={(_, prog) => updateBar(prog)}
+          onProgress={(_, progress) => {
+            updateBar(progress);
           }}
-          onProgress={(_, prog) => updateBar(prog)}
         >
           {data.map((item) => (
             <SwiperSlide key={item.id}>

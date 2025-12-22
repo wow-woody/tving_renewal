@@ -1,0 +1,35 @@
+.zootopia-wrapper {
+  display: flex;
+  width: 100%;
+  padding-right: 0;
+}
+
+.zootopia-frame {
+  flex: 1;
+  height: 400px;
+  overflow: hidden;
+}
+
+.zootopia-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: 0;
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  }
+}

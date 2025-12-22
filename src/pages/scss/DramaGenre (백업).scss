@@ -1,0 +1,140 @@
+.contents-wrap {
+    h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .drama-grid {
+        margin-top: 32px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+
+        .drama-card {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            .drama-card-inner {
+                position: relative;
+                border: 2px solid blue;
+            }
+            .img-wrap {
+                position: relative;
+                border-radius: 14px;
+                overflow: hidden;
+                will-change: transform;
+                border: 2px solid transparent;
+                box-sizing: border-box;
+                transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: -2px;
+                    right: -2px;
+                    bottom: -2px;
+                    height: 30%;
+                    background: linear-gradient(
+                        to top,
+                        rgba(255, 21, 60, 0.8) 0%,
+                        rgba(255, 21, 60, 0.4) 50%,
+                        rgba(255, 21, 60, 0) 100%
+                    );
+                    opacity: 0;
+                    transition: opacity 0.4s ease,
+                        transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    pointer-events: none;
+                    transform-origin: center center;
+                }
+
+                img {
+                    width: 100%;
+                    aspect-ratio: 2/3;
+                    object-fit: cover;
+                    transform-origin: center center;
+                    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    will-change: transform;
+                }
+            }
+
+            .title-wrap {
+                width: 100%;
+                height: 6rem;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // border: #fff 1px solid;
+
+                .title {
+                    width: 100%;
+                    color: #fff;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    text-align: center;
+                    transition: font-weight 0.4s ease, transform 0.4s ease;
+                }
+            }
+
+            &:hover {
+                z-index: 2;
+                .img-wrap {
+                    transform: scaleY(1.06);
+                    border-color: #ff153c;
+                    box-shadow: 0 8px 16px rgba(255, 21, 60, 0.2), 0 16px 32px rgba(0, 0, 0, 0.15),
+                        0 24px 48px rgba(0, 0, 0, 0.1);
+
+                    &::after {
+                        opacity: 1;
+                        transform: scale(1.1);
+                    }
+
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
+                .title {
+                    // font-weight: 800;
+                    // letter-spacing: 0.02em;
+                }
+            }
+
+            // .title-wrap {
+
+            //     // background: radial-gradient(
+            //     //     ellipse at bottom center,
+            //     //     rgba(255, 21, 60, 0.5) 0%,
+            //     //     rgba(255, 21, 60, 0.25) 45%,
+            //     //     rgba(255, 21, 60, 0.1) 65%,
+            //     //     rgba(255, 21, 60, 0) 80%
+            //     // );
+
+            //     // background-size: 100% 0%;
+            //     // background-repeat: no-repeat;
+            //     // background-position: bottom;
+
+            //     transition: background-size 0.3s ease,
+            //         transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+            //     .title {
+            //         width: 100%;
+            //         transform: translateY(0);
+            //         transition: transform 0.25s ease;
+
+            //         color: #fff;
+            //         font-size: 1.6rem;
+            //         line-height: 1.6;
+
+            //         height: calc(2.6rem * 2);
+            //         display: -webkit-box;
+            //         -webkit-line-clamp: 2;
+            //         -webkit-box-orient: vertical;
+            //     }
+            // }
+        }
+    }
+}

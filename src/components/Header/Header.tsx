@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Header.scss';
 import homeIcon from '../../assets/icon/aside-header-icon1.png';
 import userIcon from '../../assets/icon/aside-header-icon2.png';
@@ -6,9 +6,13 @@ import alertIcon from '../../assets/icon/aside-header-icon3.png';
 import favoritIcon from '../../assets/icon/aside-header-icon4.png';
 import contactIcon from '../../assets/icon/aside-header-icon5.png';
 import settingIcon from '../../assets/icon/aside-header-icon6.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
 import ProfileSelect from '../ProfileSelect/ProfileSelect';
+import SearchDropdown from './SearchDropdown';
+import { useSearchStore } from '../../store/useSearchStore';
+import CstomerService from '../../pages/auth/CstomerService';
+import LogoutModal from './LogoutModal';
 
 interface menuitem {
   id: number;
@@ -20,15 +24,17 @@ interface menuitem {
 const asideMenu: menuitem[] = [
   { id: 1, title: '홈', path: '/', img: homeIcon },
   { id: 2, title: '마이페이지', path: '/mypage', img: userIcon },
-  { id: 3, title: '신작알림', path: '/', img: alertIcon },
-  { id: 4, title: '찜한 컨텐츠', path: '/', img: favoritIcon },
+  { id: 3, title: '라이브 알림', path: '/mypage', img: alertIcon },
+  { id: 4, title: '찜한 컨텐츠', path: '/mypage', img: favoritIcon },
   { id: 5, title: '문의하기', path: '/', img: contactIcon },
-  { id: 6, title: '설정', path: '/', img: settingIcon },
+  { id: 6, title: '로그아웃', path: '/', img: settingIcon },
 ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading } = useAuthStore();
+  const { user, loading, onLogout } = useAuthStore();
+  const { searchResults, isSearching, onSearch, clearSearch } = useSearchStore();
+  const navigate = useNavigate();
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -41,15 +47,76 @@ const Header = () => {
   //------------ search-box 보이기 ------------
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [sValue, setSValue] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [showCustomerService, setShowCustomerService] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const handleSearchClose = () => {
     setIsSearchOpen(false);
     setSValue('');
+    clearSearch();
+    setSelectedIndex(-1);
   };
 
-  //------------ search-box 숨기기 ------------
-  const location = useLocation();
-  const isMain = location.pathname === '/';
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSValue(value);
+    if (value.trim()) {
+      onSearch(value);
+    } else {
+      clearSearch();
+    }
+  };
+
+  const handleSearchSubmit = () => {
+    if (sValue.trim()) {
+      navigate(`/search?q=${encodeURIComponent(sValue.trim())}`);
+      handleSearchClose();
+    }
+  };
+
+  const handleMenuClick = (item: menuitem, e: React.MouseEvent) => {
+    if (item.title === '문의하기') {
+      e.preventDefault();
+      setShowCustomerService(true);
+    } else if (item.title === '로그아웃') {
+      e.preventDefault();
+      setShowLogoutModal(true);
+    }
+  };
+
+  const handleLogoutConfirm = () => {
+    setShowLogoutModal(false);
+    onLogout();
+    navigate('/');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && searchResults.length > 0) {
+        // 선택된 항목으로 이동
+        const selectedResult = searchResults[selectedIndex];
+        if (selectedResult) {
+          handleSearchClose();
+        }
+      } else if (sValue.trim()) {
+        // 검색 결과 페이지로 이동
+        handleSearchSubmit();
+      }
+      return;
+    }
+
+    if (!isSearchOpen || searchResults.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev < searchResults.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,8 +148,8 @@ const Header = () => {
 
         <ul className="side-menu">
           {asideMenu.map((m) => (
-            <li key={m.id} className={m.title === '설정' ? 'setting-icon' : ''}>
-              <Link to={m.path}>
+            <li key={m.id} className={m.title === '로그아웃' ? 'setting-icon' : ''}>
+              <Link to={m.path} onClick={(e) => handleMenuClick(m, e)}>
                 <img src={m.img} alt={m.title} />
                 <span>{m.title}</span>
               </Link>
@@ -92,7 +159,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`top-header ${isMain ? headerShow : 'fixed-header'}`}
+        className={`top-header ${headerShow}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}>
         <div className="header-left">
@@ -102,22 +169,19 @@ const Header = () => {
                 <Link to="/drama">드라마</Link>
               </li>
               <li>
-                <Link to="/">예능</Link>
+                <Link to="/enter">예능</Link>
               </li>
               <li>
-                <Link to="/">영화</Link>
+                <Link to="/movie">영화</Link>
               </li>
               <li>
-                <Link to="/">스포츠</Link>
+                <Link to="/sport">스포츠</Link>
               </li>
               <li>
-                <Link to="/">애니</Link>
+                <Link to="/anim">애니</Link>
               </li>
               <li>
-                <Link to="/">뉴스</Link>
-              </li>
-              <li>
-                <Link to="/">라이브</Link>
+                <Link to="/live">라이브</Link>
               </li>
             </ul>
           </nav>
@@ -135,13 +199,26 @@ const Header = () => {
                 <input
                   type="text"
                   value={sValue}
-                  onChange={(e) => setSValue(e.target.value)}
+                  onChange={handleSearchChange}
+                  onKeyDown={handleKeyDown}
                   placeholder="찾으시는 제목과 인물명을 입력해 보세요!"
+                  autoFocus
                 />
 
                 <button className="search-close" onClick={handleSearchClose} aria-label="검색 닫기">
                   <img src="/images/login-close.svg" alt="cancel" />
                 </button>
+
+                {(searchResults.length > 0 || isSearching) && (
+                  <SearchDropdown
+                    results={searchResults}
+                    isSearching={isSearching}
+                    onClose={handleSearchClose}
+                    selectedIndex={selectedIndex}
+                    onIndexChange={setSelectedIndex}
+                    searchQuery={sValue}
+                  />
+                )}
               </div>
             )}
           </div>
@@ -173,6 +250,17 @@ const Header = () => {
           <img src="/images/top-show.svg" alt="" />
         </div>
       </div>
+
+      {showCustomerService && (
+        <CstomerService onClose={() => setShowCustomerService(false)} />
+      )}
+
+      {showLogoutModal && (
+        <LogoutModal
+          onConfirm={handleLogoutConfirm}
+          onCancel={() => setShowLogoutModal(false)}
+        />
+      )}
     </header>
   );
 };

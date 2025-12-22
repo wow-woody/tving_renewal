@@ -6,9 +6,10 @@ import PasswordInput from './layout/PasswordInput';
 import EmailInput from './layout/EmailInput';
 import Agree from './layout/Agree';
 import { useAuthStore } from '../../store/useAuthStore';
+import AlertModal from '../../components/common/AlertModal';
 
 const Join = () => {
-  const { onMember } = useAuthStore();
+  const { onMember, alertModal, hideAlert } = useAuthStore();
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -18,20 +19,27 @@ const Join = () => {
 
   const navigate = useNavigate();
 
+  const handleAlertClose = () => {
+    hideAlert();
+    // 회원가입 성공시에만 홈으로 이동
+    if (alertModal?.type === 'success') {
+      navigate('/');
+    }
+  };
+
   const handleJoin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!isAgreeChecked) {
-      alert('필수 항목을 모두 체크해주세요.');
+      useAuthStore.getState().showAlert('필수 항목을 모두 체크해주세요.', 'error');
       return;
     }
 
     try {
       await onMember(id, email, password);
-
       setEmail('');
       setPassword('');
-      navigate('/');
+      // navigate 제거 - 모달 확인 후 이동
     } catch (err) {
       console.log('경로이탈');
     }
@@ -69,6 +77,15 @@ const Join = () => {
         </div>
       </div>
       <div className="footer-line"></div>
+      
+      {alertModal?.show && (
+        <AlertModal
+          message={alertModal.message}
+          type={alertModal.type}
+          title={alertModal.title}
+          onClose={handleAlertClose}
+        />
+      )}
     </div>
   );
 };

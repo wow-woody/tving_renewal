@@ -3,12 +3,12 @@
 ========================= */
 
 .enter-featured-section {
-    margin-top: 72px;
+    // margin-top: 72px;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 40px 0;
+    // padding: 40px 0;
     isolation: isolate;
     overflow: visible;
 }
@@ -16,17 +16,18 @@
 .section-header {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    margin-bottom: 62px;
 }
 
 .section-title {
     color: #fff;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 800;
 }
 
 .enter-featured-body {
-    margin-top: 32px;
+    margin-top: 0;
     position: relative;
     display: flex;
     gap: 24px;

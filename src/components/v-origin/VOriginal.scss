@@ -1,22 +1,29 @@
 .v-original {
     display: flex;
-  gap: 32px;
-  padding: 40px;
+  // gap: 32px;
+  gap:96px;
+  // padding: 40px 0 40px 10.8rem;
+  padding: 52px 0 52px 8rem;
   border-radius: 12px;
   background: linear-gradient(295deg, rgba(255, 21, 60, 0.50) -42.62%, rgba(255, 21, 60, 0.40) -25.5%, rgba(255, 21, 60, 0.30) -8.39%, rgba(255, 21, 60, 0.10) 8.73%, rgba(255, 21, 60, 0.20) 25.84%, rgba(255, 21, 60, 0.30) 42.95%, rgba(255, 21, 60, 0.40) 60.07%, rgba(255, 21, 60, 0.50) 77.18%, rgba(255, 21, 60, 0.40) 100%);
-  width: 1756px;
-  margin: 0 auto;  
+  width: 100%;  
   
 
   .v-original-info {
-    width: 272px;
+    width: 280px;
     color: #fff;
-    margin-right: 94px;
+    // margin-right: 40px;
+    flex-shrink: 0;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 
     .logo {
       font-weight: 700;
       font-size: 18px;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
     }
 
     p {
@@ -36,7 +43,7 @@
   }
 
   .v-original-slider {
-    width: 80%;
+    flex: 1;
     overflow: hidden;
     position: relative;
 
@@ -130,12 +137,14 @@
 }
 
 .glass-frame {
-  margin-top: 30px;
-  margin-left: 10.8rem;
-  width: 1770px;
+  // margin-top: 30px;
+  // margin-left: 10.8rem;
+  // width: 1770px;
+  width:100%;
   display: flex;
   justify-content: flex-start;
-  padding: 5px 3px;
+  // padding: 5px 3px;
+  padding:5px;
   border-radius: 12px;
   position: relative;
   overflow: hidden;

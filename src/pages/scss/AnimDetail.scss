@@ -1,0 +1,64 @@
+@use '../../App.scss' as g;
+
+.anim-detail-wrap {
+  padding-top: 12rem;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  .section-1 {
+    .detail-banner {
+      height: 70vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 10.8rem 60px;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      }
+
+      .detail-info {
+        position: relative;
+        z-index: 1;
+        color: #fff;
+
+        h1 {
+          font-size: 3.6rem;
+          font-weight: 800;
+          margin-bottom: 20px;
+        }
+
+        p {
+          font-size: 1.8rem;
+          line-height: 1.6;
+          max-width: 800px;
+          margin-bottom: 20px;
+        }
+
+        .meta {
+          display: flex;
+          gap: 16px;
+          font-size: 1.6rem;
+
+          span {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .section-2 {
+    padding-top: 70px;
+  }
+}

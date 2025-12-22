@@ -1,0 +1,106 @@
+@use '../../App.scss' as g;
+
+.contents-wrap {
+    padding-top: 12rem;
+    max-width: 1920px;
+    margin: 0 auto;
+
+    .section-1 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 46px;
+
+        h2 {
+            font-size: 3.6rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2.4rem;
+        }
+
+        .sub-container {
+            min-width: 833px;
+            aspect-ratio: 1788/732;
+            
+            .main-banner-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 16px;
+            }
+        }
+    }
+
+    .section-2 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 64px;
+        
+        .anim-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            
+            .filter-item {
+                padding: 10px 24px;
+                border: 1px solid #5c5c5c;
+                @include g.boxshadow;
+                border-radius: 50px;
+                color: #fff;
+                font-size: 1.6rem;
+                background: transparent;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+                
+                &:hover {
+                    border-color: #ff153c;
+                    background: rgba(255, 21, 60, 0.1);
+                }
+                
+                &.active {
+                    border-color: #ff153c;
+                    background: #ff153c;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .section-rank-anim {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 64px;
+    }
+
+    .section-animSwiper {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 64px;
+    }
+
+    .section-snoopy {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 64px;
+    }
+
+    .section-zootopia {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 64px;
+    }
+
+    .section-vonly {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+
+    .section-voriginal {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+}

@@ -1,0 +1,140 @@
+.kbl {
+    display: flex;
+    // gap: 32px;
+    gap: 96px;
+    // padding: 115px 40px;
+    padding: 12rem 0 12rem 8rem;
+
+    border-radius: 12px;
+    overflow: hidden;
+    background: url("/images/KBL.png");
+    background-size: 120%;
+    background-position: center;
+    background-repeat: no-repeat;
+    // width: 1756px;
+    width:100%;
+    // margin: 0 auto;
+
+    .kbl-info {
+        width: 280px;
+        color: #fff;
+
+        display:flex;
+        flex-direction:column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .more-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    }
+
+    .kbl-slider {
+        width: 80%;
+        overflow: hidden;
+        position: relative;
+
+        .kbl-card-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            text-decoration: none;
+
+            .kbl-card {
+                position: relative;
+                border-radius: 12px;
+                overflow: hidden;
+                transition: border-color 0.3s ease;
+
+                img {
+                    display: block;
+                    border-radius: 12px;
+                    transition: transform 0.4s ease;
+                    width: 400px;
+                    height: 225px;
+                    object-fit: cover;
+                }
+            }
+
+            &:hover .kbl-card {
+                border-color: #ff153c;
+            }
+
+            &:hover .kbl-card img {
+                transform: scale(1.2);
+            }
+        }
+
+        .kbl-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .nav-btn {
+            width: 120px;
+            height: 120px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            pointer-events: auto;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.3s ease;
+            font-size: 80px;
+            color: #fff;
+            background: transparent;
+            border: none;
+
+            .nav-btn.prev {
+
+                margin-left: 0px;
+
+                img {
+                    width: 36px
+                }
+
+                ;
+            }
+
+            .nav-btn.next {
+                margin-right: -40px;
+
+                img {
+                    width: 36px
+                }
+
+                ;
+            }
+        }
+
+        .nav-btn:hover {
+            border-color: #fff;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+    }
+}

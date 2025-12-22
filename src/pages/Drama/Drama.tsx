@@ -4,9 +4,21 @@ import '../scss/Drama.scss';
 import { DRAMA_FILTERS } from '../../data/DramaFilters';
 import { useNavigate, useParams } from 'react-router-dom';
 import OnAirDramaList from '../../components/Drama/OnAirDrama';
+import Popular20 from '../../components/Drama/Popular20/Popular20';
+import VOriginalSection from '../../components/v-origin/VOriginalSection';
 import DramaSwiper from '../../components/Drama/DramaSwiper';
-import { useDramaCate } from '../../store/Drama/useDramaCate';
-import { useDramaList } from '../../store/Drama/useDramaList';
+import {
+  FANTASY_CONFIG,
+  ACTION_CONFIG,
+  Comedy_CONFIG,
+  OVERSEAS_CONFIG,
+  Human_CONFIG,
+  War_CONFIG,
+  Mystery_CONFIG,
+} from '../../data/DramaFilters';
+import AppleTvSection from '../../components/appletv/AppleTvSection';
+import DramaCountry from '../../components/Drama/DramaCountry';
+
 const Drama = () => {
   const onFetchTvs = useTvSeriesStore((s) => s.onFetchTvs);
   const onFetchKoTvs = useTvSeriesStore((s) => s.onFetchKoTvs);
@@ -15,12 +27,6 @@ const Drama = () => {
 
   const navigate = useNavigate();
   const { key } = useParams();
-  const setCategory = useDramaCate((s) => s.setCategory);
-  const dramaList = useDramaList();
-
-  useEffect(() => {
-    setCategory(key || 'all');
-  }, [key, setCategory]);
 
   useEffect(() => {
     onFetchTvs();
@@ -46,21 +52,40 @@ const Drama = () => {
           ))}
         </ul>
       </section>
-      <section className="section-3">
+      <section className="section-onair">
         <div className="onair-list">
-          <div>
-            <h3>지금 방영중인 드라마</h3>
-          </div>
-          <div>
-            <OnAirDramaList tvs={onairko} />
-          </div>
+          <OnAirDramaList tvs={onairko} />
         </div>
       </section>
-      <section className="section-4">
-        <div></div>
-        <div>
-          <DramaSwiper tvs={dramaList} />
-        </div>
+      <section className="section-dramaSwiper">
+        <Popular20 />
+      </section>
+      <section className="drama-voriginal">
+        <VOriginalSection />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaSwiper config={FANTASY_CONFIG} />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaSwiper config={ACTION_CONFIG} />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaSwiper config={Comedy_CONFIG} />
+      </section>
+      <section className="section-9">
+        <AppleTvSection />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaCountry config={OVERSEAS_CONFIG} />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaSwiper config={Human_CONFIG} />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaSwiper config={War_CONFIG} />
+      </section>
+      <section className="section-dramaSwiper">
+        <DramaSwiper config={Mystery_CONFIG} />
       </section>
     </div>
   );

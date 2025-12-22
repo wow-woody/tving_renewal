@@ -47,7 +47,7 @@
 .pager-item {
     position: relative;
     cursor: pointer;
-    padding-bottom: 8px;
+    padding-bottom: 20px;
     font-size: 14px;
     color: #dddddd;
     white-space: nowrap;
@@ -70,6 +70,7 @@
    Pager Title
 ================================ */
 .pager-title {
+    font-size: 18px;
     position: relative;
     padding: 0 8px;
     z-index: 1;
@@ -94,12 +95,12 @@
 /* ================================
    Active State
 ================================ */
-.swiper-pagination-bullet-active {
+.mainbanner .swiper-pagination-bullet-active {
     color: #fff;
     font-weight: 800;
 }
 
-.swiper-pagination-bullet-active .pager-progress {
+.mainbanner .swiper-pagination-bullet-active .pager-progress {
     animation: progressBar 3s linear forwards;
 }
 
