@@ -13,6 +13,12 @@ import { db } from '../firebase/firebase';
 import type { Profile, Subscription } from '../type/Auth';
 import { ProfileImg } from '../constants/ProfileImages';
 
+const endOfThisMonthISO = () => {
+  const now = new Date();
+  const end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+  return end.toISOString();
+};
+
 interface UserState {
     profiles: Profile[];
     profileId: string | null;
@@ -155,17 +161,25 @@ export const useUserStore = create<UserState>((set, get) => ({
     },
 
     // 구독 취소
+
     cancelSubscription: async (uid, profileId) => {
         const { profiles } = get();
         const profile = profiles.find((p) => p.id === profileId);
-        if (!profile) return;
+        if (!profile?.subscription) return;
+
+        const next = {
+            ...profile.subscription,
+            status: 'canceled' as const,
+            canceledAt: new Date().toISOString(),         // 신청일
+            cancelEffectiveAt: endOfThisMonthISO(),       // ✅ 표시용: 이번달 말
+        };
 
         await updateDoc(doc(db, 'users', uid, 'profiles', profileId), {
-            subscription: null,
+            subscription: next,
         });
 
         set({
-            profiles: profiles.map((p) => (p.id === profileId ? { ...p, subscription: null } : p)),
+            profiles: profiles.map((p) => (p.id === profileId ? { ...p, subscription: next } : p)),
         });
     },
-}));
+}));    

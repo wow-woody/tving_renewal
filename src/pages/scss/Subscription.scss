@@ -39,7 +39,7 @@
 
     .select-section {
         position: sticky;
-        top: 93px;
+        top: 92px;
 
         width: 100%;
         padding: 28px 0 20px 0;
@@ -59,6 +59,28 @@
             padding: 16px 24px;
             border-radius: 24px;
             @include g.boxshadow;
+
+            &.active {
+                background:
+                    conic-gradient(from 135deg at 50% 50%,
+                        rgba(255, 255, 255, 0.22) 0deg,
+                        rgba(0, 0, 0, 0.10) 90deg,
+                        rgba(255, 255, 255, 0.18) 180deg,
+                        rgba(0, 0, 0, 0.12) 270deg,
+                        rgba(255, 255, 255, 0.22) 360deg),
+                    #ff153c;
+
+                box-shadow:
+                    0px 6px 18px rgba(0, 0, 0, 0.30),
+                    0px 0px 14px rgba(255, 255, 255, 0.18) inset,
+                    0px 0px 22px rgba(255, 21, 60, 0.40);
+
+                backdrop-filter: blur(100px);
+
+                border: 1px solid rgba(255, 255, 255, 0.2);
+
+                color:#fff;
+            }
         }
     }
 
@@ -102,6 +124,7 @@
                             height: 52px;
                             margin-bottom: 16px;
                         }
+
                         span {
                             font-size: 1.2rem;
                             color: #828282;
@@ -130,6 +153,7 @@
                                     .title {
                                         color: #fff;
                                     }
+
                                     .price-wrap {
                                         .cost {
                                             color: #fff;
@@ -168,11 +192,13 @@
 
                                 .price-wrap {
                                     text-align: center;
+
                                     .price {
                                         font-size: 2.4rem;
                                         font-weight: 800;
                                         color: #fff;
                                     }
+
                                     .cost {
                                         font-size: 1.2rem;
                                         font-weight: 700;

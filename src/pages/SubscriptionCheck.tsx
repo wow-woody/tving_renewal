@@ -178,13 +178,8 @@ const SubscriptionCheck = () => {
     const selectedItemId = useSubscriptionStore((s) => s.selectedItemId);
 
     const selectedItem = subscriptionData.sections
-        .flatMap((section) =>
-            section.items.map((item) => ({
-                ...item,
-                section,
-            }))
-        )
-        .find((item) => item.id === selectedItemId);
+        .flatMap((section) => section.items.map((item) => ({ ...item, section })))
+        .find((x) => x.id === selectedItemId);
 
     // 🚨 선택 없이 접근 차단
     if (!selectedItem) {
@@ -228,10 +223,10 @@ const SubscriptionCheck = () => {
                                     <img
                                         src={
                                             service === 'TVING'
-                                                ? '/images/tving-icon.svg'
+                                                ? '/images/tving-logo-main.svg'
                                                 : service === 'WAVVE'
-                                                ? '/images/wave-icon.svg'
-                                                : '/images/diseny-icon.svg'
+                                                    ? '/images/wave-logo.svg'
+                                                    : '/images/diseny-logo.svg'
                                         }
                                         alt={service}
                                         className={service === 'DISNEY' ? 'disney-logo' : ''}
@@ -241,7 +236,7 @@ const SubscriptionCheck = () => {
                                     )}
                                 </React.Fragment>
                             ))}
-                            {selectedItem.name}
+                            이용권
                         </h2>
                     </div>
 
@@ -303,6 +298,7 @@ const SubscriptionCheck = () => {
                                 onClick={() => setSelectedPay(idx)}
                             >
                                 <img src={`/images/${pay}-pay.svg`} alt={pay} />
+                                {pay==='card' && <span>신용카드</span>}
                             </button>
                         ))}
                     </div>

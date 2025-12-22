@@ -21,7 +21,6 @@ const Mypage = () => {
     const uid = user?.uid;
 
     const currentProfile = profiles.find((p) => p.id === profileId);
-    const subscription = currentProfile?.subscription;
 
     const { hearts, onFetchHeart, onToggleHeart } = useHeartStore();
     const { watchHistory, onFetchWatchHistory, onRemoveWatchHistory } = useWatchHistoryStore();
@@ -41,6 +40,62 @@ const Mypage = () => {
     const trackRefInterest = useRef<HTMLDivElement | null>(null);
     const prevRefInterest = useRef<HTMLButtonElement | null>(null);
     const nextRefInterest = useRef<HTMLButtonElement | null>(null);
+
+    const rawSubscription = currentProfile?.subscription;
+
+    const isExpired = (expiresAt: string) => new Date(expiresAt).getTime() < Date.now();
+
+    const normalizeSubscription = (sub: any) => {
+        if (!sub) return null;
+
+        const expired = sub.expiresAt ? isExpired(sub.expiresAt) : false;
+
+        return {
+            ...sub,
+            status: sub.status ?? (expired ? 'expired' : 'active'),
+            subscribedAt: sub.subscribedAt ?? sub.startedAt,
+        };
+    };
+
+    const subscription = normalizeSubscription(rawSubscription);
+
+    const formatDate = (iso?: string) => {
+        if (!iso) return '-';
+        const d = new Date(iso);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}.${m}.${day}`;
+    };
+
+    const [showCancelModal, setShowCancelModal] = useState(false);
+
+    const isSubActive = subscription?.status === 'active';
+    const isSubCanceled = subscription?.status === 'canceled';
+    const isSubExpired = subscription?.status === 'expired';
+
+    // ✅ 취소 상태면 cancelEffectiveAt을 우선 표시, 없으면 expiresAt 표시
+    const endDateToShow =
+        subscription?.status === 'canceled'
+            ? (subscription.cancelEffectiveAt ?? subscription.expiresAt)
+            : subscription?.expiresAt;
+
+    const handleClickCancel = () => setShowCancelModal(true);
+
+    const handleConfirmCancel = async () => {
+        if (!uid || !profileId) return;
+        await cancelSubscription(uid, profileId);
+        setShowCancelModal(false);
+    };
+
+    // (선택) 아이콘 매핑: companies가 있으면 보여주기
+    const getCompanyIcon = (name: string) => {
+        if (name === 'TVING') return '/images/tving-icon.svg';
+        if (name === 'WAVVE') return '/images/wave-icon.svg';
+        if (name === 'DISNEY') return '/images/diseny-icon.svg';
+        return '';
+    };
+
 
     useEffect(() => {
         if (!user) {
@@ -123,37 +178,93 @@ const Mypage = () => {
 
                     <div className="subscribe">
                         <div className="top-title">
-                            <h3 className="sub-title">이용권 관리</h3>
+                            <div className="with-priod">
+                                <h3 className="sub-title">이용권 관리</h3>
+
+                                <div className="sub-title-info">
+                                    {/* 구독중/취소/만료일 때: 타이틀 옆에 기간 */}
+                                    {subscription && (
+                                        <p className={`sub-period ${isSubCanceled ? 'end-soon' : ''}`}>
+                                            {formatDate(subscription.startedAt)} ~{' '}
+                                            <span className={isSubCanceled ? 'end-date-red' : ''}>
+                                                {formatDate(endDateToShow)}
+                                            </span>
+                                        </p>
+                                    )}
+                                    <p className="subscribe-name">
+                                        {/* {subscription.name} */}
+                                        {isSubActive && <span className="badge active">이용중</span>}
+                                        {isSubCanceled && <span className="badge canceled">취소됨</span>}
+                                        {isSubExpired && <span className="badge expired">만료됨</span>}
+                                    </p>
+                                </div>
+                            </div>
+                            {/* 버튼 영역 */}
+                            <div className="link">
+                                {!subscription || isSubCanceled || isSubExpired ? (
+                                    <Link to="/subscription">
+                                        <p>이용권 구매하기</p>
+                                        <img src="/images/edit.svg" alt="buy" />
+                                    </Link>
+                                ) : (
+                                    <Link to="/subscription">
+                                        <p>{subscription.name}</p>
+                                        <img src="/images/edit.svg" alt="plan" />
+                                    </Link>
+                                )}
+                            </div>
                         </div>
 
-                        {subscription ? (
+                        {/* ====== 가운데 내용 ====== */}
+                        {!subscription ? (
+                            <div className="no-subscribe center">
+                                <p>구독권이 없습니다.</p>
+                            </div>
+                        ) : (
                             <>
-                                <div className="current-subscribe">
-                                    <p className="subscribe-name">{subscription.name}</p>
+                                <div className="current-subscribe one-line">
+                                    <div className="subscribe-icon-wrap">
+                                        {Array.isArray(subscription.companies) && subscription.companies.length > 0 && (
+                                            <div className="sub-icons">
+                                                {subscription.companies.map((c: string) => {
+                                                    const src = getCompanyIcon(c);
+                                                    if (!src) return null;
+                                                    return <img key={c} src={src} alt={c} />;
+                                                })}
+                                            </div>
+                                        )}
 
-                                    {subscription.description.map((desc) => (
-                                        <div className="subscribe-info" key={desc}>
-                                            <p>{desc}</p>
-                                        </div>
-                                    ))}
+                                    </div>
+
+                                    {Array.isArray(subscription.description) && subscription.description.length > 0 && (
+                                        <p className="sub-desc-line">{subscription.description.join(' | ')}</p>
+                                    )}
+
                                 </div>
 
-                                <button
-                                    className="cancel-subscribe"
-                                    onClick={() => {
-                                        if (!uid || !profileId) return;
-                                        if (!confirm('정말 구독을 취소하시겠습니까?')) return;
-                                        cancelSubscription(uid, profileId);
-                                    }}
-                                >
-                                    이용권 취소
-                                </button>
+                                {/* ====== 하단 버튼/문구 ====== */}
+                                {/* {isSubActive ? (
+                                    <button className="cancel-subscribe" onClick={handleClickCancel}>
+                                        이용권 취소
+                                    </button>
+                                ) : isSubCanceled ? (
+                                    <div className="no-subscribe">
+                                        <p>
+                                            구독이 취소되었습니다.{' '}
+                                            <span className="end-date-red">{formatDate(endDateToShow)}</span> 까지 이용 가능해요.
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="no-subscribe">
+                                        <p>구독이 만료되었습니다.</p>
+                                    </div>
+                                )} */}
+                                {isSubActive && (
+                                    <button className="cancel-subscribe" onClick={handleClickCancel}>
+                                        이용권 취소
+                                    </button>
+                                )}
                             </>
-                        ) : (
-                            <div className="no-subscribe">
-                                <p>이용 중인 이용권이 없습니다.</p>
-                                <Link to="/subscription">이용권 구독하기</Link>
-                            </div>
                         )}
                     </div>
 
@@ -399,10 +510,30 @@ const Mypage = () => {
             {showCustomerService && (
                 <CstomerService onClose={() => setShowCustomerService(false)} />
             )}
+
             {showEditMembers && (
                 <div className="modal-overlay" onClick={() => setShowEditMembers(false)}>
                     <div onClick={(e) => e.stopPropagation()}>
                         <Edit_Members onClose={() => setShowEditMembers(false)} />
+                    </div>
+                </div>
+            )}
+
+            {showCancelModal && (
+                <div className="modal-overlay" onClick={() => setShowCancelModal(false)}>
+                    <div className="modal" onClick={(e) => e.stopPropagation()}>
+                        <p className="modal-title">정말 구독을 취소하시겠습니까?</p>
+                        <div className="modal-actions">
+                            <button className="btn-yes" onClick={handleConfirmCancel}>
+                                네
+                            </button>
+                            <button className="btn-no" onClick={() => setShowCancelModal(false)}>
+                                아니오
+                            </button>
+                        </div>
+                        <button className="close" onClick={() => setShowCancelModal(false)}>
+                            <img src="/images/cancle-white-icon.svg" alt="cancle" />
+                        </button>
                     </div>
                 </div>
             )}

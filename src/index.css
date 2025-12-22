@@ -9,6 +9,9 @@
 html {
     font-family: 'NanumSquareNeo', 'sans-serif';
     font-size: 10px;
+
+    scrollbar-gutter: stable both-edges;
+
 }
 
 ul,

@@ -123,7 +123,7 @@ const CstomerService = ({ onClose }: CustomerServiceProps) => {
         <div className="customer-service-card">
           <h2>고객센터 문의</h2>
 
-          <button className="close" onClick={onClose}>
+          <button className="" onClick={onClose}>
             <img src="/images/cancle-white-icon.svg" alt="cancle" />
           </button>
 
