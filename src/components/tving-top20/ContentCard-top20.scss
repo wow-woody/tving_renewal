@@ -16,11 +16,11 @@
   /* 숫자 영역 */
   .rank-box {
     position: absolute;
-    left: -24px;
+    left: -110px;
     bottom: 0;
-    width: 84px; // 숫자 전용 폭
+    width: 200px; // 숫자 전용 폭
 
-    z-index: 50;
+    z-index: 0;
     pointer-events: none;
 
     img {

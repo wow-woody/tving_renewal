@@ -50,9 +50,18 @@ export const useUserStore = create<UserState>((set, get) => ({
       ...(doc.data() as Omit<Profile, 'id'>),
     }));
 
+    // localStorage에서 저장된 profileId 확인
+    const savedProfileId = localStorage.getItem('selectedProfileId');
+    const validProfileId =
+      savedProfileId && profiles.some((p) => p.id === savedProfileId)
+        ? savedProfileId
+        : profiles[0].id;
+
+    localStorage.setItem('selectedProfileId', validProfileId);
+
     set({
       profiles,
-      profileId: profiles[0].id, // 첫 프로필 자동 선택
+      profileId: validProfileId,
     });
   },
 
@@ -96,13 +105,18 @@ export const useUserStore = create<UserState>((set, get) => ({
     await deleteDoc(doc(db, 'users', uid, 'profiles', profileId));
 
     const setProfiles = profiles.filter((p) => p.id !== profileId);
+    const newProfileId =
+      currentId === profileId
+        ? setProfiles.find((p) => p.owner)?.id ?? setProfiles[0]?.id ?? ''
+        : currentId;
+
+    if (newProfileId) {
+      localStorage.setItem('selectedProfileId', newProfileId);
+    }
 
     set({
       profiles: setProfiles,
-      profileId:
-        currentId === profileId
-          ? setProfiles.find((p) => p.owner)?.id ?? setProfiles[0].id
-          : currentId,
+      profileId: newProfileId,
     });
   },
 
@@ -115,5 +129,8 @@ export const useUserStore = create<UserState>((set, get) => ({
     set({ profiles: profiles.map((p) => (p.id === profileId ? { ...p, name } : p)) });
   },
 
-  onSetProfile: (id) => set({ profileId: id }),
+  onSetProfile: (id) => {
+    localStorage.setItem('selectedProfileId', id);
+    set({ profileId: id });
+  },
 }));

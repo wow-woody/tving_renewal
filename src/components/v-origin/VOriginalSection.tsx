@@ -59,7 +59,6 @@ const VOriginalSection = ({ category }: Props) => {
           만나보세요.
         </p>
         </div>
-        <button className="more-btn">더보기 +</button>
       </div>
 
       {/* 우측 카드 영역 */}

@@ -39,6 +39,14 @@ type UserInfo =
 interface AuthState {
   user: UserInfo | null;
   loading: boolean;
+  alertModal: {
+    show: boolean;
+    message: string;
+    type: 'success' | 'error' | 'info';
+    title?: string;
+  } | null;
+  showAlert: (message: string, type?: 'success' | 'error' | 'info', title?: string) => void;
+  hideAlert: () => void;
   onMember: (id: string, email: string, password: string) => Promise<void>;
   onLogin: (email: string, password: string) => Promise<void>;
   onLogout: () => Promise<void>;
@@ -50,6 +58,15 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: true,
+  alertModal: null,
+
+  showAlert: (message, type = 'info', title) => {
+    set({ alertModal: { show: true, message, type, title } });
+  },
+
+  hideAlert: () => {
+    set({ alertModal: null });
+  },
 
   initAuth: () => {
     onAuthStateChanged(auth, (user) => {
@@ -80,9 +97,9 @@ export const useAuthStore = create<AuthState>((set) => ({
         createdAt: new Date(),
       });
       set({ user: userCredential.user });
-      alert('회원가입 완료');
+      useAuthStore.getState().showAlert('회원가입이 완료되었습니다!', 'success');
     } catch (err: any) {
-      alert('회원가입 실패');
+      useAuthStore.getState().showAlert('회원가입에 실패했습니다. 다시 시도해주세요.', 'error');
       console.log('회원가입 실패', err.message);
     }
   },
@@ -102,9 +119,9 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       const userCredential = await signInWithEmailAndPassword(auth, IdEmail, password);
       set({ user: userCredential.user });
-      alert('로그인 성공');
+      useAuthStore.getState().showAlert('로그인 성공!', 'success');
     } catch (err: any) {
-      alert('로그인 실패');
+      useAuthStore.getState().showAlert('로그인에 실패했습니다.\n아이디와 비밀번호를 확인해주세요.', 'error');
       console.log('로그인 실패', err.message);
     }
   },
@@ -129,9 +146,9 @@ export const useAuthStore = create<AuthState>((set) => ({
         await setDoc(userRef, customUser);
       }
       set({ user: customUser });
-      alert(`로그인 성공! `);
+      useAuthStore.getState().showAlert(`${customUser.name}님, 환영합니다!`, 'success', 'Google 로그인 성공');
     } catch (err: any) {
-      alert(err.message);
+      useAuthStore.getState().showAlert(err.message || '로그인에 실패했습니다.', 'error');
     }
   },
 
@@ -186,10 +203,10 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ user: kakaoUser });
       localStorage.setItem('kakaoUser', JSON.stringify(kakaoUser));
 
-      alert(`${kakaoUser.name}님, 카카오 로그인 성공! `);
+      useAuthStore.getState().showAlert(`${kakaoUser.name}님, 환영합니다!`, 'success', '카카오 로그인 성공');
     } catch (err: any) {
       console.error(' 카카오 로그인 중 오류:', err);
-      alert(err.message);
+      useAuthStore.getState().showAlert(err.message || '로그인에 실패했습니다.', 'error');
     }
   },
 

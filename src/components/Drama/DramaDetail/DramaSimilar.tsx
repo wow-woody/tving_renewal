@@ -32,7 +32,7 @@ const DramaSimilar = () => {
     if (genreId) {
       onFetchByFilter({ with_genres: String(genreId) });
     }
-  }, [tvDetail]);
+  }, [tvDetail, onFetchByFilter]);
 
   const updateBar = (prog: number) => {
     if (!trackRef.current || !barRef.current) return;
@@ -107,7 +107,7 @@ const DramaSimilar = () => {
                   <button className="poster-thumb" onClick={() => handleContentClick(content.id)}>
                     <img
                       src={`https://image.tmdb.org/t/p/w500${content.poster_path}`}
-                      alt={content.name || content.title}
+                      alt={content.name}
                     />
                   </button>
                 </div>

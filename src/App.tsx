@@ -67,6 +67,11 @@ function App() {
     }
   }, [user]);
 
+  // 페이지 이동 시 스크롤을 맨 위로
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <>
       {!hideHeader && <Header />}
@@ -98,6 +103,7 @@ function App() {
         <Route path="/movie" element={<Movie />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/movie/genre/:key" element={<MovieGenre />} />
+
       </Routes>
 
       {!hideFooter && <Footer />}

@@ -6,7 +6,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import ContentCard from './ContentCard';
-import { RankScope } from '../../../type/enum';
 import '../../tving-top20/RankRow-top20.scss';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;

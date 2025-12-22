@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import AnimSwiper from '../../components/Anim/AnimSwiper';
 import SnoopySection from '../../components/Anim/SnoopySection';
 import ZootopiaSection from '../../components/Anim/ZootopiaSection';
-import { Category } from '../../type/enum';
+
 
 const Anim = () => {
   const onFetchAnims = useAnimStore((s) => s.onFetchAnims);

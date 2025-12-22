@@ -10,7 +10,12 @@ export interface LiveAlarm {
 }
 
 // 알림 추가
-export const addLiveAlarm = async (userId: string, channelId: string, title: string, thumb: string) => {
+export const addLiveAlarm = async (
+  userId: string,
+  channelId: string,
+  title: string,
+  thumb: string
+) => {
   try {
     const alarmRef = doc(db, 'users', userId, 'liveAlarms', channelId);
     await setDoc(alarmRef, {
@@ -41,8 +46,9 @@ export const removeLiveAlarm = async (userId: string, channelId: string) => {
 // 알림 확인 (이미 설정되어 있는지)
 export const checkLiveAlarm = async (userId: string, channelId: string): Promise<boolean> => {
   try {
-    const alarmRef = doc(db, 'users', userId, 'liveAlarms', channelId);
-    const alarmDoc = await getDocs(query(collection(db, 'users', userId, 'liveAlarms'), where('channelId', '==', channelId)));
+    const alarmDoc = await getDocs(
+      query(collection(db, 'users', userId, 'liveAlarms'), where('channelId', '==', channelId))
+    );
     return !alarmDoc.empty;
   } catch (error) {
     console.error('알림 확인 실패:', error);
@@ -55,7 +61,7 @@ export const getLiveAlarms = async (userId: string): Promise<LiveAlarm[]> => {
   try {
     const alarmsRef = collection(db, 'users', userId, 'liveAlarms');
     const snapshot = await getDocs(alarmsRef);
-    return snapshot.docs.map(doc => ({
+    return snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
       createdAt: doc.data().createdAt?.toDate() || new Date(),
