@@ -1,3 +1,80 @@
+.season-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	position: relative;
+}
+
+.season-inline-btn {
+		min-width: 100px;
+		width: auto;
+		letter-spacing: 0.08em;
+		word-break: keep-all;
+		white-space: nowrap;
+	background: #222;
+	color: #fff;
+	border: 1.5px solid #5c5c5c;
+	border-radius: 8px;
+	padding: 10px 0px;
+	font-size: 1.4rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.18s, color 0.18s, border 0.18s;
+	box-sizing: border-box;
+	outline: none;
+	letter-spacing: 0.02em;
+	background-clip: padding-box;
+}
+.season-inline-btn:hover,
+.season-inline-btn:active {
+	background: #222;
+	color: #fff;
+	border: 1.5px solid #ff153c;
+}
+
+#id-season-n {
+	width: 120px;
+}
+
+.season-inline-list {
+	
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	padding: 0;
+	margin-top: 24px;
+	justify-content: center;
+}
+.season-inline-item {
+			margin-top: -23px;
+		min-width: 100px;
+		width: auto;
+		letter-spacing: 0.08em;
+		word-break: keep-all;
+		white-space: nowrap;
+	background: #222;
+	border: 1.5px solid #5c5c5c;
+	color: #fff;
+	font-size: 1.4rem;
+	font-weight: 500;
+	padding: 10px 0px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.18s, color 0.18s, border 0.18s;
+	box-sizing: border-box;
+	outline: none;
+	letter-spacing: 0.02em;
+	background-clip: padding-box;
+}
+.season-inline-item.active,
+.season-inline-item:hover {
+	background: #222;
+	color: #fff;
+	border: 1.5px solid #ff153c;
+}
 
 .drama-season-section{
 
@@ -10,14 +87,47 @@
 
 
 
+
+// 기존 inline 컨트롤(위치 변경으로 미사용)
 .episode-controls-inline {
+	display: none;
+}
+
+// 시즌선택 아래로 내린 컨트롤 (네비+페이저 가로 배치)
+.episode-controls-below-row {
 	display: flex;
-	align-items: flex-end;
-	flex: 1 1 auto;
+	flex-direction: row;
+	align-items: end;
 	justify-content: flex-end;
-	gap: 0;
-	margin-left: 0;
-  margin-bottom: 20px;
+	gap: 16px;
+	width: 100%;
+}
+
+.episode-pagination-row {
+	position: relative;
+	width: 180px;
+	height: 2px;
+	display: flex;
+	align-items: center;
+	background: none;
+	min-width: 0;
+}
+
+.pagenation-line {
+	width: 100%;
+	height: 2px;
+	background: #373737;
+	border-radius: 1px;
+}
+
+.pointer-line.episode-pointer-line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 2px;
+	background: #ff153c;
+	border-radius: 1px;
+	transition: left 0.35s cubic-bezier(0.4,0,0.2,1), width 0.35s cubic-bezier(0.4,0,0.2,1);
 }
 
 
@@ -89,11 +199,23 @@
 	border-color: #373737;
 }
 // 시즌 타이틀과 드롭다운 버튼을 옆으로 나란히
-.season-title-row-flex {
+// .season-title-row-flex {
+// 	display: flex;
+// 	flex-direction: row;
+// 	align-items: center;
+// 	gap: 16px;}
+
+.season-header-row-flex{
 	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 16px;
+}
+.season-header-row-flex{
+	.season-title{
+
+		h3{
+		font-size: 2.4rem;
+		font-weight: 600;
+		color: white;
+	}}
 }
 
 
@@ -110,7 +232,7 @@
 	// min-width: 170px;
 	height: 300px;
 	position: relative;
-	border: 2px solid transparent;
+	border: 2px solid #5C5C5C;
 	border-radius: 12px;
 	transition: border 0.3s;
 	overflow: hidden;
@@ -129,7 +251,7 @@
 
 	h3 {
 		
-		font-size: 2.4rem;
+		font-size: 1.8rem;
 		width: 100%;
 		overflow-wrap: break-word;
 		word-break: keep-all;
