@@ -359,7 +359,7 @@ const Mypage = () => {
                                                     />
                                                 </div>
                                                 <p className="watching-title">
-                                                    {item.title || item.name}
+                                                    {item.title}
                                                 </p>
                                                 {item.seasonNumber && item.episodeNumber && (
                                                     <p className="watching-episode">

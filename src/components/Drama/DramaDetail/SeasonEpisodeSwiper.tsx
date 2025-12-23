@@ -74,7 +74,8 @@ export default function SeasonEpisodeSwiper({
       if (ep) {
         await onAddWatchHistory({
           id: ep.id,
-          title: ep.name,
+          // title: 드라마 제목, name: 에피소드명
+          title: tvDetail.name || '',
           name: ep.name,
           poster_path: ep.still_path || tvDetail.poster_path || '',
           media_type: 'tv',
