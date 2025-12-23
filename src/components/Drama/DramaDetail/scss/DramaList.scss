@@ -1,0 +1,162 @@
+
+.drama-season-section{
+
+.season-header-row-flex {
+	display: block;
+	align-items: flex-end;
+	width: 100%;
+	gap: 0;
+}
+
+
+
+.episode-controls-inline {
+	display: flex;
+	align-items: flex-end;
+	flex: 1 1 auto;
+	justify-content: flex-end;
+	gap: 0;
+	margin-left: 0;
+  margin-bottom: 20px;
+}
+
+
+
+.episode-pagination {
+	position: relative;
+	flex: 1 1 auto;
+	height: 2px;
+	display: flex;
+	align-items: center;
+	background: none;
+	margin-right: 12px;
+	min-width: 0;
+}
+
+
+.pagenation-line {
+	width: 100%;
+	height: 2px;
+	background: #373737;
+	border-radius: 0;
+}
+
+
+.pointer-line.episode-pointer-line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 120px;
+	height: 2px;
+	background: #ff153c;
+	border-radius: 0;
+	transform: translateX(var(--episode-progress, 0px));
+	transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+
+
+.episode-nav {
+	display: flex;
+	align-items: center;
+	gap: 0;
+}
+.episode-nav .nav-btn {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #373737;
+	background: transparent;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 0;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s, border 0.2s;
+	box-sizing: border-box;
+}
+.episode-nav .nav-btn:hover {
+	background: #222;
+	color: #ff153c;
+	// border-color: #ff153c;
+}
+.episode-nav .nav-btn:disabled,
+.episode-nav .nav-btn.swiper-button-disabled {
+	opacity: 0.4;
+	cursor: default;
+	background: transparent;
+	border-color: #373737;
+}
+// 시즌 타이틀과 드롭다운 버튼을 옆으로 나란히
+.season-title-row-flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 16px;
+}
+
+
+
+.episode-card {
+	width: 400px;
+	// min-width: 170px;
+	height: 280px;
+	display: flex;
+	flex-direction: column;
+}
+.episode-card .thumb {
+	width: 264px;
+	// min-width: 170px;
+	height: 300px;
+	position: relative;
+	border: 2px solid transparent;
+	border-radius: 12px;
+	transition: border 0.3s;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.episode-card .thumb img,
+.episode-card .thumb iframe {
+	// width: 100%;
+	// height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+
+	h3 {
+		
+		font-size: 2.4rem;
+		width: 100%;
+		overflow-wrap: break-word;
+		word-break: keep-all;
+		white-space: normal;
+		color: white;
+	}
+
+	.episode-title{
+		width: 264px;
+	h3 {
+	font-size: 1.4rem;
+	width: 100%;
+	overflow-wrap: break-word;
+	word-break: keep-all;
+	white-space: normal;
+	color: white;
+}
+
+.ep-overview {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  font-size: 1.0rem;
+}
+	}
+}
+
