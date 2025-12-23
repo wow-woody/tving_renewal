@@ -16,6 +16,8 @@ const DramaDeBanner = () => {
       onFetchTvVideos(id);
       onFetchTvDetail(id);
     }
+    // 언마운트 시 영상 자동 종료
+    return () => setPlayVideo(false);
   }, [id, onFetchTvVideos, onFetchTvDetail]);
 
   if (!tvDetail) return <div>로딩중...</div>;
