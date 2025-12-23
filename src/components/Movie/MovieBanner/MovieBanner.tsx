@@ -73,7 +73,7 @@ const MovieBanner = () => {
         ) : (
           <h1 className="banner-title">{duneMovie.title}</h1>
         )}
-        <Link to={`/movie/${duneMovie.id}`} className="banner-link">
+        <Link to={`/movie/detail/${duneMovie.id}`} className="banner-link">
           자세히 보기
         </Link>
       </div>

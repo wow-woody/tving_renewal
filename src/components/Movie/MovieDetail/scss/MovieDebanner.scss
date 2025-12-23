@@ -22,6 +22,7 @@
           rgba(40, 40, 40, 0) 55%,
           rgba(40, 40, 40, 0.6) 100%
         ),
+        linear-gradient(90deg, #282828 10%, rgba(40, 40, 40, 0) 50%),
         linear-gradient(180deg, rgba(40, 40, 40, 0) 55%, #282828 85%);
     }
 
@@ -94,6 +95,34 @@
       overflow-wrap: break-word;
       color: #e5e5e5;
       line-height: 1.5;
+
+      p.clamped {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p.expanded {
+        display: block;
+      }
+
+      .btn-more {
+        margin-top: 8px;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 1.4rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+
+        &:hover {
+          color: #ff4560;
+        }
+      }
     }
 
     .detail-people {

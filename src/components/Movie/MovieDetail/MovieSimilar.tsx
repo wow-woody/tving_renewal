@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useMovieStore } from '../../../store/useMoviesStore';
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
@@ -9,15 +9,12 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import './scss/MovieImages.scss';
-import MovieImagePopup from './MovieImagePopup';
+import './scss/MovieSimilar.scss';
 
-const MovieImages = () => {
+const MovieSimilar = () => {
   const { id } = useParams<{ id: string }>();
-  const { images, onFetchImages } = useMovieStore();
-
-  const [showImagePopup, setShowImagePopup] = useState(false);
-  const [selectedImagePath, setSelectedImagePath] = useState('');
+  const navigate = useNavigate();
+  const { movieDetail, filteredMovies, onFetchByFilter } = useMovieStore();
 
   const [barOffset, setBarOffset] = useState(0);
 
@@ -28,45 +25,48 @@ const MovieImages = () => {
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    if (!id) return;
-    onFetchImages(id);
-  }, [id, onFetchImages]);
+    if (!movieDetail?.genres) return;
+
+    // 첫 번째 장르 ID로 비슷한 콘텐츠 가져오기
+    const genreId = movieDetail.genres[0]?.id;
+    if (genreId) {
+      onFetchByFilter({ with_genres: String(genreId) });
+    }
+  }, [movieDetail, onFetchByFilter]);
 
   const updateBar = (prog: number) => {
     if (!trackRef.current || !barRef.current) return;
-
     const track = trackRef.current.clientWidth;
     const bar = barRef.current.clientWidth;
     const maxLeft = Math.max(track - bar, 0);
-
     setBarOffset(Math.min(Math.max(prog, 0), 1) * maxLeft);
   };
 
-  const handleImageClick = (imagePath: string) => {
-    setSelectedImagePath(imagePath);
-    setShowImagePopup(true);
+  const handleContentClick = (contentId: number) => {
+    navigate(`/movie/detail/${contentId}`);
   };
 
-  if (!images || images.length === 0) return null;
+  // 현재 콘텐츠 제외
+  const similarContent = filteredMovies.filter((movie) => movie.id !== Number(id));
 
-  const displayImages = images.slice(0, 20);
+  if (!similarContent || similarContent.length === 0) return null;
 
   return (
-    <section className="movieImages-wrap">
+    <section className="movieSimilar-wrap">
       <div
-        className="season-section"
-        style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
-        <div className="season-header">
-          <div className="season-title">
-            <h3>스틸컷 이미지</h3>
+        className="similar-section"
+        style={{ '--movie-progress': `${barOffset}px` } as CSSProperties}>
+        <div className="similar-header">
+          <div className="similar-title">
+            <h3>비슷한 콘텐츠</h3>
           </div>
 
           <div className="thumb-controls">
-            <div className="enter-pagination" ref={trackRef}>
+            <div className="movie-pagination" ref={trackRef}>
               <div className="pagenation-line" />
               <div className="pointer-line" ref={barRef} />
             </div>
-            <div className="enter-nav">
+            <div className="movie-nav">
               <button ref={prevRef} className="nav-btn prev">
                 ‹
               </button>
@@ -77,10 +77,10 @@ const MovieImages = () => {
           </div>
         </div>
 
-        <div className="episode-swiper">
+        <div className="similar-swiper">
           <Swiper
             modules={[Navigation]}
-            slidesPerView={3.8}
+            slidesPerView={5.5}
             spaceBetween={16}
             navigation
             onBeforeInit={(swiper) => {
@@ -89,46 +89,34 @@ const MovieImages = () => {
               // @ts-expect-error HTMLElement OK
               swiper.params.navigation.nextEl = nextRef.current;
             }}
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
+            onSwiper={(s) => {
+              swiperRef.current = s;
               updateBar(0);
             }}
             onSlideChange={(swiper) => {
-              const total = swiper.slides.length;
+              const total = similarContent.length;
               const visible = Number(swiper.params.slidesPerView) || 1;
               const maxIndex = Math.max(total - visible, 1);
-
               updateBar(swiper.realIndex / maxIndex);
-            }}>
-            {displayImages.map((image, index) => (
-              <SwiperSlide key={index}>
-                <div className="image-card">
-                  <button
-                    className="image-card-thumb"
-                    onClick={() => handleImageClick(image.file_path)}>
+            }}
+            onProgress={(_, prog) => updateBar(prog)}>
+            {similarContent.map((content) => (
+              <SwiperSlide key={content.id}>
+                <div className="similar-card">
+                  <button className="poster-thumb" onClick={() => handleContentClick(content.id)}>
                     <img
-                      src={`https://image.tmdb.org/t/p/w780${image.file_path}`}
-                      alt={`Movie backdrop ${index + 1}`}
+                      src={`https://image.tmdb.org/t/p/w500${content.poster_path}`}
+                      alt={content.title}
                     />
                   </button>
-                  <div className="image-title">
-                    <h3>스틸컷 {index + 1}</h3>
-                    <p>
-                      {image.width} x {image.height}
-                    </p>
-                  </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       </div>
-
-      {showImagePopup && (
-        <MovieImagePopup imagePath={selectedImagePath} onClose={() => setShowImagePopup(false)} />
-      )}
     </section>
   );
 };
 
-export default MovieImages;
+export default MovieSimilar;

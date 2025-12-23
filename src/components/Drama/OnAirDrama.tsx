@@ -21,12 +21,46 @@ const getAutoplaySrc = (src: string) => {
   return src.includes('?') ? `${src}&${params}` : `${src}?${params}`;
 };
 
-const pickBestTrailer = (videos: any[]) =>
+const pickBestTrailer = (videos: TmdbVideo[]) =>
   videos.find((v) => v.site === 'YouTube' && v.type === 'Trailer') ||
   videos.find((v) => v.site === 'YouTube' && v.type === 'Teaser') ||
   videos.find((v) => v.site === 'YouTube');
 
 /* ================= types ================= */
+
+interface TmdbVideo {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+  published_at: string;
+}
+
+interface TmdbGenre {
+  id: number;
+  name: string;
+}
+
+interface TmdbNetwork {
+  id: number;
+  name: string;
+  logo_path: string | null;
+}
+
+interface TvDetailInfo {
+  id: number;
+  name: string;
+  overview: string;
+  genres: TmdbGenre[];
+  genreNames: string[];
+  networks: TmdbNetwork[];
+  number_of_seasons: number;
+  seasonText: string;
+  adult: boolean;
+  age: string;
+}
 
 interface OnAirTv {
   id: number;
@@ -50,11 +84,10 @@ interface FeaturedItem {
 
 const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
   /* ---------- state ---------- */
-  const [list, setList] = useState<FeaturedItem[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [barOffset, setBarOffset] = useState(0);
   const [currentVideoKey, setCurrentVideoKey] = useState<string | null>(null);
-  const [tvDetail, setTvDetail] = useState<any>(null);
+  const [tvDetail, setTvDetail] = useState<TvDetailInfo | null>(null);
 
   /* ---------- refs ---------- */
   const swiperRef = useRef<SwiperType | null>(null);
@@ -66,19 +99,13 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
   /* =========================================================
      1️⃣ props.tvs → FeaturedItem list 변환
      ========================================================= */
-  useEffect(() => {
-    if (!tvs || tvs.length === 0) return;
-
-    const mapped: FeaturedItem[] = tvs.map((tv) => ({
+  const list: FeaturedItem[] =
+    tvs?.map((tv) => ({
       id: tv.id,
       title: tv.name,
       img1: tv.poster_path ? `${IMAGE_BASE}${tv.poster_path}` : '',
       desc: tv.overview,
-    }));
-
-    setList(mapped);
-    setActiveIndex(0);
-  }, [tvs]);
+    })) || [];
 
   const activeItem = list.length > 0 ? list[activeIndex] ?? list[0] : null;
 
@@ -96,7 +123,7 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
 
       setTvDetail({
         ...detail,
-        genreNames: detail.genres?.map((g: any) => g.name) || [],
+        genreNames: detail.genres?.map((g: TmdbGenre) => g.name) || [],
         networks: detail.networks || [],
         seasonText:
           detail.number_of_seasons === 1
@@ -109,7 +136,7 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
     };
 
     fetchDetail();
-  }, [activeItem]);
+  }, [activeItem?.id]);
 
   /* =========================================================
      3️⃣ active 변경 시 → 비디오 fetch (로컬)
@@ -139,7 +166,7 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
     };
 
     fetchVideo();
-  }, [activeItem]);
+  }, [activeItem?.id]);
 
   /* =========================================================
      4️⃣ progress bar 계산
@@ -225,7 +252,7 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
                 )}
               </p>
 
-              <p className="broadcast">{tvDetail.networks.map((n: any) => n.name).join(', ')}</p>
+              <p className="broadcast">{tvDetail.networks.map((n) => n.name).join(', ')}</p>
 
               <p className="season">{tvDetail.seasonText}</p>
               <p className="genre">{tvDetail.genreNames.join(' · ')}</p>
@@ -265,7 +292,6 @@ const OnAirDramaList = ({ tvs }: OnAirDramaListProps) => {
                 <button
                   className={`thumb ${index === activeIndex ? 'is-active' : ''}`}
                   onClick={() => {
-                    setActiveIndex(index);
                     swiperRef.current?.slideToLoop(index);
                   }}>
                   <img src={item.img1} alt={item.title} />

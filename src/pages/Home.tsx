@@ -24,6 +24,7 @@ import LiveNews from '../components/news-live/LiveNews';
 import { liveChannels } from '../data/LiveChannels';
 import MyLive from '../components/my-live/MyLive';
 import SportsLive from '../components/sports-live/SportsLive';
+import WatchHistory from '../components/WatchHistory/WatchHistory';
 
 const Home = () => {
   // 1) 전부 합치기
@@ -55,7 +56,7 @@ const Home = () => {
       </section>
 
       <section className="section-3">
-        <h2 className="hidden">현재 시청중인 프로그램</h2>
+        <WatchHistory />
       </section>
 
       <section className="section-4">

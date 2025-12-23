@@ -10,6 +10,7 @@ const MovieDebanner = () => {
   const { movieDetail, videos, onFetchMovieDetail, onFetchVideo } = useMovieStore();
   const { onToggleHeart, hearts } = useHeartStore();
   const [playVideo, setPlayVideo] = useState(false);
+  const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -88,7 +89,14 @@ const MovieDebanner = () => {
             {movieDetail.runtime && <p>{movieDetail.runtime}분</p>}
           </div>
           <div className="detail-overview">
-            <p>{movieDetail.overview}</p>
+            <p className={isOverviewExpanded ? 'expanded' : 'clamped'}>{movieDetail.overview}</p>
+            {movieDetail.overview && movieDetail.overview.length > 100 && (
+              <button
+                className="btn-more"
+                onClick={() => setIsOverviewExpanded(!isOverviewExpanded)}>
+                {isOverviewExpanded ? '접기' : '더보기'}
+              </button>
+            )}
           </div>
           <div className="detail-people">
             <div className="directors">
