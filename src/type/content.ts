@@ -25,6 +25,7 @@ export interface Content<NId = number> {
   subtitle?: string;
   director?: string;
   actor?: string;
+  character?: string;
   desc?: string;
 
   iframe?: {
