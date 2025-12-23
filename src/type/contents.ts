@@ -1,103 +1,108 @@
 // 공통타입
 export interface MediaBase {
-  id: number;
-  overview: string;
-  backdrop_path: string;
-  poster_path: string;
-  vote_average: number;
-  adult: boolean;
-  cAge: string;
-  logo: string;
+    id: number;
+    overview: string;
+    backdrop_path: string;
+    poster_path: string;
+    vote_average: number;
+    adult: boolean;
+    cAge: string;
+    logo: string;
 }
 
 //movie
 export interface Movie extends MediaBase {
-  title: string;
-  release_date: string;
-  genre_ids?: number[];
-  original_language?: string;
+    title: string;
+    release_date: string;
+    genre_ids?: number[];
+    original_language?: string;
+    runtime?: number;
+    genres?: Array<{ id: number; name: string }>;
+    genreNames?: string[];
+    directors?: string[];
+    casts?: string[];
 }
 
 //video 타입
 export interface Video {
-  id: string;
-  key: string; //youtube key
-  name: string;
-  site: string; //youtube, video
-  type: string; //trailer, teaser
+    id: string;
+    key: string; //youtube key
+    name: string;
+    site: string; //youtube, video
+    type: string; //trailer, teaser
 }
 
 //tv 타입
 export interface TV extends MediaBase {
-  name: string;
-  poster_path: string;
-  first_air_date: string;
-  genre_ids?: number[];
+    name: string;
+    poster_path: string;
+    first_air_date: string;
+    genre_ids?: number[];
 }
 
 //season 타입
 export interface Season extends MediaBase {
-  name: string;
-  season_number: number;
-  poster_path: string;
+    name: string;
+    season_number: number;
+    poster_path: string;
 }
 
 //episodes 타입
 export interface Episodes extends MediaBase {
-  name: string;
-  episode_number: number;
-  still_path: string;
+    name: string;
+    episode_number: number;
+    still_path: string;
 }
 
 export interface MovieState {
-  movies: Movie[];
-  videos: [];
-  tvs: TV[];
-  seasons: Season[];
-  episodes: Episodes[];
+    movies: Movie[];
+    videos: [];
+    tvs: TV[];
+    seasons: Season[];
+    episodes: Episodes[];
 
-  // episodesBySeason: Record<number, any[]>;
+    // episodesBySeason: Record<number, any[]>;
 
-  onFetchPopular: () => Promise<void>;
-  onFetchVideo: (id: string) => Promise<Video[]>;
-  onFetchTvs: () => Promise<void>;
-  onFetchTvVideos: (id: string) => Promise<void>;
-  onFetchSeasons: (id: string) => Promise<void>;
-  onFetchEpisodes: (id: string, season: number) => Promise<void>;
+    onFetchPopular: () => Promise<void>;
+    onFetchVideo: (id: string) => Promise<Video[]>;
+    onFetchTvs: () => Promise<void>;
+    onFetchTvVideos: (id: string) => Promise<void>;
+    onFetchSeasons: (id: string) => Promise<void>;
+    onFetchEpisodes: (id: string, season: number) => Promise<void>;
 }
 
 // heart 찜목록 타입
 export interface HeartItem extends MediaBase {
-  title?: string;
-  name?: string;
-  poster_path: string;
-  media_type?: 'tv' | 'movie';
+    title?: string;
+    name?: string;
+    poster_path: string;
+    media_type?: 'tv' | 'movie';
 }
 
 //zustand 관리에 대한 상태 타입 정의
 export interface HeartState {
-  hearts: HeartItem[];
-  onToggleHeart: (movie: HeartItem) => Promise<void>;
-  onFetchHeart: () => Promise<void>;
-  onResetHeart: () => void;
+    hearts: HeartItem[];
+    onToggleHeart: (movie: HeartItem) => Promise<void>;
+    onFetchHeart: () => Promise<void>;
+    onResetHeart: () => void;
 }
 
 // 시청 내역 타입
 export interface WatchHistoryItem extends MediaBase {
-  title?: string;
-  name?: string;
-  poster_path: string;
-  media_type?: 'tv' | 'movie';
-  watchedAt: string;
-  episodeNumber?: number;
-  seasonNumber?: number;
+    title?: string;
+    name?: string;
+    poster_path: string;
+    media_type?: 'tv' | 'movie';
+    watchedAt: string;
+    episodeNumber?: number;
+    seasonNumber?: number;
 }
 
 // 시청 내역 상태 타입
 export interface WatchHistoryState {
-  watchHistory: WatchHistoryItem[];
-  onAddWatchHistory: (item: Omit<WatchHistoryItem, 'watchedAt'>) => Promise<void>;
-  onRemoveWatchHistory: (id: number) => Promise<void>;
-  onFetchWatchHistory: () => Promise<void>;
-  onResetWatchHistory: () => void;
+    watchHistory: WatchHistoryItem[];
+    onAddWatchHistory: (item: Omit<WatchHistoryItem, 'watchedAt'>) => Promise<void>;
+    onRemoveWatchHistory: (id: number) => Promise<void>;
+    onFetchWatchHistory: () => Promise<void>;
+    onResetWatchHistory: () => void;
 }
