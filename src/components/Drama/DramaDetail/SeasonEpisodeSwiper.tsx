@@ -5,6 +5,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './scss/SeasonEpisodeSwiper.scss'
 import '../scss/DramaList.scss';
+import EpisodeVideoModal from './EpisodeVideoModal';
+import { useWatchHistoryStore } from '../../../store/useWatchHistoryStore';
+import { useAuthStore } from '../../../store/useAuthStore';
+import { useNavigate } from 'react-router-dom';
+import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
 
 interface Props {
   tvDetail: any;
@@ -27,6 +32,12 @@ export default function SeasonEpisodeSwiper({
 }: Props) {
   const episodeSwiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const { videos, onFetchTvVideos } = useTvSeriesStore();
+  const { onAddWatchHistory } = useWatchHistoryStore();
+  const { user } = useAuthStore();
+  const navigate = useNavigate();
   const slidesPerView = 2.5;
   const total = episodes.length;
   const maxIndex = total > slidesPerView ? total - slidesPerView : 0;
@@ -36,47 +47,106 @@ export default function SeasonEpisodeSwiper({
   // 막대 길이: 전체 바의 (1 / (maxIndex+1))
   const pointerWidthPercent = maxIndex > 0 ? (100 / (maxIndex + 1)) : 100;
   const pointerLeftPercent = progress * (100 - pointerWidthPercent);
+
+  // 영상 모달 오픈 핸들러
+  // 현재 activeIndex로 시청한 에피소드 정보 추출
+  const getCurrentEpisode = () => {
+    return episodes[activeIndex];
+  };
+
+  const handleOpenVideo = async () => {
+    await onFetchTvVideos(tvDetail.id);
+    // TMDB에서 YouTube 트레일러 우선
+    const trailer = videos.find(v => v.site === 'YouTube' && v.type === 'Trailer') || videos.find(v => v.site === 'YouTube');
+    if (trailer) {
+      setVideoId(trailer.key);
+      setShowVideoModal(true);
+    } else {
+      alert('예고편 영상을 찾을 수 없습니다.');
+    }
+  };
+
+  // 영상 모달 닫힐 때 시청내역 추가 및 마이페이지 이동
+  const handleVideoModalClose = async () => {
+    setShowVideoModal(false);
+    if (user) {
+      const ep = getCurrentEpisode();
+      if (ep) {
+        await onAddWatchHistory({
+          id: ep.id,
+          title: ep.name,
+          name: ep.name,
+          poster_path: ep.still_path || tvDetail.poster_path || '',
+          media_type: 'tv',
+          overview: ep.overview,
+          backdrop_path: ep.still_path || tvDetail.backdrop_path || '',
+          vote_average: ep.vote_average || 0,
+          adult: false,
+          cAge: tvDetail.cAge || '',
+          logo: '',
+          episodeNumber: ep.episode_number,
+          seasonNumber: selectedSeason,
+        });
+      }
+    }
+  };
+
   return (
     <div className="drama-season-section">
       <div className="season-header">
         <div className="season-header-row-flex">
           <div className="season-title">
-            <h3>{tvDetail.name} 시즌</h3>
+            <h3>{tvDetail.name}</h3>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px' }}>
+                <button
+                  className="season-inline-btn"
+                  onClick={() => setShowSeasonMenu(!showSeasonMenu)}
+                  type="button"
+                >
+                  {seasons.find(s => s.season_number === selectedSeason)?.name || '시즌'}
+                </button>
+                {showSeasonMenu && (
+                  <div className="season-inline-list" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px', marginLeft: '0' }}>
+                    {seasons.map((s: any) => (
+                      <button
+                        key={s.id}
+                        className={`season-inline-item${s.season_number === selectedSeason ? ' active' : ''}`}
+                        onClick={() => { setSelectedSeason(s.season_number); setShowSeasonMenu(false); }}
+                        type="button"
+                      >
+                        {s.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-          <button className="season-dropdown-btn" onClick={() => setShowSeasonMenu(!showSeasonMenu)}>
-            시즌 선택
-          </button>
-          {showSeasonMenu && (
-            <div className="season-dropdown-menu">
-              {seasons.map((s: any) => (
-                <button key={s.id} className={`season-menu-item${s.season_number === selectedSeason ? ' active' : ''}`} onClick={() => { setSelectedSeason(s.season_number); setShowSeasonMenu(false); }}>{s.name}</button>
-              ))}
-            </div>
-          )}
-          {/* 페이저 & 네비게이션 */}
-          <div className="episode-controls-inline">
-            <div className="episode-pagination">
-              <div className="pagenation-line" />
-              <div
-                className="pointer-line episode-pointer-line"
-                style={{
-                  width: `${pointerWidthPercent}%`,
-                  left: `${pointerLeftPercent}%`,
-                }}
-              />
-            </div>
-            <div className="episode-nav">
-              <button type="button" className="nav-btn prev episode-prev" aria-label="Previous slide">‹</button>
-              <button type="button" className="nav-btn next episode-next" aria-label="Next slide">›</button>
-            </div>
+        </div>
+        {/* 페이저 & 네비게이션: 시즌선택 아래로 이동 */}
+        <div className="episode-controls-below-row">
+          <div className="episode-pagination episode-pagination-row">
+            <div className="pagenation-line" />
+            <div
+              className="pointer-line episode-pointer-line"
+              style={{
+                width: `${pointerWidthPercent}%`,
+                left: `${pointerLeftPercent}%`,
+              }}
+            />
+          </div>
+          <div className="episode-nav">
+            <button type="button" className="nav-btn prev episode-prev" aria-label="Previous slide">‹</button>
+            <button type="button" className="nav-btn next episode-next" aria-label="Next slide">›</button>
           </div>
         </div>
       </div>
       <div className="drama-episode-swiper-wrap">
         <Swiper
           modules={[Navigation]}
-          slidesPerView={5.5}
-          spaceBetween={14}
+          slidesPerView={5.8}
+          spaceBetween={0}
           loop={false}
           navigation={{
             nextEl: '.episode-next',
@@ -95,7 +165,7 @@ export default function SeasonEpisodeSwiper({
           {episodes.map((ep: any) => (
             <SwiperSlide key={ep.id}>
               <div className="episode-card">
-                <div className="thumb">
+                <div className="thumb" onClick={handleOpenVideo} style={{ cursor: 'pointer' }}>
                   <img src={ep.still_path ? `https://image.tmdb.org/t/p/w500${ep.still_path}` : tvDetail.poster_path ? `https://image.tmdb.org/t/p/w500${tvDetail.poster_path}` : ''} alt={ep.name} />
                   <div className="play-overlay"><div className="play-icon">▶</div></div>
                 </div>
@@ -109,6 +179,9 @@ export default function SeasonEpisodeSwiper({
           ))}
         </Swiper>
       </div>
+      {showVideoModal && videoId && (
+        <EpisodeVideoModal videoId={videoId} onClose={handleVideoModalClose} />
+      )}
     </div>
   );
 }
