@@ -14,6 +14,14 @@ import type { DramaGenres } from '../../data/DramaFilters';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
+interface VideoResult {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+}
+
 const getAutoplaySrc = (src: string) => {
   const params = 'autoplay=1&mute=1&controls=0&playsinline=1&rel=0';
   return src.includes('?') ? `${src}&${params}` : `${src}?${params}`;
@@ -98,7 +106,8 @@ const DramaCountry = ({ config }: Props) => {
             const koVideoData = await koVideoRes.json();
 
             let trailer = koVideoData.results?.find(
-              (v: any) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
+              (v: VideoResult) =>
+                v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
             );
 
             // 한국어 없으면 영어로 fallback
@@ -112,7 +121,8 @@ const DramaCountry = ({ config }: Props) => {
               const enVideoData = await enVideoRes.json();
 
               trailer = enVideoData.results?.find(
-                (v: any) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
+                (v: VideoResult) =>
+                  v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
               );
             }
 

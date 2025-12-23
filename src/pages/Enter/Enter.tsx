@@ -20,9 +20,8 @@ const Enter = () => {
   }, [onFetchEnters, onFetchKoEnters]);
 
   return (
-    <div className="contents-wrap">
+    <div className="enter-contents-wrap">
       <section className="section-1">
-        {/* <h2>인기 예능 프로그램</h2> */}
         <div className="sub-container">
           <img src="/images/예능배너.webp" alt="예능 배너" className="main-banner-image" />
           <img src="/images/예능배너타이틀.webp" alt="예능 타이틀" className="banner-title-image" />
@@ -42,35 +41,35 @@ const Enter = () => {
         </ul>
       </section>
 
-      <section className="section-enter-featured">
+      <section className="section-3">
         <EnterFeaturedSection />
       </section>
 
-      <section className="section-dramaSwiper">
+      <section className="section-4">
         <EnterSwiper config={TALK_CONFIG} />
       </section>
 
-      <section className="section-dramaSwiper">
+      <section className="section-5">
         <EnterSwiper config={REALITY_CONFIG} />
       </section>
 
-      <section className="section-vonly">
+      <section className="section-6">
         <VOnlySection category={Category.ENTER} />
       </section>
 
-      <section className="section-dramaSwiper">
+      <section className="section-7">
         <EnterSwiper config={COMEDY_CONFIG} />
       </section>
 
-      <section className="section-dramaSwiper">
+      <section className="section-8">
         <EnterSwiper config={GAME_CONFIG} />
       </section>
 
-      <section className="section-dramaSwiper">
+      <section className="section-9">
         <EnterSwiper config={FAMILY_CONFIG} />
       </section>
 
-      <section className="section-voriginal">
+      <section className="section-10">
         <VOriginalSection category={Category.ENTER} />
       </section>
     </div>

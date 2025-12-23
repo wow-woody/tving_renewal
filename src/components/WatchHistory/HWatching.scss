@@ -1,22 +1,15 @@
 /* =========================
-   Drama Featured Section
+   HWatching History Section
 ========================= */
 
-.onair-section {
-  
+.hwatching-section {
   position: relative;
   display: flex;
   flex-direction: column;
-  // gap: 16px;
-  // padding: 40px 0;
   isolation: isolate;
   overflow: visible;
-  // padding-left: 10.8rem;
-  // padding-right: 2.4rem;
-  // padding-top: clamp(20px, 2.5vw, 40px);
-  // padding-bottom: clamp(20px, 2.5vw, 40px);
 
-  /* 재사용: 공통 구조는 enter 스타일과 동일한 클래스 명 사용 */
+  /* 재사용: 공통 구조는 onair 스타일과 동일한 클래스 명 사용 */
   .section-header {
     display: flex;
     flex-direction: column;
@@ -28,14 +21,14 @@
     max-width: 160px;
   }
 
-  .onair-title {
+  .hwatching-title {
     color: #fff;
     font-size: 36px;
     font-weight: 900;
     line-height: 48px;
   }
 
-  .onair-body {
+  .hwatching-body {
     display: grid;
     grid-template-columns:
       minmax(120px, 12vw) /* title */
@@ -44,8 +37,8 @@
     align-items: flex-start;
   }
 
-  .onair-fixed {
-    flex: unset; // ❗ 중요
+  .hwatching-fixed {
+    flex: unset;
     width: 100%;
     max-width: 628px;
   }
@@ -110,7 +103,7 @@
   }
 
   .featured-info .desc {
-    width: 100%; // 🔥 필수 (flex 안에서 줄바꿈 제어)
+    width: 100%;
     color: #919191;
     font-size: 16px;
     line-height: 24px;
@@ -121,11 +114,10 @@
     overflow: hidden;
 
     text-overflow: ellipsis;
-    max-height: calc(24px * 2); // ✅ 2줄까지만
+    max-height: calc(24px * 2);
   }
 
-  .thumb-rail-onair {
-    //   overflow: visible; // 필수
+  .thumb-rail-hwatching {
     overflow: hidden;
     min-width: 0;
   }

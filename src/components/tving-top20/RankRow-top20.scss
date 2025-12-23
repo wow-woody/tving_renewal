@@ -3,7 +3,8 @@
   .section-title {
     font-size: 36px;
     font-weight: 800;
-    margin-bottom: 8px;
+    color: white;
+    // margin-bottom: 8px;
   }
 
   /* 드라마 섹션과 동일 컨트롤 레이아웃 */
@@ -12,7 +13,7 @@
     display: flex;
     align-items: flex-end;
     gap: 12px;
-    margin-bottom: 62px;
+    margin-bottom: 64px;
   }
 
   .enter-pagination {

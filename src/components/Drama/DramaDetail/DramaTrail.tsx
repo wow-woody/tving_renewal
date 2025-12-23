@@ -78,10 +78,9 @@ const DramaTrail = () => {
 
                 <div className="episode-swiper">
                     <Swiper
-                        slidesPerView="auto"
-                        // slidesPerView={3.8}   // ← 여기만 상황별로 변경
-                        spaceBetween={16}
                         modules={[Navigation]}
+                        slidesPerView={3.8} // ← 여기만 상황별로 변경
+                        spaceBetween={16}
                         navigation
                         onBeforeInit={(swiper) => {
                             // TS 에러 방지용
@@ -104,10 +103,10 @@ const DramaTrail = () => {
                     >
                         {videos.map((video) => (
                             <SwiperSlide key={video.id}>
-                                <div className="episode-card">
+                                <div className="trailer-card">
                                     <button
                                         onClick={() => handleVideoClick(video.key)}
-                                        className="thumb"
+                                        className="trailer-card-thumb"
                                     >
                                         <img
                                             src={`https://img.youtube.com/vi/${video.key}/maxresdefault.jpg`}

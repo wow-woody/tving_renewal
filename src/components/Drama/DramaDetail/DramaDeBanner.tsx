@@ -25,8 +25,8 @@ const DramaDeBanner = () => {
   const backdropUrl = tvDetail.backdrop
     ? `https://image.tmdb.org/t/p/original${tvDetail.backdrop}`
     : tvDetail.poster_path
-      ? `https://image.tmdb.org/t/p/original${tvDetail.poster_path}`
-      : '';
+    ? `https://image.tmdb.org/t/p/original${tvDetail.poster_path}`
+    : '';
 
   const isHearted = hearts.some((h: HeartItem) => h.id === tvDetail.id);
 
@@ -52,7 +52,7 @@ const DramaDeBanner = () => {
 
   return (
     <>
-      <div className="detail-banner">
+      <div className="drama-detail-banner">
         <div
           className="hero-bg"
           style={{
@@ -66,7 +66,7 @@ const DramaDeBanner = () => {
               allowFullScreen></iframe>
           )}
         </div>
-        <div className="detail-left">
+        <div className="D-detail-left">
           <div className="detail-title">
             {tvDetail.logo ? (
               <img
@@ -86,7 +86,7 @@ const DramaDeBanner = () => {
           <div className="detail-overview">
             <p>{tvDetail.overview}</p>
           </div>
-          <div className='detail-people'>
+          <div className="detail-people">
             <div className="directors">
               {tvDetail.directors?.length > 0 && (
                 <>

@@ -121,7 +121,9 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ user: userCredential.user });
       useAuthStore.getState().showAlert('로그인 성공!', 'success');
     } catch (err: any) {
-      useAuthStore.getState().showAlert('로그인에 실패했습니다.\n아이디와 비밀번호를 확인해주세요.', 'error');
+      useAuthStore
+        .getState()
+        .showAlert('로그인에 실패했습니다.\n아이디와 비밀번호를 확인해주세요.', 'error');
       console.log('로그인 실패', err.message);
     }
   },
@@ -146,7 +148,9 @@ export const useAuthStore = create<AuthState>((set) => ({
         await setDoc(userRef, customUser);
       }
       set({ user: customUser });
-      useAuthStore.getState().showAlert(`${customUser.name}님, 환영합니다!`, 'success', 'Google 로그인 성공');
+      useAuthStore
+        .getState()
+        .showAlert(`${customUser.name}님, 환영합니다!`, 'success', 'Google 로그인 성공');
     } catch (err: any) {
       useAuthStore.getState().showAlert(err.message || '로그인에 실패했습니다.', 'error');
     }
@@ -203,7 +207,9 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ user: kakaoUser });
       localStorage.setItem('kakaoUser', JSON.stringify(kakaoUser));
 
-      useAuthStore.getState().showAlert(`${kakaoUser.name}님, 환영합니다!`, 'success', '카카오 로그인 성공');
+      useAuthStore
+        .getState()
+        .showAlert(`${kakaoUser.name}님, 환영합니다!`, 'success', '카카오 로그인 성공');
     } catch (err: any) {
       console.error(' 카카오 로그인 중 오류:', err);
       useAuthStore.getState().showAlert(err.message || '로그인에 실패했습니다.', 'error');
@@ -211,8 +217,13 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   // 로그아웃
+  // onLogout: async () => {
+  //   await signOut(auth);
+  //   set({ user: null });
+  // },
   onLogout: async () => {
     await signOut(auth);
+    localStorage.removeItem('kakaoUser');
     set({ user: null });
   },
 }));

@@ -3,22 +3,22 @@
 ========================= */
 
 .enter-featured-section {
-  margin-top: 72px;
+  // margin-top: 72px;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 40px 0;
+  // gap: 16px;
+  // padding: 40px 0;
   isolation: isolate;
   overflow: visible;
-}
+
 
 /* 재사용: 공통 구조 */
 .section-header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 62px;
+  // gap: 8px;
+  // margin-bottom: 62px;
 }
 
 .section-title {
@@ -228,4 +228,5 @@
 .enter-nav .nav-btn:disabled {
   opacity: 0.4;
   cursor: default;
+}
 }

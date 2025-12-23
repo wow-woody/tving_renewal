@@ -37,7 +37,7 @@ const Drama = () => {
   }, [onFetchTvs, onFetchKoTvs, onFetchOnAirKo]);
 
   return (
-    <div className="contents-wrap">
+    <div className="drama-contents-wrap">
       <section className="section-1">
         <DramaBanner />
       </section>
@@ -57,39 +57,43 @@ const Drama = () => {
           ))}
         </Swiper>
       </section>
-      <section className="section-onair">
+      <section className="section-3">
         <div className="onair-list">
           <OnAirDramaList tvs={onairko} />
         </div>
       </section>
-      <section className="section-dramaSwiper">
+      
+      <section className="section-4">
         <Popular20 />
       </section>
-      <section className="drama-voriginal">
+
+      <section className="section-5">
         <VOriginalSection />
       </section>
-      <section className="section-dramaSwiper">
+
+      <section className="section-6">
         <DramaSwiper config={FANTASY_CONFIG} />
       </section>
-      <section className="section-dramaSwiper">
+
+      <section className="section-7">
         <DramaSwiper config={ACTION_CONFIG} />
       </section>
-      <section className="section-dramaSwiper">
+      <section className="section-8">
         <DramaSwiper config={Comedy_CONFIG} />
       </section>
       <section className="section-9">
         <AppleTvSection />
       </section>
-      <section className="section-dramaSwiper">
+      <section className="section-10">
         <DramaCountry config={OVERSEAS_CONFIG} />
       </section>
-      <section className="section-dramaSwiper">
+      <section className="section-11">
         <DramaSwiper config={Human_CONFIG} />
       </section>
-      <section className="section-dramaSwiper">
+      <section className="section-12">
         <DramaSwiper config={War_CONFIG} />
       </section>
-      <section className="section-dramaSwiper">
+      <section className="section-13">
         <DramaSwiper config={Mystery_CONFIG} />
       </section>
     </div>

@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import MovieCard from './MovieCard';
+import './MovieRankRow-top20.scss';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w342';
@@ -66,7 +67,7 @@ const MoviePopular20 = ({ title = '인기 영화 TOP 20' }) => {
 
   return (
     <section
-      className="movie-top20-wrap"
+      className="movie-rank-row-top20-wrap"
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
       <h2 className="section-title">{title}</h2>
 
@@ -87,8 +88,8 @@ const MoviePopular20 = ({ title = '인기 영화 TOP 20' }) => {
 
       <div className="rank-row">
         <Swiper
-          slidesPerView={6}
-          spaceBetween={50}
+          slidesPerView={4.3}
+          spaceBetween={30}
           modules={[Navigation]}
           navigation
           onBeforeInit={(swiper) => {

@@ -1,4 +1,4 @@
-.detail-banner {
+.drama-detail-banner {
     width: 100%;
     aspect-ratio: 1788/732;
     position: relative;
@@ -26,10 +26,10 @@
         }
     }
 
-    .detail-left {
+    .D-detail-left {
         position: absolute;
 
-        top: 50%;
+        top: 30%;
         transform: translateY(-50%);
 
         width: 50%;
@@ -41,8 +41,7 @@
         flex-direction: column;
         gap: 24px;
 
-        // color: #919191;
-        color: #fff;
+        color: #919191;
         font-weight: 700;
 
         .detail-title {
@@ -59,14 +58,11 @@
             flex-wrap: wrap;
 
             font-size: 1.4rem;
-            // color: #b9b9b9;
-            color: #fff;
+            color: #b9b9b9;
 
             p {
                 padding: 5px 9px;
-                // border: 2px solid #373737;
-                border: 2px solid #fff;
-
+                border: 2px solid #373737;
                 border-radius: 4px;
             }
         }

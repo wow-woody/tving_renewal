@@ -221,7 +221,7 @@ const MovieSwiper = ({ config }: Props) => {
           </div>
 
           {movieDetail && (
-            <Link to={`/movie/${movieDetail.id}`} className="featured-info">
+            <Link to={`/movie/detail/${movieDetail.id}`} className="featured-info">
               <h3>{movieDetail.title}</h3>
 
               <p className="age">
@@ -237,7 +237,7 @@ const MovieSwiper = ({ config }: Props) => {
               <p className="year">{movieDetail.releaseYear}</p>
               <p className="runtime">{movieDetail.runtime}</p>
               <p className="genre">{movieDetail.genreNames.slice(0, 2).join(', ')}</p>
-              <span className="desc">{movieDetail.overview}</span>
+              <span className="desc movie-overview-3lines">{movieDetail.overview}</span>
             </Link>
           )}
         </div>

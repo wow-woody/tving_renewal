@@ -98,7 +98,7 @@ const MovieClassic = () => {
         onProgress={(_, prog) => updateBar(prog)}>
         {classicMovies.map((movie, i) => (
           <SwiperSlide key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/movie/detail/${movie.id}`}>
               <div className={`classic-wrap ${i % 2 === 1 ? 'reverse' : ''}`}>
                 <div className="img-box">
                   <img

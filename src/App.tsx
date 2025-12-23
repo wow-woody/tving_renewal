@@ -54,18 +54,24 @@ function App() {
   const hideFooter = noFooterPage.includes(location.pathname);
 
   const initAuth = useAuthStore((state) => state.initAuth);
-  const { user } = useAuthStore();
+  const { user, loading } = useAuthStore();
   const { initProfiles } = useUserStore();
 
   useEffect(() => {
     initAuth();
-  }, []);
+  }, [initAuth]);
+
+  // useEffect(() => {
+  //   if (user && 'uid' in user) {
+  //     initProfiles(user.uid);
+  //   }
+  // }, [user]);
 
   useEffect(() => {
-    if (user && 'uid' in user) {
+    if (!loading && user && 'uid' in user) {
       initProfiles(user.uid);
     }
-  }, [user]);
+  }, [user, loading, initProfiles]);
 
   // 페이지 이동 시 스크롤을 맨 위로
   useEffect(() => {
@@ -101,9 +107,8 @@ function App() {
         <Route path="/live" element={<LivePage />} />
         <Route path="/sport" element={<SportBanner />} />
         <Route path="/movie" element={<Movie />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/movie/detail/:id" element={<MovieDetail />} />
         <Route path="/movie/genre/:key" element={<MovieGenre />} />
-
       </Routes>
 
       {!hideFooter && <Footer />}
