@@ -13,7 +13,8 @@ const SearchResults = () => {
     const movies = searchResults.filter((r) => r.media_type === 'movie');
     const tvShows = searchResults.filter((r) => r.media_type === 'tv');
     const people = searchResults.filter((r) => r.media_type === 'person');
-    return { movies, tvShows, people };
+    const characters = searchResults.filter((r) => r.media_type === 'character');
+    return { movies, tvShows, people, characters };
   }, [searchResults]);
 
   useEffect(() => {
@@ -163,6 +164,42 @@ const SearchResults = () => {
             )}
           </div>
         )}
+
+            {filteredResults.characters.length > 0 && (
+              <section className="results-section">
+                <h2 className="section-title">
+                  캐릭터 <span className="count">({filteredResults.characters.length})</span>
+                </h2>
+                <div className="results-grid people-grid">
+                  {filteredResults.characters.map((character) => (
+                    <div key={`character-${character.id}`} className="result-card person-card">
+                      <div className="card-poster person-poster">
+                        {character.poster_path ? (
+                          <img
+                            src={character.poster_path}
+                            alt={character.title}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="no-poster">
+                            <span>No Image</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="card-info">
+                        <h3 className="card-title">{character.title}</h3>
+                        {character.known_for_department && (
+                          <p className="person-department">{character.known_for_department}</p>
+                        )}
+                        {character.release_date && (
+                          <p className="card-year">{character.release_date}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
       </div>
     </div>
   );
