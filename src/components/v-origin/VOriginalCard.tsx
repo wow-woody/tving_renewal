@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Content } from "../../type/content";
+import type { Content } from "../../types/content";
 import { TVING_BADGE } from "../../contents/media";
 
 interface Props {

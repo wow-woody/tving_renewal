@@ -1,0 +1,90 @@
+@use '../../App.scss' as common;
+
+.swiper-control {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+
+    margin-bottom: 36px;
+
+    .enter-pagination {
+        flex: 1;
+
+        position: relative;
+
+        height: 2px;
+
+        .pagenation-line {
+            width: 100%;
+            height: 100%;
+
+            background: common.$line-g;
+        }
+
+        .pointer-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 120px;
+            height: 100%;
+            background: common.$base-red;
+
+            transform: translateX(var(--enter-progress, 0px));
+            transition: transform 0.35s ease;
+        }
+    }
+
+    .enter-nav {
+        display: flex;
+        align-items: center;
+
+        button {
+            width: 32px;
+            height: 32px;
+
+            border: 2px solid common.$line-g;
+            border-radius: 0;
+
+            &:hover {
+
+                .arrow-left,
+                .arrow-right {
+                    color: common.$base-red;
+                }
+            }
+
+            &+button {
+                border-left: none;
+            }
+
+            .arrow-left,
+            .arrow-right {
+                color: common.$line-w;
+
+                width: 8px;
+                height: 8px;
+            }
+
+            &:disabled,
+            &.swiper-button-disabled {
+                cursor: default;
+
+                .arrow-left,
+                .arrow-right {
+                    opacity: 0.4;
+                }
+
+                &:hover {
+                    .arrow-left,
+                    .arrow-right {
+                        color: common.$line-w;
+                        opacity: 0.4;
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -8,8 +8,8 @@ import "./AppleTv.scss";
 import AppleTvCard from "./AppleTvCard";
 
 import { ALL_CONTENTS } from "../../data";
-import type { Content } from "../../type/content";
-import { RankScope } from "../../type/enum";
+import type { Content } from "../../types/content";
+import { RankScope } from "../../types/enum";
 
 const AppleTvSection = () => {
   const swiperRef = useRef<any | null>(null);

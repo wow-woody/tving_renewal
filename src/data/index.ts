@@ -4,8 +4,8 @@ import Enter from "./Enter";
 import Anim from "./Anim";
 import Movie from "./Movie";
 
-import { TvingBadge } from "../type/enum";
-import type { Content } from "../type/content";
+import { TvingBadge } from "../types/enum";
+import type { Content } from "../types/content";
 
 /** 모든 콘텐츠 */
 export const ALL_CONTENTS: Content[] = [

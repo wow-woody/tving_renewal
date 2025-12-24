@@ -7,7 +7,7 @@ import EnterSwiper from '../../components/Enter/EnterSwiper';
 import EnterFeaturedSection from '../../components/enter-pop/EnterFeaturedSection';
 import VOriginalSection from '../../components/v-origin/VOriginalSection';
 import VOnlySection from '../../components/v-only/VOnlySection';
-import { Category } from '../../type/enum';
+import { Category } from '../../types/enum';
 
 const Enter = () => {
   const onFetchEnters = useTvSeriesStore((s) => s.onFetchEnters);

@@ -9,7 +9,7 @@ import "./VOriginal.scss";
 
 import { ORIGINAL_CONTENTS } from "../../data";
 import { TVING_BADGE } from "../../contents/media";
-import { TvingBadge, Category } from "../../type/enum";
+import { TvingBadge, Category } from "../../types/enum";
 
 interface Props {
   category?: Category;

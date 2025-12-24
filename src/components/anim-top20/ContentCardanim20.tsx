@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import type { Content } from "../../type/content";
-import { RankScope } from "../../type/enum";
+import type { Content } from "../../types/content";
+import { RankScope } from "../../types/enum";
 import "./ContentCard-anim20.scss"
 
 interface Props {

@@ -1,4 +1,4 @@
-import { TvingBadge, AgeRating } from '../type/enum';
+import { TvingBadge, AgeRating } from '../types/enum';
 
 /* TVING 배지 */
 export const TVING_BADGE = {

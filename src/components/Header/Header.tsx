@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './Header.scss';
-import homeIcon from '../../assets/icon/aside-header-icon1.png';
-import userIcon from '../../assets/icon/aside-header-icon2.png';
-import alertIcon from '../../assets/icon/aside-header-icon3.png';
-import favoritIcon from '../../assets/icon/aside-header-icon4.png';
-import contactIcon from '../../assets/icon/aside-header-icon5.png';
-import settingIcon from '../../assets/icon/aside-header-icon6.png';
+import homeIcon from '../../assets/icons/aside-header-icon1.png';
+import userIcon from '../../assets/icons/aside-header-icon2.png';
+import alertIcon from '../../assets/icons/aside-header-icon3.png';
+import favoritIcon from '../../assets/icons/aside-header-icon4.png';
+import contactIcon from '../../assets/icons/aside-header-icon5.png';
+import settingIcon from '../../assets/icons/aside-header-icon6.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
 import ProfileSelect from '../ProfileSelect/ProfileSelect';

@@ -1,6 +1,6 @@
 import RankRow from "./RankRowtop20";
 import { ALL_CONTENTS } from "../../data/index"; // index.ts에서 ALL_CONTENTS export 중 :contentReference[oaicite:6]{index=6}
-import { RankScope } from "../../type/enum";
+import { RankScope } from "../../types/enum";
 
 const TvingTop20 = () => {
   const tvingTop20 = ALL_CONTENTS

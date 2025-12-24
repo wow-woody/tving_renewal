@@ -1,5 +1,5 @@
-import type { Content } from '../type/content';
-import { AgeRating, Category, Genre, RankScope, TvingBadge } from '../type/enum';
+import type { Content } from '../types/content';
+import { AgeRating, Category, Genre, RankScope, TvingBadge } from '../types/enum';
 
 
 const Movie: Content[] = [

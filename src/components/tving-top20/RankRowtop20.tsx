@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import ContentCard from './ContentCardtop20';
-import type { Content } from '../../type/content';
-import { RankScope } from '../../type/enum';
+import type { Content } from '../../types/content';
+import { RankScope } from '../../types/enum';
 import './RankRow-top20.scss';
 
 interface RankRowProps {
@@ -24,16 +24,6 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  // const updateBar = (prog: number) => {
-  //   if (!trackRef.current || !barRef.current) return;
-  //   const track = trackRef.current.clientWidth;
-  //   const bar = barRef.current.clientWidth;
-  //   const maxLeft = Math.max(track - bar, 0);
-  //   const safeProg = Math.min(Math.max(prog, 0), 1);
-  //   setBarOffset(safeProg * maxLeft);
-  // };
-
-  /** 🔥 progress 값(0~1)으로 페이지네이션 위치 계산 */
   const updateBar = (progress: number) => {
     if (!trackRef.current || !barRef.current) return;
 
@@ -69,9 +59,9 @@ const RankRowtop20 = ({ title = '오늘의 티빙 TOP 20', data, rankScope }: Ra
 
   return (
     <section className="rank-row-top20"
-
       style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}
     >
+      
       {/* 섹션 제목 */}
       {title && (
         <h2 className="section-title">{title}</h2>

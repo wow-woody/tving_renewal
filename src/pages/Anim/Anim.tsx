@@ -3,7 +3,7 @@ import { useAnimStore } from '../../store/useAnimStore';
 import '../scss/Anim.scss';
 import RankRowAnim from '../../components/anim-top20/RankRowanim20';
 import anim from '../../data/Anim';
-import { RankScope } from '../../type/enum';
+import { RankScope } from '../../types/enum';
 import { 
   ANIM_FILTERS, 
   JP_ANIM_CONFIG, 

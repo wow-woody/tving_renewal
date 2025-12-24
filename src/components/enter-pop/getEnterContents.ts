@@ -1,6 +1,6 @@
 import {ALL_CONTENTS} from "../../data/index"; 
-import { Category } from "../../type/enum";
-import type { Content } from "../../type/content";
+import { Category } from "../../types/enum";
+import type { Content } from "../../types/content";
 
 export const getEnterContents = (): Content[] => {
   return ALL_CONTENTS.filter(

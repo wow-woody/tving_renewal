@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import ContentCard from "./ContentCardanim20";
-import type { Content } from "../../type/content";
-import { RankScope } from "../../type/enum";
+import type { Content } from "../../types/content";
+import { RankScope } from "../../types/enum";
 import "./RankRow-anim20.scss";
 
 interface RankRowProps {

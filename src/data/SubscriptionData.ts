@@ -1,4 +1,4 @@
-import type { SubscriptionData } from '../type/Subscription.types';
+import type { SubscriptionData } from '../types/Subscription.types';
 
 export const subscriptionData: SubscriptionData = {
     sections: [

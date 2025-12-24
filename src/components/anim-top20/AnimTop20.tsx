@@ -1,6 +1,6 @@
 import RankRow from "./RankRowanim20";
 import { ALL_CONTENTS } from "../../data/index";
-import { RankScope } from "../../type/enum";
+import { RankScope } from "../../types/enum";
 
 const AnimPop20 = () => {
   const popAnim20 = ALL_CONTENTS

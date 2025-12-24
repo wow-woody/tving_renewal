@@ -7,8 +7,8 @@ import anim from '../data/Anim';
 import movie from '../data/Movie';
 import enter from '../data/Enter';
 
-import type { Content } from '../type/content';
-import { RankScope } from '../type/enum';
+import type { Content } from '../types/content';
+import { RankScope } from '../types/enum';
 import VOnlySection from '../components/v-only/VOnlySection';
 import VOriginalSection from '../components/v-origin/VOriginalSection';
 import MainBanner from '../components/main-banner/MainBanner';
@@ -25,6 +25,8 @@ import { liveChannels } from '../data/LiveChannels';
 import MyLive from '../components/my-live/MyLive';
 import SportsLive from '../components/sports-live/SportsLive';
 import WatchHistory from '../components/WatchHistory/WatchHistory';
+
+import TvingTop20 from '../components/Home/Tving-top-20/TvingTop20';
 
 const Home = () => {
   // 1) 전부 합치기
@@ -109,6 +111,10 @@ const Home = () => {
 
       <section className="section-16">
         <SportsLive list={liveChannels} />
+      </section>
+
+      <section>
+        <TvingTop20/>
       </section>
     </div>
   );
