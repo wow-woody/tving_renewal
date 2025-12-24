@@ -1,20 +1,20 @@
 .rank-card {
   display: flex;
-  align-items: flex-end;   // 숫자 아래 정렬
+  align-items: flex-end; // 숫자 아래 정렬
   gap: 0px;
-  width: auto;             // ⭐ swiper auto 계산용
+  width: auto; // ⭐ swiper auto 계산용
   flex-shrink: 0;
   text-decoration: none;
-  z-index: -1;
+  // z-index: -1;
 }
 
 /* 숫자 영역 */
 .rank-box {
   width: 120px;
-               // 숫자 전용 폭 (84px → 100px)
+  // 숫자 전용 폭 (84px → 100px)
   flex-shrink: 0;
-  margin-right: -20px;  // 포스터와 살짝 겹치게
-  z-index: -1;           // 숫자가 위에 표시되도록
+  margin-right: -20px; // 포스터와 살짝 겹치게
+  z-index: -1; // 숫자가 위에 표시되도록
 
   img {
     width: 100%;
@@ -22,14 +22,13 @@
   }
 }
 
-
 /* 포스터 영역 */
 .poster-box {
   position: relative;
   width: 160px;
-  border: 2px solid #5C5C5C;   // ⭐ border를 부모로 이동
+  border: 2px solid #5c5c5c; // ⭐ border를 부모로 이동
   border-radius: 12px;
-  overflow: hidden;           // ⭐ 확대된 이미지 잘라내기
+  overflow: hidden; // ⭐ 확대된 이미지 잘라내기
   transition: border-color 0.3s ease;
 }
 
@@ -42,9 +41,9 @@
 }
 
 .rank-card:hover .poster-box {
-  border-color: #FF153C;
+  border-color: #ff153c;
 }
 
 .rank-card:hover .poster-box img {
-  transform: scale(1.2);      // ⭐ 이미지만 확대
+  transform: scale(1.2); // ⭐ 이미지만 확대
 }

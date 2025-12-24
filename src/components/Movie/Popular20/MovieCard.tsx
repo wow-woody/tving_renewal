@@ -9,7 +9,7 @@ interface Props {
 
 const MovieCard = ({ id, title, img1, order }: Props) => {
   return (
-    <Link to={`/movie/${id}`} className="rank-card">
+    <Link to={`/movie/detail/${id}`} className="rank-card">
       {order && (
         <div className="rank-box">
           <img

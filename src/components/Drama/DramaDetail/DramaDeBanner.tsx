@@ -16,6 +16,8 @@ const DramaDeBanner = () => {
       onFetchTvVideos(id);
       onFetchTvDetail(id);
     }
+    // 언마운트 시 영상 자동 종료
+    return () => setPlayVideo(false);
   }, [id, onFetchTvVideos, onFetchTvDetail]);
 
   if (!tvDetail) return <div>로딩중...</div>;
@@ -46,7 +48,7 @@ const DramaDeBanner = () => {
       };
       await onToggleHeart(heartItem);
     } catch (error) {
-      console.error('천하기 오류:', error);
+      console.error('찜하기 오류:', error);
     }
   };
 
@@ -59,11 +61,14 @@ const DramaDeBanner = () => {
             backgroundImage: `url(${backdropUrl})`,
           }}>
           {playVideo && trailer && (
-            <iframe
-              className="hero-video"
-              src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1`}
-              allow="autoplay; fullscreen"
-              allowFullScreen></iframe>
+            <>
+              <iframe
+                className="hero-video"
+                src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1`}
+                allow="autoplay; fullscreen"
+                allowFullScreen></iframe>
+              <div className="hero-overlay" />
+            </>
           )}
         </div>
         <div className="D-detail-left">
@@ -105,8 +110,11 @@ const DramaDeBanner = () => {
             </div>
           </div>
           <div className="detail-btn">
-            <button className="btn-play" onClick={() => setPlayVideo(true)}>
-              <img src="/images/detail-play-btn.png" alt="재생" />
+            <button
+              className="btn-play"
+              onClick={() => setPlayVideo((prev) => !prev)}
+              aria-label={playVideo ? '일시정지' : '재생'}>
+              <img src="/images/detail-play-btn.png" alt={playVideo ? '일시정지' : '재생'} />
             </button>
             <button
               className={`btn-heart ${isHearted ? 'hearted' : ''}`}
