@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './Sport.scss';
 import { sports } from '../../data/sport';
-import SportsLive from '../../components/sports-live/SportsLive';
+// import SportsLive from '../../components/sports-live/SportsLive';
 import { liveChannels } from '../../data/LiveChannels';
 
 const banners = [
@@ -137,7 +137,7 @@ const Sport = () => {
                     </div>
                 </section>
 
-                <SportsLive list={liveChannels} />
+                {/* <SportsLive list={liveChannels} /> */}
 
                 <section className="section-3">
                     <h2>SUPER RACE</h2>

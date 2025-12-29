@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import type { LiveChannel } from "../../data/LiveChannels";
 
+import './LiveContentCard.scss'
+
 interface LiveCardProps {
     item: LiveChannel;
     isPlaying: boolean;
@@ -12,7 +14,7 @@ const LiveContentCard = ({ item, isPlaying, onPlay }: LiveCardProps) => {
 
         return (
             <div className='live-content-card'>
-                <div className="contetn" onClick={() => onPlay(item.id)}>
+                <div className="content" onClick={() => onPlay(item.id)}>
                     {isPlaying ? (
                         <div dangerouslySetInnerHTML={{ __html: item.iframe }} />
                     ) : (

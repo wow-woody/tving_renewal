@@ -89,7 +89,7 @@ const AppleTvSection = () => {
               ref={prevRef}
               aria-label="Previous slide"
             >
-              <img src="/images/arrow-LW.svg" alt="" />
+              <img src="/images/arrow-left.svg" alt="" />
             </button>
             <button
               type="button"
@@ -97,7 +97,7 @@ const AppleTvSection = () => {
               ref={nextRef}
               aria-label="Next slide"
             >
-              <img src="/images/arrow-RW.svg" alt="" />
+              <img src="/images/arrow-right.svg" alt="" />
             </button>
           </div>
         </div>

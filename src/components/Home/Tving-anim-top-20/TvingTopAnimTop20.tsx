@@ -11,26 +11,27 @@ import RankingSwiper from '../../RankingSwiper/RankingSwiper'
 import RankingContentCard from '../../RankingContentCard/RankingContentCard'
 
 
-const TvingTop20 = () => {
+const TvingTopAnimTop20 = () => {
 
     const all: Content[] = [...drama, ...anim, ...movie, ...enter];
 
-    const top20 = all
-        .filter((item) => item.rank?.[RankScope.TOP20] != null)
-        .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
-        .slice(0, 20);
+  const anim20 = all
+    .filter((item) => item.rank?.[RankScope.POP_ANIM] != null)
+    .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
+    .slice(0, 20);
+
 
     return (
         <RankingSwiper>
-            {top20.map((item) => (
+            {anim20.map((item) => (
                 <SwiperSlide key={String(item.id)}>
                     <RankingContentCard
                     item={item}
-                    rankScope={RankScope.TOP20}/>
+                    rankScope={RankScope.POP_ANIM}/>
                 </SwiperSlide>
             ))}
         </RankingSwiper>
     )
 }
 
-export default TvingTop20
+export default TvingTopAnimTop20

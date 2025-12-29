@@ -4,7 +4,7 @@ import { Swiper } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperControl from "../SwiperControl/SwiperControl";
 import 'swiper/css';
-import './RankingSwiper.scss'
+import styles from './RankingSwiper.module.scss'
 
 
 interface RankingSwipperType {
@@ -16,7 +16,7 @@ interface RankingSwipperType {
 const RankingSwiper = ({
     children,
     slidesPerView = "auto",
-    spaceBetween = 32,
+    spaceBetween = 12,
 }: RankingSwipperType) => {
     const swiperRef = useRef<any>(null);
     const barRef = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ const RankingSwiper = ({
     };
 
     return (
-        <div className='swiper-wrap' style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
+        <div className={styles['swiper-wrap']} style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}>
 
             <SwiperControl
                 trackRef={trackRef}

@@ -1,0 +1,150 @@
+@use '../../App.scss' as common;
+
+.hilight-section-wrappers {
+    width: 100%;
+    height: 324px;
+
+    border-radius: 12px;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 4px;
+
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
+        radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
+        radial-gradient(circle at center left, rgba(255, 255, 255, 0.10) 0%, transparent 15%),
+        radial-gradient(circle at center right, rgba(255, 255, 255, 0.10) 0%, transparent 15%),
+        rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    /* 빛 반사 테두리 - 모서리 더 투명 */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+
+    /* 입체감과 빛 반사 */
+    box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        0 0 20px 0 rgba(255, 255, 255, 0.08) inset,
+        0 -2px 10px 0 rgba(255, 255, 255, 0.1) inset;
+
+    /* 반짝임 효과 (상단 하이라이트) */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.6) 20%,
+                rgba(255, 255, 255, 0.8) 50%,
+                rgba(255, 255, 255, 0.6) 80%,
+                transparent 100%);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* 빛 반사 효과 (대각선) */
+    &::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%);
+        animation: shine 4s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    .hilight-section {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 8px;
+
+        padding: 30px 0 30px 30px;
+
+        display: flex;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .section-info {
+            width: 170px;
+            height: 100%;
+
+            flex-shrink: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            color: common.$text-w;
+
+            .info-main {
+                .info-top {
+                    height: 26px;
+
+                    img {
+                        height: 100%;
+                    }
+                }
+
+                .info-middle {
+                    font-size: 1.4rem;
+                }
+            }
+
+            .info-bottom {
+                padding: 4px 8px;
+
+                border: 1px solid common.$line-w;
+                border-radius: 4px;
+
+                display:inline-block;
+            }
+        }
+
+        .section-sliders {
+            flex: 1;
+            min-width: 0;
+
+        }
+    }
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateX(-10px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(10px);
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    100% {
+        transform: translate(50%, 50%) rotate(45deg);
+    }
+}

@@ -1,0 +1,65 @@
+@use '../../App.scss' as common;
+
+.live-content-card {
+    width: 408px;
+    height: 100%;
+
+    padding: 12px;
+
+    @include common.boxshadow;
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    .content {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 408/226;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: none;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    .meta {
+        margin-top: 1.2rem;
+
+        .row {
+            display:flex;
+            gap: 1rem;
+
+            .badge {
+                font-size: 8px;
+                font-weight: 800;
+                padding: 4px 8px;
+                border-radius: 8px;
+                background: #ff153c;
+                text-align: center;
+
+                color:#fff;
+            }
+
+            .title{
+                width:100%;
+                
+                font-size: 1.2rem;
+                font-weight: 800;
+                color: #fff;
+                
+            }
+        }
+    }
+}

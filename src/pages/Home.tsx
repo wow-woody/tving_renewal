@@ -1,14 +1,5 @@
 import './scss/Home.scss';
-import RankRow from '../components/tving-top20/RankRowtop20';
-import RankRowAnim from '../components/anim-top20/RankRowanim20';
 
-import drama from '../data/Drama';
-import anim from '../data/Anim';
-import movie from '../data/Movie';
-import enter from '../data/Enter';
-
-import type { Content } from '../types/content';
-import { RankScope } from '../types/enum';
 import VOnlySection from '../components/v-only/VOnlySection';
 import VOriginalSection from '../components/v-origin/VOriginalSection';
 import MainBanner from '../components/main-banner/MainBanner';
@@ -20,30 +11,19 @@ import DramaFeaturedSection from '../components/drama-pop/DramaFeaturedSection';
 import MovieFeaturedSection from '../components/movie-pop/MovieFeaturedSection';
 import AppleTvSection from '../components/appletv/AppleTvSection';
 import KblSection from '../components/kbl/KblSection';
-import { liveChannels } from '../data/LiveChannels';
-import MyLive from '../components/my-live/MyLive';
-import SportsLive from '../components/sports-live/SportsLive';
 import WatchHistory from '../components/WatchHistory/WatchHistory';
 
 import TvingTop20 from '../components/Home/Tving-top-20/TvingTop20';
+import TvingTopAnimTop20 from '../components/Home/Tving-anim-top-20/TvingTopAnimTop20';
+
+import { liveChannels } from '../data/LiveChannels';
 import LiveNews from '../components/Home/Live-news/LiveNews';
+import LiveFavorite from '../components/Home/Live-favorite/LiveFavorite';
+import LiveSports from '../components/Home/Live-Sports/LiveSports';
+import HilightsVOriginal from '../components/Home/Hilights-Voriginal/HilightsVOriginal';
 
 
 const Home = () => {
-  // 1) 전부 합치기
-  const all: Content[] = [...drama, ...anim, ...movie, ...enter];
-
-  // 2) TOP20 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
-  const top20 = all
-    .filter((item) => item.rank?.[RankScope.TOP20] != null)
-    .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
-    .slice(0, 20);
-
-  // 2) ANIM 랭크 있는 것만 추출 + 랭크 순 정렬(1~20)
-  const anim20 = all
-    .filter((item) => item.rank?.[RankScope.POP_ANIM] != null)
-    .sort((a, b) => (a.rank?.[RankScope.TOP20] ?? 999) - (b.rank?.[RankScope.TOP20] ?? 999))
-    .slice(0, 20);
 
   return (
     <div className="main-wrap">
@@ -63,22 +43,24 @@ const Home = () => {
           <WatchHistory />
         </section>
 
-        {/* <section className="section-4">
+        <section className='section-4'>
           <h2 className="section-title">뉴스 라이브</h2>
           <LiveNews list={liveChannels} />
-        </section> */}
+        </section>
 
         <section className="section-5">
           <h2 className="section-title">티빙 NEW! 공개 예정 콘텐츠</h2>
           <TvingNew />
         </section>
 
-        <section className="section-6">
-          <RankRow data={top20} rankScope={RankScope.TOP20} />
+        <section className='section-6'>
+          <h2 className="section-title">오늘의 티빙 TOP20</h2>
+          <TvingTop20 />
         </section>
 
-        <section className="section-7">
-          <MyLive list={liveChannels} />
+        <section className='section-7'>
+          <h2 className="section-title">내 취향 딱! 인기 라이브</h2>
+          <LiveFavorite list={liveChannels} />
         </section>
 
         <section className="section-8">
@@ -105,25 +87,25 @@ const Home = () => {
           <MovieFeaturedSection />
         </section>
 
-        <section className="section-14">
-          <RankRowAnim data={anim20} title="실시간 인기 애니메이션" rankScope={RankScope.POP_ANIM} />
+        <section className='section-14'>
+          <h2 className="section-title">실시간 인기 애니메이션</h2>
+          <TvingTopAnimTop20/>
         </section>
 
         <section className="section-15">
           <VOnlySection />
         </section>
 
-        <section className="section-16">
-          <SportsLive list={liveChannels} />
+        <section className='section-16'>
+          <h2 className="section-title">실시간 스포츠 라이브</h2>
+          <LiveSports list={liveChannels} />
         </section>
 
-        <section className='section-17'>
-          <TvingTop20 />
+
+        <section>
+          <HilightsVOriginal/>
         </section>
 
-        <section className='section-18'>
-          <LiveNews list={liveChannels}/>
-        </section>
 
       </div>
     </div>

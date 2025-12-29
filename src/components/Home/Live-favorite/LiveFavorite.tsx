@@ -8,8 +8,8 @@ interface Props {
   list: LiveChannel[];
 }
 
-const LiveNews = ({ list = [] }: Props) => {
-  const newsList = list.filter((item) => item.category === "뉴스");
+const LiveFavorite = ({ list = [] }: Props) => {
+  const newsList = list.filter((item) => item.state === "mylive");
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   if (newsList.length === 0) return null;
@@ -34,4 +34,4 @@ const LiveNews = ({ list = [] }: Props) => {
   );
 };
 
-export default LiveNews;
+export default LiveFavorite;
