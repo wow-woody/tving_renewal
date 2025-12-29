@@ -1,0 +1,29 @@
+.rank-content-card {
+    height: 100%;
+
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+
+    .poster-box {
+        display: block;
+        height: 100%;
+        aspect-ratio: 223/320;
+
+        border-radius: 14px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition:transform 0.3s ease;
+
+            &:hover{
+                transform:scale(1.1);
+            }
+        }
+    }
+
+}

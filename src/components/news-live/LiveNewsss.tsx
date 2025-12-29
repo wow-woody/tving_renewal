@@ -8,77 +8,51 @@ import type { Swiper as SwiperType } from 'swiper';
 import "swiper/css";
 import "swiper/css/navigation";
 import "./LiveNews.scss";
+import SwiperControl from '../SwiperControl/SwiperControl';
 
 interface Props {
   list: LiveChannel[];
 }
 
-const LiveNews = ({ list }: Props) => {
+const LiveNewsss = ({ list }: Props) => {
   const navigate = useNavigate();
   const newsList = list.filter(
     (item) => item.category === "뉴스"
   );
 
-  const [barOffset, setBarOffset] = useState(0);
   const [playingId, setPlayingId] = useState<string | null>(null);
+
   const swiperRef = useRef<SwiperType | null>(null);
   const barRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
-
-  const progress = barOffset;
+  const [barOffset, setBarOffset] = useState(0);
 
   const updateBar = (prog: number) => {
     if (!trackRef.current || !barRef.current) return;
     const track = trackRef.current.clientWidth;
     const bar = barRef.current.clientWidth;
     const maxLeft = Math.max(track - bar, 0);
+
     const safeProg = Math.min(Math.max(prog, 0), 1);
     setBarOffset(safeProg * maxLeft);
   };
-
-  useEffect(() => {
-    const swiper = swiperRef.current;
-    if (!swiper || !prevRef.current || !nextRef.current) return;
-
-    const nav =
-      typeof swiper.params.navigation === 'object' && swiper.params.navigation
-        ? swiper.params.navigation
-        : ({} as NonNullable<Exclude<typeof swiper.params.navigation, boolean>>);
-
-    swiper.params.navigation = {
-      ...nav,
-      prevEl: prevRef.current!,
-      nextEl: nextRef.current!,
-    } as any;
-
-    swiper.navigation.destroy();
-    swiper.navigation.init();
-    swiper.navigation.update();
-  });
 
   if (newsList.length === 0) return null;
 
   return (
     <section
       className="live-news"
-      style={{ '--news-progress': `${progress}px` } as CSSProperties}
+      style={{ '--enter-progress': `${barOffset}px` } as CSSProperties}
     >
       {/* 헤더 */}
-      <div className="section-header">
-        <h2>뉴스 라이브</h2>
-        <div className="thumb-controls">
-          <div className="news-pagination" ref={trackRef}>
-            <div className="pagenation-line" />
-            <div className="pointer-line" ref={barRef} />
-          </div>
-          <div className="news-nav">
-            <button type="button" className="nav-btn prev" ref={prevRef} aria-label="Previous slide">‹</button>
-            <button type="button" className="nav-btn next" ref={nextRef} aria-label="Next slide">›</button>
-          </div>
-        </div>
-      </div>
+      <SwiperControl
+        trackRef={trackRef}
+        barRef={barRef}
+        prevRef={prevRef}
+        nextRef={nextRef}
+      />
 
       {/* 슬라이더 */}
       <Swiper
@@ -88,9 +62,9 @@ const LiveNews = ({ list }: Props) => {
         navigation
         loop={true}
         onBeforeInit={(swiper) => {
-          // @ts-expect-error HTMLElement ok
+          // @ts-ignore
           swiper.params.navigation.prevEl = prevRef.current;
-          // @ts-expect-error HTMLElement ok
+          // @ts-ignore
           swiper.params.navigation.nextEl = nextRef.current;
         }}
         onSwiper={(s) => {
@@ -99,9 +73,7 @@ const LiveNews = ({ list }: Props) => {
         }}
         onSlideChange={(swiper) => {
           const total = newsList.length;
-          const visible = Number(swiper.params.slidesPerView) || 1;
-          const maxIndex = Math.max(total - visible, 1);
-          const prog = Math.min(Math.max(swiper.realIndex / maxIndex, 0), 1);
+          const prog = swiper.realIndex / (total - 1);
           updateBar(prog);
         }}
         onProgress={(_, prog) => updateBar(prog)}
@@ -120,8 +92,8 @@ const LiveNews = ({ list }: Props) => {
               <div className="meta">
                 <div className="row">
                   <span className="badge">LIVE</span>
-                  <p 
-                    className="title" 
+                  <p
+                    className="title"
                     onClick={() => navigate('/live', { state: { channelId: item.id } })}
                   >
                     {item.title}
@@ -136,4 +108,4 @@ const LiveNews = ({ list }: Props) => {
   );
 };
 
-export default LiveNews;
+export default LiveNewsss;

@@ -1,0 +1,37 @@
+import { useState } from 'react';
+import { SwiperSlide } from "swiper/react";
+import type { LiveChannel } from "../../../data/LiveChannels";
+import LiveSwiper from '../../LiveSwiper/LiveSwiper';
+import LiveCard from '../../LiveContentCard/LiveContentCard';
+
+interface Props {
+  list: LiveChannel[];
+}
+
+const LiveNews = ({ list = [] }: Props) => {
+  const newsList = list.filter((item) => item.category === "뉴스");
+  const [playingId, setPlayingId] = useState<string | null>(null);
+
+  if (newsList.length === 0) return null;
+
+  return (
+    <div className="live-news">
+
+      <LiveSwiper slidesPerView={3.2} loop={true}>
+
+        {newsList.map((item) => (
+          <SwiperSlide key={item.id}>
+            <LiveCard 
+              item={item} 
+              isPlaying={playingId === item.id} 
+              onPlay={setPlayingId} 
+            />
+          </SwiperSlide>
+        ))}
+
+      </LiveSwiper>
+    </div>
+  );
+};
+
+export default LiveNews;

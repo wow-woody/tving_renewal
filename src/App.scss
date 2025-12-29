@@ -1,8 +1,10 @@
 // ---------공통사항----------
-// .inner{
-//   max-width: ;
-//   margin: 0 auto;
-// }
+@mixin inner($margin-bottom: 2.4rem){
+  padding-left: 10.8rem;
+  padding-top: 12rem;
+  padding-right:2.4rem;
+  margin-bottom: $margin-bottom;
+}
 
 // ---------컬러 가이드---------
 $base-red: #ff153c;
@@ -10,6 +12,12 @@ $base-black: #282828;
 $text-w: #fff;
 $line-w: #fff;
 $line-g: #3d3d3d;
+
+@mixin section-title($font-size:3.2rem){
+  font-size: $font-size;
+  font-weight: 800;
+  color: $text-w;
+}
 
 // ----------mixin-----------
 // @mixin flex($jc: space-between, $ai: center, $gap) {
