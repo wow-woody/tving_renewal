@@ -93,6 +93,8 @@
 
             color: common.$text-w;
 
+            margin-right: 62px;
+
             .info-main {
                 .info-top {
                     height: 26px;
@@ -104,6 +106,7 @@
 
                 .info-middle {
                     font-size: 1.4rem;
+                    margin-top: 8px;
                 }
             }
 
@@ -113,13 +116,44 @@
                 border: 1px solid common.$line-w;
                 border-radius: 4px;
 
-                display:inline-block;
+                display: inline-block;
             }
         }
 
         .section-sliders {
             flex: 1;
             min-width: 0;
+
+            padding: 0 30px;
+
+            position: relative;
+
+            .slider-nav {
+                width: 98.5%;
+
+                display: flex;
+                justify-content: space-between;
+
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+
+                left: 8px;
+
+
+                .nav-btn {
+                    padding: 8px 2px;
+                    border: 1px solid rgba(common.$line-w, 0.6);
+                    border-radius: 4px;
+
+                    color:rgba(common.$line-w, 0.6);
+
+                    &:disabled {
+                        border-color: rgba(common.$line-w, 0.2);
+                        color: rgba(common.$line-w, 0.2);
+                    }
+                }
+            }
 
         }
     }

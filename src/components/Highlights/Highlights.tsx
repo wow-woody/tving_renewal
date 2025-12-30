@@ -1,5 +1,5 @@
 import type React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
@@ -7,12 +7,14 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 import './Highlights.scss'
+import ArrowLeft from "../../assets/icons/ArrowLeft";
+import ArrowRight from "../../assets/icons/ArrowRight";
 
 
 interface HightlightsType {
     config: {
         logoUrl: string;
-        description: string;
+        description: ReactNode;
         bgType: 'color' | 'image';
         bgValue: string;
         slidesPerView?: number | 'auto';
@@ -87,10 +89,10 @@ const Highlights = ({ config, contents, contentCards }: HightlightsType) => {
 
                     <div className="slider-nav">
                         <button ref={prevRef} className="nav-btn prev">
-                            <img src="/images/arrow-LW.svg" alt="prev" />
+                            <ArrowLeft size={10}/>
                         </button>
                         <button ref={nextRef} className="nav-btn next">
-                            <img src="/images/arrow-RW.svg" alt="next" />
+                            <ArrowRight size={10}/>
                         </button>
                     </div>
 

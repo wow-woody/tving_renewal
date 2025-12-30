@@ -20,7 +20,7 @@ const HilightsVOriginal = ({ category }: Props) => {
         <Highlights
             config={{
                 logoUrl: badge.image,
-                description: "티빙만의 특별한 오리지널 콘텐츠를 만나보세요.", // 줄바꿈이 필요하면 <br/>를 포함한 ReactNode로 타입 변경 추천
+                description: <>티빙만의 특별한 오리지널 <br/> 콘텐츠를 만나보세요.</>, // 줄바꿈이 필요하면 <br/>를 포함한 ReactNode로 타입 변경 추천
                 bgType: 'image', // 오리지널 섹션이 단색 배경이라면
                 bgValue: 'linear-gradient(295deg, rgba(255, 21, 60, 0.5) -42.62%, rgba(255, 21, 60, 0.4) -25.5%, rgba(255, 21, 60, 0.3) -8.39%, rgba(255, 21, 60, 0.1) 8.73%, rgba(255, 21, 60, 0.2) 25.84%, rgba(255, 21, 60, 0.3) 42.95%, rgba(255, 21, 60, 0.4) 60.07%, rgba(255, 21, 60, 0.5) 77.18%, rgba(255, 21, 60, 0.4) 100%)', // 배경색 지정
                 slidesPerView: 4.5,
