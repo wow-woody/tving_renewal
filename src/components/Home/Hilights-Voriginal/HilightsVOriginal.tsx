@@ -1,4 +1,4 @@
-import VOriginalCard from "./HilightsVOriginalCard";
+import VOriginalCard from "../../HightlightsContentCard/HightlightContentCard";
 import Highlights from "../../Highlights/Highlights";
 
 import { ORIGINAL_CONTENTS } from "../../../data/index";
