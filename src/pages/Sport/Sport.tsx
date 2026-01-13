@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import YoutubeModal from '../../components/YoutubeModal';
+import YoutubeModal from '../../components/Common/YoutubeModal';
 // import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './Sport.scss';
 import { sports } from '../../data/sport';
-import SportsLive from '../../components/sports-live/SportsLive';
+import SportsLive from '../../components/Live/Sports/SportsLive';
 import { liveChannels } from '../../data/LiveChannels';
 
 const banners = [
@@ -16,18 +16,17 @@ const banners = [
     { title: 'UFC', image: '/images/spo-banner3.png' },
     { title: 'WIMBLEDON', image: '/images/spo-banner4.png' },
     { title: 'KBO', image: '/images/spo-banner5.png' },
-
 ];
 
 const Sport = () => {
-    const kblGames = sports.filter(sport => sport.category === 'KBL').slice(0, 4);
+    const kblGames = sports.filter((sport) => sport.category === 'KBL').slice(0, 4);
 
     // 카테고리별 데이터
-    const superraceData = sports.filter(sport => sport.category === 'SUPERRACE');
-    const ufcData = sports.filter(sport => sport.category === 'UFC');
-    const kblData = sports.filter(sport => sport.category === 'KBL');
-    const wimbledonData = sports.filter(sport => sport.category === 'WIMBLEDON');
-    const kboData = sports.filter(sport => sport.category === 'KBO');
+    const superraceData = sports.filter((sport) => sport.category === 'SUPERRACE');
+    const ufcData = sports.filter((sport) => sport.category === 'UFC');
+    const kblData = sports.filter((sport) => sport.category === 'KBL');
+    const wimbledonData = sports.filter((sport) => sport.category === 'WIMBLEDON');
+    const kboData = sports.filter((sport) => sport.category === 'KBO');
 
     // 각 카드별 시작 시간 (시간 단위를 초로 변환)
     const initialTimes = [93 * 60 * 60, 99 * 60 * 60, 104 * 60 * 60, 120 * 60 * 60]; // 93h, 99h, 104h, 120h
@@ -38,30 +37,23 @@ const Sport = () => {
         '/images/spo-live1.webp',
         '/images/spo-live2.webp',
         '/images/spo-live3.webp',
-        '/images/spo-live4.webp'
+        '/images/spo-live4.webp',
     ];
 
     // 각 카드별 제목
-    const gameTitles = [
-        'SK vs 현대모비스',
-        'KCC vs KT',
-        '정관장 vs 삼성',
-        'LG vs DB'
-    ];
+    const gameTitles = ['SK vs 현대모비스', 'KCC vs KT', '정관장 vs 삼성', 'LG vs DB'];
 
     // 각 카드별 경기 시작 시간 (카운트다운과 매칭)
     const gameDates = [
-        '12.24 (화) 오후 9:00',   // 93시간 후
-        '12.25 (수) 오전 3:00',   // 99시간 후
-        '12.25 (수) 오전 8:00',   // 104시간 후
-        '12.26 (목) 오전 12:00'   // 120시간 후
+        '12.24 (화) 오후 9:00', // 93시간 후
+        '12.25 (수) 오전 3:00', // 99시간 후
+        '12.25 (수) 오전 8:00', // 104시간 후
+        '12.26 (목) 오전 12:00', // 120시간 후
     ];
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setTimesLeft((prev) =>
-                prev.map((time) => (time <= 0 ? 0 : time - 1))
-            );
+            setTimesLeft((prev) => prev.map((time) => (time <= 0 ? 0 : time - 1)));
         }, 1000);
 
         return () => clearInterval(timer);
@@ -71,14 +63,16 @@ const Sport = () => {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const secs = seconds % 60;
-        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(
+            secs
+        ).padStart(2, '0')}`;
     };
 
     // Youtube Modal 상태
     const [youtubeId, setYoutubeId] = useState<string | null>(null);
 
     return (
-        <div className='sport-wrappers'>
+        <div className="sport-wrappers">
             <div className="sport-wrap">
                 <section className="section-1">
                     <div className="sport-container">
@@ -306,9 +300,7 @@ const Sport = () => {
                     <div className="swiper-button-next kbo-next"></div>
                 </section>
             </div>
-            {youtubeId && (
-                <YoutubeModal videoId={youtubeId} onClose={() => setYoutubeId(null)} />
-            )}
+            {youtubeId && <YoutubeModal videoId={youtubeId} onClose={() => setYoutubeId(null)} />}
         </div>
     );
 };

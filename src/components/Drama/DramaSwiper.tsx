@@ -7,9 +7,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import '../drama-pop/DramaFeaturedSection.scss';
-import { AGE } from '../../contents/media';
+import { AGE } from '../../../contents/media';
 import { Link } from 'react-router-dom';
-import type { DramaGenres } from '../../data/DramaFilters';
+import type { DramaGenres } from '../../../data/DramaFilters';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
@@ -136,9 +136,9 @@ const DramaSwiper = ({ config }: Props) => {
         networks: detail.networks || [],
         seasonText:
           detail.number_of_seasons === 1
-            ? '시즌 1'
+            ? '?�즌 1'
             : detail.number_of_seasons
-            ? `시즌 ${detail.number_of_seasons}`
+            ? `?�즌 ${detail.number_of_seasons}`
             : '',
         age: detail.adult ? '19' : '12',
       });
@@ -147,14 +147,14 @@ const DramaSwiper = ({ config }: Props) => {
     fetchDetail();
   }, [activeItem]);
 
-  // 각 스와이퍼마다 독립적으로 비디오 가져오기
+  // �??��??�퍼마다 ?�립?�으�?비디??가?�오�?
   useEffect(() => {
     if (!activeItem) return;
 
     const fetchVideo = async () => {
       setCurrentVideoKey(null);
 
-      // 한국어 비디오 시도
+      // ?�국??비디???�도
       const koRes = await fetch(
         `https://api.themoviedb.org/3/tv/${activeItem.id}/videos?${new URLSearchParams({
           api_key: API_KEY,
@@ -165,7 +165,7 @@ const DramaSwiper = ({ config }: Props) => {
 
       let trailer = pickBestTrailer(koData.results || []);
 
-      // 한국어 없으면 영어로 fallback
+      // ?�국???�으�??�어�?fallback
       if (!trailer) {
         const enRes = await fetch(
           `https://api.themoviedb.org/3/tv/${activeItem.id}/videos?${new URLSearchParams({
@@ -209,10 +209,10 @@ const DramaSwiper = ({ config }: Props) => {
           </div>
           <div className="enter-nav">
             <button ref={prevRef} className="nav-btn prev">
-              ‹
+              ??
             </button>
             <button ref={nextRef} className="nav-btn next">
-              ›
+              ??
             </button>
           </div>
         </div>
@@ -261,7 +261,7 @@ const DramaSwiper = ({ config }: Props) => {
           )}
         </div>
 
-        {/* 썸네일 스와이퍼 */}
+        {/* ?�네???��??�퍼 */}
         <div className="thumb-rail">
           <Swiper
             slidesPerView={4.2}

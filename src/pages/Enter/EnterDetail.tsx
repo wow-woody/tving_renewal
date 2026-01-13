@@ -1,5 +1,5 @@
-import EnterDeBanner from '../../components/Enter/EnterDeBanner';
-import EnterList from '../../components/Enter/EnterList';
+import EnterDeBanner from '../../components/Entertainment/EnterDeBanner';
+import EnterList from '../../components/Entertainment/EnterList';
 import '../scss/DramaDetail.scss';
 
 const EnterDetail = () => {

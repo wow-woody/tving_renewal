@@ -6,88 +6,88 @@ import PasswordInput from './layout/PasswordInput';
 import EmailInput from './layout/EmailInput';
 import Agree from './layout/Agree';
 import { useAuthStore } from '../../store/useAuthStore';
-import AlertModal from '../../components/common/AlertModal';
+import AlertModal from '../../components/Common/AlertModal/AlertModal';
 
 const Join = () => {
-  const { onMember, alertModal, hideAlert } = useAuthStore();
+    const { onMember, alertModal, hideAlert } = useAuthStore();
 
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
-  const [email, setEmail] = useState('');
-  const [isAgreeChecked, setIsAgreeChecked] = useState(false);
+    const [id, setId] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordCheck, setPasswordCheck] = useState('');
+    const [email, setEmail] = useState('');
+    const [isAgreeChecked, setIsAgreeChecked] = useState(false);
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleAlertClose = () => {
-    hideAlert();
-    // 회원가입 성공시에만 홈으로 이동
-    if (alertModal?.type === 'success') {
-      navigate('/');
-    }
-  };
+    const handleAlertClose = () => {
+        hideAlert();
+        // 회원가입 성공시에만 홈으로 이동
+        if (alertModal?.type === 'success') {
+            navigate('/');
+        }
+    };
 
-  const handleJoin = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const handleJoin = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-    if (!isAgreeChecked) {
-      useAuthStore.getState().showAlert('필수 항목을 모두 체크해주세요.', 'error');
-      return;
-    }
+        if (!isAgreeChecked) {
+            useAuthStore.getState().showAlert('필수 항목을 모두 체크해주세요.', 'error');
+            return;
+        }
 
-    try {
-      await onMember(id, email, password);
-      setEmail('');
-      setPassword('');
-      // navigate 제거 - 모달 확인 후 이동
-    } catch (err) {
-      console.log('경로이탈');
-    }
-  };
+        try {
+            await onMember(id, email, password);
+            setEmail('');
+            setPassword('');
+            // navigate 제거 - 모달 확인 후 이동
+        } catch (err) {
+            console.log('경로이탈');
+        }
+    };
 
-  return (
-    <div className="join-wrappers">
-      <div className="top">
-        <Link to="/">
-          <img src="/images/tving-logo-main.svg" alt="logo" />
-        </Link>
-      </div>
-      <div className="join-wrap">
-        <div className="join-box">
-          <h2>아이디와 이메일로 간편하게 시작하세요!</h2>
-          <form className="join-section" onSubmit={handleJoin}>
-            <div className="input-area">
-              <IdInput value={id} onChange={setId} />
-              <PasswordInput
-                password={password}
-                onPasswordChange={setPassword}
-                passwordCheck={passwordCheck}
-                onPasswordCheckChange={setPasswordCheck}
-              />
-              <EmailInput value={email} onChange={setEmail} />
+    return (
+        <div className="join-wrappers">
+            <div className="top">
+                <Link to="/">
+                    <img src="/images/tving-logo-main.svg" alt="logo" />
+                </Link>
             </div>
-            <Agree onChangeCheck={setIsAgreeChecked} />
-            <button className="join-btn" type="submit">
-              가입하기
-            </button>
-          </form>
-          <button className="back" onClick={() => navigate(-1)}>
-            <p>뒤로가기</p>
-          </button>
+            <div className="join-wrap">
+                <div className="join-box">
+                    <h2>아이디와 이메일로 간편하게 시작하세요!</h2>
+                    <form className="join-section" onSubmit={handleJoin}>
+                        <div className="input-area">
+                            <IdInput value={id} onChange={setId} />
+                            <PasswordInput
+                                password={password}
+                                onPasswordChange={setPassword}
+                                passwordCheck={passwordCheck}
+                                onPasswordCheckChange={setPasswordCheck}
+                            />
+                            <EmailInput value={email} onChange={setEmail} />
+                        </div>
+                        <Agree onChangeCheck={setIsAgreeChecked} />
+                        <button className="join-btn" type="submit">
+                            가입하기
+                        </button>
+                    </form>
+                    <button className="back" onClick={() => navigate(-1)}>
+                        <p>뒤로가기</p>
+                    </button>
+                </div>
+            </div>
+            <div className="footer-line"></div>
+
+            {alertModal?.show && (
+                <AlertModal
+                    message={alertModal.message}
+                    type={alertModal.type}
+                    title={alertModal.title}
+                    onClose={handleAlertClose}
+                />
+            )}
         </div>
-      </div>
-      <div className="footer-line"></div>
-      
-      {alertModal?.show && (
-        <AlertModal
-          message={alertModal.message}
-          type={alertModal.type}
-          title={alertModal.title}
-          onClose={handleAlertClose}
-        />
-      )}
-    </div>
-  );
+    );
 };
 
 export default Join;

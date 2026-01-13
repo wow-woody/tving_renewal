@@ -6,10 +6,10 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import '../drama-pop/DramaFeaturedSection.scss';
-import { AGE } from '../../contents/media';
+import './Featured/DramaFeaturedSection.scss';
+import { AGE } from '../../../contents/media';
 import { Link } from 'react-router-dom';
-import type { DramaGenres } from '../../data/DramaFilters';
+import type { DramaGenres } from '../../../data/DramaFilters';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
@@ -58,15 +58,15 @@ const DramaCountry = ({ config }: Props) => {
     const fetchOverseas = async () => {
       const results: FeaturedItem[] = [];
 
-      // 미국, 영국, 중국, 일본 설정
+      // 미국, ?�국, 중국, ?�본 ?�정
       const countries = [
         { type: 'with_original_language', value: 'en', name: '미국' }, // 미국
-        { type: 'with_origin_country', value: 'GB', name: '영국' }, // 영국
+        { type: 'with_origin_country', value: 'GB', name: '?�국' }, // ?�국
         { type: 'with_original_language', value: 'zh', name: '중국' }, // 중국
-        { type: 'with_original_language', value: 'ja', name: '일본' }, // 일본
+        { type: 'with_original_language', value: 'ja', name: '?�본' }, // ?�본
       ];
 
-      // 각 국가별로 데이터 가져오기
+      // �?�??별로 ?�이??가?�오�?
       for (const country of countries) {
         if (results.length >= 15) break;
 
@@ -96,7 +96,7 @@ const DramaCountry = ({ config }: Props) => {
           for (const tv of data.results) {
             if (countryResults >= targetPerCountry) break;
 
-            // 한국어 비디오 시도
+            // ?�국??비디???�도
             const koVideoRes = await fetch(
               `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
                 api_key: API_KEY,
@@ -110,7 +110,7 @@ const DramaCountry = ({ config }: Props) => {
                 v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')
             );
 
-            // 한국어 없으면 영어로 fallback
+            // ?�국???�으�??�어�?fallback
             if (!trailer) {
               const enVideoRes = await fetch(
                 `https://api.themoviedb.org/3/tv/${tv.id}/videos?${new URLSearchParams({
@@ -185,10 +185,10 @@ const DramaCountry = ({ config }: Props) => {
           </div>
           <div className="enter-nav">
             <button ref={prevRef} className="nav-btn prev">
-              ‹
+              ??
             </button>
             <button ref={nextRef} className="nav-btn next">
-              ›
+              ??
             </button>
           </div>
         </div>
@@ -232,7 +232,7 @@ const DramaCountry = ({ config }: Props) => {
           </Link>
         </div>
 
-        {/* 썸네일 스와이퍼 */}
+        {/* ?�네???��??�퍼 */}
         <div className="thumb-rail">
           <Swiper
             slidesPerView={4.2}
