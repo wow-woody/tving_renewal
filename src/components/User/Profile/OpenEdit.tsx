@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Profile } from '../../../types/Auth';
+import type { Profile } from '../../../type/Auth';
 import { useUserStore } from '../../../store/useUserStore';
 import { useAuthStore } from '../../../store/useAuthStore';
 import './OpenEdit.scss';

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import type { LiveChannel } from '../../../../data/LiveChannels';
+import type { LiveChannel } from '../../../data/LiveChannels';
 
 interface Props {
     list: LiveChannel[];

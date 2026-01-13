@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { Sport } from '../../../../../data/sport';
+import type { Sport } from '../../../../data/sport';
 
 interface Props {
     item: Sport;

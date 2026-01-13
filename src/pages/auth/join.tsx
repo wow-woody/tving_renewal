@@ -6,7 +6,7 @@ import PasswordInput from './layout/PasswordInput';
 import EmailInput from './layout/EmailInput';
 import Agree from './layout/Agree';
 import { useAuthStore } from '../../store/useAuthStore';
-import AlertModal from '../../components/Common/AlertModal/AlertModal';
+import AlertModal from '../../components/Common/AlertModal';
 
 const Join = () => {
     const { onMember, alertModal, hideAlert } = useAuthStore();

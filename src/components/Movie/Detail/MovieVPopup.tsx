@@ -1,4 +1,4 @@
-import '../../YoutubeModal.scss';
+import '../../Common/YoutubeModal.scss';
 
 interface MovieVPopupProps {
   youtubeKey: string;

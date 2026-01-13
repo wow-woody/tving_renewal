@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAnimStore } from '../../../store/useAnimStore';
+import { useAnimStore } from '../../store/useAnimStore';
 import './scss/AnimDeBanner.scss';
 
 const AnimDeBanner = () => {

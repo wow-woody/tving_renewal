@@ -7,9 +7,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import './scss/EnterSwiper.scss';
-import { AGE } from '../../../contents/media';
+import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';
-import type { EnterGenres } from '../../../data/EnterFilters';
+import type { EnterGenres } from '../../data/EnterFilters';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';

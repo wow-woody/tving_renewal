@@ -6,8 +6,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import ContentCard from './ContentCardtop20';
-import type { Content } from '../../../types/content';
-import { RankScope } from '../../../types/enum';
+import type { Content } from '../../../type/content';
+import { RankScope } from '../../../type/enum';
 import './RankRow-top20.scss';
 
 interface RankRowProps {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
+import { useTvSeriesStore } from '../../store/useTvSeriesStore';
 import { useParams } from 'react-router-dom';
 import './scss/EnterDeBanner.scss';
 

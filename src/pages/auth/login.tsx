@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './scss/Login.scss';
 import { useAuthStore } from '../../store/useAuthStore';
-import AlertModal from '../../components/Common/AlertModal/AlertModal';
+import AlertModal from '../../components/Common/AlertModal';
 
 const Login = () => {
     const [id, setId] = useState('');

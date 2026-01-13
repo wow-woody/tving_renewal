@@ -1,4 +1,4 @@
-import type { Content } from '../../../../types/content';
+import type { Content } from '../../../type/content';
 
 interface FeaturedCardProps {
     item: Content;

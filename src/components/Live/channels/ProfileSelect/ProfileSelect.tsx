@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useUserStore } from '../../../store/useUserStore';
-import { useAuthStore } from '../../../store/useAuthStore';
-import type { Profile } from '../../../type/Auth';
+import { useUserStore } from '../../../../store/useUserStore';
+import { useAuthStore } from '../../../../store/useAuthStore';
+import type { Profile } from '../../../../type/Auth';
 import { Link } from 'react-router-dom';
 import './ProfileSelect.scss';
 

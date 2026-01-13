@@ -7,8 +7,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './HWatching.scss';
 import { Link } from 'react-router-dom';
-import { useWatchHistoryStore } from '../../store/useWatchHistoryStore';
-import { useAuthStore } from '../../store/useAuthStore';
+import { useWatchHistoryStore } from '../../../store/useWatchHistoryStore';
+import { useAuthStore } from '../../../store/useAuthStore';
 
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 

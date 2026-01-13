@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './scss/OnAirDrama.scss';
 
-import { AGE } from '../../../contents/media';
+import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;

@@ -22,8 +22,8 @@
         transform: translate(-50%, -50%);
 
         .edit-popup {
-            position:relative;
-            
+            position: relative;
+
             @include g.boxshadow;
             border-radius: 12px;
             padding: 46px 46px 32px 46px;
@@ -80,18 +80,15 @@
 
                         &.edit {
                             background: #5c5c5c;
-
                         }
                     }
                 }
-
-
             }
 
             .close {
                 position: absolute;
-                top:24px;
-                right:24px;
+                top: 24px;
+                right: 24px;
             }
         }
     }

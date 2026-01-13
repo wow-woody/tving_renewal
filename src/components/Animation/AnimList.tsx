@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useAnimStore } from '../../../store/useAnimStore';
+import { useAnimStore } from '../../store/useAnimStore';
 import { useEffect, useRef, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';

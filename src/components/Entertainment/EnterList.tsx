@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useTvSeriesStore } from '../../../store/useTvSeriesStore';
+import { useTvSeriesStore } from '../../store/useTvSeriesStore';
 import { useEffect, useRef, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';

@@ -1,6 +1,6 @@
 import RankRow from './RankRowanim20';
 import { ALL_CONTENTS } from '../../../data/index';
-import { RankScope } from '../../../types/enum';
+import { RankScope } from '../../../type/enum';
 
 const AnimPop20 = () => {
     const popAnim20 = ALL_CONTENTS.filter((item) => item.rank?.[RankScope.POP_ANIM])

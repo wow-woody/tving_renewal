@@ -6,11 +6,10 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import '../../Featured/Top20/RankRow-top20.scss';
 import './Featured/MovieFeaturedSection.scss';
-import { AGE } from '../../../contents/media';
+import { AGE } from '../../contents/media';
 import { Link } from 'react-router-dom';
-import type { MovieGenres } from '../../../data/MovieFilters';
+import type { MovieGenres } from '../../data/MovieFilters';
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { LiveChannel } from '../../../../data/LiveChannels';
-import { useAuthStore } from '../../../../store/useAuthStore';
+import type { LiveChannel } from '../../../data/LiveChannels';
+import { useAuthStore } from '../../../store/useAuthStore';
 import { addLiveAlarm, removeLiveAlarm, checkLiveAlarm } from '../../../firebase/liveAlarms';
 
 interface Props {
