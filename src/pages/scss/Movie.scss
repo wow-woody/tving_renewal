@@ -1,58 +1,63 @@
 @use '../../App.scss' as g;
 
 .movie-contents-wrap {
-  width: 100%;
-  padding-top: 12rem;
+    width: 100%;
+    padding-top: 12rem;
 
-  .section-1 {
-    padding-left: 10.8rem;
-    padding-right: 2.4rem;
-   
-  }
-
-  .section-2 {
-    padding-left: 10.8rem;
-    padding-right: 2.4rem;
-    margin: 46px 0;
-
-    .movie-filter-swiper {
-      width: 100%;
-
-      .filter-slide {
-        width: auto;
-      }
-    
-      .filter-item {
-        padding: 10px 24px;
-        border: 1px solid #5c5c5c;
-        @include g.boxshadow;
-        border-radius: 50px;
-        color: #fff;
-        font-size: 1.6rem;
-        background: transparent;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-
-        &:hover {
-          border-color: #ff153c;
-          background: rgba(255, 21, 60, 0.1);
-        }
-
-        &.active {
-          border-color: #ff153c;
-          background: #ff153c;
-          color: #fff;
-        }
-      }
+    .section-1 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
     }
-  }
 
-  .section-3,.section-4,.section-5,.section-6,.section-7,.section-8,.section-9, .section-10 ,.section-11 {
-    padding-left: 10.8rem;
-    padding-right: 2.4rem;
-    margin-bottom: 12rem;
-  }
+    .section-2 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin: 46px 0;
 
- 
+        .movie-filter-swiper {
+            width: 100%;
+
+            .filter-slide {
+                width: auto;
+            }
+
+            .filter-item {
+                padding: 10px 24px;
+                border: 1px solid #5c5c5c;
+                @include g.boxshadow;
+                border-radius: 50px;
+                color: #fff;
+                font-size: 1.6rem;
+                background: transparent;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+
+                &:hover {
+                    border-color: #ff153c;
+                    background: rgba(255, 21, 60, 0.1);
+                }
+
+                &.active {
+                    border-color: #ff153c;
+                    background: #ff153c;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .section-3,
+    .section-4,
+    .section-5,
+    .section-6,
+    .section-7,
+    .section-8,
+    .section-9,
+    .section-10,
+    .section-11 {
+        padding-left: 10.8rem;
+        padding-right: 2.4rem;
+        margin-bottom: 12rem;
+    }
 }

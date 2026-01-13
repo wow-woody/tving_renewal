@@ -30,8 +30,6 @@
         aspect-ratio: 1788/750;
         overflow: hidden;
 
-
-
         img {
             height: 100%;
             object-fit: contain;
@@ -161,8 +159,6 @@
                 transition: transform 0.3s ease;
                 cursor: pointer;
 
-
-
                 .game-thumbnail {
                     position: relative;
                     width: 100%;
@@ -247,7 +243,7 @@
     .section-7 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        
+
         h2 {
             font-size: 2.6rem;
             font-weight: 700;
