@@ -5,8 +5,6 @@
         padding-top: 12rem;
 
         .section-1 {
-            padding-left: 10.8rem;
-            padding-right: 2.4rem;
             margin-bottom: clamp(20px, 2.5vw, 46px);
 
             h2 {
@@ -140,8 +138,6 @@
    Section 2 - Game Schedule
 ================================ */
     .section-2 {
-        padding-left: 10.8rem;
-        padding-right: 2.4rem;
         margin-top: 60px;
         margin-bottom: 80px;
 
@@ -238,8 +234,6 @@
    Sports Live Section
 ================================ */
     .sport-wrap .sports-live {
-        padding-left: 10.8rem;
-        padding-right: 2.4rem;
         margin-bottom: 80px;
     }
 
@@ -253,9 +247,7 @@
     .section-7 {
         padding-left: 10.8rem;
         padding-right: 2.4rem;
-        margin-bottom: 80px;
-        position: relative;
-
+        
         h2 {
             font-size: 2.6rem;
             font-weight: 700;
@@ -323,11 +315,11 @@
         }
 
         .swiper-button-prev {
-            left: 10.8rem;
+            left: 20px;
         }
 
         .swiper-button-next {
-            right: 2.4rem;
+            right: 20px;
         }
     }
 }
