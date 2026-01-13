@@ -25,8 +25,6 @@ const LiveNews = ({ list }: Props) => {
     const prevRef = useRef<HTMLButtonElement | null>(null);
     const nextRef = useRef<HTMLButtonElement | null>(null);
 
-    const progress = barOffset;
-
     const updateBar = (prog: number) => {
         if (!trackRef.current || !barRef.current) return;
         const track = trackRef.current.clientWidth;
@@ -43,25 +41,25 @@ const LiveNews = ({ list }: Props) => {
         const nav =
             typeof swiper.params.navigation === 'object' && swiper.params.navigation
                 ? swiper.params.navigation
-                : ({} as NonNullable<Exclude<typeof swiper.params.navigation, boolean>>);
+                : {};
 
-        swiper.params.navigation = {
+        (swiper.params.navigation as Record<string, unknown>) = {
             ...nav,
             prevEl: prevRef.current!,
             nextEl: nextRef.current!,
-        } as any;
+        };
 
         swiper.navigation.destroy();
         swiper.navigation.init();
         swiper.navigation.update();
-    });
+    }, []);
 
     if (newsList.length === 0) return null;
 
     return (
         <section
             className="live-news"
-            style={{ '--news-progress': `${progress}px` } as CSSProperties}
+            style={{ '--news-progress': `${barOffset}px` } as CSSProperties}
         >
             {/* 헤더 */}
             <div className="section-header">
@@ -72,22 +70,22 @@ const LiveNews = ({ list }: Props) => {
                         <div className="pointer-line" ref={barRef} />
                     </div>
                     <div className="news-nav">
-                        <button
-                            type="button"
-                            className="nav-btn prev"
-                            ref={prevRef}
-                            aria-label="Previous slide"
-                        >
-                            ‹
-                        </button>
-                        <button
-                            type="button"
-                            className="nav-btn next"
-                            ref={nextRef}
-                            aria-label="Next slide"
-                        >
-                            ›
-                        </button>
+                            <button
+                                type="button"
+                                className="nav-btn prev"
+                                ref={prevRef}
+                                aria-label="Previous slide"
+                            >
+                                ‹
+                            </button>
+                            <button
+                                type="button"
+                                className="nav-btn next"
+                                ref={nextRef}
+                                aria-label="Next slide"
+                            >
+                                ›
+                            </button>
                     </div>
                 </div>
             </div>
