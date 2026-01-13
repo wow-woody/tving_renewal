@@ -1,9 +1,13 @@
 @use '../../App.scss' as g;
 
 .enter-contents-wrap {
+  width: 100%;
   padding-top: 12rem;
 
   .section-1 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+
     .sub-container {
       position: relative;
       min-width: 833px;
@@ -31,6 +35,9 @@
   }
 
   .section-2 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+
     .enter-filter {
       display: flex;
       flex-wrap: wrap;
@@ -64,6 +71,9 @@
   }
 
   .section-3, .section-4, .section-5, .section-7,.section-6, .section-8, .section-9, .section-10 {
+     padding-left: 10.8rem;
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
     margin-bottom: 12rem;
   }
 

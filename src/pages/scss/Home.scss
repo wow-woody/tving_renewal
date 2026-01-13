@@ -1,22 +1,12 @@
 .main-wrap {
-  // padding-left: 10.8rem;
+  width: 100%;
   padding-top: 12rem;
-  max-width: 1920px;
-  // margin: 0 auto;
-
-  // .section-title {
-  //     font-size: 3.6rem;
-  //     font-weight: 800;
-  //     color: #fff;
-
-  //     position: relative;
-  //     z-index: 5;
-  // }
-  //     position: relative;
-  //     z-index: 5;
-  // }
+  margin: 0 auto;
 
   .section-1 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
+
     h2 {
       font-size: 2.6rem;
       font-weight: 700;
@@ -26,13 +16,13 @@
 
     .main-container {
       min-width: 833px;
-      // aspect-ratio: 149/61;
       aspect-ratio: 1788/732;
-      // background: rgb(149, 113, 113);
     }
   }
 
   .section-2 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
     padding-top: 9.2rem;
     padding-bottom: 6rem;
   }
@@ -40,7 +30,8 @@
   .section-3 {
     padding-left: 10.8rem;
   }
-.section-4 {
+
+  .section-4 {
     padding-left: 10.8rem;
     padding-right: 2.4rem;
     padding-top: 9.2rem;
@@ -48,7 +39,6 @@
   }
 
   .section-5 {
-    //    padding-left: 10.8rem;
     padding-right: 2.4rem;
     padding-top: 6rem;
     padding-bottom: 6rem;

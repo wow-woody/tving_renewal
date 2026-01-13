@@ -1,13 +1,18 @@
 @use '../../App.scss' as g;
 
 .movie-contents-wrap {
+  width: 100%;
   padding-top: 12rem;
 
   .section-1 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
    
   }
 
   .section-2 {
+    padding-left: 10.8rem;
+    padding-right: 2.4rem;
     margin: 46px 0;
 
     .movie-filter-swiper {
