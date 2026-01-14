@@ -53,7 +53,7 @@ const LiveNews = ({ list }: Props) => {
         swiper.navigation.init();
         swiper.navigation.update();
     }, []);
-
+    
     if (newsList.length === 0) return null;
 
     return (

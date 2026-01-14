@@ -1,110 +1,115 @@
-  .tiving-new-wrappers{
+@use '../../../App.scss' as g;
+
+.tiving-new-wrappers {
     padding-left: 10.8rem;
 
-  .section-header {
-    // margin-bottom: 24px;
-    // display: flex;
-    // justify-content: space-between;
+    .section-header {
+        // margin-bottom: 24px;
+        // display: flex;
+        // justify-content: space-between;
 
-    // padding-left: 10.8rem;
-    // padding-right: 2.4rem;
+        // padding-left: 10.8rem;
+        // padding-right: 2.4rem;
 
-    color:#fff;
-    
-
-    h2 {
-      font-size: 3.6rem;
-      font-weight: 800;
-      // margin-bottom:8px;
-    }
-
-    .thumb-controls {
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      gap: 12px;
-      margin-bottom: 64px;
-      padding-right: 2.4rem;
-    }
-
-    .news-pagination {
-      position: relative;
-      flex: 1 1 auto;
-      height: 2px;
-      display: flex;
-      align-items: center;
-
-      .pagenation-line {
-        width: 100%;
-        height: 2px;
-        background: #373737;
-      }
-
-      .pointer-line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 120px;
-        height: 2px;
-        background: #ff153c;
-        transform: translateX(var(--news-progress, 0px));
-        transition: transform 0.35s ease;
-      }
-    }
-
-    .news-nav {
-      display: flex;
-      align-items: flex-start;
-      gap: 0;
-      height: 34px;
-      border-top: 1px solid #373737;
-      border-bottom: 1px solid #373737;
-      padding-top: 0;
-
-      .nav-btn {
-        width: 32px;
-        height: 32px;
-        display: inline-flex;
-        justify-content: center;
-        border: 1px solid #373737;
-        font-size: 20px;
         color: #fff;
-        border-radius: 0;
-        cursor: pointer;
-        background: transparent;
 
-        &:hover {
-          color: #ff153c;
+        h2 {
+            font-size: 3.6rem;
+            font-weight: 800;
+            // margin-bottom:8px;
         }
 
-        &:disabled {
-          opacity: 0.4;
-          cursor: default;
+        .thumb-controls {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 64px;
+            padding-right: 2.4rem;
         }
 
-        &.swiper-button-disabled {
-          opacity: 0.4;
-          cursor: default;
+        .news-pagination {
+            position: relative;
+            flex: 1 1 auto;
+            height: 2px;
+            display: flex;
+            align-items: center;
+
+            .pagenation-line {
+                width: 100%;
+                height: 2px;
+                background: g.$bg-color;
+            }
+
+            .pointer-line {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 120px;
+                height: 2px;
+                background: #ff153c;
+                transform: translateX(var(--news-progress, 0px));
+                transition: transform 0.35s ease;
+            }
         }
-      }
+
+        .news-nav {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            width: 64px;
+            height: 32px;
+            border: 2px solid #373737;
+            padding-top: 0;
+            box-sizing: content-box; // 추가
+            .prev {
+                border-right: 2px solid #373737;
+            }
+
+            .nav-btn {
+                width: 32px;
+                height: 32px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                // border: 1px solid #373737;
+                font-size: 28px;
+                color: #fff;
+                border-radius: 0;
+                cursor: pointer;
+                background: transparent;
+                line-height: 0;
+                padding: 0;
+                font-family: inherit;
+                
+                &:hover {
+                    color: #ff153c;
+                }
+
+                &:disabled {
+                    opacity: 0.4;
+                    cursor: default;
+                }
+
+                &.swiper-button-disabled {
+                    opacity: 0.4;
+                    cursor: default;
+                }
+            }
+        }
     }
-  }
-  }
-
-
-
+}
 
 .new-swiper {
     width: 100%;
 
-    margin-top:32px;
+    margin-top: 32px;
 
     .swiper-slide {
         width: clamp(280px, 60vw, 656px);
 
         display: flex;
         justify-content: center;
-    
     }
 }
 

@@ -1,12 +1,14 @@
+@use '../../../App.scss' as g;
+
 .button-banner-wrappers {
     width: 100%;
     display: flex;
-    justify-content: space-around;
-
+    justify-content:center;
+    gap: 0.7rem;
     padding-top: 4rem;
     padding-bottom: 4rem;
-    border-top: 1px solid #373737;
-    border-bottom: 1px solid #373737;
+    border-top: 0.2rem solid g.$border-color;
+    border-bottom: 0.2rem solid g.$border-color;
     margin-top: 4.6rem;
 
     overflow-x: auto;
@@ -14,6 +16,7 @@
 
     cursor: grab;
 
+    flex-wrap: wrap;
     &.dragging {
         cursor: grabbing;
     }
@@ -71,7 +74,7 @@
                 border: 1.1px solid rgba(255, 255, 255, 0.2);
                 box-sizing: border-box;
 
-                border-radius: 14px;
+                border-radius: 12px;
 
                 transition: backdrop-filter 0.4s;
             }

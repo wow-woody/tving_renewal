@@ -62,7 +62,7 @@ const KblSection = () => {
 
                 <div className="kbl-slider">
                     <Swiper
-                        slidesPerView={3}
+                        slidesPerView={3.2}
                         spaceBetween={24}
                         modules={[Navigation]}
                         onBeforeInit={(swiper) => {

@@ -1,147 +1,154 @@
 .dramaSimilar-wrap {
-  padding: 60px 0;
+    padding: 60px 0;
 
-  .similar-section {
-    margin-bottom: 60px;
-  }
-
-  .similar-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 62px;
-  }
-
-  .similar-title {
-    h3 {
-      color: #fff;
-      font-size: 36px;
-    }
-  }
-
-  .thumb-controls {
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-  }
-
-  .enter-pagination {
-    position: relative;
-    flex: 1 1 auto;
-    height: 2px;
-    display: flex;
-    align-items: center;
-
-    .pagenation-line {
-      width: 100%;
-      height: 2px;
-      background: #373737;
+    .similar-section {
+        margin-bottom: 60px;
     }
 
-    .pointer-line {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 120px;
-      height: 2px;
-      background: #ff153c;
-      transform: translateX(var(--enter-progress, 0px));
-      transition: transform 0.35s ease;
+    .similar-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 62px;
     }
-  }
 
-  .enter-nav {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    height: 34px;
-    border-top: 1px solid #373737;
-    border-bottom: 1px solid #373737;
-    padding-top: 0;
-
-    .nav-btn {
-      width: 32px;
-      height: 32px;
-      display: inline-flex;
-      justify-content: center;
-      border: 1px solid #373737;
-      font-size: 20px;
-      color: #fff;
-      border-radius: 0;
-      cursor: pointer;
-      background: transparent;
-
-      &:hover {
-        color: #ff153c;
-      }
-
-      &:disabled {
-        opacity: 0.4;
-        cursor: default;
-      }
+    .similar-title {
+        h3 {
+            color: #fff;
+            font-size: 36px;
+        }
     }
-  }
 
-  .similar-swiper {
-    position: relative;
-  }
-
-  .similar-card {
-    .poster-thumb {
-      width: 100%;
-      display: block;
-      overflow: hidden;
-      border-radius: 8px;
-      background: transparent;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.3s;
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
+    .thumb-controls {
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0);
-        transition: background 0.3s;
-      }
-
-      &:hover {
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        border: 2px solid #ff153c;
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        aspect-ratio: 2 / 3;
-        object-fit: cover;
-        transition: transform 0.3s;
-      }
-
-      &:hover img {
-        transform: scale(1.05);
-      }
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
     }
 
-    .content-title {
-      color: #fff;
-      margin-top: 12px;
+    .enter-pagination {
+        position: relative;
+        flex: 1 1 auto;
+        height: 2px;
+        display: flex;
+        align-items: center;
 
-      h4 {
-        font-size: 14px;
-        font-weight: 500;
-        margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+        .pagenation-line {
+            width: 100%;
+            height: 2px;
+            background: #373737;
+        }
+
+        .pointer-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 2px;
+            background: #ff153c;
+            transform: translateX(var(--enter-progress, 0px));
+            transition: transform 0.35s ease;
+        }
     }
-  }
+
+    .enter-nav {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        width: 64px;
+        height: 32px;
+        border: 2px solid #373737;
+        padding-top: 0;
+        box-sizing: content-box; // 추가
+        .prev {
+            border-right: 2px solid #373737;
+        }
+        .nav-btn {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            // border: 1px solid #373737;
+            font-size: 28px;
+            color: #fff;
+            border-radius: 0;
+            cursor: pointer;
+            background: transparent;
+            line-height: 0;
+            padding: 0;
+            font-family: inherit;
+
+            &:hover {
+                color: #ff153c;
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: default;
+            }
+        }
+    }
+
+    .similar-swiper {
+        position: relative;
+    }
+
+    .similar-card {
+        .poster-thumb {
+            width: 100%;
+            display: block;
+            overflow: hidden;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0);
+                transition: background 0.3s;
+            }
+
+            &:hover {
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+                border: 2px solid #ff153c;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                aspect-ratio: 2 / 3;
+                object-fit: cover;
+                transition: transform 0.3s;
+            }
+
+            &:hover img {
+                transform: scale(1.05);
+            }
+        }
+
+        .content-title {
+            color: #fff;
+            margin-top: 12px;
+
+            h4 {
+                font-size: 14px;
+                font-weight: 500;
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
 }

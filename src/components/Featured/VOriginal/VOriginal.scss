@@ -1,230 +1,233 @@
 .v-original {
     display: flex;
-  // gap: 32px;
-  gap:96px;
-  // padding: 40px 0 40px 10.8rem;
-  padding: 52px 0 52px 8rem;
-  border-radius: 12px;
-  background: linear-gradient(295deg, rgba(255, 21, 60, 0.50) -42.62%, rgba(255, 21, 60, 0.40) -25.5%, rgba(255, 21, 60, 0.30) -8.39%, rgba(255, 21, 60, 0.10) 8.73%, rgba(255, 21, 60, 0.20) 25.84%, rgba(255, 21, 60, 0.30) 42.95%, rgba(255, 21, 60, 0.40) 60.07%, rgba(255, 21, 60, 0.50) 77.18%, rgba(255, 21, 60, 0.40) 100%);
-  width: 100%;  
-  
+    // gap: 32px;
+    gap: 96px;
+    // padding: 40px 0 40px 10.8rem;
+    padding: 52px 0 52px 8rem;
+    border-radius: 12px;
+    background: linear-gradient(
+        295deg,
+        rgba(255, 21, 60, 0.5) -42.62%,
+        rgba(255, 21, 60, 0.4) -25.5%,
+        rgba(255, 21, 60, 0.3) -8.39%,
+        rgba(255, 21, 60, 0.1) 8.73%,
+        rgba(255, 21, 60, 0.2) 25.84%,
+        rgba(255, 21, 60, 0.3) 42.95%,
+        rgba(255, 21, 60, 0.4) 60.07%,
+        rgba(255, 21, 60, 0.5) 77.18%,
+        rgba(255, 21, 60, 0.4) 100%
+    );
+    width: 100%;
 
-  .v-original-info {
-    width: 280px;
-    color: #fff;
-    // margin-right: 40px;
-    flex-shrink: 0;
+    .v-original-info {
+        width: 280px;
+        color: #fff;
+        // margin-right: 40px;
+        flex-shrink: 0;
 
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2.4rem !important;
 
-    .logo {
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 24px;
-    }
-
-    p {
-      font-size: 24px;
-      line-height: 1.4;
-      margin-bottom: 16px;
-    }
-
-    .more-btn {
-      background: transparent;
-      border: 1px solid #fff;
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  }
-
-  .v-original-slider {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-
-    .v-original-card {
-      position: relative;
-      
-      border-radius: 12px;
-      
-
-      img {
-        display: block;
-        border-radius: 12px;
-        transition: transform 0.4s ease;
-      }
-
-     
-
-      .badge {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 30px;   
-        padding: 4px 6px;
-        border-radius: 4px;
-        width: 150px;
-        img{
-          width: 10px;
-          height: auto;
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 24px;
         }
-        
-      }
+
+        p {
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .more-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
     }
 
-    /* 네비게이션 스타일 */
-    .v-original-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      z-index: 10;
-      pointer-events: none;
+    .v-original-slider {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+
+        .v-original-card {
+            position: relative;
+            border-radius: 12px;
+            width: 260px;
+            img {
+                display: block;
+                border-radius: 12px;
+                transition: transform 0.4s ease;
+                width: 100%;
+            }
+
+            .badge {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 30px;
+                padding: 4px 6px;
+                border-radius: 4px;
+                width: 150px;
+                img {
+                    width: 10px;
+                    height: auto;
+                }
+            }
+        }
+
+        /* 네비게이션 스타일 */
+        .v-original-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .nav-btn {
+            width: 120px;
+            height: 120px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            pointer-events: auto;
+            opacity: 0.5;
+            transition: opacity 0.25s ease, transform 0.3s ease;
+            font-size: 80px;
+            color: #fff;
+            background: transparent;
+            border: none;
+            filter: drop-shadow(0 0px 6px rgba(0, 0, 0, 0.4));
+        }
+
+        .nav-btn.prev {
+            img {
+                width: 30px;
+            }
+            margin-left: -40px;
+        }
+
+        .nav-btn.next {
+            margin-right: -40px;
+            img {
+                width: 30px;
+            }
+        }
+
+        .nav-btn:hover {
+            border-color: #fff;
+            transform: scale(1.35);
+            opacity: 1;
+            filter: drop-shadow(0 0px 6px rgba(0, 0, 0, 0.6));
+        }
+
+        // .nav-btn:disabled {
+        //   opacity: 0.3;
+        cursor: default;
+        // }
     }
-
-    .nav-btn {
-      width: 120px;
-      height: 120px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      pointer-events: auto;
-      color: #fff;
-      font-size: 100px;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.25s ease, transform 0.3s ease;
-    
-    }
-
-    .nav-btn.prev {
-      
-      img{
-        width: 36px
-
-      };
-      margin-left: -40px;
-    }
-
-    .nav-btn.next {
-      margin-right: -40px;
-       img{
-        width: 36px
-
-      };
-    }
-
-    .nav-btn:hover {
-     
-      border-color: #fff;
-      transform: scale(1.1);
-      opacity: 1;
-    }
-
-    // .nav-btn:disabled {
-    //   opacity: 0.3;
-      cursor: default;
-    // }
-  }
 }
 
 .glass-frame {
-  // margin-top: 30px;
-  // margin-left: 10.8rem;
-  // width: 1770px;
-  width:100%;
-  display: flex;
-  justify-content: flex-start;
-  // padding: 5px 3px;
-  padding:5px;
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-  
-  /* Glass morphism 효과 강화 + 모서리 빛 반사 */
-  background: 
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
-    radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
-    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
-    radial-gradient(circle at center left, rgba(255, 255, 255, 0.10) 0%, transparent 15%),
-    radial-gradient(circle at center right, rgba(255, 255, 255, 0.10) 0%, transparent 15%),
-    rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  
-  /* 빛 반사 테두리 - 모서리 더 투명 */
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  
-  /* 입체감과 빛 반사 */
-  box-shadow: 
-    0 8px 32px 0 rgba(0, 0, 0, 0.37),
-    0 0 20px 0 rgba(255, 255, 255, 0.08) inset,
-    0 -2px 10px 0 rgba(255, 255, 255, 0.1) inset;
-  
-  /* 반짝임 효과 (상단 하이라이트) */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.6) 20%,
-      rgba(255, 255, 255, 0.8) 50%,
-      rgba(255, 255, 255, 0.6) 80%,
-      transparent 100%
-    );
-    animation: shimmer 3s ease-in-out infinite;
-  }
-  
-  /* 빛 반사 효과 (대각선) */
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 70%
-    );
-    animation: shine 4s ease-in-out infinite;
-    pointer-events: none;
-  }
+    // margin-top: 30px;
+    // margin-left: 10.8rem;
+    // width: 1770px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    // padding: 5px 3px;
+    padding: 5px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+
+    /* Glass morphism 효과 강화 + 모서리 빛 반사 */
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.12) 0%, transparent 15%),
+        radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08) 0%, transparent 15%),
+        radial-gradient(circle at center left, rgba(255, 255, 255, 0.1) 0%, transparent 15%),
+        radial-gradient(circle at center right, rgba(255, 255, 255, 0.1) 0%, transparent 15%),
+        rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    /* 빛 반사 테두리 - 모서리 더 투명 */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+
+    /* 입체감과 빛 반사 */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 20px 0 rgba(255, 255, 255, 0.08) inset,
+        0 -2px 10px 0 rgba(255, 255, 255, 0.1) inset;
+
+    /* 반짝임 효과 (상단 하이라이트) */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.6) 20%,
+            rgba(255, 255, 255, 0.8) 50%,
+            rgba(255, 255, 255, 0.6) 80%,
+            transparent 100%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* 빛 반사 효과 (대각선) */
+    &::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 70%
+        );
+        animation: shine 4s ease-in-out infinite;
+        pointer-events: none;
+    }
 }
 
 @keyframes shimmer {
-  0%, 100% {
-    opacity: 0.3;
-    transform: translateX(-10px);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(10px);
-  }
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateX(-10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(10px);
+    }
 }
 
 @keyframes shine {
-  0% {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-  100% {
-    transform: translate(50%, 50%) rotate(45deg);
-  }
+    0% {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    100% {
+        transform: translate(50%, 50%) rotate(45deg);
+    }
 }
-
