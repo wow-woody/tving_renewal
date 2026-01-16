@@ -125,6 +125,7 @@
 
     .thumb-rail {
         position: relative;
+        height: 375px; // 김정우 추가
         z-index: 1;
         flex: 1 1 auto;
         min-width: 0;
@@ -134,10 +135,15 @@
         /* 내부 슬라이드가 좌우로 이동할 때 영상 영역으로 넘침 클리핑 */
         overflow: hidden;
         padding-left: 0;
+        
     }
 
     .thumb-swiper {
-        width: 100%;
+        // width: 100%;
+        height: auto; // 김정우 추가
+    }
+    .swiper-wrapper {
+        width: auto; // 김정우 추가
     }
 
     /* =========================
@@ -145,9 +151,11 @@
 ========================= */
 
     .thumb {
-        // width: 100%;
-        width: 248px;
-        height: 375px;
+        // width: 248px;
+        width: 100%; // 김정우 추가
+        max-width: 248px; // 김정우 추가
+        aspect-ratio: 248 / 375; // 김정우 추가
+        height: auto; // 김정우 추가
         border-radius: 12px;
         overflow: hidden;
         background: transparent;
